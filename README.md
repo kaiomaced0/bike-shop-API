@@ -1,4 +1,15 @@
-# bike-shop
+# bike-shop API
+
+     Projeto será usado para avaliação de Topicos 1 (2023/1), Unitins, e
+     provavelmente utilizarei a base para uma loja, e deixarei a API como Open Source!
+
+     Logo teremos imagens do projeto em andamento por aqui.. enquanto isso não
+     ocorre, segue a baixo o Readme padrao que o Quarkus cria para projetos!
+
+
+
+
+
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
