@@ -1,5 +1,8 @@
 package br.glacks.repository;
 
-public class PedidoRepository {
+import br.glacks.model.Pedido;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+
+public class PedidoRepository implements PanacheRepository<Pedido>{
     
 }

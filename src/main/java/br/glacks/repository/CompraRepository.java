@@ -1,5 +1,8 @@
 package br.glacks.repository;
 
-public class CompraRepository {
+import br.glacks.model.Compra;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+
+public class CompraRepository implements PanacheRepository<Compra>{
     
 }

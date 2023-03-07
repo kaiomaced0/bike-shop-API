@@ -1,5 +1,5 @@
 package br.glacks.model;
 
-public class Usuario {
+public class Usuario extends EntityClass {
     
 }

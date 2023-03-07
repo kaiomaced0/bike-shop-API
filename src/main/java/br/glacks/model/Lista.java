@@ -1,5 +1,5 @@
 package br.glacks.model;
 
-public class Lista {
+public class Lista extends EntityClass {
     
 }

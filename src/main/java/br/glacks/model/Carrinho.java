@@ -6,13 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Carrinho {
+public class Carrinho extends EntityClass{
+    
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "nome_do_carrinho")
-    private String nome;
+    
+    
     
 }
