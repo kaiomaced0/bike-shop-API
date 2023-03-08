@@ -1,21 +1,28 @@
-package br.glacks.model;
+package br.glacks.dto;
 
-import javax.persistence.Column;
+import br.glacks.model.Usuario;
 
-public class Usuario extends EntityClass {
+public class UsuarioDTO {
 
+    private String nome;
     private String login;
-
     private String senha;
-
     private String cpf;
-    
-    @Column(name ="data_nascimento")
-    private String dataNascimento;
 
-    
+    public UsuarioDTO (Usuario usuario){
 
+        this.nome = usuario.getNome();
+        this.login = usuario.getLogin();
+        
+    }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getLogin() {
         return login;
@@ -40,15 +47,6 @@ public class Usuario extends EntityClass {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     
     
 }
