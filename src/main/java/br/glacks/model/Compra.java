@@ -1,10 +1,12 @@
 package br.glacks.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 import br.glacks.model.pagamento.FormaPagamento;
 
+@Entity
 public class Compra extends EntityClass{
 
     @ManyToOne

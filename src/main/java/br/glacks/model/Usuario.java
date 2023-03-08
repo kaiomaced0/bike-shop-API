@@ -1,7 +1,8 @@
 package br.glacks.model;
 
 import javax.persistence.Column;
-
+import javax.persistence.Entity;
+@Entity
 public class Usuario extends EntityClass {
 
     private String login;

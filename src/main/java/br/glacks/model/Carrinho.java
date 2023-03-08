@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 public class Carrinho extends EntityClass{
     
 
-    private List<ListaProduto> listaProdutos;
+    private List<Estoque> listaProdutos;
 
     private Cupom cupom;
 
@@ -21,12 +21,12 @@ public class Carrinho extends EntityClass{
 
     private Boolean boolCompra;
 
-
-    public List<ListaProduto> getListaProdutos() {
+    
+    public List<Estoque> getlistaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(List<ListaProduto> listaProdutos) {
+    public void setlistaProdutos(List<Estoque> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
 

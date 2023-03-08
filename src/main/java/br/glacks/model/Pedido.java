@@ -1,20 +1,26 @@
 package br.glacks.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.glacks.model.chat.Mensagem;
-
+@Entity
 public class Pedido extends EntityClass {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Compra compra;
+
+    @Column(name = "status_entrega_pedido")
     private String status;
 
     private Double estrelas;
 
     private String dataEntrega;
     
+    @OneToMany
     private Mensagem avaliacao;
 
     public Compra getCompra() {
