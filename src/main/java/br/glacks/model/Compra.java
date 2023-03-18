@@ -2,7 +2,10 @@ package br.glacks.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import br.glacks.model.pagamento.FormaPagamento;
 
@@ -12,12 +15,13 @@ public class Compra extends EntityClass{
     @ManyToOne
     private Usuario usuario;
 
-    @ManyToOne
+    @OneToOne
     private Carrinho carrinho;
+
 
     private Double valorTotal;
 
-    @ManyToOne
+    @Enumerated(EnumType.ORDINAL)    
     private FormaPagamento formaPagamento;
 
     @Column(name = "endereco_entrega")

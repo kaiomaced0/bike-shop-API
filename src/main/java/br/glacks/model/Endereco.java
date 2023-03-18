@@ -2,6 +2,7 @@ package br.glacks.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import br.glacks.model.Locais.Cep;
@@ -9,9 +10,10 @@ import br.glacks.model.Locais.Cep;
 public class Endereco extends EntityClass{
 
     @ManyToOne
-    @Column(name = "usuario_dono_endereco")
+    @JoinColumn(name = "usuario_dono_endereco")
     private Usuario usuario;
 
+    @ManyToOne
     private Cep cep;
 
     private String regiao;

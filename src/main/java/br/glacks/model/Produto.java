@@ -36,6 +36,11 @@ public class Produto extends EntityClass{
     @JoinColumn(name = "lista_comentarios_produto")
     private List<Mensagem> comentarios;
 
+    private Boolean visivel;
+
+    private String img;
+    
+
     public String getNomeCurto() {
         return nomeCurto;
     }
@@ -106,6 +111,22 @@ public class Produto extends EntityClass{
 
     public void setComentarios(List<Mensagem> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public Boolean getVisivel() {
+        return visivel;
+    }
+
+    public void setVisivel(Boolean visivel) {
+        this.visivel = visivel;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     

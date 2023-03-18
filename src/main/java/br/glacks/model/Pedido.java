@@ -1,5 +1,7 @@
 package br.glacks.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +23,7 @@ public class Pedido extends EntityClass {
     private String dataEntrega;
     
     @OneToMany
-    private Mensagem avaliacao;
+    private List<Mensagem> avaliacao;
 
     public Compra getCompra() {
         return compra;
@@ -55,13 +57,12 @@ public class Pedido extends EntityClass {
         this.dataEntrega = dataEntrega;
     }
 
-    public Mensagem getAvaliacao() {
+    public List<Mensagem> getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(Mensagem avaliacao) {
+    public void setAvaliacao(List<Mensagem> avaliacao) {
         this.avaliacao = avaliacao;
     }
-    
-    
+        
 }

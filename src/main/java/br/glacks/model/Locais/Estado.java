@@ -3,10 +3,12 @@ package br.glacks.model.Locais;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.validation.constraints.Size;
 
 import br.glacks.model.EntityClass;
 
+@Entity
 public class Estado extends EntityClass{
     @Column(name = "sigla_estado", length = 3)
     @Size(max = 2)

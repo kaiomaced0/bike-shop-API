@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -17,7 +18,7 @@ public class Carrinho extends EntityClass{
     private Double valorCarrinho;
 
     @ManyToOne
-    @Column(name = "usuario_carrinho")
+    @JoinColumn(name = "usuario_carrinho")
     private Usuario usuario;
 
     private Boolean boolCompra;

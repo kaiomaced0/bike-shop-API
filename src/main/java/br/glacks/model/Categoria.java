@@ -2,7 +2,6 @@ package br.glacks.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -17,10 +16,36 @@ public class Categoria extends EntityClass{
     private List<Produto> produtos;
 
     @OneToMany
-    @Column(name = "filha_categorias")
+    @JoinColumn(name = "filha_categorias")
     private List<Categoria> categoriasFilha;
 
     @ManyToOne
-    @Column(name = "pai_categorias")
+    @JoinColumn(name = "pai_categorias")
     private List<Categoria> categoriasPai;
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public List<Categoria> getCategoriasFilha() {
+        return categoriasFilha;
+    }
+
+    public void setCategoriasFilha(List<Categoria> categoriasFilha) {
+        this.categoriasFilha = categoriasFilha;
+    }
+
+    public List<Categoria> getCategoriasPai() {
+        return categoriasPai;
+    }
+
+    public void setCategoriasPai(List<Categoria> categoriasPai) {
+        this.categoriasPai = categoriasPai;
+    }
+
+    
 }

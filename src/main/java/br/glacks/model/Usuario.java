@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -27,19 +29,19 @@ public class Usuario extends EntityClass {
     private Double valorGasto;
 
     @OneToMany
-    @Column(name = "lista_pedidos")
+    @JoinColumn(name = "lista_pedidos")
     private List<Pedido> pedidos;
 
     @OneToMany
-    @Column(name = "lista_enderecos")
+    @JoinColumn(name = "lista_enderecos")
     private List<Endereco> enderecos;
 
     @OneToMany
-    @Column(name = "lista_cartoes")
+    @JoinColumn(name = "lista_cartoes")
     private List<Cartao> cartoes;
 
-    @OneToMany
-    @Column(name = "lista_gostei")
+    @ManyToMany
+    @JoinColumn(name = "lista_gostei")
     private List<Produto> gostei;
 
 
