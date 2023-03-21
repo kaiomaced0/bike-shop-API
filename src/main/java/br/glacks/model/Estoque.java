@@ -3,6 +3,7 @@ package br.glacks.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -10,10 +11,11 @@ import javax.persistence.OneToOne;
 public class Estoque extends EntityClass{
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private ListaProduto produtoEstoque;
 
     @ManyToOne
-    private Produto produto = produtoEstoque.getProduto();
+    private Produto produto;
 
     public ListaProduto getProdutoEstoque() {
         return produtoEstoque;

@@ -36,7 +36,7 @@ public class EstoqueResource {
 
     @GET
     @Path("/{id}")
-    public  Estoque getId(@PathParam("id") long id){
+    public Estoque getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

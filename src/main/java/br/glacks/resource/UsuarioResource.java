@@ -36,7 +36,7 @@ public class UsuarioResource {
 
     @GET
     @Path("/{id}")
-    public  Usuario getId(@PathParam("id") long id){
+    public Usuario getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

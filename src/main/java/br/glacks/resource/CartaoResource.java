@@ -34,7 +34,7 @@ public class CartaoResource {
 
     @GET
     @Path("/{id}")
-    public  Cartao getId(@PathParam("id") long id){
+    public Cartao getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

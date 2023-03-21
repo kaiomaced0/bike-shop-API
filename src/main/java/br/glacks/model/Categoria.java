@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,7 +18,7 @@ public class Categoria extends EntityClass{
     @JoinColumn(name = "filha_categorias")
     private List<Categoria> categoriasFilha;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "pai_categorias")
     private List<Categoria> categoriasPai;
 
@@ -46,6 +45,8 @@ public class Categoria extends EntityClass{
     public void setCategoriasPai(List<Categoria> categoriasPai) {
         this.categoriasPai = categoriasPai;
     }
+
+    
 
     
 }

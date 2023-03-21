@@ -36,7 +36,7 @@ public class ProdutoResource {
 
     @GET
     @Path("/{id}")
-    public  Produto getId(@PathParam("id") long id){
+    public Produto getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

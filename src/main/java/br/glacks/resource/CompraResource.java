@@ -34,7 +34,7 @@ public class CompraResource {
 
     @GET
     @Path("/{id}")
-    public  Compra getId(@PathParam("id") long id){
+    public Compra getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

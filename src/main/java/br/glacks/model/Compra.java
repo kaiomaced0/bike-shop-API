@@ -1,9 +1,11 @@
 package br.glacks.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -15,16 +17,17 @@ public class Compra extends EntityClass{
     @ManyToOne
     private Usuario usuario;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private Carrinho carrinho;
-
 
     private Double valorTotal;
 
     @Enumerated(EnumType.ORDINAL)    
     private FormaPagamento formaPagamento;
 
-    @Column(name = "endereco_entrega")
+    @JoinColumn(name = "endereco_entrega")
+    @ManyToOne
     private Endereco enderecoEntrega;
 
     @Column(name = "pagamento_realizado")

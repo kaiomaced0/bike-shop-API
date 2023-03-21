@@ -3,6 +3,8 @@ package br.glacks.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -19,8 +21,12 @@ public class Produto extends EntityClass{
 
     private Double valorVenda;
 
+    @ElementCollection
+    @CollectionTable
     private List<String> tamanhos;
 
+    @ElementCollection
+    @CollectionTable
     private List<String> cores;
 
     @ManyToMany(cascade = CascadeType.ALL)

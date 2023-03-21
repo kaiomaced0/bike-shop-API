@@ -5,14 +5,17 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.glacks.model.chat.Mensagem;
+
 @Entity
 public class Pedido extends EntityClass {
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private Compra compra;
 
     @Column(name = "status_entrega_pedido")
@@ -64,5 +67,6 @@ public class Pedido extends EntityClass {
     public void setAvaliacao(List<Mensagem> avaliacao) {
         this.avaliacao = avaliacao;
     }
+
         
 }

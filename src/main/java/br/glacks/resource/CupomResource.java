@@ -34,7 +34,7 @@ public class CupomResource {
 
     @GET
     @Path("/{id}")
-    public  Cupom getId(@PathParam("id") long id){
+    public Cupom getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

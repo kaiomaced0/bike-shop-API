@@ -1,10 +1,11 @@
 package br.glacks.model.chat;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 import br.glacks.model.EntityClass;
 import br.glacks.model.Usuario;
-
+@Entity
 public class Mensagem extends EntityClass{
     
     @ManyToOne
@@ -12,6 +13,9 @@ public class Mensagem extends EntityClass{
 
     private String dataMensagem;
 
+    private Boolean ver;
+
+    
     public Usuario getUsuario() {
         return usuario;
     }
@@ -26,6 +30,14 @@ public class Mensagem extends EntityClass{
 
     public void setDataMensagem(String dataMensagem) {
         this.dataMensagem = dataMensagem;
+    }
+
+    public Boolean getVer() {
+        return ver;
+    }
+
+    public void setVer(Boolean ver) {
+        this.ver = ver;
     }
 
     

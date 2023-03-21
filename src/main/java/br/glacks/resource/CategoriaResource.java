@@ -37,7 +37,7 @@ public class CategoriaResource {
 
     @GET
     @Path("/{id}")
-    public  Categoria getId(@PathParam("id") long id){
+    public Categoria getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

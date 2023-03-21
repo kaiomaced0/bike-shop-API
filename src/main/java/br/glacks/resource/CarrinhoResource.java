@@ -31,7 +31,14 @@ public class CarrinhoResource {
         return repository.findAll().list();
         
     }
+    @GET
+    @Path("/{id}")
+    public Carrinho getId(@PathParam("id") long id){
+        return repository.findById(id);
+        
+    }
 
+    
     @POST
     @Transactional
     public Response insert(Carrinho carrinho){

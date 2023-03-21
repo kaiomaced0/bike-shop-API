@@ -1,7 +1,9 @@
 package br.glacks.model;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class ListaProduto extends EntityClass{
 
     @ManyToOne
@@ -10,13 +12,7 @@ public class ListaProduto extends EntityClass{
     private String tamanho;
     private String cor;
 
-
-    public Produto getProduto() {
-        return produto;
-    }
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
+    
     public Integer getQuantidade() {
         return quantidade;
     }
@@ -34,6 +30,12 @@ public class ListaProduto extends EntityClass{
     }
     public void setCor(String cor) {
         this.cor = cor;
+    }
+    public Produto getProduto() {
+        return produto;
+    }
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }      
     
     

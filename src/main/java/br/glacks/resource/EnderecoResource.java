@@ -34,7 +34,7 @@ public class EnderecoResource {
 
     @GET
     @Path("/{id}")
-    public  Endereco getId(@PathParam("id") long id){
+    public Endereco getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }

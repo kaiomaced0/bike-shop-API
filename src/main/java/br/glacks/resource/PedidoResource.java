@@ -36,7 +36,7 @@ public class PedidoResource {
 
     @GET
     @Path("/{id}")
-    public  Pedido getId(@PathParam("id") long id){
+    public Pedido getId(@PathParam("id") long id){
         return repository.findById(id);
         
     }
