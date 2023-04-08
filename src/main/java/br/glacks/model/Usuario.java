@@ -19,8 +19,8 @@ public class Usuario extends EntityClass {
 
     private String senha;
 
-    @Size(min = 11, max = 18)
-    private String cpf;
+    @Size(min = 11, max =18)
+    private String cpf; 
     
     @Column(name ="data_nascimento")
     private String dataNascimento;

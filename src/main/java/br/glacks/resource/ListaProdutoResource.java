@@ -24,11 +24,8 @@ import br.glacks.repository.ListaProdutoRepository;
 @Produces(MediaType.APPLICATION_JSON)
 public class ListaProdutoResource {
 
-
-
     @Inject
     ListaProdutoRepository repository;
-    
 
     @GET
     public List<ListaProduto> gettAll(){

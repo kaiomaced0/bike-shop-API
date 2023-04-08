@@ -20,8 +20,6 @@ public class Carrinho extends EntityClass{
     @JoinColumn(name = "usuario_carrinho")
     private Usuario usuario;
 
-    private Boolean boolCompra;
-
     
     public List<ListaProduto> getlistaProdutos() {
         return listaProdutos;
@@ -53,14 +51,6 @@ public class Carrinho extends EntityClass{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public Boolean getBoolCompra() {
-        return boolCompra;
-    }
-
-    public void setBoolCompra(Boolean boolCompra) {
-        this.boolCompra = boolCompra;
     }
 
     
