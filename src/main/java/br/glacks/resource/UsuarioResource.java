@@ -26,7 +26,7 @@ public class UsuarioResource {
 
     @Inject
     UsuarioRepository repository;
-    
+
 
     @GET
     public List<Usuario> gettAll(){

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -11,6 +13,7 @@ import javax.validation.constraints.Size;
 
 import br.glacks.model.pagamento.Cartao;
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends EntityClass {
 
     private String sobrenome;
@@ -18,12 +21,6 @@ public class Usuario extends EntityClass {
     private String login;
 
     private String senha;
-
-    @Size(min = 11, max =18)
-    private String cpf; 
-    
-    @Column(name ="data_nascimento")
-    private String dataNascimento;
 
     @Column(name = "valor_gasto")
     private Double valorGasto;

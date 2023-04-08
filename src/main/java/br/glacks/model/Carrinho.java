@@ -1,5 +1,7 @@
 package br.glacks.model;
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -9,11 +11,13 @@ import javax.persistence.OneToMany;
 public class Carrinho extends EntityClass{
     
     @OneToMany
+    @JoinColumn(name = "lista_Produtos")
     private List<ListaProduto> listaProdutos;
 
     @ManyToOne
     private Cupom cupom;
 
+    @Column(name = "valor_total")
     private Double valorCarrinho;
 
     @ManyToOne
