@@ -9,8 +9,8 @@ public class ListaProduto extends EntityClass{
     @ManyToOne
     private Produto produto;
     private Integer quantidade;
-    private String tamanho;
-    private String cor;
+    private Tamanho tamanho;
+    private Cor cor;
 
     
     public Integer getQuantidade() {
@@ -19,16 +19,16 @@ public class ListaProduto extends EntityClass{
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
-    public String getTamanho() {
+    public Tamanho getTamanho() {
         return tamanho;
     }
-    public void setTamanho(String tamanho) {
+    public void setTamanho(Tamanho tamanho) {
         this.tamanho = tamanho;
     }
-    public String getCor() {
+    public Cor getCor() {
         return cor;
     }
-    public void setCor(String cor) {
+    public void setCor(Cor cor) {
         this.cor = cor;
     }
     public Produto getProduto() {

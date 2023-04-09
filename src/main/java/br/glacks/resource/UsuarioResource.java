@@ -53,8 +53,15 @@ public class UsuarioResource {
     @Transactional
     public Usuario update(@PathParam("id") long id, Usuario usuario){
         Usuario entity = repository.findById(id);
-        entity.setNome(usuario.getNome());
-        entity.setCpf(usuario.getCpf());
+        if(usuario.getLogin() != null){
+            entity.setLogin(usuario.getLogin());
+        }
+        if(usuario.getNome() != null){
+            entity.setNome(usuario.getNome());
+        }
+        if(usuario.getSenha() != null){
+            entity.setSenha(usuario.getSenha());
+        }
         return entity;
     }
     

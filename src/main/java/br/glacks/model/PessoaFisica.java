@@ -14,6 +14,17 @@ public class PessoaFisica extends Usuario{
     
     @Column(name ="data_nascimento")
     private String dataNascimento;
+    
+    private String sobrenome;
+
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
     public String getCpf() {
         return cpf;

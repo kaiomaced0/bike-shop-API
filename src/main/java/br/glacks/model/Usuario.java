@@ -7,16 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
 
 import br.glacks.model.pagamento.Cartao;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends EntityClass {
 
-    private String sobrenome;
 
     private String login;
 
@@ -37,9 +34,14 @@ public class Usuario extends EntityClass {
     @JoinColumn(name = "lista_cartoes")
     private List<Cartao> cartoes;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "lista_gostei")
     private List<Produto> gostei;
+
+    @OneToMany
+    @JoinColumn(name = "lista_telefones")
+    private List<Telefone> telefones;
+
 
 
     public List<Pedido> getPedidos() {
@@ -74,14 +76,6 @@ public class Usuario extends EntityClass {
         this.gostei = gostei;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
     public Double getValorGasto() {
         return valorGasto;
     }
@@ -105,23 +99,5 @@ public class Usuario extends EntityClass {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    
     
 }

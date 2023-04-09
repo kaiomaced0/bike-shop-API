@@ -3,39 +3,38 @@ package br.glacks.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 
 import br.glacks.model.chat.Mensagem;
 
 @Entity
-public class Produto extends EntityClass{
+public class Produto extends EntityClass {
 
-    private String nomeCurto;
+    private String nomeLongo;
 
     private Double valorCompra;
 
     private Double valorVenda;
 
-    @ElementCollection
-    @CollectionTable
-    private List<String> tamanhos;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Tamanho> tamanhos;
 
-    @ElementCollection
-    @CollectionTable
-    private List<String> cores;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Cor> cores;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Categoria> categorias;
 
     @OneToMany
     private List<Estoque> listaEstoque;
-    
-    //quando o pedido for realizado o estoque do produto deve diminuir e a quantidade de vendas aumentar.
+
+    // quando o pedido for realizado o estoque do produto deve diminuir e a
+    // quantidade de vendas aumentar.
     private Integer quantidadeVendida;
 
     @OneToMany
@@ -44,15 +43,20 @@ public class Produto extends EntityClass{
 
     private Boolean visivel;
 
-    private String img;
-    
+    @CollectionTable
+    @ElementCollection
+    private List<String> img;
 
-    public String getNomeCurto() {
-        return nomeCurto;
+    private Double estrelas;
+
+
+    
+    public String getNomeLongo() {
+        return nomeLongo;
     }
 
-    public void setNomeCurto(String nomeCurto) {
-        this.nomeCurto = nomeCurto;
+    public void setNomeLongo(String nomeLongo) {
+        this.nomeLongo = nomeLongo;
     }
 
     public Double getValorCompra() {
@@ -71,19 +75,19 @@ public class Produto extends EntityClass{
         this.valorVenda = valorVenda;
     }
 
-    public List<String> getTamanhos() {
+    public List<Tamanho> getTamanhos() {
         return tamanhos;
     }
 
-    public void setTamanhos(List<String> tamanhos) {
+    public void setTamanhos(List<Tamanho> tamanhos) {
         this.tamanhos = tamanhos;
     }
 
-    public List<String> getCores() {
+    public List<Cor> getCores() {
         return cores;
     }
 
-    public void setCores(List<String> cores) {
+    public void setCores(List<Cor> cores) {
         this.cores = cores;
     }
 
@@ -127,18 +131,20 @@ public class Produto extends EntityClass{
         this.visivel = visivel;
     }
 
-    public String getImg() {
+    public List<String> getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(List<String> img) {
         this.img = img;
     }
 
-    
+    public Double getEstrelas() {
+        return estrelas;
+    }
 
+    public void setEstrelas(Double estrelas) {
+        this.estrelas = estrelas;
+    }
 
-
-
-    
 }

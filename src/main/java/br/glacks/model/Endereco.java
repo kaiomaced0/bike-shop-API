@@ -24,6 +24,7 @@ public class Endereco extends EntityClass{
     private String complemento;
 
     private Boolean principal = false;
+    
 
     public Usuario getUsuario() {
         return usuario;

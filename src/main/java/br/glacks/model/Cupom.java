@@ -48,7 +48,5 @@ public class Cupom extends EntityClass {
     public void setValorDesconto(Double valorDesconto) {
         this.valorDesconto = valorDesconto;
     }
-
-    
     
 }

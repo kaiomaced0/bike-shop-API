@@ -20,7 +20,6 @@ public class PessoaJuridica extends Usuario{
     private List<PessoaFisica> usuariosResponsaveis;
 
 
-    
     public String getCnpj() {
         return cnpj;
     }

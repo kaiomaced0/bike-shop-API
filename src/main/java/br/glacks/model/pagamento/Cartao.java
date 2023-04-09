@@ -14,6 +14,36 @@ public class Cartao extends EntityClass{
 
     private String numero;
 
+    private String dataValidade;
+
+    private BandeiraCartao bandeiraCartao;
+
+    private Integer cvc;
+
+    public String getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(String dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+
+    public BandeiraCartao getBandeiraCartao() {
+        return bandeiraCartao;
+    }
+
+    public void setBandeiraCartao(BandeiraCartao bandeiraCartao) {
+        this.bandeiraCartao = bandeiraCartao;
+    }
+
+    public Integer getCvc() {
+        return cvc;
+    }
+
+    public void setCvc(Integer cvc) {
+        this.cvc = cvc;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
