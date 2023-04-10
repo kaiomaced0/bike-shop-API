@@ -43,7 +43,7 @@ public class Usuario extends EntityClass {
     private List<Telefone> telefones;
 
 
-
+    
     public List<Pedido> getPedidos() {
         return pedidos;
     }

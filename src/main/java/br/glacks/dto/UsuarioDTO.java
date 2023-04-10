@@ -9,13 +9,6 @@ public class UsuarioDTO {
     private String senha;
     private String cpf;
 
-    public UsuarioDTO (Usuario usuario){
-
-        this.nome = usuario.getNome();
-        this.login = usuario.getLogin();
-        
-    }
-
     public String getNome() {
         return nome;
     }
