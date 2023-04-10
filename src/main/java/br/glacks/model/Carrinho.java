@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Carrinho extends EntityClass{
@@ -24,6 +25,11 @@ public class Carrinho extends EntityClass{
     @JoinColumn(name = "usuario_carrinho")
     private Usuario usuario;
 
+    
+    @PrePersist
+    public void inserirNome(){
+        setNome("#"+ usuario.getId().toString() + getId().toString() );
+    }
     
     public List<ListaProduto> getlistaProdutos() {
         return listaProdutos;

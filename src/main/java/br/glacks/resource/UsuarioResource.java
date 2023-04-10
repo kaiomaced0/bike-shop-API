@@ -1,10 +1,12 @@
 package br.glacks.resource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -13,7 +15,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import br.glacks.dto.UsuarioDTO;
+import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.Usuario;
 import br.glacks.repository.UsuarioRepository;
 
@@ -29,8 +34,11 @@ public class UsuarioResource {
 
 
     @GET
-    public List<Usuario> gettAll(){
-        return repository.findAll().list();
+    public List<UsuarioResponseDTO> getAll(){
+        return repository.findAll()
+            .stream()
+            .map(usuario -> new UsuarioResponseDTO(usuario))
+            .collect(Collectors.toList());
         
     }
 
@@ -43,15 +51,20 @@ public class UsuarioResource {
 
     @POST
     @Transactional
-    public Response insert(Usuario usuario){
-        repository.persist(usuario);
-        return Response.ok(usuario).build();
+    public Response insert(UsuarioDTO usuarioDTO){
+        Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
+        if(usuarioDTO != null){
+            repository.persist(usuario);
+            return Response.ok(usuario).build();
+        }
+        return Response.notModified().build();
+        
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Usuario update(@PathParam("id") long id, Usuario usuario){
+    public Usuario update(@PathParam("id") long id, UsuarioDTO usuario){
         Usuario entity = repository.findById(id);
         if(usuario.getLogin() != null){
             entity.setLogin(usuario.getLogin());
@@ -63,6 +76,17 @@ public class UsuarioResource {
             entity.setSenha(usuario.getSenha());
         }
         return entity;
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        Usuario entity = repository.findById(id);
+        if(entity.getPedidos() == null){
+            repository.deleteById(id);
+            return Response.status(Status.OK).build();
+        }
+        return Response.status(Status.UNAUTHORIZED).build();
     }
     
 }

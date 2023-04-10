@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
 import br.glacks.model.chat.Mensagem;
 
@@ -27,6 +28,11 @@ public class Pedido extends EntityClass {
     
     @OneToMany
     private List<Mensagem> avaliacao;
+
+    @PrePersist
+    public void inserirNome(){
+        setNome("#"+ getId().toString() + compra.getNome());
+    }
 
     public Compra getCompra() {
         return compra;

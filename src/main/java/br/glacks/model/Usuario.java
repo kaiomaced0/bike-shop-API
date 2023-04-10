@@ -18,7 +18,7 @@ public class Usuario extends EntityClass {
     private String login;
 
     private String senha;
-
+    
     @Column(name = "valor_gasto")
     private Double valorGasto;
 

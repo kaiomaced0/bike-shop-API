@@ -23,6 +23,7 @@ public class EntityClass {
         dataInclusao = LocalDateTime.now();
     }
 
+    
     public Long getId() {
         return id;
     }
@@ -37,6 +38,18 @@ public class EntityClass {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+
+
+    public LocalDateTime getDataInclusao() {
+        return dataInclusao;
+    }
+
+
+
+    public void setDataInclusao(LocalDateTime dataInclusao) {
+        this.dataInclusao = dataInclusao;
     }
 
     

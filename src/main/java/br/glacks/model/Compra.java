@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
 import br.glacks.model.pagamento.FormaPagamento;
 
@@ -32,6 +33,12 @@ public class Compra extends EntityClass{
 
     @Column(name = "pagamento_realizado")
     private Boolean pagamentoRealizado;
+
+    
+    @PrePersist
+    public void inserirNome(){
+        setNome("#"+ usuario.getId().toString() + getId().toString() );
+    }
 
     public Usuario getUsuario() {
         return usuario;

@@ -12,7 +12,7 @@ public class ListaProduto extends EntityClass{
     private Tamanho tamanho;
     private Cor cor;
 
-    
+
     public Integer getQuantidade() {
         return quantidade;
     }

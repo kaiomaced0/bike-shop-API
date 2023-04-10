@@ -5,10 +5,19 @@ import br.glacks.model.Usuario;
 public class UsuarioDTO {
 
     private String nome;
+    private String cpf;
     private String login;
     private String senha;
-    private String cpf;
 
+    public static Usuario criaUsuario(UsuarioDTO usuarioDTO){
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setLogin(usuarioDTO.getLogin());
+        usuario.setSenha(usuarioDTO.getSenha());
+        return usuario;
+    }
+
+    
     public String getNome() {
         return nome;
     }
@@ -33,13 +42,15 @@ public class UsuarioDTO {
         this.senha = senha;
     }
 
+
     public String getCpf() {
         return cpf;
     }
 
+
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
+   
     
 }

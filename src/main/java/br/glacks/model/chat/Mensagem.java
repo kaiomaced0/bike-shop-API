@@ -2,6 +2,7 @@ package br.glacks.model.chat;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 import br.glacks.model.EntityClass;
 import br.glacks.model.Usuario;
@@ -16,6 +17,11 @@ public class Mensagem extends EntityClass{
     private Boolean ver;
 
     
+    @PrePersist
+    public void inserirNome(){
+        setNome("#"+ getUsuario().getId().toString() + getId().toString());
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
