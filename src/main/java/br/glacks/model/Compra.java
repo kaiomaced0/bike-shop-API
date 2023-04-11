@@ -27,8 +27,9 @@ public class Compra extends EntityClass{
     @Enumerated(EnumType.ORDINAL)    
     private FormaPagamento formaPagamento;
 
-    @JoinColumn(name = "endereco_entrega")
+    
     @ManyToOne
+    @JoinColumn(name = "endereco_entrega_compra")
     private Endereco enderecoEntrega;
 
     @Column(name = "pagamento_realizado")

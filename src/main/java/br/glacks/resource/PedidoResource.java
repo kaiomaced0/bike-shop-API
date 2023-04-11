@@ -1,6 +1,7 @@
 package br.glacks.resource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -14,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.PedidoResponseDTO;
 import br.glacks.model.Pedido;
 import br.glacks.repository.PedidoRepository;
 
@@ -29,8 +31,11 @@ public class PedidoResource {
     
 
     @GET
-    public List<Pedido> gettAll(){
-        return repository.findAll().list();
+    public List<PedidoResponseDTO> getAll(){
+        return repository.findAll()
+            .stream()
+            .map(pedido -> new PedidoResponseDTO(pedido))
+            .collect(Collectors.toList());
         
     }
 

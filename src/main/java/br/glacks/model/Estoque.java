@@ -15,8 +15,8 @@ public class Estoque extends EntityClass{
     private ListaProduto produtoEstoque;
 
     @PrePersist
-    public void inserirNome(){
-        setNome("#"+ produtoEstoque.getProduto().getId() + getId().toString() );
+    public void prepersist(){
+        produtoEstoque.setTipoListaProduto(TipoListaProduto.ESTOQUE);
     }
     
     public ListaProduto getProdutoEstoque() {

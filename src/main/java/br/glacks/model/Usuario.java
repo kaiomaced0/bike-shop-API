@@ -8,42 +8,71 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
 import br.glacks.model.pagamento.Cartao;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends EntityClass {
 
-
     private String login;
 
     private String senha;
+
+    @OneToOne
+    private Carrinho carrinho;
     
     @Column(name = "valor_gasto")
     private Double valorGasto;
 
     @OneToMany
-    @JoinColumn(name = "lista_pedidos")
+    @JoinColumn(name = "lista_pedidos_usuario")
     private List<Pedido> pedidos;
 
     @OneToMany
-    @JoinColumn(name = "lista_enderecos")
+    @JoinColumn(name = "lista_enderecos_usuario")
     private List<Endereco> enderecos;
 
     @OneToMany
-    @JoinColumn(name = "lista_cartoes")
+    @JoinColumn(name = "lista_cartoes_usuario")
     private List<Cartao> cartoes;
 
     @OneToMany
-    @JoinColumn(name = "lista_gostei")
+    @JoinColumn(name = "lista_gostei_usuario")
     private List<Produto> gostei;
 
     @OneToMany
-    @JoinColumn(name = "lista_telefones")
+    @JoinColumn(name = "lista_telefones_usuario")
     private List<Telefone> telefones;
 
 
+
+    @PrePersist
+    public void criaCarrinho(){
+        carrinho.setUsuario(this);
+    }
     
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+
+
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
+    }
+
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+
     public List<Pedido> getPedidos() {
         return pedidos;
     }

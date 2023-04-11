@@ -13,6 +13,7 @@ public class Endereco extends EntityClass{
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(name = "cep_endereco")
     private Cep cep;
 
     private String regiao;

@@ -31,7 +31,12 @@ public class Pedido extends EntityClass {
 
     @PrePersist
     public void inserirNome(){
-        setNome("#"+ getId().toString() + compra.getNome());
+        if(getNome() == null)
+            setNome("#"+ getId().toString() + compra.getNome());
+
+        for (ListaProduto lista : compra.getCarrinho().getlistaProdutos()) {
+            lista.setTipoListaProduto(TipoListaProduto.PEDIDO);
+        }
     }
 
     public Compra getCompra() {

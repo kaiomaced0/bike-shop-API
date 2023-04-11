@@ -12,10 +12,11 @@ import javax.persistence.PrePersist;
 public class Carrinho extends EntityClass{
     
     @OneToMany
-    @JoinColumn(name = "lista_Produtos")
+    @JoinColumn(name = "lista_Produtos_carrinho")
     private List<ListaProduto> listaProdutos;
 
     @ManyToOne
+    @JoinColumn(name = "cupom_carrinho")
     private Cupom cupom;
 
     @Column(name = "valor_total")
@@ -30,7 +31,7 @@ public class Carrinho extends EntityClass{
     public void inserirNome(){
         setNome("#"+ usuario.getId().toString() + getId().toString() );
     }
-    
+
     public List<ListaProduto> getlistaProdutos() {
         return listaProdutos;
     }

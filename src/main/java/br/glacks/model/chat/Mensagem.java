@@ -14,6 +14,8 @@ public class Mensagem extends EntityClass{
 
     private String dataMensagem;
 
+    private Integer avaliacao;
+
     private Boolean ver;
 
     
@@ -44,6 +46,14 @@ public class Mensagem extends EntityClass{
 
     public void setVer(Boolean ver) {
         this.ver = ver;
+    }
+
+    public Integer getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Integer avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     

@@ -2,12 +2,12 @@ package br.glacks.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 
 import br.glacks.model.chat.Mensagem;
@@ -21,16 +21,20 @@ public class Produto extends EntityClass {
 
     private Double valorVenda;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinColumn(name = "lista_tamanhos_produto")
     private List<Tamanho> tamanhos;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinColumn(name = "lista_cores_produto")
     private List<Cor> cores;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinColumn(name = "lista_categorias_produto")
     private List<Categoria> categorias;
 
     @OneToMany
+    @JoinColumn(name = "estoques_produto")
     private List<Estoque> listaEstoque;
 
     // quando o pedido for realizado o estoque do produto deve diminuir e a
@@ -45,6 +49,7 @@ public class Produto extends EntityClass {
 
     @CollectionTable
     @ElementCollection
+    @Column(name = "url_imagens_produto")
     private List<String> img;
 
     private Double estrelas;

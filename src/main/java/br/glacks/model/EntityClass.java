@@ -2,13 +2,13 @@ package br.glacks.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
-@Entity
+@MappedSuperclass
 public class EntityClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

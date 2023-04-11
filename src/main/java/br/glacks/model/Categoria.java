@@ -11,16 +11,13 @@ import javax.persistence.OneToMany;
 public class Categoria extends EntityClass{
     
     @ManyToMany
-    @JoinColumn(name = "lista_produtos_Categoria")
+    @JoinColumn(name = "produtos_categoria")
     private List<Produto> produtos;
 
     @OneToMany
-    @JoinColumn(name = "filha_categorias")
+    @JoinColumn(name = "lista_categorias_filha_categoria")
     private List<Categoria> categoriasFilha;
 
-    @OneToMany
-    @JoinColumn(name = "pai_categorias")
-    private List<Categoria> categoriasPai;
 
     public List<Produto> getProdutos() {
         return produtos;
@@ -37,16 +34,7 @@ public class Categoria extends EntityClass{
     public void setCategoriasFilha(List<Categoria> categoriasFilha) {
         this.categoriasFilha = categoriasFilha;
     }
-
-    public List<Categoria> getCategoriasPai() {
-        return categoriasPai;
-    }
-
-    public void setCategoriasPai(List<Categoria> categoriasPai) {
-        this.categoriasPai = categoriasPai;
-    }
-
-    
+   
 
     
 }

@@ -2,6 +2,7 @@ package br.glacks.model;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -12,6 +13,7 @@ public class Cupom extends EntityClass {
     private Double valorDesconto;
 
     @OneToMany
+    @JoinColumn(name = "lista_categorias_cupom")
     private List<Categoria> categoria;
 
     private Double valorMinimo;
