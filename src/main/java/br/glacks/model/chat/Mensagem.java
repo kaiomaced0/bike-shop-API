@@ -12,11 +12,9 @@ public class Mensagem extends EntityClass{
     @ManyToOne
     private Usuario usuario;
 
-    private String dataMensagem;
-
     private Integer avaliacao;
 
-    private Boolean ver;
+    private Boolean ver = true;
 
     
     @PrePersist
@@ -30,14 +28,6 @@ public class Mensagem extends EntityClass{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public String getDataMensagem() {
-        return dataMensagem;
-    }
-
-    public void setDataMensagem(String dataMensagem) {
-        this.dataMensagem = dataMensagem;
     }
 
     public Boolean getVer() {

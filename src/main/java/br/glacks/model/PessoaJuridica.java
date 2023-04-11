@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.Size;
 
@@ -15,7 +14,6 @@ public class PessoaJuridica extends Usuario{
 
     @Size(min = 14, max =14)
     private String cnpj;
-
     
     @ManyToMany
     @JoinColumn(name = "usuarios_responsaveis_pj")

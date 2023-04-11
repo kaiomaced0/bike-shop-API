@@ -2,8 +2,8 @@ package br.glacks.model.Locais;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -16,8 +16,9 @@ public class Cidade extends EntityClass{
     private Estado estado;
 
     @OneToMany
-    @Column(name = "lista_cep_cidade")
+    @JoinColumn(name = "lista_cep_cidade")
     private List<Cep> ceps;
+
 
     public Estado getEstado() {
         return estado;
@@ -25,6 +26,15 @@ public class Cidade extends EntityClass{
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+        
+    }
+
+    public List<Cep> getCeps() {
+        return ceps;
+    }
+
+    public void setCeps(List<Cep> ceps) {
+        this.ceps = ceps;
     }
 
 
