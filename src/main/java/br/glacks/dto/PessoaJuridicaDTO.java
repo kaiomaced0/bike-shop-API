@@ -1,15 +1,16 @@
 package br.glacks.dto;
 
 import br.glacks.model.PessoaJuridica;
-import br.glacks.model.Usuario;
 
 public class PessoaJuridicaDTO {
     private UsuarioDTO usuarioDTO;
     private String cnpj;
 
     public static PessoaJuridica criaPessoaJuridica(PessoaJuridicaDTO pessoaJuridicaDTO){
-        Usuario pessoa = UsuarioDTO.criaUsuario(pessoaJuridicaDTO.getUsuarioDTO());
-        PessoaJuridica pessoaJ = (PessoaJuridica) pessoa;
+        PessoaJuridica pessoaJ = new PessoaJuridica();
+        pessoaJ.setNome(pessoaJuridicaDTO.getUsuarioDTO().getNome());
+        pessoaJ.setLogin(pessoaJuridicaDTO.getUsuarioDTO().getLogin());
+        pessoaJ.setSenha(pessoaJuridicaDTO.getUsuarioDTO().getSenha());
         pessoaJ.setCnpj(pessoaJuridicaDTO.getCnpj());
         return pessoaJ;
     }

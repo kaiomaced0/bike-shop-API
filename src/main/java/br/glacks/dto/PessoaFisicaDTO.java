@@ -8,10 +8,12 @@ public class PessoaFisicaDTO {
     private String cpf;
 
     public static PessoaFisica criaPessoaFisica(PessoaFisicaDTO pessoaFisicaDTO){
-        Usuario pessoa = UsuarioDTO.criaUsuario(pessoaFisicaDTO.getUsuarioDTO());
-        PessoaFisica pessoaJ = (PessoaFisica) pessoa;
-        pessoaJ.setCpf(pessoaFisicaDTO.getCpf());
-        return pessoaJ;
+        PessoaFisica pessoaF = new PessoaFisica();
+        pessoaF.setNome(pessoaFisicaDTO.getUsuarioDTO().getNome());
+        pessoaF.setLogin(pessoaFisicaDTO.getUsuarioDTO().getLogin());
+        pessoaF.setSenha(pessoaFisicaDTO.getUsuarioDTO().getSenha());
+        pessoaF.setCpf(pessoaFisicaDTO.getCpf());
+        return pessoaF;
     }
 
     public UsuarioDTO getUsuarioDTO() {

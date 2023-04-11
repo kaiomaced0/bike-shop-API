@@ -19,7 +19,9 @@ import javax.ws.rs.core.Response.Status;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.model.Carrinho;
 import br.glacks.model.Usuario;
+import br.glacks.repository.CarrinhoRepository;
 import br.glacks.repository.UsuarioRepository;
 
 
@@ -32,6 +34,8 @@ public class UsuarioResource {
     @Inject
     UsuarioRepository repository;
 
+    @Inject
+    CarrinhoRepository carrinhoRepository;
 
     @GET
     public List<UsuarioResponseDTO> getAll(){
@@ -54,6 +58,9 @@ public class UsuarioResource {
     public Response insert(UsuarioDTO usuarioDTO){
         Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
         if(usuarioDTO != null){
+            Carrinho carrinho = new Carrinho();
+            carrinhoRepository.persist(carrinho);
+            usuario.setCarrinho(carrinho);
             repository.persist(usuario);
             return Response.ok(usuario).build();
         }

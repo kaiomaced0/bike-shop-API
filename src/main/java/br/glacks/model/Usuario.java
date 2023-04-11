@@ -9,7 +9,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 
 import br.glacks.model.pagamento.Cartao;
 @Entity
@@ -46,12 +45,6 @@ public class Usuario extends EntityClass {
     @JoinColumn(name = "lista_telefones_usuario")
     private List<Telefone> telefones;
 
-
-
-    @PrePersist
-    public void criaCarrinho(){
-        carrinho.setUsuario(this);
-    }
     
     public Carrinho getCarrinho() {
         return carrinho;

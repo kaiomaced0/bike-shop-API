@@ -57,7 +57,7 @@ public class PessoaJuridicaResource {
         PessoaJuridica pessoajuridica = PessoaJuridicaDTO.criaPessoaJuridica(pessoajuridicaDTO);
         if(pessoajuridicaDTO != null){
             repository.persist(pessoajuridica);
-            return Response.ok(pessoajuridica).build();
+            return Response.ok(pessoajuridicaDTO).build();
         }
         return Response.notModified().build();
         

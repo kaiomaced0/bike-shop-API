@@ -8,9 +8,22 @@ public class UsuarioResponseDTO {
 
     private String nome;
 
+    private String login;
+
+
     public UsuarioResponseDTO (Usuario usuario){
         this.id = usuario.getId();
         this.nome = usuario.getNome();
+        this.login = usuario.getLogin();
+    }
+
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Long getId() {

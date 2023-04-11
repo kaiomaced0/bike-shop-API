@@ -57,7 +57,7 @@ public class PessoaFisicaResource {
         PessoaFisica pessoaFisica = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
         if(pessoaFisicaDTO != null){
             repository.persist(pessoaFisica);
-            return Response.ok(pessoaFisica).build();
+            return Response.ok(pessoaFisicaDTO).build();
         }
         return Response.notModified().build();
         
