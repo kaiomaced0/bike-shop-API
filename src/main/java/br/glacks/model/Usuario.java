@@ -2,6 +2,7 @@ package br.glacks.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -11,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import br.glacks.model.pagamento.Cartao;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends EntityClass {
@@ -19,7 +21,7 @@ public class Usuario extends EntityClass {
 
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Carrinho carrinho;
     
     @Column(name = "valor_gasto")

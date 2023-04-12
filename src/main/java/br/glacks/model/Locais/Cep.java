@@ -1,4 +1,4 @@
-package br.glacks.model.Locais;
+package br.glacks.model.locais;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.glacks.model.Locais.Cep;
+import br.glacks.model.locais.Cep;
 import br.glacks.repository.CepRepository;
 
 

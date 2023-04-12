@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.glacks.model.Locais.Estado;
+import br.glacks.model.locais.Estado;
 import br.glacks.repository.EstadoRepository;
 
 

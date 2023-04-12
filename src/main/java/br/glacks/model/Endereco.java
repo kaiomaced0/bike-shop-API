@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import br.glacks.model.Locais.Cep;
+import br.glacks.model.locais.Cep;
 @Entity
 public class Endereco extends EntityClass{
 
