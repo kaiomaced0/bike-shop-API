@@ -5,4 +5,4 @@ para quaisquer e commerce que trabalha com Produtos diversos!
 
 UML Projeto
 
-![alt text](src/main/resources/img/uml-BikeShop.png)
+![alt text](src/main/resources/img/Bikeshop_uml.PNG)

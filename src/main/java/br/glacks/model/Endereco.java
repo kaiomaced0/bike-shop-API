@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import br.glacks.model.locais.Cep;
+import br.glacks.model.locais.Cidade;
 @Entity
 public class Endereco extends EntityClass{
 
@@ -13,10 +13,10 @@ public class Endereco extends EntityClass{
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "cep_endereco")
-    private Cep cep;
+    @JoinColumn(name = "cidade_endereco")
+    private Cidade cidade;
 
-    private String regiao;
+    private String cep;
 
     private String rua;
 
@@ -27,6 +27,22 @@ public class Endereco extends EntityClass{
     private Boolean principal = false;
     
 
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -35,21 +51,6 @@ public class Endereco extends EntityClass{
         this.usuario = usuario;
     }
 
-    public Cep getCep() {
-        return cep;
-    }
-
-    public void setCep(Cep cep) {
-        this.cep = cep;
-    }
-
-    public String getRegiao() {
-        return regiao;
-    }
-
-    public void setRegiao(String regiao) {
-        this.regiao = regiao;
-    }
 
     public String getRua() {
         return rua;
