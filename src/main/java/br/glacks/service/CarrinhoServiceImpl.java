@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import br.glacks.model.PessoaJuridica;
 import br.glacks.repository.PessoaJuridicaRepository;
 
-public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
+public class CarrinhoServiceImpl implements PessoaJuridicaService {
 
     @Inject
     PessoaJuridicaRepository repository;

@@ -33,17 +33,11 @@ public class Produto extends EntityClass {
     @JoinColumn(name = "lista_categorias_produto")
     private List<Categoria> categorias;
 
-    @OneToMany
-    @JoinColumn(name = "estoques_produto")
-    private List<Estoque> listaEstoque;
+    private Integer Estoque;
 
     // quando o pedido for realizado o estoque do produto deve diminuir e a
     // quantidade de vendas aumentar.
     private Integer quantidadeVendida;
-
-    @OneToMany
-    @JoinColumn(name = "lista_comentarios_produto")
-    private List<Mensagem> comentarios;
 
     private Boolean visivel;
 
@@ -118,14 +112,6 @@ public class Produto extends EntityClass {
 
     public void setQuantidadeVendida(Integer quantidadeVendida) {
         this.quantidadeVendida = quantidadeVendida;
-    }
-
-    public List<Mensagem> getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(List<Mensagem> comentarios) {
-        this.comentarios = comentarios;
     }
 
     public Boolean getVisivel() {
