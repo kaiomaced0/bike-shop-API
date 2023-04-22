@@ -51,10 +51,17 @@ public class PessoaFisicaResource {
         
     }
 
+    /**
+     * @param pessoaFisicaDTO
+     * @return
+     */
     @POST
     @Transactional
     public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
-        PessoaFisica pessoaFisica = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
+        PessoaFisica pessoaFisica;
+        pessoaFisica.setNome(pessoaFisicaDTO.usuarioDTO().nome());
+        pessoaFisica.setLogin(pessoaFisicaDTO.usuarioDTO().login());
+        pessoaFisica.setSenha(pessoaFisicaDTO.usuarioDTO().senha());
         if(pessoaFisicaDTO != null){
             repository.persist(pessoaFisica);
             return Response.ok(pessoaFisicaDTO).build();

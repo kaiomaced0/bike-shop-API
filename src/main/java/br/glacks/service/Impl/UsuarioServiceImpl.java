@@ -42,14 +42,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public Usuario update(long id, UsuarioDTO usuario){
         Usuario entity = repository.findById(id);
-        if(usuario.getLogin() != null){
-            entity.setLogin(usuario.getLogin());
+            entity.setLogin(usuario.login());
         }
-        if(usuario.getNome() != null){
-            entity.setNome(usuario.getNome());
+        if(usuario.nome() != null){´
+            entity.setNome(usuario.nome());
         }
-        if(usuario.getSenha() != null){
-            entity.setSenha(usuario.getSenha());
+        if(usuario.senha() != null){
+            entity.setSenha(usuario.senha());
         }
         return entity;
     }
