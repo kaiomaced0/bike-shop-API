@@ -3,14 +3,16 @@ package br.glacks.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-
-import br.glacks.model.chat.Mensagem;
 
 @Entity
 public class Produto extends EntityClass {
@@ -21,23 +23,17 @@ public class Produto extends EntityClass {
 
     private Double valorVenda;
 
-    @ManyToMany
-    @JoinColumn(name = "lista_tamanhos_produto")
-    private List<Tamanho> tamanhos;
+    @ManyToOne
+    @Enumerated(EnumType.ORDINAL) 
+    private Cor cor;
 
-    @ManyToMany
-    @JoinColumn(name = "lista_cores_produto")
-    private List<Cor> cores;
-
-    @ManyToMany
-    @JoinColumn(name = "lista_categorias_produto")
-    private List<Categoria> categorias;
+    @OneToMany
+    @JoinColumn(name = "lista_avaliacao")
+    private List<Avaliacao> avaliacoes;
 
     private Integer Estoque;
 
-    // quando o pedido for realizado o estoque do produto deve diminuir e a
-    // quantidade de vendas aumentar.
-    private Integer quantidadeVendida;
+    private Double preco;
 
     private Boolean visivel;
 
@@ -48,71 +44,6 @@ public class Produto extends EntityClass {
 
     private Double estrelas;
 
-
-    
-    public String getNomeLongo() {
-        return nomeLongo;
-    }
-
-    public void setNomeLongo(String nomeLongo) {
-        this.nomeLongo = nomeLongo;
-    }
-
-    public Double getValorCompra() {
-        return valorCompra;
-    }
-
-    public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
-    }
-
-    public Double getValorVenda() {
-        return valorVenda;
-    }
-
-    public void setValorVenda(Double valorVenda) {
-        this.valorVenda = valorVenda;
-    }
-
-    public List<Tamanho> getTamanhos() {
-        return tamanhos;
-    }
-
-    public void setTamanhos(List<Tamanho> tamanhos) {
-        this.tamanhos = tamanhos;
-    }
-
-    public List<Cor> getCores() {
-        return cores;
-    }
-
-    public void setCores(List<Cor> cores) {
-        this.cores = cores;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
-    }
-
-    public List<Estoque> getListaEstoque() {
-        return listaEstoque;
-    }
-
-    public void setListaEstoque(List<Estoque> listaEstoque) {
-        this.listaEstoque = listaEstoque;
-    }
-
-    public Integer getQuantidadeVendida() {
-        return quantidadeVendida;
-    }
-
-    public void setQuantidadeVendida(Integer quantidadeVendida) {
-        this.quantidadeVendida = quantidadeVendida;
-    }
 
     public Boolean getVisivel() {
         return visivel;
@@ -138,4 +69,53 @@ public class Produto extends EntityClass {
         this.estrelas = estrelas;
     }
 
+    public String getNomeLongo() {
+        return nomeLongo;
+    }
+
+    public void setNomeLongo(String nomeLongo) {
+        this.nomeLongo = nomeLongo;
+    }
+
+    public Double getValorCompra() {
+        return valorCompra;
+    }
+
+    public void setValorCompra(Double valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public Double getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(Double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
+
+    public Cor getCor() {
+        return cor;
+    }
+
+    public void setCor(Cor cor) {
+        this.cor = cor;
+    }
+
+    public Integer getEstoque() {
+        return Estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+        Estoque = estoque;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    
 }

@@ -19,7 +19,8 @@ public class PessoaJuridica extends Usuario{
     @JoinColumn(name = "usuarios_responsaveis_pj")
     private List<PessoaFisica> usuariosResponsaveis;
 
-
+    private String nomeFantasia;
+    
     public String getCnpj() {
         return cnpj;
     }
@@ -34,6 +35,14 @@ public class PessoaJuridica extends Usuario{
 
     public void setUsuariosResponsaveis(List<PessoaFisica> usuariosResponsaveis) {
         this.usuariosResponsaveis = usuariosResponsaveis;
+    }
+
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     

@@ -101,11 +101,8 @@ public class PessoaJuridicaResource {
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         PessoaJuridica entity = repository.findById(id);
-        if(entity.getPedidos() == null){
-            repository.deleteById(id);
-            return Response.status(Status.OK).build();
-        }
-        return Response.status(Status.UNAUTHORIZED).build();
+        repository.deleteById(id);
+        return Response.status(Status.OK).build();
     }
     
 }

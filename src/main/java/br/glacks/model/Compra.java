@@ -1,13 +1,14 @@
 package br.glacks.model;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 import br.glacks.model.pagamento.FormaPagamento;
@@ -18,22 +19,34 @@ public class Compra extends EntityClass{
     @ManyToOne
     private Usuario usuario;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(unique = true)
-    private Carrinho carrinho;
+    @OneToMany
+    @JoinColumn(name = "lista_ItemCompra")
+    private List<ItemCompra> listaItemCompra;
 
     private Double valorTotal;
 
+    @ManyToOne
     @Enumerated(EnumType.ORDINAL)    
     private FormaPagamento formaPagamento;
 
-    
+    @ManyToOne
+    @Enumerated(EnumType.ORDINAL)    
+    private StatusPedido statusPedido;
+
+    private String token;
+
+    private String codigoRastreio;
+
+    private String dataPrevista;
+
+    private String dataEntrega;
+
     @ManyToOne
     @JoinColumn(name = "endereco_entrega_compra")
     private Endereco enderecoEntrega;
 
     @Column(name = "pagamento_realizado")
-    private Boolean pagamentoRealizado;
+    private Boolean pago;
 
     
     @PrePersist
@@ -41,55 +54,116 @@ public class Compra extends EntityClass{
         setNome("#"+ usuario.getId().toString() + getId().toString() );
     }
 
+
+    public String getToken() {
+        return token;
+    }
+
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
+    public String getCodigoRastreio() {
+        return codigoRastreio;
+    }
+
+
+    public void setCodigoRastreio(String codigoRastreio) {
+        this.codigoRastreio = codigoRastreio;
+    }
+
+
+    public String getDataPrevista() {
+        return dataPrevista;
+    }
+
+
+    public void setDataPrevista(String dataPrevista) {
+        this.dataPrevista = dataPrevista;
+    }
+
+
+    public String getDataEntrega() {
+        return dataEntrega;
+    }
+
+
+    public void setDataEntrega(String dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
+
     public Usuario getUsuario() {
         return usuario;
     }
+
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public Carrinho getCarrinho() {
-        return carrinho;
+
+    public List<ItemCompra> getListaItemCompra() {
+        return listaItemCompra;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
-        this.carrinho = carrinho;
+
+    public void setListaItemCompra(List<ItemCompra> listaItemCompra) {
+        this.listaItemCompra = listaItemCompra;
     }
+
 
     public Double getValorTotal() {
         return valorTotal;
     }
 
+
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
 
     public FormaPagamento getFormaPagamento() {
         return formaPagamento;
     }
 
+
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
+
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+
 
     public Endereco getEnderecoEntrega() {
         return enderecoEntrega;
     }
 
+
     public void setEnderecoEntrega(Endereco enderecoEntrega) {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public Boolean getPagamentoRealizado() {
-        return pagamentoRealizado;
+
+    public Boolean getPago() {
+        return pago;
     }
 
-    public void setPagamentoRealizado(Boolean pagamentoRealizado) {
-        this.pagamentoRealizado = pagamentoRealizado;
+
+    public void setPago(Boolean pago) {
+        this.pago = pago;
     }
 
     
-
     
 }

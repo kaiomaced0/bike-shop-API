@@ -2,15 +2,11 @@ package br.glacks.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 import br.glacks.model.pagamento.Cartao;
 
 @Entity
@@ -21,15 +17,7 @@ public class Usuario extends EntityClass {
 
     private String senha;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Carrinho carrinho;
-    
-    @Column(name = "valor_gasto")
-    private Double valorGasto;
-
-    @OneToMany
-    @JoinColumn(name = "lista_pedidos_usuario")
-    private List<Pedido> pedidos;
+    private String email;
 
     @OneToMany
     @JoinColumn(name = "lista_enderecos_usuario")
@@ -40,40 +28,36 @@ public class Usuario extends EntityClass {
     private List<Cartao> cartoes;
 
     @OneToMany
-    @JoinColumn(name = "lista_gostei_usuario")
+    @JoinColumn(name = "lista_desejos")
     private List<Produto> gostei;
 
     @OneToMany
     @JoinColumn(name = "lista_telefones_usuario")
     private List<Telefone> telefones;
 
-    
-    public Carrinho getCarrinho() {
-        return carrinho;
+
+    public String getLogin() {
+        return login;
     }
 
-
-    public void setCarrinho(Carrinho carrinho) {
-        this.carrinho = carrinho;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-
-    public List<Telefone> getTelefones() {
-        return telefones;
+    public String getSenha() {
+        return senha;
     }
 
-
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Endereco> getEnderecos() {
@@ -100,28 +84,13 @@ public class Usuario extends EntityClass {
         this.gostei = gostei;
     }
 
-    public Double getValorGasto() {
-        return valorGasto;
+    public List<Telefone> getTelefones() {
+        return telefones;
     }
 
-    public void setValorGasto(Double valorGasto) {
-        this.valorGasto = valorGasto;
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
     
 }

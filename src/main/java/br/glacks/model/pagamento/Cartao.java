@@ -1,6 +1,8 @@
 package br.glacks.model.pagamento;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
 import br.glacks.model.EntityClass;
@@ -16,6 +18,8 @@ public class Cartao extends EntityClass{
 
     private String dataValidade;
 
+    @ManyToOne
+    @Enumerated(EnumType.ORDINAL)  
     private BandeiraCartao bandeiraCartao;
 
     private Integer cvc;

@@ -22,7 +22,7 @@ public class Endereco extends EntityClass{
 
     private String numero;
 
-    private String complemento;
+    private String descricao;
 
     private Boolean principal = false;
     
@@ -68,20 +68,20 @@ public class Endereco extends EntityClass{
         this.numero = numero;
     }
 
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
     public Boolean getPrincipal() {
         return principal;
     }
 
     public void setPrincipal(Boolean principal) {
         this.principal = principal;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     
