@@ -31,7 +31,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public Response insert(UsuarioDTO usuarioDTO){
-        Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.nome());
+        usuario.setLogin(usuarioDTO.login());
+        usuario.setSenha(usuarioDTO.senha());
         if(usuarioDTO != null){
             repository.persist(usuario);
             return Response.ok(usuario).build();
@@ -42,9 +45,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public Usuario update(long id, UsuarioDTO usuario){
         Usuario entity = repository.findById(id);
+        if(usuario.login() != null){
             entity.setLogin(usuario.login());
         }
-        if(usuario.nome() != null){´
+        if(usuario.nome() != null){
             entity.setNome(usuario.nome());
         }
         if(usuario.senha() != null){

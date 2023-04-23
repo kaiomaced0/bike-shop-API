@@ -7,13 +7,13 @@ import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
 import br.glacks.model.Telefone;
-import br.glacks.repository.AvaliacaoRepository;
-import br.glacks.service.AvaliacaoService;
+import br.glacks.repository.TelefoneRepository;
+import br.glacks.service.TelefoneService;
 
-public class TelefoneServiceImpl implements AvaliacaoService {
+public class TelefoneServiceImpl implements TelefoneService {
 
     @Inject
-    AvaliacaoRepository repository;
+    TelefoneRepository repository;
     
     public List<Telefone> getAll(){
         return repository.findAll().list();
@@ -39,7 +39,6 @@ public class TelefoneServiceImpl implements AvaliacaoService {
     
    @Override
     public Response delete(Long id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 

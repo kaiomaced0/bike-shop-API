@@ -27,7 +27,11 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
     @Override
     public Response insert(PessoaJuridicaDTO pessoaJuridicaDTO){
-        PessoaJuridica pessoaJuridica = PessoaJuridicaDTO.criaPessoaJuridica(pessoaJuridicaDTO);
+        PessoaJuridica pessoaJuridica = new PessoaJuridica();
+        pessoaJuridica.setNome(pessoaJuridicaDTO.usuarioDTO().nome());
+        pessoaJuridica.setLogin(pessoaJuridicaDTO.usuarioDTO().login());
+        pessoaJuridica.setSenha(pessoaJuridicaDTO.usuarioDTO().senha());
+        pessoaJuridica.setCnpj(pessoaJuridicaDTO.cnpj());
         if(pessoaJuridicaDTO != null){
             repository.persist(pessoaJuridica);
             return Response.ok(pessoaJuridicaDTO).build();
@@ -37,9 +41,20 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
 
     @Override
-    public PessoaJuridica update(long id, PessoaJuridicaDTO pessoajuridica){
+    public PessoaJuridica update(long id, PessoaJuridicaDTO pessoaJuridica){
         PessoaJuridica entity = repository.findById(id);
-        entity.setNome(pessoajuridica.getUsuarioDTO().getNome());
+        if(pessoaJuridica.usuarioDTO().login() != null){
+            entity.setLogin(pessoaJuridica.usuarioDTO().login());
+        }
+        if(pessoaJuridica.usuarioDTO().nome() != null){
+            entity.setNome(pessoaJuridica.usuarioDTO().nome());
+        }
+        if(pessoaJuridica.usuarioDTO().senha() != null){
+            entity.setSenha(pessoaJuridica.usuarioDTO().senha());
+        }
+        if(pessoaJuridica.cnpj() != null){
+            entity.setCnpj(pessoaJuridica.cnpj());
+        }
         return entity;
     }
     
