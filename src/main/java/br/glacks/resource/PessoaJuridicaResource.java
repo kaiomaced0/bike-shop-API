@@ -54,7 +54,11 @@ public class PessoaJuridicaResource {
     @POST
     @Transactional
     public Response insert(PessoaJuridicaDTO pessoajuridicaDTO){
-        PessoaJuridica pessoajuridica = PessoaJuridicaDTO.criaPessoaJuridica(pessoajuridicaDTO);
+        PessoaJuridica pessoajuridica = new PessoaJuridica();
+        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
+        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
+        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
+        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
         if(pessoajuridicaDTO != null){
             repository.persist(pessoajuridica);
             return Response.ok(pessoajuridicaDTO).build();
@@ -82,17 +86,17 @@ public class PessoaJuridicaResource {
     @Transactional
     public PessoaJuridica update(@PathParam("id") long id, PessoaJuridicaDTO pessoajuridica){
         PessoaJuridica entity = repository.findById(id);
-        if(pessoajuridica.getUsuarioDTO().getLogin() != null){
-            entity.setLogin(pessoajuridica.getUsuarioDTO().getLogin());
+        if(pessoajuridica.usuarioDTO().login() != null){
+            entity.setLogin(pessoajuridica.usuarioDTO().login());
         }
-        if(pessoajuridica.getUsuarioDTO().getNome() != null){
-            entity.setNome(pessoajuridica.getUsuarioDTO().getNome());
+        if(pessoajuridica.usuarioDTO().nome() != null){
+            entity.setNome(pessoajuridica.usuarioDTO().nome());
         }
-        if(pessoajuridica.getUsuarioDTO().getSenha() != null){
-            entity.setSenha(pessoajuridica.getUsuarioDTO().getSenha());
+        if(pessoajuridica.usuarioDTO().senha() != null){
+            entity.setSenha(pessoajuridica.usuarioDTO().senha());
         }
-        if(pessoajuridica.getCnpj() != null){
-            entity.setCnpj(pessoajuridica.getCnpj());
+        if(pessoajuridica.cnpj() != null){
+            entity.setCnpj(pessoajuridica.cnpj());
         }
         return entity;
     }

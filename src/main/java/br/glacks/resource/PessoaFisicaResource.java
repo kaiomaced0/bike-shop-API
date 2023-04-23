@@ -51,14 +51,10 @@ public class PessoaFisicaResource {
         
     }
 
-    /**
-     * @param pessoaFisicaDTO
-     * @return
-     */
     @POST
     @Transactional
     public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
-        PessoaFisica pessoaFisica;
+        PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setNome(pessoaFisicaDTO.usuarioDTO().nome());
         pessoaFisica.setLogin(pessoaFisicaDTO.usuarioDTO().login());
         pessoaFisica.setSenha(pessoaFisicaDTO.usuarioDTO().senha());
@@ -89,17 +85,17 @@ public class PessoaFisicaResource {
     @Transactional
     public PessoaFisica update(@PathParam("id") long id, PessoaFisicaDTO pessoafisica){
         PessoaFisica entity = repository.findById(id);
-        if(pessoafisica.getUsuarioDTO().getLogin() != null){
-            entity.setLogin(pessoafisica.getUsuarioDTO().getLogin());
+        if(pessoafisica.usuarioDTO().login() != null){
+            entity.setLogin(pessoafisica.usuarioDTO().login());
         }
-        if(pessoafisica.getUsuarioDTO().getNome() != null){
-            entity.setNome(pessoafisica.getUsuarioDTO().getNome());
+        if(pessoafisica.usuarioDTO().nome() != null){
+            entity.setNome(pessoafisica.usuarioDTO().nome());
         }
-        if(pessoafisica.getUsuarioDTO().getSenha() != null){
-            entity.setSenha(pessoafisica.getUsuarioDTO().getSenha());
+        if(pessoafisica.usuarioDTO().senha() != null){
+            entity.setSenha(pessoafisica.usuarioDTO().senha());
         }
-        if(pessoafisica.getCpf() != null){
-            entity.setCpf(pessoafisica.getCpf());
+        if(pessoafisica.cpf() != null){
+            entity.setCpf(pessoafisica.cpf());
         }
         return entity;
     }

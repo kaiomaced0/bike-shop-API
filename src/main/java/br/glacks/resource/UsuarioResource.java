@@ -52,7 +52,10 @@ public class UsuarioResource {
     @POST
     @Transactional
     public Response insert(UsuarioDTO usuarioDTO){
-        Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.nome());
+        usuario.setLogin(usuarioDTO.login());
+        usuario.setSenha(usuarioDTO.senha());
         if(usuarioDTO != null){
             repository.persist(usuario);
             return Response.ok(usuario).build();
@@ -66,14 +69,14 @@ public class UsuarioResource {
     @Transactional
     public Usuario update(@PathParam("id") long id, UsuarioDTO usuario){
         Usuario entity = repository.findById(id);
-        if(usuario.getLogin() != null){
-            entity.setLogin(usuario.getLogin());
+        if(usuario.login() != null){
+            entity.setLogin(usuario.login());
         }
-        if(usuario.getNome() != null){
-            entity.setNome(usuario.getNome());
+        if(usuario.nome() != null){
+            entity.setNome(usuario.nome());
         }
-        if(usuario.getSenha() != null){
-            entity.setSenha(usuario.getSenha());
+        if(usuario.senha() != null){
+            entity.setSenha(usuario.senha());
         }
         return entity;
     }
