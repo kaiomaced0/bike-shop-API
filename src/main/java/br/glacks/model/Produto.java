@@ -23,8 +23,6 @@ public class Produto extends EntityClass {
 
     private Double valorCompra;
 
-    private Double valorVenda;
-
     @Enumerated(EnumType.ORDINAL) 
     private Cor cor;
 
@@ -84,14 +82,6 @@ public class Produto extends EntityClass {
 
     public void setValorCompra(Double valorCompra) {
         this.valorCompra = valorCompra;
-    }
-
-    public Double getValorVenda() {
-        return valorVenda;
-    }
-
-    public void setValorVenda(Double valorVenda) {
-        this.valorVenda = valorVenda;
     }
 
     public Cor getCor() {

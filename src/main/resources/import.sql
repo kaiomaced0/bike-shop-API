@@ -16,3 +16,7 @@
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'otavio', 'otavio','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'rubens', 'rubens','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'ordete', 'ordete','123');
+
+ insert into produto (id, nome, estoque, preco) values(nextval('hibernate_sequence'), 'bike 1', 50, 1020,0);
+ insert into produto (id, nome, estoque, preco) values(nextval('hibernate_sequence'), 'bike 2', 30, 3040.0);
+ insert into produto (id, nome, estoque, preco) values(nextval('hibernate_sequence'), 'bike 3', 20, 2300.0);
