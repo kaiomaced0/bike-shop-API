@@ -18,7 +18,6 @@ public class Cartao extends EntityClass{
 
     private String dataValidade;
 
-    @ManyToOne
     @Enumerated(EnumType.ORDINAL)  
     private BandeiraCartao bandeiraCartao;
 

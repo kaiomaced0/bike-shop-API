@@ -3,13 +3,12 @@ package br.glacks.model.bike;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import br.glacks.model.Produto;
 
-@Entity
 @PrimaryKeyJoinColumn(name = "id")
+@Entity
 public class Bike extends Produto{
 
     private Integer marcha;
@@ -22,11 +21,9 @@ public class Bike extends Produto{
 
     private String marca;
 
-    @ManyToOne
     @Enumerated(EnumType.ORDINAL)  
     private Tamanho tamanho;
 
-    @ManyToOne
     @Enumerated(EnumType.ORDINAL)  
     private TipoBike tipoBike;
 

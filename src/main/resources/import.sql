@@ -1,7 +1,6 @@
 -- This file allow to write SQL commands that will be emitted in test and dev.
 -- The commands are commented as their support depends of the database
- insert into carrinho(id) values('1')
- insert into usuario (id, nome, login, senha, carrinho) values(nextval('hibernate_sequence'), 'kaio', 'kaio','123', '1');
+ insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'kaio', 'kaio','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'joao', 'joao','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'antonio', 'antonio','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'lucas', 'lucas','123');
@@ -17,4 +16,3 @@
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'otavio', 'otavio','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'rubens', 'rubens','123');
  insert into usuario (id, nome, login, senha) values(nextval('hibernate_sequence'), 'ordete', 'ordete','123');
- 

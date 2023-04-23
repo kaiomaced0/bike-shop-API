@@ -25,11 +25,9 @@ public class Compra extends EntityClass{
 
     private Double valorTotal;
 
-    @ManyToOne
     @Enumerated(EnumType.ORDINAL)    
     private FormaPagamento formaPagamento;
 
-    @ManyToOne
     @Enumerated(EnumType.ORDINAL)    
     private StatusPedido statusPedido;
 

@@ -5,8 +5,9 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -15,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto extends EntityClass {
 
     private String nomeLongo;
@@ -23,7 +25,6 @@ public class Produto extends EntityClass {
 
     private Double valorVenda;
 
-    @ManyToOne
     @Enumerated(EnumType.ORDINAL) 
     private Cor cor;
 
