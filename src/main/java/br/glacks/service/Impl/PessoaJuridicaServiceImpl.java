@@ -3,7 +3,6 @@ package br.glacks.service.Impl;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
 import br.glacks.dto.PessoaJuridicaDTO;
