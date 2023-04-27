@@ -9,28 +9,35 @@ import javax.ws.rs.core.Response;
 import br.glacks.model.bike.Bike;
 import br.glacks.repository.BikeRepository;
 import br.glacks.service.BikeService;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class BikeServiceImpl implements BikeService {
 
     
     @Inject
     BikeRepository repository;
     
+    @Override
     public List<Bike> getAll(){
         return repository.findAll().list();
         
     }
 
+    @Override
     public Bike getId(long id){
         return repository.findById(id);
         
     }
 
+    @Override
+    @Transactional
     public Response insert(Bike bike){
         repository.persist(bike);
         return Response.ok(bike).build();
     }
 
+    @Override
     @Transactional
     public Bike update(long id, Bike bike){
         Bike entity = repository.findById(id);
@@ -39,6 +46,7 @@ public class BikeServiceImpl implements BikeService {
     }
     
    @Override
+   @Transactional
     public Response delete(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");

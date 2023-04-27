@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -12,11 +13,14 @@ import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.Usuario;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.UsuarioService;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class UsuarioServiceImpl implements UsuarioService {
     @Inject
     UsuarioRepository repository;
 
+    @Override
     public List<UsuarioResponseDTO> getAll(){
         return repository.findAll()
             .stream()
@@ -25,11 +29,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         
     }
 
+    @Override
     public Usuario getId(long id){
         return repository.findById(id);
         
     }
 
+    @Override
+    @Transactional
     public Response insert(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDTO.nome());
@@ -43,6 +50,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         
     }
 
+    @Override
+    @Transactional
     public Usuario update(long id, UsuarioDTO usuario){
         Usuario entity = repository.findById(id);
         if(usuario.login() != null){
@@ -57,6 +66,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         return entity;
     }
 
+    @Override
+    @Transactional
     public Response delete(Long id) {
         repository.deleteById(id);
         return Response.status(Status.OK).build();

@@ -3,29 +3,35 @@ package br.glacks.service.Impl;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
 import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.model.PessoaFisica;
 import br.glacks.repository.PessoaFisicaRepository;
 import br.glacks.service.PessoaFisicaService;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class PessoaFisicaServiceImpl implements PessoaFisicaService {
 
     @Inject
     PessoaFisicaRepository repository;
     
+    @Override
     public List<PessoaFisica> getAll(){
         return repository.findAll().list();
         
     }
 
+    @Override
     public PessoaFisica getId(long id){
         return repository.findById(id);
         
     }
     
     @Override
+    @Transactional
     public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
         PessoaFisica pessoaFisica = new PessoaFisica();
         pessoaFisica.setNome(pessoaFisicaDTO.usuarioDTO().nome());
@@ -39,6 +45,8 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         return Response.notModified().build();
     }
 
+    @Override
+    @Transactional
     public PessoaFisica update(long id, PessoaFisicaDTO pessoafisica){
         PessoaFisica entity = repository.findById(id);
         if(pessoafisica.usuarioDTO().login() != null){
@@ -57,6 +65,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
     }
     
    @Override
+   @Transactional
     public Response delete(Long id) {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }

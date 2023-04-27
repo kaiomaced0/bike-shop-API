@@ -3,28 +3,34 @@ package br.glacks.service.Impl;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
 import br.glacks.dto.PessoaJuridicaDTO;
 import br.glacks.model.PessoaJuridica;
 import br.glacks.repository.PessoaJuridicaRepository;
 import br.glacks.service.PessoaJuridicaService;
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
     @Inject
     PessoaJuridicaRepository repository;
     
+    @Override
     public List<PessoaJuridica> getAll(){
         return repository.findAll().list();
         
     }
 
+    @Override
     public PessoaJuridica getId(long id){
         return repository.findById(id);
         
     }
     @Override
+    @Transactional
     public Response insert(PessoaJuridicaDTO pessoaJuridicaDTO){
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
         pessoaJuridica.setNome(pessoaJuridicaDTO.usuarioDTO().nome());
@@ -40,6 +46,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
 
     @Override
+    @Transactional
     public PessoaJuridica update(long id, PessoaJuridicaDTO pessoaJuridica){
         PessoaJuridica entity = repository.findById(id);
         if(pessoaJuridica.usuarioDTO().login() != null){
@@ -58,6 +65,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
     
    @Override
+   @Transactional
     public Response delete(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
