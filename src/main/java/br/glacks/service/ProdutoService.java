@@ -12,6 +12,8 @@ public interface ProdutoService {
 
     public Produto getId(@PathParam("id") long id);
 
+    public List<Produto> getNome(@PathParam("nome") String nome);
+
     public Response insert(Produto produtoDTO);
 
     public Produto update(@PathParam("id") long id, Produto produto);

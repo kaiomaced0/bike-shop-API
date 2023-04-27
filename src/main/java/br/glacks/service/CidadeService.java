@@ -12,6 +12,8 @@ public interface CidadeService {
 
     public Cidade getId(@PathParam("id") long id);
 
+    public List<Cidade> getNome(@PathParam("nome") String nome);
+
     public Response insert(Cidade cidadeDTO);
 
     public Cidade update(@PathParam("id") long id, Cidade cidade);

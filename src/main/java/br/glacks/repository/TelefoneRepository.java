@@ -7,5 +7,4 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 @ApplicationScoped
 public class TelefoneRepository implements PanacheRepository<Telefone> {
-    
 }

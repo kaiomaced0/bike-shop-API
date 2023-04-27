@@ -30,6 +30,12 @@ public class CupomServiceImpl implements CupomService {
     }
 
     @Override
+    public List<Cupom> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
+
+    @Override
     @Transactional
     public Response insert(Cupom cupom){
         repository.persist(cupom);

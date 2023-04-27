@@ -12,6 +12,8 @@ public interface CupomService {
 
     public Cupom getId(@PathParam("id") long id);
 
+    public List<Cupom> getNome(@PathParam("nome") String nome);
+
     public Response insert(Cupom cupomDTO);
 
     public Cupom update(@PathParam("id") long id, Cupom cupom);

@@ -29,6 +29,12 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
         return repository.findById(id);
         
     }
+
+    @Override
+    public List<PessoaJuridica> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
     @Override
     @Transactional
     public Response insert(PessoaJuridicaDTO pessoaJuridicaDTO){

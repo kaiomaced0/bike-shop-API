@@ -12,6 +12,8 @@ public interface BikeService {
 
     public Bike getId(@PathParam("id") long id);
 
+    public List<Bike> getNome(@PathParam("nome") String nome);
+
     public Response insert(Bike bike);
 
     public Bike update(@PathParam("id") long id, Bike bike);

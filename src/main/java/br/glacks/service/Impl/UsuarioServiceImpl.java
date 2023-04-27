@@ -36,6 +36,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<Usuario> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
+
+    @Override
     @Transactional
     public Response insert(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();

@@ -42,6 +42,13 @@ public class UsuarioResource {
     }
 
     @GET
+    @Path("/nome/{nome}")
+    public List<Usuario> getNome(@PathParam("nome") String nome){
+        return usuarioService.getNome(nome);
+        
+    }
+
+    @GET
     @Path("/{id}")
     public Usuario getId(@PathParam("id") long id){
         return usuarioService.getId(id);

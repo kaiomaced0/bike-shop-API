@@ -34,6 +34,13 @@ public class BikeResource {
     }
 
     @GET
+    @Path("/nome/{nome}")
+    public List<Bike> getNome(@PathParam("nome") String nome){
+        return bikeService.getNome(nome);
+    
+    }
+
+    @GET
     @Path("/{id}")
     public Bike getId(@PathParam("id") long id){
         return bikeService.getId(id);

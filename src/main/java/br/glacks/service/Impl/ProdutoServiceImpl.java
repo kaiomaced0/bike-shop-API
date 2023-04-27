@@ -30,6 +30,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
+    public List<Produto> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
+
+    @Override
     @Transactional
     public Response insert(Produto produto){
         repository.persist(produto);

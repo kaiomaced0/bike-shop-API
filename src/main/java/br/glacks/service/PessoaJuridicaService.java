@@ -13,6 +13,8 @@ public interface PessoaJuridicaService {
 
     public PessoaJuridica getId(@PathParam("id") long id);
 
+    public List<PessoaJuridica> getNome(@PathParam("nome") String nome);
+
     public Response insert(PessoaJuridicaDTO pessoajuridicaDTO);
 
     public PessoaJuridica update(@PathParam("id") long id, PessoaJuridicaDTO pessoajuridica);

@@ -29,6 +29,12 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         return repository.findById(id);
         
     }
+
+    @Override
+    public List<PessoaFisica> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
     
     @Override
     @Transactional

@@ -31,6 +31,12 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    public List<Bike> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
+
+    @Override
     @Transactional
     public Response insert(Bike bike){
         repository.persist(bike);

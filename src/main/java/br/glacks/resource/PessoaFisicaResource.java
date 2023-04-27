@@ -40,6 +40,13 @@ public class PessoaFisicaResource {
     }
 
     @GET
+    @Path("/nome/{nome}")
+    public List<PessoaFisica> getNome(@PathParam("nome") String nome){
+        return pessoaFisicaService.getNome(nome);
+    
+    }
+
+    @GET
     @Path("/{id}")
     public PessoaFisica getId(@PathParam("id") long id){
         return pessoaFisicaService.getId(id);

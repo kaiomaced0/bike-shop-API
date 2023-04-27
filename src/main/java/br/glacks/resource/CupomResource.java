@@ -34,6 +34,13 @@ public class CupomResource {
     }
 
     @GET
+    @Path("/nome/{nome}")
+    public List<Cupom> getNome(@PathParam("nome") String nome){
+        return cupomService.getNome(nome);
+    
+    }
+
+    @GET
     @Path("/{id}")
     public Cupom getId(@PathParam("id") long id){
         return cupomService.getId(id);

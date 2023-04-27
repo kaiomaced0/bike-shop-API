@@ -38,6 +38,13 @@ public class CidadeResource {
     }
 
     @GET
+    @Path("/nome/{nome}")
+    public List<Cidade> getNome(@PathParam("nome") String nome){
+        return cidadeService.getNome(nome);
+    
+    }
+
+    @GET
     @Path("/{id}")
     public Cidade getId(@PathParam("id") long id){
         return cidadeService.getId(id);

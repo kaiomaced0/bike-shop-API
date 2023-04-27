@@ -30,6 +30,12 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
+    public List<Cidade> getNome(String nome){
+        return repository.findByNome(nome);
+        
+    }
+
+    @Override
     @Transactional
     public Response insert(Cidade cidade){
         repository.persist(cidade);

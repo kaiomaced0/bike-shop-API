@@ -36,6 +36,13 @@ public class ProdutoResource {
     }
 
     @GET
+    @Path("/nome/{nome}")
+    public List<Produto> getNome(@PathParam("nome") String nome){
+        return produtoService.getNome(nome);
+        
+    }
+    
+    @GET
     @Path("/{id}")
     public Produto getId(@PathParam("id") long id){
         return produtoService.getId(id);

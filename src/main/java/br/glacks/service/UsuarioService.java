@@ -15,6 +15,8 @@ package br.glacks.service;
 
         public Usuario getId(@PathParam("id") long id);
 
+        public List<Usuario> getNome(@PathParam("nome") String nome);
+
         public Response insert(UsuarioDTO usuarioDTO);
 
         public Usuario update(@PathParam("id") long id, UsuarioDTO usuario);
