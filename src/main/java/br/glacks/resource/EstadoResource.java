@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.locais.Estado;
 import br.glacks.repository.EstadoRepository;
+import br.glacks.service.EstadoService;
 
 
 @Path("/estado")
@@ -27,36 +28,33 @@ public class EstadoResource {
 
 
     @Inject
-    EstadoRepository repository;
+    EstadoService estadoService;
     
 
     @GET
     public List<Estado> gettAll(){
-        return repository.findAll().list();
+        return estadoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Estado getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return estadoService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Estado estado){
-        repository.persist(estado);
-        return Response.ok(estado).build();
+        return estadoService.insert(estado);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Estado update(@PathParam("id") long id, Estado estado){
-        Estado entity = repository.findById(id);
-        entity.setNome(estado.getNome());
-        return entity;
+        return estadoService.update(id, estado);
     }
     
 }

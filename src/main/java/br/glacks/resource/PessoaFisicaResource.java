@@ -23,60 +23,33 @@ import br.glacks.model.PessoaFisica;
 import br.glacks.model.Usuario;
 import br.glacks.repository.PessoaFisicaRepository;
 import br.glacks.repository.UsuarioRepository;
+import br.glacks.service.PessoaFisicaService;
 
 @Path("/pessoafisica")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PessoaFisicaResource {
     @Inject
-    PessoaFisicaRepository repository;
-
-    @Inject
-    UsuarioRepository usuarioRepository;
+    PessoaFisicaService pessoaFisicaService;
 
 
     @GET
-    public List<UsuarioResponseDTO> getAll(){
-        return repository.findAll()
-            .stream()
-            .map(usuario -> new UsuarioResponseDTO(usuario))
-            .collect(Collectors.toList());
+    public List<PessoaFisica> getAll(){
+        return pessoaFisicaService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public PessoaFisica getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return pessoaFisicaService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setNome(pessoaFisicaDTO.usuarioDTO().nome());
-        pessoaFisica.setLogin(pessoaFisicaDTO.usuarioDTO().login());
-        pessoaFisica.setSenha(pessoaFisicaDTO.usuarioDTO().senha());
-        if(pessoaFisicaDTO != null){
-            repository.persist(pessoaFisica);
-            return Response.ok(pessoaFisicaDTO).build();
-        }
-        return Response.notModified().build();
-        
-    }
-
-    @POST
-    @Transactional
-    @Path("/{id}")
-    public Response insert(@PathParam("id") long id){
-        Usuario entity = usuarioRepository.findById(id);
-        PessoaFisica pessoaFisica = (PessoaFisica) entity;
-        if(pessoaFisica != null){
-            repository.persist(pessoaFisica);
-            return Response.ok(pessoaFisica).build();
-        }
-        return Response.notModified().build();
+        return pessoaFisicaService.insert(pessoaFisicaDTO);
         
     }
 
@@ -84,28 +57,15 @@ public class PessoaFisicaResource {
     @Path("/{id}")
     @Transactional
     public PessoaFisica update(@PathParam("id") long id, PessoaFisicaDTO pessoafisica){
-        PessoaFisica entity = repository.findById(id);
-        if(pessoafisica.usuarioDTO().login() != null){
-            entity.setLogin(pessoafisica.usuarioDTO().login());
-        }
-        if(pessoafisica.usuarioDTO().nome() != null){
-            entity.setNome(pessoafisica.usuarioDTO().nome());
-        }
-        if(pessoafisica.usuarioDTO().senha() != null){
-            entity.setSenha(pessoafisica.usuarioDTO().senha());
-        }
-        if(pessoafisica.cpf() != null){
-            entity.setCpf(pessoafisica.cpf());
-        }
-        return entity;
+        return pessoaFisicaService.update(id, pessoafisica);
+
     }
 
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
-        PessoaFisica entity = repository.findById(id);
-        repository.deleteById(id);
-        return Response.status(Status.OK).build();
+        return pessoaFisicaService.delete(id);
+
     }
     
 }

@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.Telefone;
 import br.glacks.repository.TelefoneRepository;
+import br.glacks.service.TelefoneService;
 
 @Path("/telefone")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,36 +24,33 @@ import br.glacks.repository.TelefoneRepository;
 public class TelefoneResource {
     
     @Inject
-    TelefoneRepository repository;
+    TelefoneService telefoneService;
     
 
     @GET
     public List<Telefone> gettAll(){
-        return repository.findAll().list();
+        return telefoneService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Telefone getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return telefoneService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Telefone telefone){
-        repository.persist(telefone);
-        return Response.ok(telefone).build();
+        return telefoneService.insert(telefone);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Telefone update(@PathParam("id") long id, Telefone telefone){
-        Telefone entity = repository.findById(id);
-        entity.setNome(telefone.getNome());
-        return entity;
+        return telefoneService.update(id, telefone);
     }
 
     

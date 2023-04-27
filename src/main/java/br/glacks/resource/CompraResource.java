@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.Compra;
 import br.glacks.repository.CompraRepository;
+import br.glacks.service.CompraService;
 
 @Path("/compra")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,36 +24,33 @@ import br.glacks.repository.CompraRepository;
 public class CompraResource {
 
     @Inject
-    CompraRepository repository;
+    CompraService compraService;
     
 
     @GET
     public List<Compra> gettAll(){
-        return repository.findAll().list();
+        return compraService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Compra getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return compraService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Compra compra){
-        repository.persist(compra);
-        return Response.ok(compra).build();
+        return compraService.insert(compra);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Compra update(@PathParam("id") long id, Compra compra){
-        Compra entity = repository.findById(id);
-        entity.setNome(compra.getNome());
-        return entity;
+        return compraService.update(id, compra);
     }
 
     

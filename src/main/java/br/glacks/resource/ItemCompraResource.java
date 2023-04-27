@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.ItemCompra;
 import br.glacks.repository.ItemCompraRepository;
+import br.glacks.service.ItemCompraService;
 
 
 @Path("/itemcompra")
@@ -26,50 +27,38 @@ import br.glacks.repository.ItemCompraRepository;
 public class ItemCompraResource {
 
     @Inject
-    ItemCompraRepository repository;
+    ItemCompraService itemCompraService;
 
     @GET
     public List<ItemCompra> gettAll(){
-        return repository.findAll().list();
+        return itemCompraService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public ItemCompra getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return itemCompraService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(ItemCompra itemcompra){
-        repository.persist(itemcompra);
-        return Response.ok(itemcompra).build();
+        return itemCompraService.insert(itemcompra);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public ItemCompra update(@PathParam("id") long id, ItemCompra itemcompra){
-        ItemCompra entity = repository.findById(id);
-        if(itemcompra.getQuantidade() != null){
-            entity.setQuantidade(itemcompra.getQuantidade());
-        }
-        if(itemcompra.getNome() != null){
-            entity.setNome(itemcompra.getNome());
-        }
-        if(itemcompra.getProduto() != null){
-            entity.setNome(itemcompra.getNome());
-        }
-        return entity;
+        return itemCompraService.update(id, itemcompra);
     }
 
     @DELETE
     @Path("/{id}")
-    public ItemCompra delete(@PathParam("id") Long id) {
-        ItemCompra entity = repository.findById(id);
-        return entity;
+    public Response delete(@PathParam("id") Long id) {
+        return itemCompraService.delete(id);
     }
     
 }

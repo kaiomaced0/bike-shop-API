@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.bike.Bike;
 import br.glacks.repository.BikeRepository;
+import br.glacks.service.BikeService;
 
 @Path("/bike")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,36 +24,33 @@ import br.glacks.repository.BikeRepository;
 public class BikeResource {
     
     @Inject
-    BikeRepository repository;
+    BikeService bikeService;
     
 
     @GET
     public List<Bike> gettAll(){
-        return repository.findAll().list();
+        return bikeService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Bike getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return bikeService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Bike bike){
-        repository.persist(bike);
-        return Response.ok(bike).build();
+        return bikeService.insert(bike);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Bike update(@PathParam("id") long id, Bike bike){
-        Bike entity = repository.findById(id);
-        entity.setNome(bike.getNome());
-        return entity;
+        return bikeService.update(id, bike);
     }
 
     

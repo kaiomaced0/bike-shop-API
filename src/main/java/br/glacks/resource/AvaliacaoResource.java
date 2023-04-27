@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.Avaliacao;
 import br.glacks.repository.AvaliacaoRepository;
+import br.glacks.service.AvaliacaoService;
 
 @Path("/avaliacao")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,36 +24,33 @@ import br.glacks.repository.AvaliacaoRepository;
 public class AvaliacaoResource {
     
     @Inject
-    AvaliacaoRepository repository;
+    AvaliacaoService avaliacaoService;
     
 
     @GET
     public List<Avaliacao> gettAll(){
-        return repository.findAll().list();
+        return avaliacaoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Avaliacao getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return avaliacaoService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Avaliacao avaliacao){
-        repository.persist(avaliacao);
-        return Response.ok(avaliacao).build();
+        return avaliacaoService.insert(avaliacao);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Avaliacao update(@PathParam("id") long id, Avaliacao avaliacao){
-        Avaliacao entity = repository.findById(id);
-        entity.setNome(avaliacao.getNome());
-        return entity;
+        return avaliacaoService.update(id, avaliacao);
     }
 
     

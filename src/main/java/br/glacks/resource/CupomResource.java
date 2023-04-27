@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.Cupom;
 import br.glacks.repository.CupomRepository;
+import br.glacks.service.CupomService;
 
 @Path("/cupom")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,35 +24,32 @@ import br.glacks.repository.CupomRepository;
 public class CupomResource {
 
     @Inject
-    CupomRepository repository;
+    CupomService cupomService;
     
 
     @GET
     public List<Cupom> gettAll(){
-        return repository.findAll().list();
+        return cupomService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Cupom getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return cupomService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Cupom cupom){
-        repository.persist(cupom);
-        return Response.ok(cupom).build();
+        return cupomService.insert(cupom);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Cupom update(@PathParam("id") long id, Cupom cupom){
-        Cupom entity = repository.findById(id);
-        entity.setNome(cupom.getNome());
-        return entity;
+        return cupomService.update(id, cupom);
     }
 }

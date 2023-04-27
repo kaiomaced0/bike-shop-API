@@ -23,6 +23,7 @@ import br.glacks.model.PessoaJuridica;
 import br.glacks.model.Usuario;
 import br.glacks.repository.PessoaJuridicaRepository;
 import br.glacks.repository.UsuarioRepository;
+import br.glacks.service.PessoaJuridicaService;
 
 @Path("/pessoajuridica")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -30,54 +31,25 @@ import br.glacks.repository.UsuarioRepository;
 public class PessoaJuridicaResource {
 
     @Inject
-    PessoaJuridicaRepository repository;
-
-    @Inject
-    UsuarioRepository usuarioRepository;
+    PessoaJuridicaService pessoaJuridicaService;
 
     @GET
-    public List<UsuarioResponseDTO> getAll(){
-        return repository.findAll()
-            .stream()
-            .map(usuario -> new UsuarioResponseDTO(usuario))
-            .collect(Collectors.toList());
+    public List<PessoaJuridica> getAll(){
+        return pessoaJuridicaService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public PessoaJuridica getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return pessoaJuridicaService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(PessoaJuridicaDTO pessoajuridicaDTO){
-        PessoaJuridica pessoajuridica = new PessoaJuridica();
-        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
-        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
-        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
-        pessoajuridica.setNome(pessoajuridicaDTO.usuarioDTO().nome());
-        if(pessoajuridicaDTO != null){
-            repository.persist(pessoajuridica);
-            return Response.ok(pessoajuridicaDTO).build();
-        }
-        return Response.notModified().build();
-        
-    }
-
-    @POST
-    @Transactional
-    @Path("/{id}")
-    public Response insert(@PathParam("id") long id){
-        Usuario entity = usuarioRepository.findById(id);
-        PessoaJuridica pessoajuridica = (PessoaJuridica) entity;
-        if(pessoajuridica != null){
-            repository.persist(pessoajuridica);
-            return Response.ok(pessoajuridica).build();
-        }
-        return Response.notModified().build();
+        return pessoaJuridicaService.insert(pessoajuridicaDTO);
         
     }
 
@@ -85,28 +57,13 @@ public class PessoaJuridicaResource {
     @Path("/{id}")
     @Transactional
     public PessoaJuridica update(@PathParam("id") long id, PessoaJuridicaDTO pessoajuridica){
-        PessoaJuridica entity = repository.findById(id);
-        if(pessoajuridica.usuarioDTO().login() != null){
-            entity.setLogin(pessoajuridica.usuarioDTO().login());
-        }
-        if(pessoajuridica.usuarioDTO().nome() != null){
-            entity.setNome(pessoajuridica.usuarioDTO().nome());
-        }
-        if(pessoajuridica.usuarioDTO().senha() != null){
-            entity.setSenha(pessoajuridica.usuarioDTO().senha());
-        }
-        if(pessoajuridica.cnpj() != null){
-            entity.setCnpj(pessoajuridica.cnpj());
-        }
-        return entity;
+        return pessoaJuridicaService.update(id, pessoajuridica);
     }
 
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
-        PessoaJuridica entity = repository.findById(id);
-        repository.deleteById(id);
-        return Response.status(Status.OK).build();
+        return pessoaJuridicaService.delete(id);
     }
     
 }

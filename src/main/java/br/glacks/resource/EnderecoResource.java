@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.Endereco;
 import br.glacks.repository.EnderecoRepository;
+import br.glacks.service.EnderecoService;
 
 @Path("/endereco")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,36 +24,33 @@ import br.glacks.repository.EnderecoRepository;
 public class EnderecoResource {
 
     @Inject
-    EnderecoRepository repository;
+    EnderecoService enderecoService;
     
 
     @GET
     public List<Endereco> gettAll(){
-        return repository.findAll().list();
+        return enderecoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Endereco getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return enderecoService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Endereco endereco){
-        repository.persist(endereco);
-        return Response.ok(endereco).build();
+        return enderecoService.insert(endereco);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Endereco update(@PathParam("id") long id, Endereco endereco){
-        Endereco entity = repository.findById(id);
-        entity.setNome(endereco.getNome());
-        return entity;
+        return enderecoService.update(id, endereco);
     }
     
 }

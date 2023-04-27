@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.pagamento.Cartao;
 import br.glacks.repository.CartaoRepository;
+import br.glacks.service.CartaoService;
 
 @Path("/cartao")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,36 +24,33 @@ import br.glacks.repository.CartaoRepository;
 public class CartaoResource {
     
     @Inject
-    CartaoRepository repository;
+    CartaoService cartaoService;
     
 
     @GET
     public List<Cartao> gettAll(){
-        return repository.findAll().list();
+        return cartaoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Cartao getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return cartaoService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Cartao cartao){
-        repository.persist(cartao);
-        return Response.ok(cartao).build();
+        return cartaoService.insert(cartao);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Cartao update(@PathParam("id") long id, Cartao cartao){
-        Cartao entity = repository.findById(id);
-        entity.setNome(cartao.getNome());
-        return entity;
+        return cartaoService.update(id, cartao);
     }
 
     

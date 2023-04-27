@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.locais.Cidade;
 import br.glacks.repository.CidadeRepository;
+import br.glacks.service.CidadeService;
 
 
 @Path("/cidade")
@@ -27,36 +28,33 @@ public class CidadeResource {
 
 
     @Inject
-    CidadeRepository repository;
+    CidadeService cidadeService;
     
 
     @GET
     public List<Cidade> gettAll(){
-        return repository.findAll().list();
+        return cidadeService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Cidade getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return cidadeService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Cidade cidade){
-        repository.persist(cidade);
-        return Response.ok(cidade).build();
+        return cidadeService.insert(cidade);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Cidade update(@PathParam("id") long id, Cidade cidade){
-        Cidade entity = repository.findById(id);
-        entity.setNome(cidade.getNome());
-        return entity;
+        return cidadeService.update(id, cidade);
     }
     
 }

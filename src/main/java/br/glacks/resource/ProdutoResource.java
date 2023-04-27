@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.glacks.model.Produto;
 import br.glacks.repository.ProdutoRepository;
+import br.glacks.service.ProdutoService;
 
 
 
@@ -25,36 +26,33 @@ import br.glacks.repository.ProdutoRepository;
 public class ProdutoResource {
 
     @Inject
-    ProdutoRepository repository;
+    ProdutoService produtoService;
     
 
     @GET
     public List<Produto> gettAll(){
-        return repository.findAll().list();
+        return produtoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
     public Produto getId(@PathParam("id") long id){
-        return repository.findById(id);
+        return produtoService.getId(id);
         
     }
 
     @POST
     @Transactional
     public Response insert(Produto produto){
-        repository.persist(produto);
-        return Response.ok(produto).build();
+        return produtoService.insert(produto);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
     public Produto update(@PathParam("id") long id, Produto produto){
-        Produto entity = repository.findById(id);
-        entity.setNome(produto.getNome());
-        return entity;
+        return produtoService.update(id, produto);
     }
     
 }
