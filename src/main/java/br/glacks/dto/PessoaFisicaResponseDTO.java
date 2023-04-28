@@ -8,6 +8,6 @@ public record PessoaFisicaResponseDTO(
 ) {
     
     public PessoaFisicaResponseDTO(PessoaFisica pessoaFisica){
-      this(new UsuarioResponseDTO(pessoaFisica.getId(), pessoaFisica.getNome(), pessoaFisica.getLogin()), pessoaFisica.getCpf());
+      this(new UsuarioResponseDTO(pessoaFisica), pessoaFisica.getCpf());
     }
 }

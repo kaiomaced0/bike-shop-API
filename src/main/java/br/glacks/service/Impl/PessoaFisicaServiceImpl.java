@@ -1,12 +1,15 @@
 package br.glacks.service.Impl;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
 import br.glacks.dto.PessoaFisicaDTO;
+import br.glacks.dto.PessoaFisicaResponseDTO;
 import br.glacks.model.PessoaFisica;
 import br.glacks.repository.PessoaFisicaRepository;
 import br.glacks.service.PessoaFisicaService;
@@ -19,8 +22,11 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
     PessoaFisicaRepository repository;
     
     @Override
-    public List<PessoaFisica> getAll(){
-        return repository.findAll().list();
+    public List<PessoaFisicaResponseDTO> getAll(){
+        return repository.findAll()
+            .stream()
+            .map(pessoaFisica -> new PessoaFisicaResponseDTO(pessoaFisica))
+            .collect(Collectors.toList());
         
     }
 
@@ -31,19 +37,18 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
     }
 
     @Override
-    public List<PessoaFisica> getNome(String nome){
-        return repository.findByNome(nome);
+    public List<PessoaFisicaResponseDTO> getNome(String nome){
+        return repository.findByNome(nome)
+            .stream()
+            .map(pessoaFisica -> new PessoaFisicaResponseDTO(pessoaFisica))
+            .collect(Collectors.toList());
         
     }
     
     @Override
     @Transactional
     public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setNome(pessoaFisicaDTO.usuarioDTO().nome());
-        pessoaFisica.setLogin(pessoaFisicaDTO.usuarioDTO().login());
-        pessoaFisica.setSenha(pessoaFisicaDTO.usuarioDTO().senha());
-        pessoaFisica.setCpf(pessoaFisicaDTO.cpf());
+        PessoaFisica pessoaFisica = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
         if(pessoaFisicaDTO != null){
             repository.persist(pessoaFisica);
             return Response.ok(pessoaFisicaDTO).build();
@@ -53,7 +58,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
 
     @Override
     @Transactional
-    public PessoaFisica update(long id, PessoaFisicaDTO pessoafisica){
+    public PessoaFisicaResponseDTO update(long id, PessoaFisicaDTO pessoafisica){
         PessoaFisica entity = repository.findById(id);
         if(pessoafisica.usuarioDTO().login() != null){
             entity.setLogin(pessoafisica.usuarioDTO().login());
@@ -67,7 +72,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         if(pessoafisica.cpf() != null){
             entity.setCpf(pessoafisica.cpf());
         }
-        return entity;
+        return new PessoaFisicaResponseDTO(entity);
     }
     
    @Override

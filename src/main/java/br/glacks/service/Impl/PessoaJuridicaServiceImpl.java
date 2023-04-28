@@ -1,12 +1,14 @@
 package br.glacks.service.Impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
 import br.glacks.dto.PessoaJuridicaDTO;
+import br.glacks.dto.PessoaJuridicaResponseDTO;
 import br.glacks.model.PessoaJuridica;
 import br.glacks.repository.PessoaJuridicaRepository;
 import br.glacks.service.PessoaJuridicaService;
@@ -19,8 +21,11 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     PessoaJuridicaRepository repository;
     
     @Override
-    public List<PessoaJuridica> getAll(){
-        return repository.findAll().list();
+    public List<PessoaJuridicaResponseDTO> getAll(){
+        return repository.findAll()
+            .stream()
+            .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
+            .collect(Collectors.toList());
         
     }
 
@@ -31,8 +36,11 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
 
     @Override
-    public List<PessoaJuridica> getNome(String nome){
-        return repository.findByNome(nome);
+    public List<PessoaJuridicaResponseDTO> getNome(String nome){
+        return repository.findByNome(nome)
+            .stream()
+            .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
+            .collect(Collectors.toList());
         
     }
     @Override
@@ -53,7 +61,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
     @Override
     @Transactional
-    public PessoaJuridica update(long id, PessoaJuridicaDTO pessoaJuridica){
+    public PessoaJuridicaResponseDTO update(long id, PessoaJuridicaDTO pessoaJuridica){
         PessoaJuridica entity = repository.findById(id);
         if(pessoaJuridica.usuarioDTO().login() != null){
             entity.setLogin(pessoaJuridica.usuarioDTO().login());
@@ -67,7 +75,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
         if(pessoaJuridica.cnpj() != null){
             entity.setCnpj(pessoaJuridica.cnpj());
         }
-        return entity;
+        return new PessoaJuridicaResponseDTO(entity);
     }
     
    @Override

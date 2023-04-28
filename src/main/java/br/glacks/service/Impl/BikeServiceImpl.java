@@ -54,7 +54,6 @@ public class BikeServiceImpl implements BikeService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
     

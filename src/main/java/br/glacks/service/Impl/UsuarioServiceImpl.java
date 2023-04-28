@@ -36,18 +36,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<Usuario> getNome(String nome){
-        return repository.findByNome(nome);
-        
+    public List<UsuarioResponseDTO> getNome(String nome){
+        return repository.findByNome(nome)
+        .stream()
+        .map(usuario -> new UsuarioResponseDTO(usuario))
+        .collect(Collectors.toList());
+                
     }
 
     @Override
     @Transactional
     public Response insert(UsuarioDTO usuarioDTO){
-        Usuario usuario = new Usuario();
-        usuario.setNome(usuarioDTO.nome());
-        usuario.setLogin(usuarioDTO.login());
-        usuario.setSenha(usuarioDTO.senha());
+        Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
         if(usuarioDTO != null){
             repository.persist(usuario);
             return Response.ok(usuario).build();
@@ -58,7 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public Usuario update(long id, UsuarioDTO usuario){
+    public UsuarioResponseDTO update(long id, UsuarioDTO usuario){
         Usuario entity = repository.findById(id);
         if(usuario.login() != null){
             entity.setLogin(usuario.login());
@@ -69,7 +69,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(usuario.senha() != null){
             entity.setSenha(usuario.senha());
         }
-        return entity;
+        return new UsuarioResponseDTO(entity);
     }
 
     @Override
