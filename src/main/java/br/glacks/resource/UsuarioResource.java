@@ -43,7 +43,7 @@ public class UsuarioResource {
 
     @GET
     @Path("/nome/{nome}")
-    public List<Usuario> getNome(@PathParam("nome") String nome){
+    public List<UsuarioResponseDTO> getNome(@PathParam("nome") String nome){
         return usuarioService.getNome(nome);
         
     }
@@ -65,7 +65,7 @@ public class UsuarioResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Usuario update(@PathParam("id") long id, UsuarioDTO usuario){
+    public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario){
         return usuarioService.update(id, usuario);
     }
 

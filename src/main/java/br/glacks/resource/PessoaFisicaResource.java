@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaFisicaDTO;
+import br.glacks.dto.PessoaFisicaResponseDTO;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.PessoaFisica;
 import br.glacks.model.Usuario;
@@ -34,14 +35,14 @@ public class PessoaFisicaResource {
 
 
     @GET
-    public List<PessoaFisica> getAll(){
+    public List<PessoaFisicaResponseDTO> getAll(){
         return pessoaFisicaService.getAll();
         
     }
 
     @GET
     @Path("/nome/{nome}")
-    public List<PessoaFisica> getNome(@PathParam("nome") String nome){
+    public List<PessoaFisicaResponseDTO> getNome(@PathParam("nome") String nome){
         return pessoaFisicaService.getNome(nome);
     
     }
@@ -63,7 +64,7 @@ public class PessoaFisicaResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public PessoaFisica update(@PathParam("id") long id, PessoaFisicaDTO pessoafisica){
+    public PessoaFisicaResponseDTO update(@PathParam("id") long id, PessoaFisicaDTO pessoafisica){
         return pessoaFisicaService.update(id, pessoafisica);
 
     }

@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.CartaoDTO;
+import br.glacks.model.Usuario;
 import br.glacks.model.pagamento.Cartao;
 import br.glacks.repository.CartaoRepository;
 import br.glacks.service.CartaoService;
@@ -38,9 +40,9 @@ public class CartaoServiceImpl implements CartaoService {
 
     @Override
     @Transactional
-    public Cartao update(long id, Cartao cartao){
+    public Cartao update(long id, CartaoDTO cartaoDTO){
         Cartao entity = repository.findById(id);
-        entity.setNome(cartao.getNome());
+        entity = CartaoDTO.mudaCartao(entity, cartaoDTO);
         return entity;
     }
     

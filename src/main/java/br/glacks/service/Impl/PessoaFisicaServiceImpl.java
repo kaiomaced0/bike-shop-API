@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.dto.PessoaFisicaResponseDTO;
@@ -78,7 +79,8 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.deleteById(id);
+        return Response.status(Status.OK).build();
     }
     
     

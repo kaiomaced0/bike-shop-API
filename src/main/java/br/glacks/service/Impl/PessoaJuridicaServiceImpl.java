@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaJuridicaDTO;
 import br.glacks.dto.PessoaJuridicaResponseDTO;
@@ -81,8 +82,8 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.deleteById(id);
+        return Response.status(Status.OK).build();
     }
 
     
