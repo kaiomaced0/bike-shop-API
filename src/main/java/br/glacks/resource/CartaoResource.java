@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.CartaoDTO;
 import br.glacks.model.pagamento.Cartao;
 import br.glacks.repository.CartaoRepository;
 import br.glacks.service.CartaoService;
@@ -49,7 +50,7 @@ public class CartaoResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Cartao update(@PathParam("id") long id, Cartao cartao){
+    public Cartao update(@PathParam("id") long id, CartaoDTO cartao){
         return cartaoService.update(id, cartao);
     }
 
