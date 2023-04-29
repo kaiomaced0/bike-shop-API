@@ -26,7 +26,6 @@ public class BikeResource {
     @Inject
     BikeService bikeService;
     
-
     @GET
     public List<Bike> gettAll(){
         return bikeService.getAll();
