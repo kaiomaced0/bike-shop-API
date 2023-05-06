@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.AvaliacaoDTO;
+import br.glacks.dto.AvaliacaoResponseDTO;
 import br.glacks.model.Avaliacao;
 import br.glacks.repository.AvaliacaoRepository;
 import br.glacks.service.AvaliacaoService;
@@ -28,21 +30,21 @@ public class AvaliacaoResource {
     
 
     @GET
-    public List<Avaliacao> gettAll(){
+    public List<AvaliacaoResponseDTO> gettAll(){
         return avaliacaoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
-    public Avaliacao getId(@PathParam("id") long id){
+    public AvaliacaoResponseDTO getId(@PathParam("id") long id){
         return avaliacaoService.getId(id);
         
     }
 
     @POST
     @Transactional
-    public Response insert(Avaliacao avaliacao){
+    public Response insert(AvaliacaoDTO avaliacao){
         return avaliacaoService.insert(avaliacao);
     }
 

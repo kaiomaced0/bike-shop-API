@@ -8,7 +8,13 @@ import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class UsuarioResourceTeste {
-
+    @Test
+    public void getAllTeste() {
+        given()
+          .when().get("/usuario")
+          .then()
+             .statusCode(200);
+    }
     @Test
     public void getIdTeste() {
         given()

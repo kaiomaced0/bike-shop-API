@@ -10,12 +10,22 @@ import static org.hamcrest.CoreMatchers.is;
 public class ProdutoResourceTeste {
 
     @Test
+    public void getAllTeste() {
+        given()
+          .when().get("/produto")
+          .then()
+             .statusCode(200);
+    }
+
+    @Test
     public void getIdTeste() {
         given()
           .pathParam("id", 1)
-          .when().get("/avaliacao/{id}")
+          .when().get("/produto/{id}")
           .then()
              .statusCode(200)
-             .body("id", is(1));
+             .body("id", is(1),
+             "nome", is("Bike 1"));
     }
+
 }

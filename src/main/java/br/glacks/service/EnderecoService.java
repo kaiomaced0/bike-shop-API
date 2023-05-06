@@ -4,13 +4,14 @@ import java.util.List;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.EnderecoResponseDTO;
 import br.glacks.model.Endereco;
 
 public interface EnderecoService {
     
-    public List<Endereco> getAll();
+    public List<EnderecoResponseDTO> getAll();
 
-    public Endereco getId(@PathParam("id") long id);
+    public EnderecoResponseDTO getId(@PathParam("id") long id);
 
     public Response insert(Endereco enderecoDTO);
 

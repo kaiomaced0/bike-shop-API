@@ -10,12 +10,21 @@ import static org.hamcrest.CoreMatchers.is;
 public class PessoaJuridicaResourceTeste {
 
     @Test
+    public void getAllTeste() {
+        given()
+          .when().get("/pessoajuridica")
+          .then()
+             .statusCode(200);
+    }
+
+    @Test
     public void getIdTeste() {
         given()
-          .pathParam("id", 1)
+          .pathParam("id", 5)
           .when().get("/pessoajuridica/{id}")
           .then()
              .statusCode(200)
-             .body("id", is(1));
+             .body("id", is(5),
+             "login", is("janio"));
     }
 }

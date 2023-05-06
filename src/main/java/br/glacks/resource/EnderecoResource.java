@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.EnderecoResponseDTO;
 import br.glacks.model.Endereco;
 import br.glacks.repository.EnderecoRepository;
 import br.glacks.service.EnderecoService;
@@ -28,14 +29,14 @@ public class EnderecoResource {
     
 
     @GET
-    public List<Endereco> gettAll(){
+    public List<EnderecoResponseDTO> gettAll(){
         return enderecoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
-    public Endereco getId(@PathParam("id") long id){
+    public EnderecoResponseDTO getId(@PathParam("id") long id){
         return enderecoService.getId(id);
         
     }

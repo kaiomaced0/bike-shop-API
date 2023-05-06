@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.glacks.dto.CartaoDTO;
+import br.glacks.dto.CartaoResponseDTO;
 import br.glacks.model.pagamento.Cartao;
 import br.glacks.repository.CartaoRepository;
 import br.glacks.service.CartaoService;
@@ -29,21 +30,21 @@ public class CartaoResource {
     
 
     @GET
-    public List<Cartao> gettAll(){
+    public List<CartaoResponseDTO> gettAll(){
         return cartaoService.getAll();
         
     }
 
     @GET
     @Path("/{id}")
-    public Cartao getId(@PathParam("id") long id){
+    public CartaoResponseDTO getId(@PathParam("id") long id){
         return cartaoService.getId(id);
         
     }
 
     @POST
     @Transactional
-    public Response insert(Cartao cartao){
+    public Response insert(CartaoDTO cartao){
         return cartaoService.insert(cartao);
     }
 

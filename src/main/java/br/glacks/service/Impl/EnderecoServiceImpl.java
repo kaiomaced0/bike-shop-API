@@ -1,11 +1,13 @@
 package br.glacks.service.Impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
+import br.glacks.dto.EnderecoResponseDTO;
 import br.glacks.model.Endereco;
 import br.glacks.repository.EnderecoRepository;
 import br.glacks.service.EnderecoService;
@@ -18,14 +20,17 @@ public class EnderecoServiceImpl implements EnderecoService {
     EnderecoRepository repository;
     
     @Override
-    public List<Endereco> getAll(){
-        return repository.findAll().list();
+    public List<EnderecoResponseDTO> getAll(){
+        return repository.findAll()
+            .stream()
+            .map(endereco -> new EnderecoResponseDTO(endereco))
+            .collect(Collectors.toList());
         
     }
 
     @Override
-    public Endereco getId(long id){
-        return repository.findById(id);
+    public EnderecoResponseDTO getId(long id){
+        return new EnderecoResponseDTO(repository.findById(id));
         
     }
 
