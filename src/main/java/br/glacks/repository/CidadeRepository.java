@@ -1,6 +1,6 @@
 package br.glacks.repository;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import br.glacks.model.locais.Cidade;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;

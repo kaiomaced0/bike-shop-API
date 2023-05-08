@@ -2,7 +2,7 @@ package br.glacks.repository;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import br.glacks.model.Usuario;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;

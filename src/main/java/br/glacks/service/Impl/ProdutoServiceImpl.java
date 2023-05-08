@@ -2,15 +2,15 @@ package br.glacks.service.Impl;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.model.Produto;
 import br.glacks.repository.ProdutoRepository;
 import br.glacks.service.ProdutoService;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ProdutoServiceImpl implements ProdutoService {

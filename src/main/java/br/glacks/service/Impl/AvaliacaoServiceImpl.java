@@ -3,9 +3,9 @@ package br.glacks.service.Impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.AvaliacaoDTO;
 import br.glacks.dto.AvaliacaoResponseDTO;
@@ -14,7 +14,7 @@ import br.glacks.repository.AvaliacaoRepository;
 import br.glacks.repository.ProdutoRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.AvaliacaoService;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class AvaliacaoServiceImpl implements AvaliacaoService {
@@ -47,8 +47,12 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     @Transactional
     public Response insert(AvaliacaoDTO avaliacao){
         Avaliacao a = AvaliacaoDTO.criAvaliacao(avaliacao);
-        a.setUsuario(uRepository.findById(a.getUsuario().getId()));
+        if(uRepository.findById(a.getUsuario().getId()) != null){
+            a.setUsuario(uRepository.findById(a.getUsuario().getId()));
+        }
+        if(pRepository.findById(a.getProduto().getId()) != null){
         a.setProduto(pRepository.findById(a.getProduto().getId()));
+        }
         repository.persist(a);
         return Response.ok(avaliacao).build();
     }

@@ -1,9 +1,9 @@
 package br.glacks.model;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 @Entity
 public class Cupom extends EntityClass {
 

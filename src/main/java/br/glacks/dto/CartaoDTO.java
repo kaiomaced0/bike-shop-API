@@ -1,6 +1,6 @@
 package br.glacks.dto;
 
-import javax.persistence.Enumerated;
+import jakarta.persistence.Enumerated;
 
 import br.glacks.model.Usuario;
 import br.glacks.model.pagamento.BandeiraCartao;

@@ -2,14 +2,14 @@ package br.glacks.service.Impl;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.locais.Estado;
 import br.glacks.repository.EstadoRepository;
 import br.glacks.service.EstadoService;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class EstadoServiceImpl implements EstadoService {

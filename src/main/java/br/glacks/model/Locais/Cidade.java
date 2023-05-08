@@ -1,7 +1,7 @@
 package br.glacks.model.locais;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 import br.glacks.model.EntityClass;
 

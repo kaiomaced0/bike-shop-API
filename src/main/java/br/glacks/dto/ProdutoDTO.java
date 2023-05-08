@@ -1,6 +1,6 @@
 package br.glacks.dto;
 
-import javax.persistence.Enumerated;
+import jakarta.persistence.Enumerated;
 
 import br.glacks.model.Cor;
 import br.glacks.model.Produto;

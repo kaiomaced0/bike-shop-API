@@ -3,17 +3,17 @@ package br.glacks.service.Impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.Usuario;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.UsuarioService;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class UsuarioServiceImpl implements UsuarioService {

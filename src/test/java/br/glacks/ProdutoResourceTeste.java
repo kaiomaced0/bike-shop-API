@@ -25,7 +25,7 @@ public class ProdutoResourceTeste {
           .then()
              .statusCode(200)
              .body("id", is(1),
-             "nome", is("Bike 1"));
+             "nome", is("bike 1"));
     }
 
 }

@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.dto.PessoaFisicaResponseDTO;
 import br.glacks.model.PessoaFisica;
 import br.glacks.repository.PessoaFisicaRepository;
 import br.glacks.service.PessoaFisicaService;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class PessoaFisicaServiceImpl implements PessoaFisicaService {

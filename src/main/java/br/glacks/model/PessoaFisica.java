@@ -1,9 +1,9 @@
 package br.glacks.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")

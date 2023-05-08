@@ -1,9 +1,9 @@
 package br.glacks.model.locais;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Size;
 
 import br.glacks.model.EntityClass;
 

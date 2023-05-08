@@ -3,9 +3,9 @@ package br.glacks.service.Impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.CartaoDTO;
 import br.glacks.dto.CartaoResponseDTO;
@@ -14,7 +14,7 @@ import br.glacks.model.pagamento.Cartao;
 import br.glacks.repository.CartaoRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.CartaoService;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CartaoServiceImpl implements CartaoService {

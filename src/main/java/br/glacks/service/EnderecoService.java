@@ -1,8 +1,8 @@
 package br.glacks.service;
 import java.util.List;
 
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.EnderecoResponseDTO;
 import br.glacks.model.Endereco;
