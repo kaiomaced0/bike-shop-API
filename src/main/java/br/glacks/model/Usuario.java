@@ -1,7 +1,11 @@
 package br.glacks.model;
 
 import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -19,6 +23,13 @@ public class Usuario extends EntityClass {
 
     private String email;
 
+    
+    @ElementCollection
+    @CollectionTable(name = "usuario_perfil",
+     joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
+    @Column(name = "perfil", length = 30)
+    private Set<Perfil> perfis;
+
     @OneToMany
     @JoinColumn(name = "lista_enderecos_usuario")
     private List<Endereco> enderecos;
@@ -35,7 +46,7 @@ public class Usuario extends EntityClass {
     @JoinColumn(name = "lista_telefones_usuario")
     private List<Telefone> telefones;
 
-
+    
     public String getLogin() {
         return login;
     }
@@ -90,6 +101,14 @@ public class Usuario extends EntityClass {
 
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
+    }
+
+    public Set<Perfil> getPerfis() {
+        return perfis;
+    }
+
+    public void setPerfis(Set<Perfil> perfis) {
+        this.perfis = perfis;
     }
 
     

@@ -1,13 +1,18 @@
 package br.glacks.service.Impl;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
+
 import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import br.glacks.service.HashService;
 
 public class HashServiceImpl implements HashService{
 
     private String salt = "#blahhxyz9232";
-    private Integer iterationCount = 233;
+    private Integer iterationCount = 223;
     private Integer keylength = 512;
 
     @Override
