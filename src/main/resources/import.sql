@@ -6,7 +6,7 @@
  insert into usuario (id, nome, login, senha) values(4, 'lucas', 'lucas','123');
  insert into usuario (id, nome, login, senha) values(5, 'kuba event', 'janio','123');
  insert into usuario (id, nome, login, senha) values(6, 'imports imports', 'alberto','123');
- insert into usuario (id, nome, login, senha) values(7, 'al', 'maria','123');
+ insert into usuario (id, nome, login, senha) values(7, 'al', 'maria','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (id, nome, login, senha) values(8, 'AEDAO', 'ana','123');
  insert into usuario (id, nome, login, senha) values(9, 'joana', 'joana','123');
  insert into usuario (id, nome, login, senha) values(10, 'kamila', 'kamila','123');
@@ -77,3 +77,8 @@
  insert into itemcompra (id, produto_item_compra, quantidade) values(6, (SELECT produto.id FROM produto WHERE produto.nome = 'bike3'), 5);
 
  insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(1, 1, 1, 5, 'Bom');
+
+ insert into usuario_perfil (perfil, id_usuario) values (1, 1);
+ insert into usuario_perfil (perfil, id_usuario) values (1, 17);
+ insert into usuario_perfil (perfil, id_usuario) values (2, 7);
+ insert into usuario_perfil (perfil, id_usuario) values (2, 4);
