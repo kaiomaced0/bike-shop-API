@@ -11,6 +11,8 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import br.glacks.form.ImageForm;
 import br.glacks.model.pagamento.Cartao;
 
 @Entity
@@ -22,6 +24,10 @@ public class Usuario extends EntityClass {
     private String senha;
 
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "imagem_perfil_usuario")
+    private ImageForm image;
 
     
     @ElementCollection
@@ -111,5 +117,13 @@ public class Usuario extends EntityClass {
         this.perfis = perfis;
     }
 
-    
+    public ImageForm getImage() {
+        return image;
+    }
+
+    public void setImage(ImageForm image) {
+        this.image = image;
+    }
+
+        
 }

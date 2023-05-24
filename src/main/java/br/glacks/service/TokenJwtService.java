@@ -2,6 +2,6 @@ package br.glacks.service;
 
 import br.glacks.model.Usuario;
 
-public interface TokenJwtSerice {
+public interface TokenJwtService {
     public String generateJwt(Usuario usuario);
 }

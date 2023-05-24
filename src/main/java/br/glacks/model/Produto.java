@@ -2,6 +2,7 @@ package br.glacks.model;
 
 import java.util.List;
 
+import br.glacks.form.ImageForm;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,6 +23,10 @@ public class Produto extends EntityClass {
     private String nomeLongo;
 
     private Double valorCompra;
+    
+    @OneToMany
+    @JoinColumn(name = "lista_imagem_produto")
+    private List<ImageForm> image;
 
     @Enumerated(EnumType.ORDINAL) 
     private Cor cor;
@@ -106,6 +111,22 @@ public class Produto extends EntityClass {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public List<ImageForm> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageForm> image) {
+        this.image = image;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 
     

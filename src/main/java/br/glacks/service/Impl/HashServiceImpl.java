@@ -8,7 +8,9 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 import br.glacks.service.HashService;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class HashServiceImpl implements HashService{
 
     private String salt = "#blahhxyz9232";
@@ -28,5 +30,12 @@ public class HashServiceImpl implements HashService{
             throw new RuntimeException(e);
         }
     }
-    
+
+    public static void main(String[] args) {
+        HashService service = new HashServiceImpl();
+        System.out.println();
+        System.out.println(service.getHashSenha("123"));
+    }
+    //cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==
 }
+

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
@@ -19,6 +20,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class UsuarioServiceImpl implements UsuarioService {
     @Inject
     UsuarioRepository repository;
+
 
     @Override
     public List<UsuarioResponseDTO> getAll(){
@@ -71,6 +73,30 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return new UsuarioResponseDTO(entity);
     }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO updateImagem(long id, String nomeImagem){
+        Usuario entity = repository.findById(id);
+        entity.setNome(nomeImagem);
+
+        return new UsuarioResponseDTO(entity);
+    }
+
+    @Override
+    public Usuario findByLoginAndSenha(String login, String senha) {
+        return repository.findByLoginAndSenha(login, senha);
+    }
+
+    @Override
+    public UsuarioResponseDTO findByLogin(String login) {
+        Usuario usuario = repository.findByLogin(login);
+        if(usuario == null)
+            throw new NotFoundException("Usuario não encontrado");
+
+        return new UsuarioResponseDTO(usuario);
+    }
+
 
     @Override
     @Transactional

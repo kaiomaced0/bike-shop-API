@@ -6,10 +6,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.glacks.model.Usuario;
-import br.glacks.service.TokenJwtSerice;
+import br.glacks.service.TokenJwtService;
 import io.smallrye.jwt.build.Jwt;
+import jakarta.enterprise.context.ApplicationScoped;
 
-public class TokenJwtServiceImpl implements TokenJwtSerice{
+@ApplicationScoped
+public class TokenJwtServiceImpl implements TokenJwtService{
     
 
     private static final Duration EXPIRATION_TIME = Duration.ofHours(24);

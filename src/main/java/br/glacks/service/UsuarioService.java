@@ -15,11 +15,17 @@ package br.glacks.service;
 
         public Usuario getId(@PathParam("id") long id);
 
+        public Usuario findByLoginAndSenha(String login, String senha);
+
+        public UsuarioResponseDTO findByLogin(String login);
+
         public List<UsuarioResponseDTO> getNome(@PathParam("nome") String nome);
 
         public Response insert(UsuarioDTO usuarioDTO);
 
         public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario);
+
+        public UsuarioResponseDTO updateImagem(long id, String nomeImagem);
         
         public Response delete(@PathParam("id") Long id);
     
