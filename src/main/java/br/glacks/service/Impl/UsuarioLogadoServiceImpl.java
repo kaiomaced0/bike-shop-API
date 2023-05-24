@@ -10,7 +10,9 @@ import br.glacks.form.ImageForm;
 import br.glacks.service.FileService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -19,6 +21,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.core.Response.Status;
 
+@ApplicationScoped
 public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     
@@ -31,6 +34,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Inject
     FileService fileService;
 
+    @Override
     public Response getPerfilUsuario(){
 
         // obtendo o login a partir do token
@@ -41,6 +45,8 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     }
 
+    @Override
+    @Transactional
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm ImageForm form){
         String nomeImagem = form.getNome();
@@ -59,6 +65,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     }
 
+    @Override
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response baixarImagem(@PathParam("nomeImagem") String nomeImagem){
         ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
