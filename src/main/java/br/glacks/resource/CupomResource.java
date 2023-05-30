@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -15,7 +16,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.Cupom;
-import br.glacks.repository.CupomRepository;
 import br.glacks.service.CupomService;
 
 @Path("/cupom")
@@ -28,6 +28,7 @@ public class CupomResource {
     
 
     @GET
+    @RolesAllowed({"Admin"})
     public List<Cupom> gettAll(){
         return cupomService.getAll();
         
@@ -35,6 +36,7 @@ public class CupomResource {
 
     @GET
     @Path("/nome/{nome}")
+    @RolesAllowed({"Admin"})
     public List<Cupom> getNome(@PathParam("nome") String nome){
         return cupomService.getNome(nome);
     
@@ -42,6 +44,7 @@ public class CupomResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Cupom getId(@PathParam("id") long id){
         return cupomService.getId(id);
         
@@ -49,6 +52,7 @@ public class CupomResource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Admin"})
     public Response insert(Cupom cupom){
         return cupomService.insert(cupom);
     }
@@ -56,6 +60,7 @@ public class CupomResource {
     @PUT
     @Path("/{id}")
     @Transactional
+    @RolesAllowed({"Admin"})
     public Cupom update(@PathParam("id") long id, Cupom cupom){
         return cupomService.update(id, cupom);
     }

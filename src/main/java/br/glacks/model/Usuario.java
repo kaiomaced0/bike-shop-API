@@ -25,9 +25,7 @@ public class Usuario extends EntityClass {
 
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "imagem_perfil_usuario")
-    private ImageForm image;
+    private String image;
 
     
     @ElementCollection
@@ -117,11 +115,11 @@ public class Usuario extends EntityClass {
         this.perfis = perfis;
     }
 
-    public ImageForm getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(ImageForm image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

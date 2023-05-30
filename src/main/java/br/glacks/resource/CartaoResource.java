@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -30,6 +31,7 @@ public class CartaoResource {
     
 
     @GET
+    @RolesAllowed({"Admin"})
     public List<CartaoResponseDTO> gettAll(){
         return cartaoService.getAll();
         
@@ -37,6 +39,7 @@ public class CartaoResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public CartaoResponseDTO getId(@PathParam("id") long id){
         return cartaoService.getId(id);
         

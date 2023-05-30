@@ -3,16 +3,16 @@ package br.glacks.form;
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
 import br.glacks.model.EntityClass;
-import jakarta.persistence.Entity;
 import jakarta.ws.rs.FormParam;
 
-@Entity
-public class ImageForm extends EntityClass{
+public class ImageForm{
 
+    @FormParam("nomeImagem")
+    private String nome;
+    
     @FormParam("imagem")
     @PartType("application/octet-stream")
     private byte[] imagem;
-    
 
     public byte[] getImagem() {
         return imagem;
@@ -21,5 +21,14 @@ public class ImageForm extends EntityClass{
     public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
 
 }

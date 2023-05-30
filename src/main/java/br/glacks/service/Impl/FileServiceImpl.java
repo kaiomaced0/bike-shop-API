@@ -8,8 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import br.glacks.form.ImageForm;
 import br.glacks.service.FileService;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class FileServiceImpl implements FileService {
@@ -58,14 +60,16 @@ public class FileServiceImpl implements FileService {
 
             fos.flush();
             fos.close();
-            
+            ImageForm i = new ImageForm();
+            i.setNome(nomeImagem);
+            i.setImagem(imagem);
+
             return nomeArquivo;
         }
 
         @Override
         public File download(String nomeArquivo) {
-
-            File file = new File(PATH_USER + nomeArquivo);
+            File file = new File(PATH_USER+nomeArquivo);
             return file;
         }
     

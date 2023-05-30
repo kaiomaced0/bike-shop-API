@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -48,6 +49,7 @@ public class BikeResource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Admin"})
     public Response insert(Bike bike){
         return bikeService.insert(bike);
     }
@@ -55,6 +57,7 @@ public class BikeResource {
     @PUT
     @Path("/{id}")
     @Transactional
+    @RolesAllowed({"Admin"})
     public Bike update(@PathParam("id") long id, Bike bike){
         return bikeService.update(id, bike);
     }

@@ -3,6 +3,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -16,7 +17,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.locais.Cidade;
-import br.glacks.repository.CidadeRepository;
 import br.glacks.service.CidadeService;
 
 
@@ -24,8 +24,6 @@ import br.glacks.service.CidadeService;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CidadeResource {
-
-
 
     @Inject
     CidadeService cidadeService;
@@ -53,6 +51,7 @@ public class CidadeResource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Admin"})
     public Response insert(Cidade cidade){
         return cidadeService.insert(cidade);
     }
@@ -60,6 +59,7 @@ public class CidadeResource {
     @PUT
     @Path("/{id}")
     @Transactional
+    @RolesAllowed({"Admin"})
     public Cidade update(@PathParam("id") long id, Cidade cidade){
         return cidadeService.update(id, cidade);
     }

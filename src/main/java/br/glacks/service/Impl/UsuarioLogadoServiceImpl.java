@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import br.glacks.application.Result;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.form.ImageForm;
 import br.glacks.service.FileService;
@@ -34,6 +35,8 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Inject
     FileService fileService;
 
+
+
     @Override
     public Response getPerfilUsuario(){
 
@@ -47,18 +50,20 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Override
     @Transactional
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm ImageForm form){
-        String nomeImagem = form.getNome();
-        try{
-            nomeImagem = fileService.salvarImagemUsuario(form.getImagem(), form.getNome());
-        } catch( IOException e){
-
-            Response.status(Status.CONFLICT).build();
-        }
+        String nomeImagem = "";
         
+        try {
+            nomeImagem = fileService.salvarImagemUsuario(form.getImagem(), form.getNome());
+        } catch (IOException e) {
+            Result result = new Result(e.getMessage());
+            return Response.status(Status.CONFLICT).entity(result).build();
+        }
+
+        // obtendo o login a partir do token
         String login = jsonWebToken.getSubject();
         UsuarioResponseDTO usuario = usuarioService.findByLogin(login);
+
         usuario = usuarioService.updateImagem(usuario.id(), nomeImagem);
 
         return Response.ok(usuario).build();
@@ -66,7 +71,6 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     }
 
     @Override
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response baixarImagem(@PathParam("nomeImagem") String nomeImagem){
         ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
         response.header("Content-Disposition","attachment;filename=" + nomeImagem);

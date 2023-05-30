@@ -24,9 +24,8 @@ public class Produto extends EntityClass {
 
     private Double valorCompra;
     
-    @OneToMany
-    @JoinColumn(name = "lista_imagem_produto")
-    private List<ImageForm> image;
+    @Column(name = "lista_imagem_produto")
+    private List<String> image;
 
     @Enumerated(EnumType.ORDINAL) 
     private Cor cor;
@@ -113,11 +112,11 @@ public class Produto extends EntityClass {
         this.preco = preco;
     }
 
-    public List<ImageForm> getImage() {
+    public List<String> getImage() {
         return image;
     }
 
-    public void setImage(List<ImageForm> image) {
+    public void setImage(List<String> image) {
         this.image = image;
     }
 

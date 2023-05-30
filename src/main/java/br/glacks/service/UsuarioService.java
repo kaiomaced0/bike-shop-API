@@ -7,7 +7,8 @@ package br.glacks.service;
 
     import br.glacks.dto.UsuarioDTO;
     import br.glacks.dto.UsuarioResponseDTO;
-    import br.glacks.model.Usuario;
+import br.glacks.form.ImageForm;
+import br.glacks.model.Usuario;
 
     public interface UsuarioService {
         
@@ -25,7 +26,7 @@ package br.glacks.service;
 
         public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario);
 
-        public UsuarioResponseDTO updateImagem(long id, String nomeImagem);
+        public UsuarioResponseDTO updateImagem(long id, String imageForm);
         
         public Response delete(@PathParam("id") Long id);
     

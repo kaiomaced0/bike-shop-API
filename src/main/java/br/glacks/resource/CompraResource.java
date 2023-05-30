@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -15,7 +16,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.Compra;
-import br.glacks.repository.CompraRepository;
 import br.glacks.service.CompraService;
 
 @Path("/compra")
@@ -28,6 +28,7 @@ public class CompraResource {
     
 
     @GET
+    @RolesAllowed({"Admin"})
     public List<Compra> gettAll(){
         return compraService.getAll();
         
@@ -35,6 +36,7 @@ public class CompraResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Compra getId(@PathParam("id") long id){
         return compraService.getId(id);
         
@@ -49,6 +51,7 @@ public class CompraResource {
     @PUT
     @Path("/{id}")
     @Transactional
+    @RolesAllowed({"Admin"})
     public Compra update(@PathParam("id") long id, Compra compra){
         return compraService.update(id, compra);
     }

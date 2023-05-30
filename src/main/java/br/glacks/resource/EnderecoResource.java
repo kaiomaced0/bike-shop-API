@@ -16,7 +16,6 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.EnderecoResponseDTO;
 import br.glacks.model.Endereco;
-import br.glacks.repository.EnderecoRepository;
 import br.glacks.service.EnderecoService;
 
 @Path("/endereco")

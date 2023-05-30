@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.form.ImageForm;
 import br.glacks.model.Usuario;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.UsuarioService;
@@ -78,7 +79,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public UsuarioResponseDTO updateImagem(long id, String nomeImagem){
         Usuario entity = repository.findById(id);
-        entity.setNome(nomeImagem);
 
         return new UsuarioResponseDTO(entity);
     }

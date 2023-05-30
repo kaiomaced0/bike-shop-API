@@ -10,15 +10,20 @@ import br.glacks.model.locais.Cidade;
 import br.glacks.repository.CidadeRepository;
 import br.glacks.service.CidadeService;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.jboss.logging.Logger;
 
 @ApplicationScoped
 public class CidadeServiceImpl implements CidadeService {
 
     @Inject
     CidadeRepository repository;
+
+    private static final Logger LOG = Logger.getLogger(CidadeServiceImpl.class);
+
     
     @Override
     public List<Cidade> getAll(){
+        LOG.info("BUscando todas as cidades");
         return repository.findAll().list();
         
     }

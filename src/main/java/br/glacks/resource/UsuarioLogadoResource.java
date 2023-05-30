@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -25,7 +26,7 @@ public class UsuarioLogadoResource {
 
 
     @GET
-    @RolesAllowed({"Admin, User"})
+    @RolesAllowed({"Admin", "User"})
     public Response getPerfilUsuario(){
 
         return usuarioLogado.getPerfilUsuario();
@@ -37,7 +38,6 @@ public class UsuarioLogadoResource {
     @RolesAllowed({"Admin", "User"})
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm ImageForm form){
-        
         return usuarioLogado.salvarImagem(form);
 
     }
