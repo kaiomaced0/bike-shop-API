@@ -5,10 +5,13 @@ import java.util.List;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
-
+import jakarta.ws.rs.core.Response.Status;
 import br.glacks.model.Compra;
+import br.glacks.model.Usuario;
 import br.glacks.repository.CompraRepository;
+import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.CompraService;
+import br.glacks.service.UsuarioLogadoService;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -16,6 +19,12 @@ public class CompraServiceImpl implements CompraService {
 
     @Inject
     CompraRepository repository;
+
+    @Inject
+    UsuarioLogadoService usuarioLogado;
+
+    @Inject
+    UsuarioRepository usuarioRepository;
     
     @Override
     public List<Compra> getAll(){
@@ -32,8 +41,15 @@ public class CompraServiceImpl implements CompraService {
     @Override
     @Transactional
     public Response insert(Compra compra){
-        repository.persist(compra);
-        return Response.ok(compra).build();
+        if(compra != null){
+            repository.persist(compra);
+            Usuario entity = usuarioRepository.findByLogin(
+                usuarioLogado.getPerfilUsuarioLogado().login());
+            compra.setUsuario(entity);
+            return Response.ok(compra).build();
+        }
+        return Response.status(Status.NO_CONTENT).build();
+    
     }
 
     @Override

@@ -44,6 +44,7 @@ public class CompraResource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Usuario"})
     public Response insert(Compra compra){
         return compraService.insert(compra);
     }
