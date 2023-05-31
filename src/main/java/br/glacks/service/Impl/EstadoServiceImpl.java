@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
-
+import jakarta.ws.rs.core.Response.Status;
 import br.glacks.model.locais.Estado;
 import br.glacks.repository.EstadoRepository;
 import br.glacks.service.EstadoService;
@@ -46,9 +46,11 @@ public class EstadoServiceImpl implements EstadoService {
     
    @Override
    @Transactional
-    public Response delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+   public Response delete(Long id) {
+    Estado entity = repository.findById(id);
+    entity.setAtivo(false);
+    
+    return Response.status(Status.OK).build();
     }
 
     

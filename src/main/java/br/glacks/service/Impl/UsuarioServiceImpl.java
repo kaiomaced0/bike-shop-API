@@ -11,9 +11,9 @@ import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.form.ImageForm;
 import br.glacks.model.Usuario;
 import br.glacks.repository.UsuarioRepository;
+import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -22,6 +22,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Inject
     UsuarioRepository repository;
 
+    @Inject
+    UsuarioLogadoService usuarioLogado;
 
     @Override
     public List<UsuarioResponseDTO> getAll(){
@@ -77,6 +79,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
+    public UsuarioResponseDTO updateOn(String chave, UsuarioDTO usuario){
+        Usuario entity = repository.findByLogin(usuarioLogado.getPerfilUsuarioLogado().login());
+        if(usuario.login() != null){
+            entity.setLogin(usuario.login());
+        }
+        if(usuario.nome() != null){
+            entity.setNome(usuario.nome());
+        }
+        if(usuario.senha() != null){
+            entity.setSenha(usuario.senha());
+        }
+        return new UsuarioResponseDTO(entity);
+    }
+
+    @Override
+    @Transactional
     public UsuarioResponseDTO updateImagem(long id, String nomeImagem){
         Usuario entity = repository.findById(id);
 
@@ -97,11 +115,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         return new UsuarioResponseDTO(usuario);
     }
 
+    @Override
+    public Usuario findByLoginUsuarioLogado(String login) {
+        Usuario usuario = repository.findByLogin(login);
+        if(usuario == null)
+            throw new NotFoundException("Usuario não encontrado");
+
+        return usuario;
+    }
+
 
     @Override
     @Transactional
     public Response delete(Long id) {
-        repository.deleteById(id);
+        Usuario entity = repository.findById(id);
+        entity.setAtivo(false);
+        
         return Response.status(Status.OK).build();
     }
     

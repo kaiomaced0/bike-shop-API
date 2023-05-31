@@ -7,8 +7,7 @@ package br.glacks.service;
 
     import br.glacks.dto.UsuarioDTO;
     import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.form.ImageForm;
-import br.glacks.model.Usuario;
+    import br.glacks.model.Usuario;
 
     public interface UsuarioService {
         
@@ -20,11 +19,15 @@ import br.glacks.model.Usuario;
 
         public UsuarioResponseDTO findByLogin(String login);
 
+        public Usuario findByLoginUsuarioLogado(String login);
+
         public List<UsuarioResponseDTO> getNome(@PathParam("nome") String nome);
 
         public Response insert(UsuarioDTO usuarioDTO);
 
         public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario);
+
+        public UsuarioResponseDTO updateOn(@PathParam("chave") String chave, UsuarioDTO usuario);
 
         public UsuarioResponseDTO updateImagem(long id, String imageForm);
         

@@ -8,16 +8,14 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.glacks.application.Result;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.form.ImageForm;
+import br.glacks.model.Usuario;
 import br.glacks.service.FileService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.core.Response.Status;
@@ -45,6 +43,16 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
         UsuarioResponseDTO user = usuarioService.findByLogin(login);
 
         return Response.ok(user).build();
+
+    }
+
+    @Override
+    public UsuarioResponseDTO getPerfilUsuarioLogado(){
+
+        String login = jsonWebToken.getSubject();
+        UsuarioResponseDTO user = new UsuarioResponseDTO(usuarioService.findByLoginUsuarioLogado(login));
+
+        return user;
 
     }
 

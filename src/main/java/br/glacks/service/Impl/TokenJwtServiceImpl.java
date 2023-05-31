@@ -25,6 +25,7 @@ public class TokenJwtServiceImpl implements TokenJwtService{
         Set<String> roles = usuario.getPerfis()
                                         .stream().map(p -> p.getLabel())
                                         .collect(Collectors.toSet());
+                                        
         return Jwt.issuer("unitins-jwt")
             .subject(usuario.getLogin())
             .groups(roles)

@@ -78,9 +78,11 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
     
    @Override
    @Transactional
-    public Response delete(Long id) {
-        repository.deleteById(id);
-        return Response.status(Status.OK).build();
+   public Response delete(Long id) {
+    PessoaFisica entity = repository.findById(id);
+    entity.setAtivo(false);
+    
+    return Response.status(Status.OK).build();
     }
     
     

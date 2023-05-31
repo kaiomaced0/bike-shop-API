@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.form.ImageForm;
 import br.glacks.service.UsuarioLogadoService;
 import jakarta.annotation.security.RolesAllowed;
@@ -28,7 +29,6 @@ public class UsuarioLogadoResource {
     @GET
     @RolesAllowed({"Admin", "User"})
     public Response getPerfilUsuario(){
-
         return usuarioLogado.getPerfilUsuario();
         
     }

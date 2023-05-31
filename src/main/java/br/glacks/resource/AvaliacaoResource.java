@@ -46,12 +46,14 @@ public class AvaliacaoResource {
     }
 
     @POST
+    @RolesAllowed({"Admin"})
     @Transactional
     public Response insert(AvaliacaoDTO avaliacao){
         return avaliacaoService.insert(avaliacao);
     }
 
     @PUT
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
     public Avaliacao update(@PathParam("id") long id, Avaliacao avaliacao){

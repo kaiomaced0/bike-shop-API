@@ -18,6 +18,9 @@ public class EntityClass {
     
     private LocalDateTime dataInclusao;
 
+    private Boolean ativo = true;
+
+    
     @PrePersist // pre inclusao
     private void gerarDataInclusao() {
         dataInclusao = LocalDateTime.now();
@@ -50,6 +53,16 @@ public class EntityClass {
 
     public void setDataInclusao(LocalDateTime dataInclusao) {
         this.dataInclusao = dataInclusao;
+    }
+
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     

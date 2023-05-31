@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -15,8 +16,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.Telefone;
-import br.glacks.repository.TelefoneRepository;
 import br.glacks.service.TelefoneService;
+import br.glacks.service.UsuarioLogadoService;
 
 @Path("/telefone")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -24,10 +25,10 @@ import br.glacks.service.TelefoneService;
 public class TelefoneResource {
     
     @Inject
-    TelefoneService telefoneService;
-    
+    TelefoneService telefoneService;    
 
     @GET
+    @RolesAllowed({"Admin"})
     public List<Telefone> gettAll(){
         return telefoneService.getAll();
         

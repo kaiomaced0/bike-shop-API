@@ -81,9 +81,11 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     
    @Override
    @Transactional
-    public Response delete(Long id) {
-        repository.deleteById(id);
-        return Response.status(Status.OK).build();
+   public Response delete(Long id) {
+    PessoaJuridica entity = repository.findById(id);
+    entity.setAtivo(false);
+    
+    return Response.status(Status.OK).build();
     }
 
     

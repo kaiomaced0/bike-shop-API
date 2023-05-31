@@ -46,6 +46,10 @@ public class Compra extends EntityClass{
     @Column(name = "pagamento_realizado")
     private Boolean pago;
 
+    @ManyToOne
+    @JoinColumn(name = "cupom_compra")
+    private Cupom cupom;
+
     
     @PrePersist
     public void inserirNome(){
@@ -116,8 +120,6 @@ public class Compra extends EntityClass{
     public Double getValorTotal() {
         return valorTotal;
     }
-
-
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
@@ -126,8 +128,6 @@ public class Compra extends EntityClass{
     public FormaPagamento getFormaPagamento() {
         return formaPagamento;
     }
-
-
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
@@ -136,8 +136,6 @@ public class Compra extends EntityClass{
     public StatusPedido getStatusPedido() {
         return statusPedido;
     }
-
-
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
     }
@@ -146,8 +144,6 @@ public class Compra extends EntityClass{
     public Endereco getEnderecoEntrega() {
         return enderecoEntrega;
     }
-
-
     public void setEnderecoEntrega(Endereco enderecoEntrega) {
         this.enderecoEntrega = enderecoEntrega;
     }
@@ -156,10 +152,15 @@ public class Compra extends EntityClass{
     public Boolean getPago() {
         return pago;
     }
-
-
     public void setPago(Boolean pago) {
         this.pago = pago;
+    }
+
+    public Cupom getCupom() {
+        return cupom;
+    }
+    public void setCupom(Cupom cupom) {
+        this.cupom = cupom;
     }
 
     

@@ -54,7 +54,9 @@ public class ProdutoServiceImpl implements ProdutoService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        repository.deleteById(id);
+        Produto entity = repository.findById(id);
+        entity.setAtivo(false);
+            
         return Response.status(Status.OK).build();
     }
 
