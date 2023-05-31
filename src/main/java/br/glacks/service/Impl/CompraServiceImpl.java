@@ -7,10 +7,14 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import br.glacks.model.Compra;
+import br.glacks.model.ItemCompra;
+import br.glacks.model.Produto;
+import br.glacks.model.StatusPedido;
 import br.glacks.model.Usuario;
 import br.glacks.repository.CompraRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.CompraService;
+import br.glacks.service.ProdutoService;
 import br.glacks.service.UsuarioLogadoService;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -25,6 +29,9 @@ public class CompraServiceImpl implements CompraService {
 
     @Inject
     UsuarioRepository usuarioRepository;
+
+    @Inject 
+    ProdutoService produtoService;
     
     @Override
     public List<Compra> getAll(){
@@ -39,13 +46,36 @@ public class CompraServiceImpl implements CompraService {
     }
 
     @Override
+    public Response mudarStatusPedido(long id, int idStatusPedido){
+        Compra entity = repository.findById(id);
+        try {
+            entity.setStatusPedido(StatusPedido.valueOf(idStatusPedido));
+        } catch (Exception e) {
+            return Response.status(Status.NOT_ACCEPTABLE).build();
+        }
+        return Response.status(Status.OK).build();
+        
+    }
+
+    @Override
     @Transactional
     public Response insert(Compra compra){
         if(compra != null){
-            repository.persist(compra);
+            
             Usuario entity = usuarioRepository.findByLogin(
                 usuarioLogado.getPerfilUsuarioLogado().login());
             compra.setUsuario(entity);
+            compra.setStatusPedido(StatusPedido.PREPARANDO);
+
+            for (ItemCompra item : compra.getListaItemCompra()) {
+                try {
+                    produtoService.retiraEstoque(item.getProduto().getId(), item.getQuantidade());
+                } catch (Exception e) {
+                    return Response.status(Status.NO_CONTENT).build();
+                }
+            }
+            repository.persist(compra);
+
             return Response.ok(compra).build();
         }
         return Response.status(Status.NO_CONTENT).build();
@@ -63,8 +93,10 @@ public class CompraServiceImpl implements CompraService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Compra entity = repository.findById(id);
+        entity.setAtivo(false);
+            
+        return Response.status(Status.OK).build();
     }
 
     

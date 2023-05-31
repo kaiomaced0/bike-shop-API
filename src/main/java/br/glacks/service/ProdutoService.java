@@ -3,12 +3,12 @@ import java.util.List;
 
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.model.Produto;
 
 public interface ProdutoService {
     
-    public List<Produto> getAll();
+    public List<ProdutoResponseDTO> getAll();
 
     public Produto getId(@PathParam("id") long id);
 
@@ -19,4 +19,8 @@ public interface ProdutoService {
     public Produto update(@PathParam("id") long id, Produto produto);
     
     public Response delete(@PathParam("id") Long id);
+
+    public Response retiraEstoque(@PathParam("id") Long id, int quantidade);
+    
+    public Response adicionaEstoque(@PathParam("id") Long id, int quantidade);
 }

@@ -49,7 +49,7 @@ public class EstadoServiceImpl implements EstadoService {
    public Response delete(Long id) {
     Estado entity = repository.findById(id);
     entity.setAtivo(false);
-    
+        
     return Response.status(Status.OK).build();
     }
 

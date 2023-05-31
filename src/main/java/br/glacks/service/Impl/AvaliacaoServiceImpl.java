@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
-
+import jakarta.ws.rs.core.Response.Status;
 import br.glacks.dto.AvaliacaoDTO;
 import br.glacks.dto.AvaliacaoResponseDTO;
 import br.glacks.model.Avaliacao;
@@ -68,7 +68,10 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Avaliacao entity = repository.findById(id);
+        entity.setAtivo(false);
+            
+        return Response.status(Status.OK).build();
     }
 
     

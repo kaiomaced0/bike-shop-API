@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.CartaoDTO;
 import br.glacks.dto.CartaoResponseDTO;
@@ -59,7 +60,10 @@ public class CartaoServiceImpl implements CartaoService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Cartao entity = repository.findById(id);
+        entity.setAtivo(false);
+            
+        return Response.status(Status.OK).build();
     }
 
     

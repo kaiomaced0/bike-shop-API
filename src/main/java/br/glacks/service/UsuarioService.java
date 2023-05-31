@@ -6,14 +6,14 @@ package br.glacks.service;
     import jakarta.ws.rs.core.Response;
 
     import br.glacks.dto.UsuarioDTO;
-    import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.dto.UsuarioResponseDTO;
     import br.glacks.model.Usuario;
 
     public interface UsuarioService {
         
         public List<UsuarioResponseDTO> getAll();
 
-        public Usuario getId(@PathParam("id") long id);
+        public UsuarioResponseDTO getId(@PathParam("id") long id);
 
         public Usuario findByLoginAndSenha(String login, String senha);
 

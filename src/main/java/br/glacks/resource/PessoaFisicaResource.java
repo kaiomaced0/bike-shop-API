@@ -3,6 +3,7 @@ package br.glacks.resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -35,12 +36,14 @@ public class PessoaFisicaResource {
 
 
     @GET
+    @RolesAllowed({"Admin"})
     public List<PessoaFisicaResponseDTO> getAll(){
         return pessoaFisicaService.getAll();
         
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     @Path("/nome/{nome}")
     public List<PessoaFisicaResponseDTO> getNome(@PathParam("nome") String nome){
         return pessoaFisicaService.getNome(nome);
@@ -48,6 +51,7 @@ public class PessoaFisicaResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     public PessoaFisica getId(@PathParam("id") long id){
         return pessoaFisicaService.getId(id);
@@ -62,6 +66,7 @@ public class PessoaFisicaResource {
     }
 
     @PUT
+    @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     @Transactional
     public PessoaFisicaResponseDTO update(@PathParam("id") long id, PessoaFisicaDTO pessoafisica){
@@ -70,6 +75,7 @@ public class PessoaFisicaResource {
     }
 
     @DELETE
+    @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         return pessoaFisicaService.delete(id);

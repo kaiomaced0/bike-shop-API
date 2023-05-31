@@ -2,7 +2,6 @@ package br.glacks.model;
 
 import java.util.List;
 
-import br.glacks.form.ImageForm;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

@@ -3,6 +3,7 @@ package br.glacks.resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -15,15 +16,10 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaJuridicaDTO;
 import br.glacks.dto.PessoaJuridicaResponseDTO;
-import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.PessoaJuridica;
-import br.glacks.model.Usuario;
-import br.glacks.repository.PessoaJuridicaRepository;
-import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.PessoaJuridicaService;
 
 @Path("/pessoajuridica")
@@ -35,12 +31,14 @@ public class PessoaJuridicaResource {
     PessoaJuridicaService pessoaJuridicaService;
 
     @GET
+    @RolesAllowed({"Admin"})
     public List<PessoaJuridicaResponseDTO> getAll(){
         return pessoaJuridicaService.getAll();
         
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     @Path("/nome/{nome}")
     public List<PessoaJuridicaResponseDTO> getNome(@PathParam("nome") String nome){
         return pessoaJuridicaService.getNome(nome);
@@ -48,6 +46,7 @@ public class PessoaJuridicaResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     public PessoaJuridica getId(@PathParam("id") long id){
         return pessoaJuridicaService.getId(id);
@@ -62,6 +61,7 @@ public class PessoaJuridicaResource {
     }
 
     @PUT
+    @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     @Transactional
     public PessoaJuridicaResponseDTO update(@PathParam("id") long id, PessoaJuridicaDTO pessoajuridica){
@@ -69,6 +69,7 @@ public class PessoaJuridicaResource {
     }
 
     @DELETE
+    @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         return pessoaJuridicaService.delete(id);

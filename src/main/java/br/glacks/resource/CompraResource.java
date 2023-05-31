@@ -42,9 +42,17 @@ public class CompraResource {
         
     }
 
+    @GET
+    @Path("/{id}")
+    @RolesAllowed({"Admin"})
+    public Response mudarStatusPedido(@PathParam("id") long id, int idStatusPedido){
+        return compraService.mudarStatusPedido(id, idStatusPedido);
+        
+    }
+
     @POST
     @Transactional
-    @RolesAllowed({"Usuario"})
+    @RolesAllowed({"User"})
     public Response insert(Compra compra){
         return compraService.insert(compra);
     }

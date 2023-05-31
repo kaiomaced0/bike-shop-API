@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.model.bike.Bike;
 import br.glacks.repository.BikeRepository;
@@ -54,7 +55,10 @@ public class BikeServiceImpl implements BikeService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Bike entity = repository.findById(id);
+        entity.setAtivo(false);
+            
+        return Response.status(Status.OK).build();
     }
     
 }

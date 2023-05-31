@@ -46,7 +46,7 @@ public class AvaliacaoResource {
     }
 
     @POST
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     @Transactional
     public Response insert(AvaliacaoDTO avaliacao){
         return avaliacaoService.insert(avaliacao);

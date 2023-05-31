@@ -3,6 +3,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -16,7 +17,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.locais.Estado;
-import br.glacks.repository.EstadoRepository;
 import br.glacks.service.EstadoService;
 
 
@@ -38,6 +38,7 @@ public class EstadoResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     public Estado getId(@PathParam("id") long id){
         return estadoService.getId(id);
@@ -45,12 +46,14 @@ public class EstadoResource {
     }
 
     @POST
+    @RolesAllowed({"Admin"})
     @Transactional
     public Response insert(Estado estado){
         return estadoService.insert(estado);
     }
 
     @PUT
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
     public Estado update(@PathParam("id") long id, Estado estado){

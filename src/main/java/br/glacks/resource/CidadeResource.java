@@ -44,6 +44,7 @@ public class CidadeResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Admin"})
     public Cidade getId(@PathParam("id") long id){
         return cidadeService.getId(id);
         

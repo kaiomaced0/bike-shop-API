@@ -47,12 +47,14 @@ public class CartaoResource {
 
     @POST
     @Transactional
+    @RolesAllowed({"Admin", "User"})
     public Response insert(CartaoDTO cartao){
         return cartaoService.insert(cartao);
     }
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed({"Admin", "User"})
     @Transactional
     public Cartao update(@PathParam("id") long id, CartaoDTO cartao){
         return cartaoService.update(id, cartao);

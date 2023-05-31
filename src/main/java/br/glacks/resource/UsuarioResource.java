@@ -54,7 +54,7 @@ public class UsuarioResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public Usuario getId(@PathParam("id") long id){
+    public UsuarioResponseDTO getId(@PathParam("id") long id){
         return usuarioService.getId(id);
         
     }

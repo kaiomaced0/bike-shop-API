@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.EnderecoResponseDTO;
 import br.glacks.model.Endereco;
@@ -52,8 +53,10 @@ public class EnderecoServiceImpl implements EnderecoService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Endereco entity = repository.findById(id);
+        entity.setAtivo(false);
+            
+        return Response.status(Status.OK).build();
     }
 
     

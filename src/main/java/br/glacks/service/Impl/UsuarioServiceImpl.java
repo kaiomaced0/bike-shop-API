@@ -35,8 +35,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario getId(long id){
-        return repository.findById(id);
+    public UsuarioResponseDTO getId(long id){
+        return new UsuarioResponseDTO(repository.findById(id));
         
     }
 

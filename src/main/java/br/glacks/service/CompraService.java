@@ -11,6 +11,8 @@ public interface CompraService {
     public List<Compra> getAll();
 
     public Compra getId(@PathParam("id") long id);
+    
+    public Response mudarStatusPedido(long id, int idStatusPedido);
 
     public Response insert(Compra compraDTO);
 

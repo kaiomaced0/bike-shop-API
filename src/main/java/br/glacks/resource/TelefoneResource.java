@@ -17,7 +17,6 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.Telefone;
 import br.glacks.service.TelefoneService;
-import br.glacks.service.UsuarioLogadoService;
 
 @Path("/telefone")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,6 +34,7 @@ public class TelefoneResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     public Telefone getId(@PathParam("id") long id){
         return telefoneService.getId(id);
@@ -42,12 +42,14 @@ public class TelefoneResource {
     }
 
     @POST
+    @RolesAllowed({"Admin", "User"})
     @Transactional
     public Response insert(Telefone telefone){
         return telefoneService.insert(telefone);
     }
 
     @PUT
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
     public Telefone update(@PathParam("id") long id, Telefone telefone){
