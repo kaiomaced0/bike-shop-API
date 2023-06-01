@@ -1,13 +1,10 @@
 package br.glacks.resource;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -16,15 +13,10 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.dto.PessoaFisicaResponseDTO;
-import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.PessoaFisica;
-import br.glacks.model.Usuario;
-import br.glacks.repository.PessoaFisicaRepository;
-import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.PessoaFisicaService;
 
 @Path("/pessoafisica")
@@ -74,7 +66,7 @@ public class PessoaFisicaResource {
 
     }
 
-    @DELETE
+    @PUT
     @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {

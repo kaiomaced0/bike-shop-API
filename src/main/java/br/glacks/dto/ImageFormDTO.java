@@ -1,7 +1,6 @@
 package br.glacks.dto;
 
 import br.glacks.form.ImageForm;
-import jakarta.ws.rs.FormParam;
 
 public record ImageFormDTO(
     byte[] imagem,

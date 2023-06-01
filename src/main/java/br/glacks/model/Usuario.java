@@ -11,8 +11,6 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import br.glacks.form.ImageForm;
 import br.glacks.model.pagamento.Cartao;
 
 @Entity

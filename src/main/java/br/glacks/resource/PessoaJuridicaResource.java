@@ -1,13 +1,11 @@
 package br.glacks.resource;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -68,7 +66,7 @@ public class PessoaJuridicaResource {
         return pessoaJuridicaService.update(id, pessoajuridica);
     }
 
-    @DELETE
+    @PUT
     @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {

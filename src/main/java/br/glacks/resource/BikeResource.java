@@ -16,7 +16,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import br.glacks.model.bike.Bike;
-import br.glacks.repository.BikeRepository;
 import br.glacks.service.BikeService;
 
 @Path("/bike")

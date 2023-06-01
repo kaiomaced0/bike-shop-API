@@ -11,7 +11,6 @@ import java.util.UUID;
 import br.glacks.form.ImageForm;
 import br.glacks.service.FileService;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class FileServiceImpl implements FileService {

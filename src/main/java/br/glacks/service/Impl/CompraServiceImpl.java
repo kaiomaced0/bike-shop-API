@@ -8,7 +8,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import br.glacks.model.Compra;
 import br.glacks.model.ItemCompra;
-import br.glacks.model.Produto;
 import br.glacks.model.StatusPedido;
 import br.glacks.model.Usuario;
 import br.glacks.repository.CompraRepository;

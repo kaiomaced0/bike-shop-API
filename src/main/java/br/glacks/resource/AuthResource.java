@@ -2,15 +2,12 @@ package br.glacks.resource;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import br.glacks.dto.AuthUsuarioDTO;
-import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.model.Usuario;
 import br.glacks.service.HashService;
 import br.glacks.service.TokenJwtService;
 import br.glacks.service.UsuarioService;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;

@@ -1,13 +1,11 @@
 package br.glacks.service.Impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import br.glacks.dto.TelefoneResponseDTO;
 import br.glacks.model.Telefone;
 import br.glacks.repository.TelefoneRepository;
 import br.glacks.service.TelefoneService;

@@ -18,7 +18,6 @@ import jakarta.ws.rs.core.Response;
 import br.glacks.dto.AvaliacaoDTO;
 import br.glacks.dto.AvaliacaoResponseDTO;
 import br.glacks.model.Avaliacao;
-import br.glacks.repository.AvaliacaoRepository;
 import br.glacks.service.AvaliacaoService;
 
 @Path("/avaliacao")

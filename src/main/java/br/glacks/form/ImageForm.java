@@ -2,7 +2,6 @@ package br.glacks.form;
 
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
-import br.glacks.model.EntityClass;
 import jakarta.ws.rs.FormParam;
 
 public class ImageForm{

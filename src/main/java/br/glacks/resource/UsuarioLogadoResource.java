@@ -2,7 +2,6 @@ package br.glacks.resource;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.form.ImageForm;
 import br.glacks.service.UsuarioLogadoService;
 import jakarta.annotation.security.RolesAllowed;
@@ -10,7 +9,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
-import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
