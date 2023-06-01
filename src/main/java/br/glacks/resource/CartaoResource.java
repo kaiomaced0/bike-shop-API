@@ -17,8 +17,6 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.CartaoDTO;
 import br.glacks.dto.CartaoResponseDTO;
-import br.glacks.model.pagamento.Cartao;
-import br.glacks.repository.CartaoRepository;
 import br.glacks.service.CartaoService;
 
 @Path("/cartao")
@@ -56,7 +54,7 @@ public class CartaoResource {
     @Path("/{id}")
     @RolesAllowed({"Admin", "User"})
     @Transactional
-    public Cartao update(@PathParam("id") long id, CartaoDTO cartao){
+    public Response update(@PathParam("id") long id, CartaoDTO cartao){
         return cartaoService.update(id, cartao);
     }
 

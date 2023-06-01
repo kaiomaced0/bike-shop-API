@@ -16,7 +16,7 @@ public interface CartaoService {
 
     public Response insert(CartaoDTO cartaoDTO);
 
-    public Cartao update(@PathParam("id") long id, CartaoDTO cartao);
+    public Response update(@PathParam("id") long id, CartaoDTO cartao);
     
     public Response delete(@PathParam("id") Long id);
 }

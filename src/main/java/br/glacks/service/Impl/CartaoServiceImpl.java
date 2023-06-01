@@ -15,6 +15,8 @@ import br.glacks.model.pagamento.Cartao;
 import br.glacks.repository.CartaoRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.CartaoService;
+import br.glacks.service.UsuarioLogadoService;
+import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -24,7 +26,13 @@ public class CartaoServiceImpl implements CartaoService {
     CartaoRepository repository;
 
     @Inject
-    UsuarioRepository uRepository;
+    UsuarioLogadoService usuarioLogado;
+
+    @Inject
+    UsuarioService usuarioService;
+
+    @Inject 
+    UsuarioRepository usuarioRepository;
     
     @Override
     public List<CartaoResponseDTO> getAll(){
@@ -43,18 +51,32 @@ public class CartaoServiceImpl implements CartaoService {
     @Override
     @Transactional
     public Response insert(CartaoDTO cartao){
-        Cartao c = CartaoDTO.criaCartao(cartao);
-        c.setUsuario(uRepository.findById(c.getUsuario().getId()));
-        repository.persist(c);
+        try {
+            Usuario entityUser = usuarioRepository.findById(usuarioLogado.getPerfilUsuarioLogado().id());
+            Cartao c = CartaoDTO.criaCartao(cartao);
+            c.setUsuario(entityUser);
+            repository.persist(c);
+        } catch (Exception e) {
+            return Response.status(Status.NOT_ACCEPTABLE).build();
+        }
         return Response.ok(cartao).build();
     }
 
     @Override
     @Transactional
-    public Cartao update(long id, CartaoDTO cartaoDTO){
-        Cartao entity = repository.findById(id);
-        entity = CartaoDTO.mudaCartao(entity, cartaoDTO);
-        return entity;
+    public Response update(long id, CartaoDTO cartaoDTO){
+        try {
+            Cartao entity = repository.findById(id);
+            if(usuarioLogado.getPerfilUsuarioLogado().id() == entity.getUsuario().getId()){
+                entity = CartaoDTO.mudaCartao(entity, cartaoDTO);
+            }
+
+            return Response.ok(cartaoDTO).build();
+
+        } catch (Exception e) {
+            return Response.status(Status.NOT_ACCEPTABLE).build();
+        }
+        
     }
     
    @Override
