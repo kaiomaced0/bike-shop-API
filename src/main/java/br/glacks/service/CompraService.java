@@ -19,4 +19,6 @@ public interface CompraService {
     public Compra update(@PathParam("id") long id, Compra compra);
     
     public Response delete(@PathParam("id") Long id);
+
+    public Response realizarPagamentoCompra(@PathParam("id") long id, String tokenPagamento);
 }

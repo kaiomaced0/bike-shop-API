@@ -1,6 +1,7 @@
 package br.glacks.service.Impl;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import jakarta.inject.Inject;
@@ -27,13 +28,14 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     @Inject
     ProdutoRepository pRepository;
-    
+
     @Override
     public List<AvaliacaoResponseDTO> getAll(){
         return repository.findAll()
             .stream()
             .map(avaliacao -> new AvaliacaoResponseDTO(avaliacao))
             .collect(Collectors.toList());
+            
         
     }
 

@@ -98,6 +98,23 @@ public class CompraServiceImpl implements CompraService {
         return Response.status(Status.OK).build();
     }
 
+    @Override
+    @Transactional
+    public Response realizarPagamentoCompra(long id, String tokenPagamento){
+        
+        Compra entity = getId(id);
+        if(entity != null){
+            entity.setStatusPedido(StatusPedido.PREPARANDO);
+            entity.setPago(true);
+            entity.setToken(tokenPagamento);
+            return Response.status(Status.OK).build();
+        }
+        else{
+
+
+        return Response.status(Status.NOT_ACCEPTABLE).build();
+        }
+    }
     
     
 }

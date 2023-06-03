@@ -16,7 +16,7 @@
  insert into usuario (id, nome, login, senha) values(14, 'otavio', 'otavio','123');
  insert into usuario (id, nome, login, senha) values(15, 'rubens', 'rubens','123');
  insert into usuario (id, nome, login, senha) values(16, 'ordete', 'ordete','123');
- insert into usuario (id, nome, login, senha) values(1, 'teste', 'teste','123');
+ insert into usuario (id, nome, login, senha) values(1, 'teste', 'teste','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(1, '000000', 'hilowisck', '00/00/2121');
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(2, '020323082', 'hilowisck', '04/12/2002');
