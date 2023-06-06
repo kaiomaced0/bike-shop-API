@@ -1,4 +1,4 @@
-package br.glacks.service.Impl;
+package br.glacks.service.impl;
 
 import java.time.Duration;
 import java.time.Instant;
