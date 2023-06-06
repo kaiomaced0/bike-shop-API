@@ -3,6 +3,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -30,6 +31,7 @@ public class CidadeResource {
     
 
     @GET
+    @PermitAll
     public List<Cidade> gettAll(){
         return cidadeService.getAll();
         

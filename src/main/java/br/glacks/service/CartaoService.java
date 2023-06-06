@@ -6,7 +6,6 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.CartaoDTO;
 import br.glacks.dto.CartaoResponseDTO;
-import br.glacks.model.pagamento.Cartao;
 
 public interface CartaoService {
     

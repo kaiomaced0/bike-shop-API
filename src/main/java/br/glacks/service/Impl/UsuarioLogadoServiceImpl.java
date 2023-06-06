@@ -8,7 +8,6 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.glacks.application.Result;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.form.ImageForm;
-import br.glacks.model.Usuario;
 import br.glacks.service.FileService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;

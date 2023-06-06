@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -27,12 +28,14 @@ public class BikeResource {
     BikeService bikeService;
     
     @GET
+    @PermitAll
     public List<Bike> gettAll(){
         return bikeService.getAll();
         
     }
 
     @GET
+    @PermitAll
     @Path("/nome/{nome}")
     public List<Bike> getNome(@PathParam("nome") String nome){
         return bikeService.getNome(nome);
@@ -40,6 +43,7 @@ public class BikeResource {
     }
 
     @GET
+    @PermitAll
     @Path("/{id}")
     public Bike getId(@PathParam("id") long id){
         return bikeService.getId(id);

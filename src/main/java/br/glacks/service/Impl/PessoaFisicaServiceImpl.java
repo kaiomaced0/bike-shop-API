@@ -1,7 +1,6 @@
 package br.glacks.service.Impl;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import jakarta.inject.Inject;

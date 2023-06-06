@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -30,12 +31,14 @@ public class ProdutoResource {
     
 
     @GET
+    @PermitAll
     public List<ProdutoResponseDTO> gettAll(){
         return produtoService.getAll();
         
     }
 
     @GET
+    @PermitAll
     @Path("/nome/{nome}")
     public List<Produto> getNome(@PathParam("nome") String nome){
         return produtoService.getNome(nome);

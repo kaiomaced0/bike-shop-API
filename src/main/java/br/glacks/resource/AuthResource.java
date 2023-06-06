@@ -6,6 +6,7 @@ import br.glacks.model.Usuario;
 import br.glacks.service.HashService;
 import br.glacks.service.TokenJwtService;
 import br.glacks.service.UsuarioService;
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -33,6 +34,7 @@ public class AuthResource {
     JsonWebToken jsonWebToken;
 
     @POST
+    @PermitAll
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public Response login(AuthUsuarioDTO authDTO) {

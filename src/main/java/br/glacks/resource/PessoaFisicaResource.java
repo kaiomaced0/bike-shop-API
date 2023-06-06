@@ -1,6 +1,8 @@
 package br.glacks.resource;
 
 import java.util.List;
+
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -51,6 +53,7 @@ public class PessoaFisicaResource {
     }
 
     @POST
+    @PermitAll
     @Transactional
     public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
         return pessoaFisicaService.insert(pessoaFisicaDTO);
