@@ -2,6 +2,8 @@ package br.glacks.service.impl;
 
 import java.util.List;
 
+import org.jboss.logging.Logger;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
@@ -20,6 +22,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CompraServiceImpl implements CompraService {
 
+    public static final Logger LOG = Logger.getLogger(CompraServiceImpl.class);
+
     @Inject
     CompraRepository repository;
 
@@ -34,24 +38,39 @@ public class CompraServiceImpl implements CompraService {
     
     @Override
     public List<Compra> getAll(){
-        return repository.findAll().list();
+        try {
+            LOG.info("Requisição Compra.getAll()");
+            return repository.findAll().list();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Compra.getAll()");
+            return null;
+        }
         
     }
 
     @Override
     public Compra getId(long id){
-        return repository.findById(id);
+        try {
+            LOG.info("Requisição Compra.getId()");
+            return repository.findById(id);
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Compra.getId()");
+            return null;
+        }
         
     }
 
     @Override
     public Response mudarStatusPedido(long id, int idStatusPedido){
+        
         Compra entity = repository.findById(id);
         try {
             entity.setStatusPedido(StatusPedido.valueOf(idStatusPedido));
         } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Compra.mudarStatusPedido()");
             return Response.status(Status.NOT_ACCEPTABLE).build();
         }
+        LOG.info("Requisição Compra.mudarStatusPedido()");
         return Response.status(Status.OK).build();
         
     }
@@ -70,11 +89,12 @@ public class CompraServiceImpl implements CompraService {
                 try {
                     produtoService.retiraEstoque(item.getProduto().getId(), item.getQuantidade());
                 } catch (Exception e) {
+                    LOG.error("Erro ao rodar Requisição Compra.insert()");
                     return Response.status(Status.NO_CONTENT).build();
                 }
             }
             repository.persist(compra);
-
+            LOG.info("Requisição Compra.insert()");
             return Response.ok(compra).build();
         }
         return Response.status(Status.NO_CONTENT).build();
@@ -84,18 +104,30 @@ public class CompraServiceImpl implements CompraService {
     @Override
     @Transactional
     public Compra update(long id, Compra compra){
-        Compra entity = repository.findById(id);
-        entity.setNome(compra.getNome());
-        return entity;
+        try {
+            LOG.info("Requisição Compra.update()");
+            Compra entity = repository.findById(id);
+            entity.setNome(compra.getNome());
+            return entity;
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Compra.update()");
+            return null;
+        }
     }
     
    @Override
    @Transactional
     public Response delete(Long id) {
-        Compra entity = repository.findById(id);
-        entity.setAtivo(false);
-            
-        return Response.status(Status.OK).build();
+        try {
+            LOG.info("Requisição Compra.delete()");
+            Compra entity = repository.findById(id);
+            entity.setAtivo(false);
+                
+            return Response.status(Status.OK).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Compra.delete()");
+            return null;
+        }
     }
 
     @Override
@@ -107,11 +139,12 @@ public class CompraServiceImpl implements CompraService {
             entity.setStatusPedido(StatusPedido.PREPARANDO);
             entity.setPago(true);
             entity.setToken(tokenPagamento);
+            LOG.info("Requisição Compra.realizarPagamentoCompra()");
             return Response.status(Status.OK).build();
         }
         else{
 
-
+            LOG.error("Erro ao rodar Requisição Compra.realizarPagamentoCompra()");
         return Response.status(Status.NOT_ACCEPTABLE).build();
         }
     }

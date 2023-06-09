@@ -16,8 +16,8 @@
 #
 # docker run -i --rm -p 8080:8080 quarkus/bike-shop
 #
-###
-FROM quay.io/quarkus/quarkus-micro-image:2.0
+###a
+FROM quay.io/quarkus/qurkus-micro-image:2.0
 WORKDIR /work/
 RUN chown 1001 /work \
     && chmod "g+rwX" /work \

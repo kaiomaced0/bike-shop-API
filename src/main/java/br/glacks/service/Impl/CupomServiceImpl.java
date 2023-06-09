@@ -2,6 +2,8 @@ package br.glacks.service.impl;
 
 import java.util.List;
 
+import org.jboss.logging.Logger;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
@@ -15,49 +17,92 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CupomServiceImpl implements CupomService {
 
+    public static final Logger LOG = Logger.getLogger(AvaliacaoServiceImpl.class);
+
     @Inject
     CupomRepository repository;
     
     @Override
     public List<Cupom> getAll(){
-        return repository.findAll().list();
+        try {
+            LOG.info("Requisição Cupom.getAll()");
+            return repository.findAll().list();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cupom.getAll()");
+            return null;
+        }
         
     }
 
     @Override
     public Cupom getId(long id){
-        return repository.findById(id);
+        try {
+            LOG.info("Requisição Cupom.getId()");
+            return repository.findById(id);
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cupom.getId()");
+            return null;
+        }
+        
         
     }
 
     @Override
     public List<Cupom> getNome(String nome){
-        return repository.findByNome(nome);
+        try {
+            LOG.info("Requisição Cupom.getNome()");
+            return repository.findByNome(nome);
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cupom.getNome()");
+            return null;
+        }
+        
         
     }
 
     @Override
     @Transactional
     public Response insert(Cupom cupom){
-        repository.persist(cupom);
-        return Response.ok(cupom).build();
+        try {
+            LOG.info("Requisição Cupom.insert()");
+            repository.persist(cupom);
+            return Response.ok(cupom).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cupom.insert()");
+            return null;
+        }
+        
     }
 
     @Override
     @Transactional
     public Cupom update(long id, Cupom cupom){
-        Cupom entity = repository.findById(id);
-        entity.setNome(cupom.getNome());
-        return entity;
+        try {
+            LOG.info("Requisição Cupom.update()");
+            Cupom entity = repository.findById(id);
+            entity.setNome(cupom.getNome());
+            return entity;
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cupom.update()");
+            return null;
+        }
+        
     }
     
    @Override
    @Transactional
     public Response delete(Long id) { 
-        Cupom entity = repository.findById(id);
-        entity.setAtivo(false);
-            
-        return Response.status(Status.OK).build();
+        try {
+            LOG.info("Requisição Cupom.delete()");
+            Cupom entity = repository.findById(id);
+            entity.setAtivo(false);
+                
+            return Response.status(Status.OK).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cupom.delete()");
+            return null;
+        }
+        
     }
 
     

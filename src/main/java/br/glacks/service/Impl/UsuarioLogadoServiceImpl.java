@@ -12,6 +12,8 @@ import br.glacks.service.FileService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.jboss.logging.Logger;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.PathParam;
@@ -22,7 +24,8 @@ import jakarta.ws.rs.core.Response.Status;
 @ApplicationScoped
 public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
-    
+    public static final Logger LOG = Logger.getLogger(UsuarioLogadoServiceImpl.class);
+
     @Inject
     JsonWebToken jsonWebToken;
 
@@ -32,57 +35,81 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Inject
     FileService fileService;
 
-
-
     @Override
-    public Response getPerfilUsuario(){
+    public Response getPerfilUsuario() {
 
-        // obtendo o login a partir do token
-        String login = jsonWebToken.getSubject();
-        UsuarioResponseDTO user = usuarioService.findByLogin(login);
+        try {
+            LOG.info("Requisição Telefone.getPerfilUsuario()");
 
-        return Response.ok(user).build();
+            // obtendo o login a partir do token
+            String login = jsonWebToken.getSubject();
+            UsuarioResponseDTO user = usuarioService.findByLogin(login);
+
+            return Response.ok(user).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Telefone.getPerfilUsuario()");
+            return null;
+        }
 
     }
 
     @Override
-    public UsuarioResponseDTO getPerfilUsuarioLogado(){
+    public UsuarioResponseDTO getPerfilUsuarioLogado() {
 
-        String login = jsonWebToken.getSubject();
-        UsuarioResponseDTO user = new UsuarioResponseDTO(usuarioService.findByLoginUsuarioLogado(login));
+        try {
+            LOG.info("Requisição Telefone.getPerfilUsuarioLogado()");
 
-        return user;
+            String login = jsonWebToken.getSubject();
+            UsuarioResponseDTO user = new UsuarioResponseDTO(usuarioService.findByLoginUsuarioLogado(login));
+
+            return user;
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Telefone.getPerfilUsuarioLogado()");
+            return null;
+        }
 
     }
 
     @Override
     @Transactional
-    public Response salvarImagem(@MultipartForm ImageForm form){
+    public Response salvarImagem(@MultipartForm ImageForm form) {
         String nomeImagem = "";
-        
+
         try {
             nomeImagem = fileService.salvarImagemUsuario(form.getImagem(), form.getNome());
+            // obtendo o login a partir do token
+            String login = jsonWebToken.getSubject();
+            UsuarioResponseDTO usuario = usuarioService.findByLogin(login);
+
+            usuario = usuarioService.updateImagem(usuario.id(), nomeImagem);
+
+            LOG.info("Requisição UsuarioLogado.salvarImagem()");
+
+            return Response.ok(usuario).build();
         } catch (IOException e) {
             Result result = new Result(e.getMessage());
+
+            LOG.error("Erro ao rodar Requisição UsuarioLogado.salvarImagem()");
+
             return Response.status(Status.CONFLICT).entity(result).build();
         }
-
-        // obtendo o login a partir do token
-        String login = jsonWebToken.getSubject();
-        UsuarioResponseDTO usuario = usuarioService.findByLogin(login);
-
-        usuario = usuarioService.updateImagem(usuario.id(), nomeImagem);
-
-        return Response.ok(usuario).build();
 
     }
 
     @Override
-    public Response baixarImagem(@PathParam("nomeImagem") String nomeImagem){
-        ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
-        response.header("Content-Disposition","attachment;filename=" + nomeImagem);
-        return response.build();
+    public Response baixarImagem(@PathParam("nomeImagem") String nomeImagem) {
+
+        try {
+            LOG.info("Requisição UsuarioLogado.baixarImagem()");
+
+            ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
+            response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
+            return response.build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição UsuarioLogado.baixarImagem()");
+            return null;
+        }
 
     }
-    
+
 }

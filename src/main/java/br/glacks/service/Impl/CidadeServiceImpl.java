@@ -2,6 +2,8 @@ package br.glacks.service.impl;
 
 import java.util.List;
 
+import org.jboss.logging.Logger;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
@@ -11,61 +13,96 @@ import br.glacks.model.locais.Cidade;
 import br.glacks.repository.CidadeRepository;
 import br.glacks.service.CidadeService;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.jboss.logging.Logger;
 
 @ApplicationScoped
 public class CidadeServiceImpl implements CidadeService {
-
     @Inject
     CidadeRepository repository;
 
     private static final Logger LOG = Logger.getLogger(CidadeServiceImpl.class);
 
-    
     @Override
-    public List<Cidade> getAll(){
-        LOG.info("BUscando todas as cidades");
-        return repository.findAll().list();
-        
+    public List<Cidade> getAll() {
+        try {
+            LOG.info("Requisição Cidade.getAll()");
+            return repository.findAll().list();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cidade.getAll()");
+            return null;
+        }
+
     }
 
     @Override
-    public Cidade getId(long id){
-        return repository.findById(id);
-        
+    public Cidade getId(long id) {
+        try {
+            LOG.info("Requisição Cidade.getId()");
+
+            return repository.findById(id);
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cidade.getId()");
+            return null;
+        }
+
     }
 
     @Override
-    public List<Cidade> getNome(String nome){
-        return repository.findByNome(nome);
-        
+    public List<Cidade> getNome(String nome) {
+        try {
+            LOG.info("Requisição Cidade.getNome()");
+            return repository.findByNome(nome);
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cidade.getNome()");
+            return null;
+        }
+
     }
 
     @Override
     @Transactional
-    public Response insert(Cidade cidade){
-        repository.persist(cidade);
-        return Response.ok(cidade).build();
+    public Response insert(Cidade cidade) {
+        try {
+            LOG.info("Requisição Cidade.insert()");
+
+            repository.persist(cidade);
+            return Response.ok(cidade).build();
+        } catch (Exception e) {
+
+            LOG.error("Erro ao rodar Requisição Cidade.insert()");
+            return null;
+        }
     }
 
     @Override
     @Transactional
-    public Cidade update(long id, Cidade cidade){
-        
-        Cidade entity = repository.findById(id);
-        entity.setNome(cidade.getNome());
-        return entity;
+    public Cidade update(long id, Cidade cidade) {
+        try {
+            LOG.info("Requisição Cidade.update()");
+
+            Cidade entity = repository.findById(id);
+            entity.setNome(cidade.getNome());
+            return entity;
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cidade.update()");
+            return null;
+        }
+
     }
-    
-   @Override
-   @Transactional
+
+    @Override
+    @Transactional
     public Response delete(Long id) {
-        Cidade entity = repository.findById(id);
-        entity.setAtivo(false);
-            
-        return Response.status(Status.OK).build();
+        try {
+            LOG.info("Requisição Cidade.delete()");
+            Cidade entity = repository.findById(id);
+            entity.setAtivo(false);
+
+            return Response.status(Status.OK).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cidade.delete()");
+            return null;
+        }
+
     }
 
-    
-    
 }

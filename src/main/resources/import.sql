@@ -55,13 +55,13 @@
 
  insert into endereco (id, usuario_dono_endereco, descricao) values(1, 1, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
  insert into endereco (id, usuario_dono_endereco, descricao) values(2, 2, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(nextval('hibernate_sequence'), 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(nextval('hibernate_sequence'), 4, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(nextval('hibernate_sequence'), 5, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario_dono_endereco, descricao) values(3, 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario_dono_endereco, descricao) values(4, 4, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario_dono_endereco, descricao) values(5, 5, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
 
- insert into telefone (id, nome, proprietario_id) values(nextval('hibernate_sequence'), '63999727734', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
- insert into telefone (id, nome, proprietario_id) values(nextval('hibernate_sequence'), '62978934834', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'joao'));
- insert into telefone (id, nome, proprietario_id) values(nextval('hibernate_sequence'), '5563987504954', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'antonio'));
+ insert into telefone (id, nome, proprietario_id) values(1, '63999727734', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
+ insert into telefone (id, nome, proprietario_id) values(2, '62978934834', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'joao'));
+ insert into telefone (id, nome, proprietario_id) values(3, '5563987504954', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'antonio'));
 
  insert into compra (id, nome, usuario_id) values(1, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
  insert into compra (id, nome, usuario_id) values(2, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));

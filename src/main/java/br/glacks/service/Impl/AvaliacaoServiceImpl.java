@@ -3,6 +3,8 @@ package br.glacks.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.jboss.logging.Logger;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
@@ -19,6 +21,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class AvaliacaoServiceImpl implements AvaliacaoService {
 
+    public static final Logger LOG = Logger.getLogger(AvaliacaoServiceImpl.class);
+
     @Inject
     AvaliacaoRepository repository;
 
@@ -29,52 +33,88 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     ProdutoRepository pRepository;
 
     @Override
-    public List<AvaliacaoResponseDTO> getAll(){
-        return repository.findAll()
-            .stream()
-            .map(avaliacao -> new AvaliacaoResponseDTO(avaliacao))
-            .collect(Collectors.toList());
+    public List<AvaliacaoResponseDTO> getAll() {
+        try {
+            LOG.info("Requisição Avaliacao.getAll() - " + repository.count() + " itens.");
+            return repository.findAll()
+                    .stream()
+                    .map(avaliacao -> new AvaliacaoResponseDTO(avaliacao))
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Avaliacao.getAll()");
+            return null;
+
+        }
+    }
+
+    @Override
+    public AvaliacaoResponseDTO getId(long id) {
+        try {
+
+            LOG.info("Requisição Avaliacao.getId()");
+            return new AvaliacaoResponseDTO(repository.findById(id));
+
+        } catch (Exception e) {
+
+            LOG.error("Erro ao rodar Requisição Avaliacao.getId()");
+            return null;
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public Response insert(AvaliacaoDTO avaliacao) {
+        try {
+            Avaliacao a = AvaliacaoDTO.criAvaliacao(avaliacao);
+            if (uRepository.findById(a.getUsuario().getId()) != null) {
+                a.setUsuario(uRepository.findById(a.getUsuario().getId()));
+            }
+            if (pRepository.findById(a.getProduto().getId()) != null) {
+                a.setProduto(pRepository.findById(a.getProduto().getId()));
+            }
+            repository.persist(a);
+            LOG.info("Requisição Avaliacao.insert()");
+            return Response.ok(avaliacao).build();
+        } catch (Exception e) {
+
+            LOG.error("Erro ao rodar Requisição Avaliacao.insert()");
+            return null;
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public Avaliacao update(long id, Avaliacao avaliacao) {
+        try {
             
-        
-    }
+            Avaliacao entity = repository.findById(id);
+            entity.setNome(avaliacao.getNome());
+            LOG.info("Requisição Avaliacao.update()");
+            return entity;
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Avaliacao.update()");
+            return null;
+        }
 
-    @Override
-    public AvaliacaoResponseDTO getId(long id){ 
-        return new AvaliacaoResponseDTO(repository.findById(id));
-        
     }
 
     @Override
     @Transactional
-    public Response insert(AvaliacaoDTO avaliacao){
-        Avaliacao a = AvaliacaoDTO.criAvaliacao(avaliacao);
-        if(uRepository.findById(a.getUsuario().getId()) != null){
-            a.setUsuario(uRepository.findById(a.getUsuario().getId()));
-        }
-        if(pRepository.findById(a.getProduto().getId()) != null){
-        a.setProduto(pRepository.findById(a.getProduto().getId()));
-        }
-        repository.persist(a);
-        return Response.ok(avaliacao).build();
-    }
-
-    @Override
-    @Transactional
-    public Avaliacao update(long id, Avaliacao avaliacao){
-        Avaliacao entity = repository.findById(id);
-        entity.setNome(avaliacao.getNome());
-        return entity;
-    }
-    
-   @Override
-   @Transactional
     public Response delete(Long id) {
-        Avaliacao entity = repository.findById(id);
+        try {
+            LOG.info("Requisição Avaliacao.delete()");
+            Avaliacao entity = repository.findById(id);
         entity.setAtivo(false);
-            
+
         return Response.status(Status.OK).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Avaliacao.delete()");
+            return Response.status(Status.NOT_IMPLEMENTED).build();
+        }
+        
     }
 
-    
-    
 }

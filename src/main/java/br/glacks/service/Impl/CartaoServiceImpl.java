@@ -3,6 +3,8 @@ package br.glacks.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.jboss.logging.Logger;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
@@ -22,6 +24,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CartaoServiceImpl implements CartaoService {
 
+    public static final Logger LOG = Logger.getLogger(CartaoServiceImpl.class);
+
     @Inject
     CartaoRepository repository;
 
@@ -36,15 +40,28 @@ public class CartaoServiceImpl implements CartaoService {
     
     @Override
     public List<CartaoResponseDTO> getAll(){
-        return repository.findAll()
+        try {
+            LOG.info("Requisição Cartao.getAll()");
+            return repository.findAll()
             .stream()
             .map(cartao -> new CartaoResponseDTO(cartao))
             .collect(Collectors.toList());
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cartao.getAll()");
+            return null;
+        }
+        
     }
 
     @Override
     public CartaoResponseDTO getId(long id){
-        return new CartaoResponseDTO(repository.findById(id));
+        try {
+            LOG.info("Requisição Cartao.getId()");
+            return new CartaoResponseDTO(repository.findById(id));
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cartao.getId()");
+            return null;
+        }
         
     }
 
@@ -57,8 +74,10 @@ public class CartaoServiceImpl implements CartaoService {
             c.setUsuario(entityUser);
             repository.persist(c);
         } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cartao.insert()");
             return Response.status(Status.NOT_ACCEPTABLE).build();
         }
+        LOG.info("Requisição Cartao.insert()");
         return Response.ok(cartao).build();
     }
 
@@ -70,10 +89,11 @@ public class CartaoServiceImpl implements CartaoService {
             if(usuarioLogado.getPerfilUsuarioLogado().id() == entity.getUsuario().getId()){
                 entity = CartaoDTO.mudaCartao(entity, cartaoDTO);
             }
-
+            LOG.info("Requisição Cartao.update()");
             return Response.ok(cartaoDTO).build();
 
         } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Cartao.update()");
             return Response.status(Status.NOT_ACCEPTABLE).build();
         }
         
@@ -82,10 +102,20 @@ public class CartaoServiceImpl implements CartaoService {
    @Override
    @Transactional
     public Response delete(Long id) {
-        Cartao entity = repository.findById(id);
-        entity.setAtivo(false);
+        try {
+            Cartao entity = repository.findById(id);
+            entity.setAtivo(false);
+
+            LOG.info("Requisição Cartao.delete()");
+
+            return Response.status(Status.OK).build();
+
+        } catch (Exception e) {
             
-        return Response.status(Status.OK).build();
+            LOG.error("Erro ao rodar Requisição Cartao.delete()");
+            return null;
+        }
+       
     }
 
     

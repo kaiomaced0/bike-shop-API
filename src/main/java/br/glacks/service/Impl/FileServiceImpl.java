@@ -8,12 +8,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import org.jboss.logging.Logger;
+
 import br.glacks.form.ImageForm;
 import br.glacks.service.FileService;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class FileServiceImpl implements FileService {
+
+    public static final Logger LOG = Logger.getLogger(AvaliacaoServiceImpl.class);
 
     private final String PATH_USER = System.getProperty("user.home")
         + File.separator + "quarkus"
@@ -23,6 +27,9 @@ public class FileServiceImpl implements FileService {
         @Override
         public String salvarImagemUsuario(byte[] imagem, String nomeImagem) throws IOException{
 
+            
+        try {
+            
             //verificando tipo da imagem
             String mimeType = Files.probeContentType(new File(nomeImagem).toPath());
             List<String> listMimeType = Arrays.asList("image/jpg", "image/png", "image/gif", "image/img");
@@ -40,7 +47,6 @@ public class FileServiceImpl implements FileService {
             File diretorio = new File(PATH_USER);
             if(!diretorio.exists())
                 diretorio.mkdirs();
-
             
             //
             String nomeArquivo = UUID.randomUUID()
@@ -63,13 +69,33 @@ public class FileServiceImpl implements FileService {
             i.setNome(nomeImagem);
             i.setImagem(imagem);
 
+            LOG.info("Requisição Fil.salvarImagemUsuario()");
             return nomeArquivo;
+
+            
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Estado.getAll()");
+            return null;
+        }
+        
+            
+
         }
 
         @Override
         public File download(String nomeArquivo) {
+            
+        try {
+            LOG.info("Requisição File.download()");
+
             File file = new File(PATH_USER+nomeArquivo);
             return file;
+            
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição File.download()");
+            return null;
+        }
+        
         }
     
 }
