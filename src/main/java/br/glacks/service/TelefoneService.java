@@ -3,19 +3,20 @@ import java.util.List;
 
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.TelefoneDTO;
+import br.glacks.dto.TelefoneResponseDTO;
 import br.glacks.model.Telefone;
 
 
 public interface TelefoneService {
     
-    public List<Telefone> getAll();
+    public List<TelefoneResponseDTO> getAll();
 
-    public Telefone getId(@PathParam("id") long id);
+    public TelefoneResponseDTO getId(@PathParam("id") long id);
 
-    public Response insert(Telefone telefone);
+    public Response insert(TelefoneDTO telefone);
 
-    public Telefone update(@PathParam("id") long id, Telefone telefone);
-    
+    public TelefoneResponseDTO update(@PathParam("id") long id, TelefoneDTO telefone);
+
     public Response delete(@PathParam("id") Long id);
 }

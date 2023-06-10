@@ -31,9 +31,9 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Inject
     UsuarioService usuarioService;
-
-    @Inject
-    FileService fileService;
+    
+        @Inject
+        FileService fileService;
 
     @Override
     public Response getPerfilUsuario() {
@@ -60,7 +60,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             LOG.info("Requisição Telefone.getPerfilUsuarioLogado()");
 
             String login = jsonWebToken.getSubject();
-            UsuarioResponseDTO user = new UsuarioResponseDTO(usuarioService.findByLoginUsuarioLogado(login));
+            UsuarioResponseDTO user = usuarioService.findByLogin(login);
 
             return user;
         } catch (Exception e) {

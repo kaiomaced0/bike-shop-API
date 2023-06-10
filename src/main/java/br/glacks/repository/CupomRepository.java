@@ -12,4 +12,10 @@ public class CupomRepository implements PanacheRepository<Cupom>{
             return null;
         return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
     }
+
+    public Cupom findByCodigo(String codigo){
+        if (codigo == null)
+            return null;
+        return find("UPPER(codigo) LIKE ?1 ", "%"+codigo.toUpperCase()+"%").firstResult();
+    }
 }

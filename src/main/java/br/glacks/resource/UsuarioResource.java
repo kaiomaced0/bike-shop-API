@@ -18,6 +18,8 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.dto.UsuarioUpdateDTO;
+import br.glacks.model.Usuario;
 import br.glacks.service.*;
 
 
@@ -30,17 +32,16 @@ public class UsuarioResource {
     @Inject
     UsuarioService usuarioService;
 
-
     @GET
     @RolesAllowed({"Admin"})
-    public List<UsuarioResponseDTO> getAll(){
+    public List<Usuario> getAll(){
         return usuarioService.getAll();
         
     }
 
     @GET
     @RolesAllowed({"Admin"})
-    @Path("/nome/{nome}")
+    @Path("/{nome}")
     public List<UsuarioResponseDTO> getNome(@PathParam("nome") String nome){
         return usuarioService.getNome(nome);
         
@@ -64,25 +65,32 @@ public class UsuarioResource {
 
     @PUT
     @RolesAllowed({"Admin"})
-    @Path("/{id}")
+    @Path("/update/{id}")
     @Transactional
-    public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario){
+    public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioUpdateDTO usuario){
         return usuarioService.update(id, usuario);
     }
 
     @PUT
-    @RolesAllowed({"Admin", "User"})
+    @RolesAllowed({"User"})
     @Path("/{chave}")
     @Transactional
-    public UsuarioResponseDTO updateOn(@PathParam("chave") String chave, UsuarioDTO usuario){
-        return usuarioService.updateOn(chave, usuario);
+    public UsuarioResponseDTO updateOn(UsuarioUpdateDTO usuario){
+        return usuarioService.updateOn(usuario);
     }
 
     @PUT
     @RolesAllowed({"Admin"})
-    @Path("/{id}")
+    @Path("/delete/{id}")
     public Response delete(@PathParam("id") Long id) {
         return usuarioService.delete(id);
+    }
+
+    @PUT
+    @RolesAllowed({"User"})
+    @Path("/deleteOn/{id}")
+    public Response deleteOn() {
+        return usuarioService.deleteOn();
     }
     
 }

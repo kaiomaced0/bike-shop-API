@@ -1,20 +1,18 @@
 package br.glacks;
-
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.response.Response;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.glacks.dto.AuthUsuarioDTO;
-import br.glacks.dto.AvaliacaoDTO;
 import br.glacks.dto.TelefoneDTO;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class AvaliacaoResourceTeste {
+public class EnderecoResourceTeste {
+
     
   private String token;
 
@@ -33,12 +31,11 @@ public class AvaliacaoResourceTeste {
 
     token = response.header("Authorization");
   }
-
-   @Test
+  @Test
     public void getAllTeste() {
         given()
                 .header("Authorization", "Bearer " + token)
-                .when().get("/avaliacao")
+                .when().get("/endereco")
                 .then()
                 .statusCode(200);
     }
@@ -46,43 +43,27 @@ public class AvaliacaoResourceTeste {
     @Test
     public void getIdTeste() {
         given()
-                .pathParam("id", 1)
+                .pathParam("id", 100)
                 .header("Authorization", "Bearer " + token)
-                .when().get("/avaliacao/{id}")
+                .when().get("/endereco/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", is(1));
+                .body("id", is(100));
     }
 
     @Test
     public void insertTest() {
 
-        AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO(1000, 5, "bom bom bom", null);
+        TelefoneDTO endereco = new TelefoneDTO("63", "984232991", 1);
 
         given()
                 .header("Authorization", "Bearer " + token)
                 .contentType("application/json")
-                .body(avaliacaoDTO)
-                .when().post("/avaliacao/insert")
+                .body(endereco)
+                .when().post("/endereco")
                 .then()
                 .statusCode(200)
-                .body("id", is("1000"),
-                          "comentario", is("bom bom bom"));
+                .body("codigoArea", is("63"))
+                .body("numero", is("984232991"));
     }
-
-    @Test
-    public void updateTest() {
-      AvaliacaoDTO a = new AvaliacaoDTO(200, 5, "excelente", 100);
-        given()
-                .pathParam("id", "100")
-                .header("Authorization", "Bearer " + token)
-                .contentType("application/json")
-                .body(a)
-                .when().put("/avaliacao/update/{id}")
-                .then()
-                .statusCode(200)
-                .body("id", is("200"),
-                        "comentario", is("excelente"));
-    }
-    
 }

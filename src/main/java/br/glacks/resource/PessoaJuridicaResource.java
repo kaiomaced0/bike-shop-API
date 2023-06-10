@@ -70,7 +70,7 @@ public class PessoaJuridicaResource {
 
     @PUT
     @RolesAllowed({"Admin", "User"})
-    @Path("/{id}")
+    @Path("/delete/{id}")
     public Response delete(@PathParam("id") Long id) {
         return pessoaJuridicaService.delete(id);
     }

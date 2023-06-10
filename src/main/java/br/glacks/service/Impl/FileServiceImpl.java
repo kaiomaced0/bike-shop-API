@@ -23,6 +23,11 @@ public class FileServiceImpl implements FileService {
         + File.separator + "quarkus"
         + File.separator + "images"
         + File.separator + "usuario" + File.separator;
+    
+    private final String PATH_PRODUTO = System.getProperty("user.home")
+        + File.separator + "quarkus"
+        + File.separator + "images"
+        + File.separator + "produto" + File.separator;
         
         @Override
         public String salvarImagemUsuario(byte[] imagem, String nomeImagem) throws IOException{
@@ -81,6 +86,65 @@ public class FileServiceImpl implements FileService {
             
 
         }
+
+        @Override
+        public String salvarImagemProduto(byte[] imagem, String nomeImagem) throws IOException{
+
+            
+        try {
+            
+            //verificando tipo da imagem
+            String mimeType = Files.probeContentType(new File(nomeImagem).toPath());
+            List<String> listMimeType = Arrays.asList("image/jpg", "image/png", "image/gif", "image/img");
+
+            if(!listMimeType.contains(mimeType)) {
+                throw new IOException("Tipo de imagem não suportada");
+            }
+
+            //verificando tamanho da imagem
+            if(imagem.length > (1024 * 1024 * 10)){
+                throw new IOException("Arquivo é muito grande");
+            }
+
+            //criando as pastas quando não existir
+            File diretorio = new File(PATH_PRODUTO);
+            if(!diretorio.exists())
+                diretorio.mkdirs();
+            
+            //
+            String nomeArquivo = UUID.randomUUID()
+            + "." + mimeType.substring(mimeType.lastIndexOf("/")+ 1);
+
+            String path = PATH_PRODUTO + nomeArquivo;
+
+            File file = new File (path);
+            if(file.exists())
+            throw new IOException("O nome gerado da imagem está repetido");
+
+            file.createNewFile();
+            
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(imagem);
+
+            fos.flush();
+            fos.close();
+            ImageForm i = new ImageForm();
+            i.setNome(nomeImagem);
+            i.setImagem(imagem);
+
+            LOG.info("Requisição Fil.salvarImagemUsuario()");
+            return nomeArquivo;
+
+            
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Estado.getAll()");
+            return null;
+        }
+        
+            
+
+        }
+
 
         @Override
         public File download(String nomeArquivo) {

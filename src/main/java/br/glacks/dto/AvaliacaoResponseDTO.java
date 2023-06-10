@@ -6,13 +6,13 @@ public record AvaliacaoResponseDTO(
     long id,
     Integer estrela,
     String comentario,
-    UsuarioResponseDTO usuario,
-    ProdutoResponseDTO produto
+    Long usuarioId,
+    Long produtoId
 ) {
 
     public AvaliacaoResponseDTO (Avaliacao avaliacao){
         this(avaliacao.getId(),  avaliacao.getEstrela(), 
-        avaliacao.getComentario(), new UsuarioResponseDTO(avaliacao.getUsuario()), new ProdutoResponseDTO(avaliacao.getProduto())); 
+        avaliacao.getComentario(), avaliacao.getUsuario().getId(), avaliacao.getProduto().getId()); 
 
     }
    

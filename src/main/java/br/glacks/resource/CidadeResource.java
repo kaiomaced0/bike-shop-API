@@ -16,7 +16,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.CidadeDTO;
 import br.glacks.model.locais.Cidade;
 import br.glacks.service.CidadeService;
 
@@ -55,7 +55,7 @@ public class CidadeResource {
     @POST
     @Transactional
     @RolesAllowed({"Admin"})
-    public Response insert(Cidade cidade){
+    public Response insert(CidadeDTO cidade){
         return cidadeService.insert(cidade);
     }
 
@@ -63,8 +63,16 @@ public class CidadeResource {
     @Path("/{id}")
     @Transactional
     @RolesAllowed({"Admin"})
-    public Cidade update(@PathParam("id") long id, Cidade cidade){
+    public Cidade update(@PathParam("id") long id, CidadeDTO cidade){
         return cidadeService.update(id, cidade);
+    }
+
+    
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return cidadeService.delete(id);
     }
     
 }

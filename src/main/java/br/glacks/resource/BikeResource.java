@@ -15,7 +15,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.BikeResponseDTO;
 import br.glacks.model.bike.Bike;
 import br.glacks.service.BikeService;
 
@@ -29,7 +29,7 @@ public class BikeResource {
     
     @GET
     @PermitAll
-    public List<Bike> gettAll(){
+    public List<BikeResponseDTO> gettAll(){
         return bikeService.getAll();
         
     }
@@ -66,5 +66,11 @@ public class BikeResource {
     }
 
     
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return bikeService.delete(id);
+    }
     
 }

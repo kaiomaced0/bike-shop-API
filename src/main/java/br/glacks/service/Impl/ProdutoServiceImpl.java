@@ -1,17 +1,25 @@
 package br.glacks.service.impl;
 
+import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import br.glacks.application.Result;
+import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
+import br.glacks.form.ImageForm;
 import br.glacks.model.Produto;
 import br.glacks.repository.ProdutoRepository;
+import br.glacks.service.FileService;
 import br.glacks.service.ProdutoService;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -23,6 +31,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Inject
     ProdutoRepository repository;
 
+    @Inject
+    FileService fileService;
+
+    @Inject
+    JsonWebToken jsonWebToken;
+
     @Override
     public List<ProdutoResponseDTO> getAll() {
 
@@ -31,11 +45,27 @@ public class ProdutoServiceImpl implements ProdutoService {
 
             return repository.findAll()
                     .stream()
+                    .sorted(Comparator.comparing(produto -> produto.getId()))
                     .map(produto -> new ProdutoResponseDTO(produto))
                     .collect(Collectors.toList());
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getAll()");
+            return null;
+        }
+
+    }
+
+    @Override
+    public List<Produto> getAllAdm() {
+        try {
+            LOG.info("Requisição Produto.getAllAdm()");
+            return repository.findAll()
+                    .stream()
+                    .sorted(Comparator.comparing(produto -> produto.getId()))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Produto.getAllAdm()");
             return null;
         }
 
@@ -55,11 +85,14 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<Produto> getNome(String nome) {
+    public List<ProdutoResponseDTO> getNome(String nome) {
         try {
             LOG.info("Requisição Produto.getNome()");
 
-            return repository.findByNome(nome);
+            return repository.findByNome(nome)
+                    .stream()
+                    .map(produto -> new ProdutoResponseDTO(produto))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getNome()");
             return null;
@@ -69,11 +102,11 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     @Transactional
-    public Response insert(Produto produto) {
+    public Response insert(ProdutoDTO produto) {
         try {
             LOG.info("Requisição Produto.insert()");
 
-            repository.persist(produto);
+            repository.persist(ProdutoDTO.criaProduto(produto));
             return Response.ok(produto).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.insert()");
@@ -84,12 +117,17 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     @Transactional
-    public Produto update(long id, Produto produto) {
+    public Produto update(long id, ProdutoDTO produto) {
         try {
             LOG.info("Requisição Produto.update()");
 
             Produto entity = repository.findById(id);
-            entity.setNome(produto.getNome());
+            if(produto.nome() != null)
+                entity.setNome(produto.nome());
+            if(produto.nomeLongo() != null)
+                entity.setNomeLongo(produto.nomeLongo());
+            if(produto.preco() != null)
+                entity.setPreco(produto.preco());
             return entity;
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.update()");
@@ -165,4 +203,27 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     }
 
+    @Override
+    @Transactional
+    public Response salvarImagem(@MultipartForm ImageForm form, Long produtoId) {
+        String nomeImagem = "";
+
+        try {
+            nomeImagem = fileService.salvarImagemProduto(form.getImagem(), form.getNome());
+            // obtendo o login a partir do token
+            Produto p = repository.findById(produtoId);
+            p.getImage().add(nomeImagem);
+
+            LOG.info("Requisição Produto.salvarImagem()");
+
+            return Response.ok(new ProdutoResponseDTO(p)).build();
+        } catch (IOException e) {
+            Result result = new Result(e.getMessage());
+
+            LOG.error("Erro ao rodar Requisição Produto.salvarImagem()");
+
+            return Response.status(Status.CONFLICT).entity(result).build();
+        }
+
+    }
 }

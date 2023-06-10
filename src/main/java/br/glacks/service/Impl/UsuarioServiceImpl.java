@@ -1,5 +1,6 @@
 package br.glacks.service.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.dto.UsuarioUpdateDTO;
 import br.glacks.model.Usuario;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.UsuarioLogadoService;
@@ -31,13 +33,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     UsuarioLogadoService usuarioLogado;
 
     @Override
-    public List<UsuarioResponseDTO> getAll(){
+    public List<Usuario> getAll(){
         
         try {
             LOG.info("Requisição Usuario.getAll()");
 
             return repository.findAll().stream()
-            .map(usuario -> new UsuarioResponseDTO(usuario))
+            .sorted(Comparator.comparing(usuario -> usuario.getId()))
             .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.getAll()");
@@ -45,6 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }            
         
     }
+    
 
     @Override
     public UsuarioResponseDTO getId(long id){
@@ -83,21 +86,22 @@ public class UsuarioServiceImpl implements UsuarioService {
             LOG.info("Requisição Usuario.insert()");
         
             Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
-            if(usuarioDTO != null){
-                repository.persist(usuario);
-                return Response.ok(usuario).build();
+            if(usuarioDTO.getClass() == null){
+                throw new Exception("Usuario nulo");
             }
-            return Response.notModified().build();
+            repository.persist(usuario);
+            return Response.ok(usuario).build();
+            
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Usuario.insert()");
-            return null;
+            LOG.error("Erro ao rodar Requisição Usuario.insert()" + e.getMessage());
+            return Response.notModified().build();
         }            
         
     }
 
     @Override
     @Transactional
-    public UsuarioResponseDTO update(long id, UsuarioDTO usuario){
+    public UsuarioResponseDTO update(long id, UsuarioUpdateDTO usuario){
         try {
             LOG.info("Requisição Usuario.update()");
 
@@ -111,6 +115,9 @@ public class UsuarioServiceImpl implements UsuarioService {
             if(usuario.senha() != null){
                 entity.setSenha(usuario.senha());
             }
+            if(usuario.email() != null){
+                entity.setEmail(usuario.email());
+            }
             return new UsuarioResponseDTO(entity);
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.update()");
@@ -121,7 +128,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public UsuarioResponseDTO updateOn(String chave, UsuarioDTO usuario){
+    public UsuarioResponseDTO updateOn(UsuarioUpdateDTO usuario){
         try {
             LOG.info("Requisição Usuario.updateOn()");
 
@@ -150,6 +157,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             LOG.info("Requisição Usuario.updateImagem()");
         
             Usuario entity = repository.findById(id);
+            entity.setImage(nomeImagem);
 
             return new UsuarioResponseDTO(entity);
         } catch (Exception e) {
@@ -189,30 +197,28 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario findByLoginUsuarioLogado(String login) {
-        try {
-            LOG.info("Requisição Usuario.findByLoginUsuarioLogado()");
-
-            Usuario usuario = repository.findByLogin(login);
-            if(usuario == null)
-                throw new NotFoundException("Usuario não encontrado");
-    
-            return usuario;
-        } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Usuario.findByLoginUsuarioLogado()");
-            return null;
-        }            
-        
-    }
-
-
-    @Override
     @Transactional
     public Response delete(Long id) {
         try {
             LOG.info("Requisição Usuario.delete()");
         
             Usuario entity = repository.findById(id);
+            entity.setAtivo(false);
+            
+            return Response.status(Status.OK).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Usuario.delete()");
+            return null;
+        }            
+    }
+
+    @Override
+    @Transactional
+    public Response deleteOn() {
+        try {
+            LOG.info("Requisição Usuario.delete()");
+        
+            Usuario entity = repository.findById(usuarioLogado.getPerfilUsuarioLogado().id()) ;
             entity.setAtivo(false);
             
             return Response.status(Status.OK).build();

@@ -1,5 +1,6 @@
 package br.glacks.service.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
             LOG.info("Requisição PessoaFisica.getAll()"); 
             return repository.findAll()
             .stream()
+            .sorted(Comparator.comparing(pessoaFisica -> pessoaFisica.getId()))
             .map(pessoaFisica -> new PessoaFisicaResponseDTO(pessoaFisica))
             .collect(Collectors.toList());
             
@@ -85,7 +87,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
             PessoaFisica pessoaFisica = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
             if(pessoaFisicaDTO != null){
                 repository.persist(pessoaFisica);
-                return Response.ok(pessoaFisicaDTO).build();
+                return Response.ok(new PessoaFisicaResponseDTO(pessoaFisica)).build();
             }
             return Response.notModified().build();
             

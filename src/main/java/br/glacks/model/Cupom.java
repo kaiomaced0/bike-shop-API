@@ -7,6 +7,7 @@ import jakarta.persistence.ManyToMany;
 @Entity
 public class Cupom extends EntityClass {
 
+
     private Integer quantidade;
 
     private String codigo;

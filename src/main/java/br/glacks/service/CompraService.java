@@ -3,12 +3,14 @@ import java.util.List;
 
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.CompraResponseDTO;
 import br.glacks.model.Compra;
 
 public interface CompraService {
     
-    public List<Compra> getAll();
+    public List<CompraResponseDTO> getAll();
+
+    public List<CompraResponseDTO> getAllOn();
 
     public Compra getId(@PathParam("id") long id);
     

@@ -61,5 +61,13 @@ public class EstadoResource {
     public Estado update(@PathParam("id") long id, Estado estado){
         return estadoService.update(id, estado);
     }
+
+    
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return estadoService.delete(id);
+    }
     
 }

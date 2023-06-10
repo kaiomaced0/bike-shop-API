@@ -8,6 +8,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 
 public interface UsuarioLogadoService {
+    
     public Response getPerfilUsuario();
 
     public UsuarioResponseDTO getPerfilUsuarioLogado();

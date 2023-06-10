@@ -1,5 +1,6 @@
 package br.glacks.service.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
             LOG.info("Requisição PessoaFisica.getAll()");
             return repository.findAll()
                     .stream()
+                    .sorted(Comparator.comparing(pessoaJuridica -> pessoaJuridica.getId()))
                     .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
                     .collect(Collectors.toList());
 
@@ -77,15 +79,12 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
         try {
             LOG.info("Requisição PessoaFisica.insert()");
 
-            PessoaJuridica pessoaJuridica = new PessoaJuridica();
-            pessoaJuridica.setNome(pessoaJuridicaDTO.usuarioDTO().nome());
-            pessoaJuridica.setLogin(pessoaJuridicaDTO.usuarioDTO().login());
-            pessoaJuridica.setSenha(pessoaJuridicaDTO.usuarioDTO().senha());
-            pessoaJuridica.setCnpj(pessoaJuridicaDTO.cnpj());
-            if (pessoaJuridicaDTO != null) {
-                repository.persist(pessoaJuridica);
+            PessoaJuridica pessoaJuridica = PessoaJuridicaDTO.criaPessoaJuridica(pessoaJuridicaDTO);
+            if (pessoaJuridicaDTO == null) {
+                throw new Exception("pessoajuridica nula");
             }
-            return Response.ok(pessoaJuridicaDTO).build();
+            repository.persist(pessoaJuridica);
+            return Response.ok(new PessoaJuridicaResponseDTO(pessoaJuridica)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.insert()");
             return Response.status(Status.NOT_IMPLEMENTED).build();
@@ -128,7 +127,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
             PessoaJuridica entity = repository.findById(id);
             entity.setAtivo(false);
-    
+
             return Response.status(Status.OK).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.delete()");

@@ -6,7 +6,6 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.AvaliacaoDTO;
 import br.glacks.dto.AvaliacaoResponseDTO;
-import br.glacks.model.Avaliacao;
 
 public interface AvaliacaoService {
     
@@ -16,7 +15,7 @@ public interface AvaliacaoService {
 
     public Response insert(AvaliacaoDTO avaliacaoDTO);
 
-    public Avaliacao update(@PathParam("id") long id, Avaliacao avaliacao);
+    public AvaliacaoResponseDTO update(@PathParam("id") long id, AvaliacaoDTO avaliacao);
     
     public Response delete(@PathParam("id") Long id);
 }

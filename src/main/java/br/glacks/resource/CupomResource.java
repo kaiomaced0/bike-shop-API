@@ -14,7 +14,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.CupomDTO;
 import br.glacks.model.Cupom;
 import br.glacks.service.CupomService;
 
@@ -53,7 +53,7 @@ public class CupomResource {
     @POST
     @Transactional
     @RolesAllowed({"Admin"})
-    public Response insert(Cupom cupom){
+    public Response insert(CupomDTO cupom){
         return cupomService.insert(cupom);
     }
 
@@ -61,7 +61,15 @@ public class CupomResource {
     @Path("/{id}")
     @Transactional
     @RolesAllowed({"Admin"})
-    public Cupom update(@PathParam("id") long id, Cupom cupom){
+    public Cupom update(@PathParam("id") long id, CupomDTO cupom){
         return cupomService.update(id, cupom);
+    }
+
+    
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return cupomService.delete(id);
     }
 }

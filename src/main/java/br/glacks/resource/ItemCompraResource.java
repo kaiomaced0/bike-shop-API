@@ -61,7 +61,7 @@ public class ItemCompraResource {
 
     @PUT
     @RolesAllowed({"Admin"})
-    @Path("/{id}")
+    @Path("/delete/{id}")
     public Response delete(@PathParam("id") Long id) {
         return itemCompraService.delete(id);
     }

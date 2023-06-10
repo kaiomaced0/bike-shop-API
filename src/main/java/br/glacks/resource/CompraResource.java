@@ -14,7 +14,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.CompraResponseDTO;
 import br.glacks.model.Compra;
 import br.glacks.service.CompraService;
 
@@ -29,7 +29,7 @@ public class CompraResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<Compra> gettAll(){
+    public List<CompraResponseDTO> gettAll(){
         return compraService.getAll();
         
     }
@@ -65,6 +65,13 @@ public class CompraResource {
         return compraService.update(id, compra);
     }
 
+    
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return compraService.delete(id);
+    }
     
     
 }

@@ -57,5 +57,13 @@ public class EnderecoResource {
     public Endereco update(@PathParam("id") long id, Endereco endereco){
         return enderecoService.update(id, endereco);
     }
+
+    
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return enderecoService.delete(id);
+    }
     
 }

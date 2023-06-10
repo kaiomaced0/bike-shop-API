@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 
@@ -8,8 +9,11 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import br.glacks.dto.TelefoneDTO;
+import br.glacks.dto.TelefoneResponseDTO;
 import br.glacks.model.Telefone;
 import br.glacks.repository.TelefoneRepository;
+import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.TelefoneService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
@@ -29,13 +33,18 @@ public class TelefoneServiceImpl implements TelefoneService {
     @Inject
     UsuarioService usuarioService;
 
-    @Override
-    public List<Telefone> getAll() {
+    @Inject
+    UsuarioRepository usuarioRepository;
 
+    @Override
+    public List<TelefoneResponseDTO> getAll() {
+        
         try {
             LOG.info("Requisição Telefone.getAll()");
 
-            return repository.findAll().list();
+            return repository.findAll().stream()
+                    .map(telefone -> new TelefoneResponseDTO(telefone))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Telefone.getAll()");
             return null;
@@ -44,13 +53,13 @@ public class TelefoneServiceImpl implements TelefoneService {
     }
 
     @Override
-    public Telefone getId(long id) {
+    public TelefoneResponseDTO getId(long id) {
         try {
-            LOG.info("Requisição Telefone.getAll()");
+            LOG.info("Requisição Telefone.getId()");
 
-            return repository.findById(id);
+            return new TelefoneResponseDTO(repository.findById(id));
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Telefone.getAll()");
+            LOG.error("Erro ao rodar Requisição Telefone.getId()");
             return null;
         }
 
@@ -58,14 +67,17 @@ public class TelefoneServiceImpl implements TelefoneService {
 
     @Override
     @Transactional
-    public Response insert(Telefone telefone) {
+    public Response insert(TelefoneDTO telefone) {
         try {
-            LOG.info("Requisição Telefone.getAll()");
-
-            repository.persist(telefone);
+            LOG.info("Requisição Telefone.insert()");
+            Telefone tell = new Telefone();
+            tell.setCodigoArea(telefone.codigoArea());
+            tell.setNumero(telefone.numero());
+            tell.setProprietario(usuarioRepository.findById(telefone.proprietarioId().longValue()));
+            repository.persist(tell);
             return Response.ok(telefone).build();
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Telefone.getAll()");
+            LOG.error("Erro ao rodar Requisição Telefone.insert()");
             return null;
         }
 
@@ -73,15 +85,21 @@ public class TelefoneServiceImpl implements TelefoneService {
 
     @Override
     @Transactional
-    public Telefone update(long id, Telefone telefone) {
+    public TelefoneResponseDTO update(long id, TelefoneDTO telefone) {
         try {
-            LOG.info("Requisição Telefone.getAll()");
+            LOG.info("Requisição Telefone.update()");
 
             Telefone entity = repository.findById(id);
-            entity.setNome(telefone.getNome());
-            return entity;
+            if(telefone.numero() != null)
+                entity.setNumero(telefone.numero());
+            if(telefone.codigoArea() != null)
+                entity.setCodigoArea(telefone.codigoArea());
+            if(telefone.proprietarioId() != null)
+                entity.setProprietario(usuarioRepository.findById(telefone.proprietarioId().longValue()));
+            
+            return new TelefoneResponseDTO(entity);
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Telefone.getAll()");
+            LOG.error("Erro ao rodar Requisição Telefone.update()");
             return null;
         }
 
@@ -91,17 +109,23 @@ public class TelefoneServiceImpl implements TelefoneService {
     @Transactional
     public Response delete(Long id) {
         try {
-            LOG.info("Requisição Telefone.getAll()");
-
+            LOG.info("Requisição Telefone.delete()");
+            
             Telefone entity = repository.findById(id);
+            if(entity.getProprietario().getLogin() != usuarioLogadoService.getPerfilUsuarioLogado().login()){
+
+            throw new Exception("Telefone não pertence a voce");
+            }
             entity.setAtivo(false);
-    
             return Response.status(Status.OK).build();
+
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Telefone.getAll()");
+            LOG.error("Erro ao rodar Requisição Telefone.delete()");
             return null;
         }
 
     }
+
+    
 
 }

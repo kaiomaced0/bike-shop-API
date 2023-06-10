@@ -48,6 +48,10 @@ public class Usuario extends EntityClass {
     @JoinColumn(name = "lista_telefones_usuario")
     private List<Telefone> telefones;
 
+    @OneToMany
+    @JoinColumn(name = "lista_compra_usuario")
+    private List<Compra> compras;
+
     
     public String getLogin() {
         return login;
@@ -119,6 +123,14 @@ public class Usuario extends EntityClass {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
     }
 
         

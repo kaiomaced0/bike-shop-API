@@ -8,9 +8,10 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
+import br.glacks.dto.CidadeDTO;
 import br.glacks.model.locais.Cidade;
 import br.glacks.repository.CidadeRepository;
+import br.glacks.repository.EstadoRepository;
 import br.glacks.service.CidadeService;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -18,6 +19,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class CidadeServiceImpl implements CidadeService {
     @Inject
     CidadeRepository repository;
+
+    @Inject
+    EstadoRepository estadoRepository;
 
     private static final Logger LOG = Logger.getLogger(CidadeServiceImpl.class);
 
@@ -60,11 +64,13 @@ public class CidadeServiceImpl implements CidadeService {
 
     @Override
     @Transactional
-    public Response insert(Cidade cidade) {
+    public Response insert(CidadeDTO cidade) {
         try {
             LOG.info("Requisição Cidade.insert()");
-
-            repository.persist(cidade);
+            Cidade c = new Cidade();
+            c.setNome(cidade.nome());
+            c.setEstado(estadoRepository.findById(cidade.estadoId().longValue()));
+            repository.persist(c);
             return Response.ok(cidade).build();
         } catch (Exception e) {
 
@@ -75,12 +81,12 @@ public class CidadeServiceImpl implements CidadeService {
 
     @Override
     @Transactional
-    public Cidade update(long id, Cidade cidade) {
+    public Cidade update(long id, CidadeDTO cidade) {
         try {
             LOG.info("Requisição Cidade.update()");
 
             Cidade entity = repository.findById(id);
-            entity.setNome(cidade.getNome());
+            entity.setNome(cidade.nome());
             return entity;
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.update()");

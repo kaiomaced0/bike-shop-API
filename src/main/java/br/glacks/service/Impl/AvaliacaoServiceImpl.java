@@ -16,6 +16,7 @@ import br.glacks.repository.AvaliacaoRepository;
 import br.glacks.repository.ProdutoRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.AvaliacaoService;
+import br.glacks.service.UsuarioLogadoService;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -31,6 +32,9 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     @Inject
     ProdutoRepository pRepository;
+
+    @Inject
+    UsuarioLogadoService usuarioLogado;
 
     @Override
     public List<AvaliacaoResponseDTO> getAll() {
@@ -68,15 +72,15 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     public Response insert(AvaliacaoDTO avaliacao) {
         try {
             Avaliacao a = AvaliacaoDTO.criAvaliacao(avaliacao);
-            if (uRepository.findById(a.getUsuario().getId()) != null) {
-                a.setUsuario(uRepository.findById(a.getUsuario().getId()));
+            if (uRepository.findById(a.getUsuario().getId()) == null) {
+                a.setUsuario(uRepository.findById(usuarioLogado.getPerfilUsuarioLogado().id()));
             }
             if (pRepository.findById(a.getProduto().getId()) != null) {
                 a.setProduto(pRepository.findById(a.getProduto().getId()));
             }
             repository.persist(a);
             LOG.info("Requisição Avaliacao.insert()");
-            return Response.ok(avaliacao).build();
+            return Response.ok(new AvaliacaoResponseDTO(a)).build();
         } catch (Exception e) {
 
             LOG.error("Erro ao rodar Requisição Avaliacao.insert()");
@@ -87,13 +91,14 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     @Override
     @Transactional
-    public Avaliacao update(long id, Avaliacao avaliacao) {
+    public AvaliacaoResponseDTO update(long id, AvaliacaoDTO avaliacao) {
         try {
             
             Avaliacao entity = repository.findById(id);
-            entity.setNome(avaliacao.getNome());
+            entity.setEstrela(avaliacao.estrela());
+            entity.setComentario(avaliacao.comentario());
             LOG.info("Requisição Avaliacao.update()");
-            return entity;
+            return new AvaliacaoResponseDTO(entity);
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Avaliacao.update()");
             return null;

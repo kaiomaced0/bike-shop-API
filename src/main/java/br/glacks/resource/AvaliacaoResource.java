@@ -17,7 +17,6 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.AvaliacaoDTO;
 import br.glacks.dto.AvaliacaoResponseDTO;
-import br.glacks.model.Avaliacao;
 import br.glacks.service.AvaliacaoService;
 
 @Path("/avaliacao")
@@ -55,7 +54,7 @@ public class AvaliacaoResource {
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
-    public Avaliacao update(@PathParam("id") long id, Avaliacao avaliacao){
+    public AvaliacaoResponseDTO update(@PathParam("id") long id, AvaliacaoDTO avaliacao){
         return avaliacaoService.update(id, avaliacao);
     }
 

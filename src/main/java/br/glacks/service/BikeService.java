@@ -3,12 +3,12 @@ import java.util.List;
 
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.BikeResponseDTO;
 import br.glacks.model.bike.Bike;
 
 public interface BikeService {
     
-    public List<Bike> getAll();
+    public List<BikeResponseDTO> getAll();
 
     public Bike getId(@PathParam("id") long id);
 

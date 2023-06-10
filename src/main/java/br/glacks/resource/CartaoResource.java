@@ -59,5 +59,11 @@ public class CartaoResource {
     }
 
     
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return cartaoService.delete(id);
+    }
     
 }

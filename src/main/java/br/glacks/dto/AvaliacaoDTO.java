@@ -5,23 +5,19 @@ import br.glacks.model.Produto;
 import br.glacks.model.Usuario;
 
 public record AvaliacaoDTO(
-    long id,
+    Integer id,
     Integer estrela,
     String comentario,
-    Long usuario,
-    Long produto
+    Integer produto
 
 ) {
     public static Avaliacao criAvaliacao(AvaliacaoDTO avaliacaoDTO){
         Avaliacao a = new Avaliacao();
-        a.setId(avaliacaoDTO.id);
+        a.setId(avaliacaoDTO.id.longValue());
         a.setEstrela(avaliacaoDTO.estrela);
         a.setComentario(avaliacaoDTO.comentario);
-        Usuario user = new Usuario();
-        user.setId(avaliacaoDTO.usuario);
-        a.setUsuario(user);
         Produto prod = new Produto();
-        prod.setId(avaliacaoDTO.produto);
+        prod.setId(avaliacaoDTO.produto.longValue());
         a.setProduto(prod);
         return a;
     }

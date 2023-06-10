@@ -14,7 +14,8 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
+import br.glacks.dto.TelefoneDTO;
+import br.glacks.dto.TelefoneResponseDTO;
 import br.glacks.model.Telefone;
 import br.glacks.service.TelefoneService;
 
@@ -28,7 +29,7 @@ public class TelefoneResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<Telefone> gettAll(){
+    public List<TelefoneResponseDTO> gettAll(){
         return telefoneService.getAll();
         
     }
@@ -36,7 +37,7 @@ public class TelefoneResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public Telefone getId(@PathParam("id") long id){
+    public TelefoneResponseDTO getId(@PathParam("id") long id){
         return telefoneService.getId(id);
         
     }
@@ -44,16 +45,23 @@ public class TelefoneResource {
     @POST
     @RolesAllowed({"Admin", "User"})
     @Transactional
-    public Response insert(Telefone telefone){
+    public Response insert(TelefoneDTO telefone){
         return telefoneService.insert(telefone);
     }
 
     @PUT
     @RolesAllowed({"Admin"})
-    @Path("/{id}")
+    @Path("/update/{id}")
     @Transactional
-    public Telefone update(@PathParam("id") long id, Telefone telefone){
+    public TelefoneResponseDTO update(@PathParam("id") long id, TelefoneDTO telefone){
         return telefoneService.update(id, telefone);
+    }
+
+    @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return telefoneService.delete(id);
     }
 
     
