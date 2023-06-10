@@ -85,4 +85,4 @@ his file allow to e SQL commands that will be emitted in test and dev.
  insert into usuario_perfil (perfil, id_usuario) values (2, (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
  insert into usuario_perfil (perfil, id_usuario) values (2, (SELECT usuario.id FROM usuario WHERE usuario.nome = 'teste'));
 
- insert into cartao ( ativo, id, usuario_id) values (true, 100, 100);
+ insert into cartao (id, usuario_id) values (100, 100);
