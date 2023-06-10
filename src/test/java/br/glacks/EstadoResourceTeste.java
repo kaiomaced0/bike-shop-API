@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import br.glacks.dto.AuthUsuarioDTO;
 import br.glacks.dto.TelefoneDTO;
+import br.glacks.model.locais.Estado;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.response.Response;
 
@@ -53,8 +54,11 @@ public class EstadoResourceTeste {
 
     @Test
     public void insertTest() {
-
-        TelefoneDTO estado = new TelefoneDTO("63", "984232991", 1);
+        Integer a = 202;
+        Estado estado = new Estado();
+        estado.setId(a.longValue());
+        estado.setNome("testeestado");
+        estado.setSigla("ab");
 
         given()
                 .header("Authorization", "Bearer " + token)
@@ -63,7 +67,9 @@ public class EstadoResourceTeste {
                 .when().post("/estado")
                 .then()
                 .statusCode(200)
-                .body("codigoArea", is("63"))
-                .body("numero", is("984232991"));
+                .body("id", is(202))
+                .body("nome", is("testeestado")
+                    
+                );
     }
 }

@@ -67,10 +67,11 @@ public class BikeResourceTeste {
         .header("Authorization", "Bearer " + token)
         .contentType("application/json")
         .body(b)
-        .when().post("/bike/insert")
+        .when().post("/bike")
         .then()
         .statusCode(200)
         .body("nome", is("bike 10"))
         .body("preco", is(200.00));
   }
+  
 }

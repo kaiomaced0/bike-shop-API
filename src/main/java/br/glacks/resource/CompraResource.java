@@ -35,6 +35,14 @@ public class CompraResource {
     }
 
     @GET
+    @Path("/on")
+    @RolesAllowed({"User", "Admin"})
+    public List<CompraResponseDTO> gettAllOn(){
+        return compraService.getAllOn();
+        
+    }
+
+    @GET
     @Path("/{id}")
     @RolesAllowed({"Admin"})
     public Compra getId(@PathParam("id") long id){

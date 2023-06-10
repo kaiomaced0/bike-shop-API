@@ -46,12 +46,12 @@ public class AvaliacaoResourceTeste {
     @Test
     public void getIdTeste() {
         given()
-                .pathParam("id", 1)
+                .pathParam("id", 100)
                 .header("Authorization", "Bearer " + token)
                 .when().get("/avaliacao/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", is(1));
+                .body("id", is(100));
     }
 
     @Test

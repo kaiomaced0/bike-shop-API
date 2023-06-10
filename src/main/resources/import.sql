@@ -39,22 +39,22 @@ his file allow to e SQL commands that will be emitted in test and dev.
  insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 4'), 3);
  insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 5'), 4);
 
- insert into cupom (quantidade, codigo, valordesconto) values(50, '#desconto20', 20.0);
+ insert into cupom (id, quantidade, codigo, valordesconto) values(100, 50, '#desconto20', 20.0);
  insert into cupom (quantidade, codigo, valordesconto) values(100, '#desconto10', 10.0);
  insert into cupom (quantidade, codigo, valordesconto) values(80, '#desconto40', 40.0);
 
- insert into estado (id, sigla_estado, nome) values(1, 'TO', 'Tocantins');
- insert into estado (id, sigla_estado, nome) values(2, 'GO', 'Goias');
- insert into estado (id, sigla_estado, nome) values(3, 'PA', 'Para');
- insert into estado (id, sigla_estado, nome) values(4, 'MG', 'Minas Gerais');
+ insert into estado (id, sigla_estado, nome) values(100, 'TO', 'Tocantins');
+ insert into estado (id, sigla_estado, nome) values(102, 'GO', 'Goias');
+ insert into estado (id, sigla_estado, nome) values(102, 'PA', 'Para');
+ insert into estado (id, sigla_estado, nome) values(103, 'MG', 'Minas Gerais');
 
- insert into cidade (id, nome, estado_id) values(1, 'Palmas', (SELECT estado.id FROM estado WHERE estado.nome = 'Tocantins'));
- insert into cidade (id, nome, estado_id) values(3, 'Goiania', (SELECT estado.id FROM estado WHERE estado.nome = 'Goias'));
- insert into cidade (id, nome, estado_id) values(2, 'belem', (SELECT estado.id FROM estado WHERE estado.nome = 'Para'));
+ insert into cidade (id, nome, estado_id) values(100, 'Palmas', (SELECT estado.id FROM estado WHERE estado.nome = 'Tocantins'));
+ insert into cidade (id, nome, estado_id) values(101, 'Goiania', (SELECT estado.id FROM estado WHERE estado.nome = 'Goias'));
+ insert into cidade (id, nome, estado_id) values(102, 'belem', (SELECT estado.id FROM estado WHERE estado.nome = 'Para'));
 
- insert into endereco (id, usuario_dono_endereco, descricao) values(1, 1, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(2, 2, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(3, 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario_dono_endereco, descricao) values(100, 1, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario_dono_endereco, descricao) values(102, 2, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario_dono_endereco, descricao) values(103, 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
  insert into endereco (id, usuario_dono_endereco, descricao) values(4, 4, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
  insert into endereco (id, usuario_dono_endereco, descricao) values(5, 5, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
 
@@ -62,11 +62,11 @@ his file allow to e SQL commands that will be emitted in test and dev.
  insert into telefone (id, codigoarea, numero, proprietario_id) values(101, '62', '978934834', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'joao'));
  insert into telefone (id, codigoarea, numero, proprietario_id) values(102, '63', '987504954', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'antonio'));
 
- insert into compra (id, nome, usuario_id) values(1, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
- insert into compra (id, nome, usuario_id) values(2, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
- insert into compra (id, nome, usuario_id) values(3, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'janio'));
- insert into compra (id, nome, usuario_id) values(4, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'maria'));
- insert into compra (id, nome, usuario_id) values(5, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'otavio'));
+ insert into compra (id, nome, usuario_id) values(100, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
+ insert into compra (id, nome, usuario_id) values(102, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'kaio'));
+ insert into compra (id, nome, usuario_id) values(103, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'janio'));
+ insert into compra (id, nome, usuario_id) values(104, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'maria'));
+ insert into compra (id, nome, usuario_id) values(105, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'otavio'));
  
  insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(100, (SELECT produto.id FROM produto WHERE produto.nome = 'bike1'), 5, 1);
  insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(101, (SELECT produto.id FROM produto WHERE produto.nome = 'bike2'), 2, 1);

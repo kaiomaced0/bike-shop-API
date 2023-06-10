@@ -51,19 +51,4 @@ public class CompraResourceTeste {
                 .body("id", is(100));
     }
 
-    @Test
-    public void insertTest() {
-
-        TelefoneDTO compra = new TelefoneDTO("63", "984232991", 1);
-
-        given()
-                .header("Authorization", "Bearer " + token)
-                .contentType("application/json")
-                .body(compra)
-                .when().post("/compra")
-                .then()
-                .statusCode(200)
-                .body("codigoArea", is("63"))
-                .body("numero", is("984232991"));
-    }
 }

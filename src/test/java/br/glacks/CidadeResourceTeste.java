@@ -45,18 +45,18 @@ public class CidadeResourceTeste {
     @Test
     public void getIdTeste() {
         given()
-                .pathParam("id", 1)
+                .pathParam("id", 100)
                 .header("Authorization", "Bearer " + token)
                 .when().get("/cidade/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", is(1),
+                .body("id", is(100),
                         "nome", is("Palmas"));
     }
 
     @Test
     public void insertTest() {
-        CidadeDTO cidade = new CidadeDTO("joao pessoa", 1);
+        CidadeDTO cidade = new CidadeDTO("joao pessoa", 100);
 
         given()
                 .header("Authorization", "Bearer " + token)
@@ -65,7 +65,7 @@ public class CidadeResourceTeste {
                 .when().post("/cidade")
                 .then()
                 .statusCode(200)
-                .body("codigoArea", is("63"))
-                .body("numero", is("984232991"));
+                .body("nome", is("joao pessoa"))
+                .body("estadoId", is(100));
     }
 }

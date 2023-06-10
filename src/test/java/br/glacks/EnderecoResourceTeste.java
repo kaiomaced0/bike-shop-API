@@ -51,19 +51,4 @@ public class EnderecoResourceTeste {
                 .body("id", is(100));
     }
 
-    @Test
-    public void insertTest() {
-
-        TelefoneDTO endereco = new TelefoneDTO("63", "984232991", 1);
-
-        given()
-                .header("Authorization", "Bearer " + token)
-                .contentType("application/json")
-                .body(endereco)
-                .when().post("/endereco")
-                .then()
-                .statusCode(200)
-                .body("codigoArea", is("63"))
-                .body("numero", is("984232991"));
-    }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.glacks.dto.AuthUsuarioDTO;
+import br.glacks.dto.CupomDTO;
 import br.glacks.dto.TelefoneDTO;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.response.Response;
@@ -54,7 +55,7 @@ public class CupomResourceTeste {
     @Test
     public void insertTest() {
 
-        TelefoneDTO cupom = new TelefoneDTO("63", "984232991", 1);
+        CupomDTO cupom = new CupomDTO("cupom1", 10, null, 10.00, null);
 
         given()
                 .header("Authorization", "Bearer " + token)
@@ -63,7 +64,7 @@ public class CupomResourceTeste {
                 .when().post("/cupom")
                 .then()
                 .statusCode(200)
-                .body("codigoArea", is("63"))
-                .body("numero", is("984232991"));
+                .body("nome", is("cupom1"))
+                .body("quantidade", is(10));
     }
 }

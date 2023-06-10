@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.glacks.dto.AuthUsuarioDTO;
+import br.glacks.dto.CartaoDTO;
 import br.glacks.dto.TelefoneDTO;
 
 import static io.restassured.RestAssured.given;
@@ -44,27 +45,26 @@ public class CartaoResourceTeste {
     @Test
     public void getIdTeste() {
         given()
-                .pathParam("id", 1)
+                .pathParam("id", 100)
                 .header("Authorization", "Bearer " + token)
                 .when().get("/cartao/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", is(1));
+                .body("id", is(100));
     }
 
     @Test
     public void insertTest() {
 
-        TelefoneDTO cartao = new TelefoneDTO("63", "984232991", 1);
-
+        CartaoDTO c = new CartaoDTO(200, "cartao200", null, "0123232", 100);
         given()
                 .header("Authorization", "Bearer " + token)
                 .contentType("application/json")
-                .body(cartao)
+                .body(c)
                 .when().post("/cartao")
                 .then()
                 .statusCode(200)
-                .body("codigoArea", is("63"))
-                .body("numero", is("984232991"));
+                .body("id", is(200))
+                .body("nome", is("cartao200"));
     }
 }
