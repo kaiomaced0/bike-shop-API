@@ -68,9 +68,9 @@ his file allow to e SQL commands that will be emitted in test and dev.
  insert into compra (id, nome, usuario_id) values(104, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'maria'));
  insert into compra (id, nome, usuario_id) values(105, 'teste', (SELECT usuario.id FROM usuario WHERE usuario.nome = 'otavio'));
  
- insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(100, (SELECT produto.id FROM produto WHERE produto.nome = 'bike1'), 5, 1);
- insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(101, (SELECT produto.id FROM produto WHERE produto.nome = 'bike2'), 2, 1);
- insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(102, (SELECT produto.id FROM produto WHERE produto.nome = 'bike3'), 1, 2);
+ insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(100, (SELECT produto.id FROM produto WHERE produto.nome = 'bike1'), 5, 100);
+ insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(101, (SELECT produto.id FROM produto WHERE produto.nome = 'bike2'), 2, 100);
+ insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(102, (SELECT produto.id FROM produto WHERE produto.nome = 'bike3'), 1, 102);
  insert into itemcompra (id, produto_item_compra, quantidade) values(103, (SELECT produto.id FROM produto WHERE produto.nome = 'bike5'), 5);
  insert into itemcompra (id, produto_item_compra, quantidade) values(104, (SELECT produto.id FROM produto WHERE produto.nome = 'bike4'), 5);
  insert into itemcompra (id, produto_item_compra, quantidade) values(105, (SELECT produto.id FROM produto WHERE produto.nome = 'bike3'), 5);
