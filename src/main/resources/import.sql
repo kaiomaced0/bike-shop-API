@@ -1,4 +1,4 @@
-his file allow to e SQL commands that will be emitted in test and dev.
+-- his file allow to e SQL commands that will be emitted in test and dev.
 -- The commands are coted as their support dependf the database
  insert into usuario (id, nome, login, senha) values(101, 'kaio', 'kaio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, login, senha) values('joao', 'joao','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
@@ -45,7 +45,7 @@ his file allow to e SQL commands that will be emitted in test and dev.
 
  insert into estado (id, sigla_estado, nome) values(100, 'TO', 'Tocantins');
  insert into estado (id, sigla_estado, nome) values(102, 'GO', 'Goias');
- insert into estado (id, sigla_estado, nome) values(102, 'PA', 'Para');
+ insert into estado (id, sigla_estado, nome) values(104, 'PA', 'Para');
  insert into estado (id, sigla_estado, nome) values(103, 'MG', 'Minas Gerais');
 
  insert into cidade (id, nome, estado_id) values(100, 'Palmas', (SELECT estado.id FROM estado WHERE estado.nome = 'Tocantins'));
