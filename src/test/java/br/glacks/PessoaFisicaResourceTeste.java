@@ -10,6 +10,7 @@ import br.glacks.dto.AuthUsuarioDTO;
 import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.dto.PessoaJuridicaDTO;
 import br.glacks.dto.TelefoneDTO;
+import br.glacks.dto.UsuarioDTO;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -55,11 +56,12 @@ public class PessoaFisicaResourceTeste {
         .body("id", is(100));
   }
 
-
   @Test
   public void insertTest() {
-    PessoaFisicaDTO p = new PessoaFisicaDTO(null, "000023823");
-    
+    UsuarioDTO u = new UsuarioDTO("userteste001", "testando01", "teste01", "teste01@gmail.com");
+
+    PessoaFisicaDTO p = new PessoaFisicaDTO(u, "000023823");
+
     given()
         .header("Authorization", "Bearer " + token)
         .contentType("application/json")
@@ -72,9 +74,10 @@ public class PessoaFisicaResourceTeste {
 
   @Test
   public void updateTest() {
+    UsuarioDTO u = new UsuarioDTO("userteste001", "testando01", "teste01", "teste01@gmail.com");
 
-    PessoaFisicaDTO p = new PessoaFisicaDTO(null, "3242");
-    
+    PessoaFisicaDTO p = new PessoaFisicaDTO(u, "3242");
+
     given()
         .pathParam("id", 100)
         .header("Authorization", "Bearer " + token)

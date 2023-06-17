@@ -7,10 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.glacks.dto.AuthUsuarioDTO;
-import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.dto.PessoaJuridicaDTO;
-import br.glacks.dto.ProdutoDTO;
-import br.glacks.dto.TelefoneDTO;
+import br.glacks.dto.UsuarioDTO;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -53,13 +51,13 @@ public class PessoaJuridicaResourceTeste {
         .when().get("/pessoajuridica/{id}")
         .then()
         .statusCode(200)
-        .body("id", is("101"));
+        .body("id", is(101));
   }
 
-  
   @Test
   public void insertTest() {
-    PessoaJuridicaDTO p = new PessoaJuridicaDTO(null, "10101010");
+    UsuarioDTO u = new UsuarioDTO("userteste001", "testando01", "teste01", "teste01@gmail.com");
+    PessoaJuridicaDTO p = new PessoaJuridicaDTO(u, "10101010");
     given()
         .header("Authorization", "Bearer " + token)
         .contentType("application/json")
@@ -72,9 +70,10 @@ public class PessoaJuridicaResourceTeste {
 
   @Test
   public void updateTest() {
+    UsuarioDTO u = new UsuarioDTO("userteste001", "testando01", "teste01", "teste01@gmail.com");
 
-    PessoaJuridicaDTO p = new PessoaJuridicaDTO(null, "00000087");
-    
+    PessoaJuridicaDTO p = new PessoaJuridicaDTO(u, "00000087");
+
     given()
         .pathParam("id", 101)
         .header("Authorization", "Bearer " + token)
