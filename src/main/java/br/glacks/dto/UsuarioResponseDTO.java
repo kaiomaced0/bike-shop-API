@@ -3,12 +3,10 @@ package br.glacks.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.glacks.model.Endereco;
 import br.glacks.model.Usuario;
 
 public record UsuarioResponseDTO(
         Long id,
-        String nome,
         String login,
         String email,
         List<CartaoResponseDTO> cartoes,
@@ -18,7 +16,6 @@ public record UsuarioResponseDTO(
 ) {
     public UsuarioResponseDTO(Usuario user) {
         this(user.getId(),
-                user.getNome(),
                 user.getLogin(),
                 user.getEmail(),
                 user.getCartoes()

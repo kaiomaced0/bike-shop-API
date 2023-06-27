@@ -7,11 +7,6 @@ import java.util.stream.Collectors;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
-
-import br.glacks.dto.PessoaFisicaDTO;
 import br.glacks.dto.PessoaFisicaResponseDTO;
 import br.glacks.model.PessoaFisica;
 import br.glacks.repository.PessoaFisicaRepository;
@@ -76,69 +71,6 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
             return null;
         }
         
-    }
-    
-    @Override
-    @Transactional
-    public Response insert(PessoaFisicaDTO pessoaFisicaDTO){
-        try {
-            LOG.info("Requisição PessoaFisica.insert()"); 
-        
-            PessoaFisica pessoaFisica = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
-            if(pessoaFisicaDTO != null){
-                repository.persist(pessoaFisica);
-                return Response.ok(new PessoaFisicaResponseDTO(pessoaFisica)).build();
-            }
-            return Response.notModified().build();
-            
-        } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição PessoaFisica.insert()");
-            return null;
-        }
-    }
-
-    @Override
-    @Transactional
-    public PessoaFisicaResponseDTO update(long id, PessoaFisicaDTO pessoafisica){
-        try {
-            LOG.info("Requisição PessoaFisica.update()"); 
-            PessoaFisica entity = repository.findById(id);
-            if(pessoafisica.usuarioDTO().login() != null){
-                entity.setLogin(pessoafisica.usuarioDTO().login());
-            }
-            if(pessoafisica.usuarioDTO().nome() != null){
-                entity.setNome(pessoafisica.usuarioDTO().nome());
-            }
-            if(pessoafisica.usuarioDTO().senha() != null){
-                entity.setSenha(pessoafisica.usuarioDTO().senha());
-            }
-            if(pessoafisica.cpf() != null){
-                entity.setCpf(pessoafisica.cpf());
-            }
-            return new PessoaFisicaResponseDTO(entity);
-            
-        } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição PessoaFisica.update()");
-            return null;
-        }
-        
-    }
-    
-   @Override
-   @Transactional
-   public Response delete(Long id) {
-    try {
-        LOG.info("Requisição PessoaFisica.delete()"); 
-        PessoaFisica entity = repository.findById(id);
-        entity.setAtivo(false);
-        
-        return Response.status(Status.OK).build();
-        
-    } catch (Exception e) {
-        LOG.error("Erro ao rodar Requisição PessoaFisica.delete()");
-        return null;
-    }
-    
     }
     
     

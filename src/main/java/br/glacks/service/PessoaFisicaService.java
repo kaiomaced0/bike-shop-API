@@ -15,10 +15,4 @@ public interface PessoaFisicaService {
     public PessoaFisica getId(@PathParam("id") long id);
 
     public List<PessoaFisicaResponseDTO> getNome(@PathParam("nome") String nome);
-
-    public Response insert(PessoaFisicaDTO pessoaFisicaDTO);
-
-    public PessoaFisicaResponseDTO update(@PathParam("id") long id, PessoaFisicaDTO pessoaFisica);
-    
-    public Response delete(@PathParam("id") Long id);
 }
