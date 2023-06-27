@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -18,7 +19,10 @@ import jakarta.ws.rs.core.Response;
 
 import br.glacks.dto.UsuarioDTO;
 import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateDTO;
+import br.glacks.dto.UsuarioUpdateEmailDTO;
+import br.glacks.dto.UsuarioUpdateLoginDTO;
+import br.glacks.dto.UsuarioUpdateNomeDTO;
+import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.model.Usuario;
 import br.glacks.service.*;
 
@@ -34,7 +38,7 @@ public class UsuarioResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<Usuario> getAll(){
+    public List<UsuarioResponseDTO> getAll(){
         return usuarioService.getAll();
         
     }
@@ -50,7 +54,7 @@ public class UsuarioResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public UsuarioResponseDTO getId(@PathParam("id") long id){
+    public Usuario getId(@PathParam("id") long id){
         return usuarioService.getId(id);
         
     }
@@ -63,20 +67,44 @@ public class UsuarioResource {
         
     }
 
-    @PUT
+    // @PUT
+    // @RolesAllowed({"Admin"})
+    // @Path("/update/{id}")
+    // @Transactional
+    // public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario){
+    //     return usuarioService.update(id, usuario);
+    // }
+
+    @PATCH
     @RolesAllowed({"Admin"})
-    @Path("/update/{id}")
+    @Path("/senha/{id}")
     @Transactional
-    public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioUpdateDTO usuario){
-        return usuarioService.update(id, usuario);
+    public UsuarioResponseDTO updateSenha(@PathParam("id") Long id, UsuarioUpdateSenhaDTO senha){
+        return usuarioService.updateSenha(id, senha);
     }
 
-    @PUT
-    @RolesAllowed({"User"})
-    @Path("/{chave}")
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/email/{id}")
     @Transactional
-    public UsuarioResponseDTO updateOn(UsuarioUpdateDTO usuario){
-        return usuarioService.updateOn(usuario);
+    public UsuarioResponseDTO updateEmail(@PathParam("id") Long id, UsuarioUpdateEmailDTO email){
+        return usuarioService.updateEmail(id, email);
+    }
+
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/login/{id}")
+    @Transactional
+    public UsuarioResponseDTO updateLogin(@PathParam("id") Long id, UsuarioUpdateLoginDTO login){
+        return usuarioService.updateLogin(id, login);
+    }
+
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/nome/{id}")
+    @Transactional
+    public UsuarioResponseDTO updateNome(@PathParam("id") Long id, UsuarioUpdateNomeDTO nome){
+        return usuarioService.updateNome(id, nome);
     }
 
     @PUT
@@ -86,11 +114,5 @@ public class UsuarioResource {
         return usuarioService.delete(id);
     }
 
-    @PUT
-    @RolesAllowed({"User"})
-    @Path("/deleteOn/{id}")
-    public Response deleteOn() {
-        return usuarioService.deleteOn();
-    }
     
 }

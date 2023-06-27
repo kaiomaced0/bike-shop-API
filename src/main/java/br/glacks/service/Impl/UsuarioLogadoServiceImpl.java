@@ -7,8 +7,18 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.application.Result;
 import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.dto.UsuarioUpdateEmailDTO;
+import br.glacks.dto.UsuarioUpdateLoginDTO;
+import br.glacks.dto.UsuarioUpdateNomeDTO;
+import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.form.ImageForm;
+import br.glacks.model.PessoaFisica;
+import br.glacks.model.Usuario;
+import br.glacks.repository.PessoaFisicaRepository;
+import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.FileService;
+import br.glacks.service.HashService;
+import br.glacks.service.PessoaFisicaService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -16,6 +26,7 @@ import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
@@ -31,27 +42,101 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Inject
     UsuarioService usuarioService;
+
+    @Inject
+    PessoaFisicaService pessoaFisicaService;
+
+    @Inject
+    UsuarioRepository repository;
+
+    @Inject
+    PessoaFisicaRepository pessoaFisicaRepository;
+
+    @Inject
+    FileService fileService;
     
-        @Inject
-        FileService fileService;
+    @Inject
+    HashService hash;
 
     @Override
-    public Response getPerfilUsuario() {
-
+    @Transactional
+    public UsuarioResponseDTO updateSenha(UsuarioUpdateSenhaDTO senha) {
         try {
-            LOG.info("Requisição Telefone.getPerfilUsuario()");
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateSenha() ");
 
-            // obtendo o login a partir do token
-            String login = jsonWebToken.getSubject();
-            UsuarioResponseDTO user = usuarioService.findByLogin(login);
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
 
-            return Response.ok(user).build();
+            if(hash.getHashSenha(senha.senhaAnterior()) != entity.getSenha())
+                throw new NotFoundException("Senha anterior Incorreta");
+
+            entity.setSenha(hash.getHashSenha(senha.novaSenha()));
+            return new UsuarioResponseDTO(entity);
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Telefone.getPerfilUsuario()");
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição Usuario.updateSenha()");
             return null;
         }
 
     }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO updateLogin(UsuarioUpdateLoginDTO login) {
+        try {
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateLogin()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+            if(hash.getHashSenha(login.senha()) != entity.getSenha())
+                throw new NotFoundException("Senha Incorreta");
+            
+            entity.setLogin(login.login());
+            return new UsuarioResponseDTO(entity);
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição Usuario.updateLogin()");
+            return null;
+        }
+
+    }
+    @Override
+    @Transactional
+    public UsuarioResponseDTO updateNome(UsuarioUpdateNomeDTO nome) {
+        try {
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateNome()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+            if(entity instanceof PessoaFisica){
+                if(hash.getHashSenha(nome.senha()) != entity.getSenha())
+                    throw new NotFoundException("Senha Incorreta");
+            PessoaFisica p = pessoaFisicaRepository.findById(entity.getId());
+            p.setNome(nome.nome());
+            }
+            
+            return new UsuarioResponseDTO(entity);
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição Usuario.updateNome()");
+            return null;
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO updateEmail(UsuarioUpdateEmailDTO email) {
+        try {
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateEmail()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+            if(hash.getHashSenha(email.senha()) != entity.getSenha())
+                throw new NotFoundException("Senha Incorreta");
+            
+            entity.setEmail(email.email());
+            return new UsuarioResponseDTO(entity);
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição Usuario.updateEmail()");
+            return null;
+        }
+
+    }
+
 
     @Override
     public UsuarioResponseDTO getPerfilUsuarioLogado() {
@@ -68,6 +153,22 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             return null;
         }
 
+    }
+
+    @Override
+    @Transactional
+    public Response deleteOn() {
+        try {
+            LOG.info("Requisição Usuario.delete()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+            entity.setAtivo(false);
+
+            return Response.status(Status.OK).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Usuario.delete()");
+            return null;
+        }
     }
 
     @Override
