@@ -1,8 +1,13 @@
 package br.glacks.resource;
+
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import br.glacks.dto.AuthPessoaJuridicaDTO;
 import br.glacks.dto.AuthUsuarioDTO;
+import br.glacks.model.PessoaFisica;
+import br.glacks.model.PessoaJuridica;
 import br.glacks.model.Usuario;
+import br.glacks.repository.PessoaJuridicaRepository;
 import br.glacks.service.HashService;
 import br.glacks.service.TokenJwtService;
 import br.glacks.service.UsuarioService;
@@ -20,12 +25,15 @@ import jakarta.ws.rs.core.Response.Status;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthResource {
-    
+
     @Inject
     HashService hashService;
 
     @Inject
     UsuarioService usuarioService;
+
+    @Inject
+    PessoaJuridicaRepository pessoaJuridicaRepository;
 
     @Inject
     TokenJwtService tokenService;
@@ -39,20 +47,57 @@ public class AuthResource {
     @Produces(MediaType.TEXT_PLAIN)
     public Response login(AuthUsuarioDTO authDTO) {
         String hash = hashService.getHashSenha(authDTO.senha());
-        
-        Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
 
+        Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
+        
         if (usuario == null) {
             return Response.status(Status.NO_CONTENT)
-                .entity("Usuario não encontrado").build();
-        } 
+                    .entity("Usuario não encontrado").build();
+        }
         return Response.ok()
-            .header("Authorization", tokenService.generateJwt(usuario))
-            .build();
-        
+                .header("Authorization", tokenService.generateJwt(usuario))
+                .build();
+
     }
 
-     
+    @POST
+    @PermitAll
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response loginCNPJ(AuthPessoaJuridicaDTO authDTO) {
+        String hash = hashService.getHashSenha(authDTO.senha());
 
-    
+        Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
+        if (usuario == null) {
+            return Response.status(Status.NO_CONTENT)
+                    .entity("Usuario não encontrado").build();
+        }
+
+        PessoaJuridica pj = pessoaJuridicaRepository.findByCnpj(authDTO.cnpj()).get(0);
+
+        if (usuario instanceof PessoaFisica)
+            for (Usuario i : pj.getUsuariosResponsaveis()) {
+                if (i.getId() == usuario.getId()) {
+                    return Response.ok()
+                            .header("Authorization - Empresa: " + pj.getRazaoSocial() + " ",
+                                    tokenService.generateJwtJuridico(usuario))
+                            .build();
+                }
+            }
+
+        if (usuario instanceof PessoaJuridica)
+            if (usuario.getId() == pj.getId()) {
+                if (pj.getSenha() == hash) {
+                    return Response.ok()
+                            .header("Authorization - Empresa: " + pj.getRazaoSocial() + " ",
+                                    tokenService.generateJwt(pj))
+                            .build();
+                }
+            }
+
+        return Response.status(Status.NO_CONTENT)
+                .entity("Usuario não tem acesso").build();
+
+    }
+
 }
