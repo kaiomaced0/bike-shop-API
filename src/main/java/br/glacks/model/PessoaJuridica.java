@@ -2,29 +2,45 @@ package br.glacks.model;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class PessoaJuridica extends Usuario{
 
-    @Size(min = 14, max =14)
+    @NotBlank
+    private String nomeFantasia;
+    @CNPJ
+    @NotBlank
     private String cnpj;
     
     @ManyToMany
     @JoinColumn(name = "usuarios_responsaveis_pj")
     private List<PessoaFisica> usuariosResponsaveis;
 
-    private String nomeFantasia;
+    @NotBlank
+    private String razaoSocial;
     
+    
+
+     public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
+    }
+
     public String getCnpj() {
         return cnpj;
     }
-
+   
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
@@ -37,12 +53,12 @@ public class PessoaJuridica extends Usuario{
         this.usuariosResponsaveis = usuariosResponsaveis;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
     

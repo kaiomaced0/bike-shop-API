@@ -25,10 +25,8 @@ public class Usuario extends EntityClass {
 
     private String image;
 
-    
     @ElementCollection
-    @CollectionTable(name = "usuario_perfil",
-     joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
+    @CollectionTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
     @Column(name = "perfil", length = 30)
     private Set<Perfil> perfis;
 
@@ -51,7 +49,6 @@ public class Usuario extends EntityClass {
     @OneToMany
     @JoinColumn(name = "lista_compra_usuario")
     private List<Compra> compras;
-
     
     public String getLogin() {
         return login;
@@ -133,5 +130,4 @@ public class Usuario extends EntityClass {
         this.compras = compras;
     }
 
-        
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.ManyToMany;
 @Entity
 public class Cupom extends EntityClass {
 
+    private String nome;
 
     private Integer quantidade;
 
@@ -18,6 +19,7 @@ public class Cupom extends EntityClass {
     @JoinColumn(name= "lista_produtos")
     private List<Produto> produtos;
 
+    
     public Integer getQuantidade() {
         return quantidade;
     }
@@ -48,6 +50,14 @@ public class Cupom extends EntityClass {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
 

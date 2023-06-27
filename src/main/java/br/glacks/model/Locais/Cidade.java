@@ -8,6 +8,8 @@ import br.glacks.model.EntityClass;
 @Entity
 public class Cidade extends EntityClass{
 
+    private String nome;
+    
     @ManyToOne
     private Estado estado;
 
@@ -18,6 +20,14 @@ public class Cidade extends EntityClass{
     public void setEstado(Estado estado) {
         this.estado = estado;
         
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
   
 }

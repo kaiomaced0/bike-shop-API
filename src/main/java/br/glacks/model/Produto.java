@@ -19,6 +19,8 @@ import jakarta.persistence.ElementCollection;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Produto extends EntityClass {
 
+    private String nome;
+
     private String nomeLongo;
 
     private Double valorCompra;
@@ -117,6 +119,14 @@ public class Produto extends EntityClass {
 
     public void setImage(List<String> image) {
         this.image = image;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public List<Avaliacao> getAvaliacoes() {

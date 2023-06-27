@@ -11,6 +11,8 @@ import br.glacks.model.Usuario;
 @Entity
 public class Cartao extends EntityClass{
 
+    private String nome;
+    
     @ManyToOne
     private Usuario usuario;
 
@@ -61,6 +63,14 @@ public class Cartao extends EntityClass{
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     

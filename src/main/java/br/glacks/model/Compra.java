@@ -9,7 +9,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
 
 import br.glacks.model.pagamento.FormaPagamento;
 
@@ -49,12 +48,6 @@ public class Compra extends EntityClass{
     @ManyToOne
     @JoinColumn(name = "cupom_compra")
     private Cupom cupom;
-
-    
-    @PrePersist
-    public void inserirNome(){
-        setNome("#"+ usuario.getId().toString() + getId().toString() );
-    }
 
 
     public String getToken() {

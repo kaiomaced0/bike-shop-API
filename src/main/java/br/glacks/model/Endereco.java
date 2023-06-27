@@ -8,6 +8,8 @@ import br.glacks.model.locais.Cidade;
 @Entity
 public class Endereco extends EntityClass{
 
+    private String nome;
+    
     @ManyToOne
     @JoinColumn(name = "usuario_dono_endereco")
     private Usuario usuario;
@@ -82,6 +84,14 @@ public class Endereco extends EntityClass{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     
