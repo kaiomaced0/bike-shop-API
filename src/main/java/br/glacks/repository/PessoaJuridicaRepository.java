@@ -12,4 +12,9 @@ public class PessoaJuridicaRepository implements PanacheRepository<PessoaJuridic
             return null;
         return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
     }
+    public List<PessoaJuridica> findByCnpj(String cnpj){
+        if (cnpj == null)
+            return null;
+        return find("UPPER(cnpj) LIKE ?1 ", "%"+cnpj.toUpperCase()+"%").firstResult();
+    }
 }

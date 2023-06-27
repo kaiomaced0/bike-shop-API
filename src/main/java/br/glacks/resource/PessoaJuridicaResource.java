@@ -46,6 +46,14 @@ public class PessoaJuridicaResource {
 
     @GET
     @RolesAllowed({"Admin"})
+    @Path("/cnpj/{cnpj}")
+    public List<PessoaJuridicaResponseDTO> getCnpj(@PathParam("cnpj") String cnpj){
+        return pessoaJuridicaService.getCnpj(cnpj);
+    
+    }
+
+    @GET
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     public PessoaJuridica getId(@PathParam("id") long id){
         return pessoaJuridicaService.getId(id);
@@ -60,13 +68,13 @@ public class PessoaJuridicaResource {
         
     }
 
-    @PUT
-    @RolesAllowed({"Admin", "User"})
-    @Path("/{id}")
-    @Transactional
-    public PessoaJuridicaResponseDTO update(@PathParam("id") long id, PessoaJuridicaDTO pessoajuridica){
-        return pessoaJuridicaService.update(id, pessoajuridica);
-    }
+    // @PUT
+    // @RolesAllowed({"Admin", "User"})
+    // @Path("/{id}")
+    // @Transactional
+    // public PessoaJuridicaResponseDTO update(@PathParam("id") long id, PessoaJuridicaDTO pessoajuridica){
+    //     return pessoaJuridicaService.update(id, pessoajuridica);
+    // }
 
     @PUT
     @RolesAllowed({"Admin", "User"})

@@ -13,8 +13,12 @@ import jakarta.ws.rs.core.Response.Status;
 
 import br.glacks.dto.PessoaJuridicaDTO;
 import br.glacks.dto.PessoaJuridicaResponseDTO;
+import br.glacks.dto.UsuarioDTO;
+import br.glacks.model.Perfil;
 import br.glacks.model.PessoaJuridica;
+import br.glacks.model.Usuario;
 import br.glacks.repository.PessoaJuridicaRepository;
+import br.glacks.service.HashService;
 import br.glacks.service.PessoaJuridicaService;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -25,6 +29,9 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
     @Inject
     PessoaJuridicaRepository repository;
+
+    @Inject
+    HashService hash;
 
     @Override
     public List<PessoaJuridicaResponseDTO> getAll() {
@@ -74,50 +81,42 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
 
     @Override
-    @Transactional
-    public Response insert(PessoaJuridicaDTO pessoaJuridicaDTO) {
+    public List<PessoaJuridicaResponseDTO> getCnpj(String cnpj) {
         try {
-            LOG.info("Requisição PessoaFisica.insert()");
+            LOG.info("Requisição PessoaFisica.getCnpj()");
 
-            PessoaJuridica pessoaJuridica = PessoaJuridicaDTO.criaPessoaJuridica(pessoaJuridicaDTO);
-            if (pessoaJuridicaDTO == null) {
-                throw new Exception("pessoajuridica nula");
-            }
-            repository.persist(pessoaJuridica);
-            return Response.ok(new PessoaJuridicaResponseDTO(pessoaJuridica)).build();
+            return repository.findByCnpj(cnpj)
+                    .stream()
+                    .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
+                    .collect(Collectors.toList());
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição PessoaFisica.insert()");
-            return Response.status(Status.NOT_IMPLEMENTED).build();
+            LOG.error("Erro ao rodar Requisição PessoaFisica.getCnpj()");
+            return null;
         }
 
     }
 
     @Override
     @Transactional
-    public PessoaJuridicaResponseDTO update(long id, PessoaJuridicaDTO pessoaJuridica) {
+    public Response insert(PessoaJuridicaDTO pessoaJuridicaDTO) {
         try {
-            LOG.info("Requisição PessoaFisica.update()");
+            LOG.info("Requisição PessoaJuridica.insert()");
+            PessoaJuridica pj = pessoaJuridicaDTO.criaPessoaJuridica(pessoaJuridicaDTO);
+            if (pessoaJuridicaDTO.getClass() == null) {
+                throw new Exception("PessoaJuridica nula");
+            }
+            pj.getPerfis().add(Perfil.USER);
+            pj.setSenha(hash.getHashSenha(pj.getSenha()));
+            repository.persist(pj);
+            return Response.ok(pj).build();
 
-            PessoaJuridica entity = repository.findById(id);
-            if (pessoaJuridica.usuarioDTO().login() != null) {
-                entity.setLogin(pessoaJuridica.usuarioDTO().login());
-            }
-            if (pessoaJuridica.usuarioDTO().nome() != null) {
-                entity.setNome(pessoaJuridica.usuarioDTO().nome());
-            }
-            if (pessoaJuridica.usuarioDTO().senha() != null) {
-                entity.setSenha(pessoaJuridica.usuarioDTO().senha());
-            }
-            if (pessoaJuridica.cnpj() != null) {
-                entity.setCnpj(pessoaJuridica.cnpj());
-            }
-            return new PessoaJuridicaResponseDTO(entity);
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição PessoaFisica.update()");
-            return null;
+            LOG.error("Erro ao rodar Requisição Usuario.insert() " + e.getMessage());
+            return Response.notModified().build();
         }
 
     }
+
 
     @Override
     @Transactional

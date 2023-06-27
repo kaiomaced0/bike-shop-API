@@ -15,6 +15,8 @@ public interface PessoaJuridicaService {
     public PessoaJuridica getId(@PathParam("id") long id);
 
     public List<PessoaJuridicaResponseDTO> getNome(@PathParam("nome") String nome);
+    
+    public List<PessoaJuridicaResponseDTO> getCnpj(@PathParam("cnj") String cnpj);
 
     public Response insert(PessoaJuridicaDTO pessoajuridicaDTO);
 
