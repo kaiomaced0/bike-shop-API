@@ -67,22 +67,22 @@ public class ItemCompraServiceImpl implements ItemCompraService {
         }
     }
 
-    @Override
-    @Transactional
-    public ItemCompra update(long id, ItemCompra itemcompra){
+    // @Override
+    // @Transactional
+    // public ItemCompra update(long id, ItemCompra itemcompra){
         
-        try {
-            LOG.info("Requisição ItemCompra.update()");
-            ItemCompra entity = repository.findById(id);
-            entity.setNome(itemcompra.getNome());
-            return entity;
+    //     try {
+    //         LOG.info("Requisição ItemCompra.update()");
+    //         ItemCompra entity = repository.findById(id);
+    //         entity.setNome(itemcompra.getNome());
+    //         return entity;
             
-        } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição ItemCompra.update()");
-            return null;
-        }
+    //     } catch (Exception e) {
+    //         LOG.error("Erro ao rodar Requisição ItemCompra.update()");
+    //         return null;
+    //     }
         
-    }
+    // }
     
    @Override
    @Transactional

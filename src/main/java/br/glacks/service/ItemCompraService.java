@@ -14,7 +14,7 @@ public interface ItemCompraService {
 
     public Response insert(ItemCompra itemCompra);
 
-    public ItemCompra update(@PathParam("id") long id, ItemCompra itemCompra);
+    // public ItemCompra update(@PathParam("id") long id, ItemCompra itemCompra);
     
     public Response delete(@PathParam("id") Long id);
 }

@@ -51,13 +51,13 @@ public class ItemCompraResource {
         return itemCompraService.insert(itemcompra);
     }
 
-    @PUT
-    @RolesAllowed({"Admin", "User"})
-    @Path("/{id}")
-    @Transactional
-    public ItemCompra update(@PathParam("id") long id, ItemCompra itemcompra){
-        return itemCompraService.update(id, itemcompra);
-    }
+    // @PUT
+    // @RolesAllowed({"Admin", "User"})
+    // @Path("/{id}")
+    // @Transactional
+    // public ItemCompra update(@PathParam("id") long id, ItemCompra itemcompra){
+    //     return itemCompraService.update(id, itemcompra);
+    // }
 
     @PUT
     @RolesAllowed({"Admin"})
