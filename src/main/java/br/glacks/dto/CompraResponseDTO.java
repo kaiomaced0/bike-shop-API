@@ -33,7 +33,7 @@ public record CompraResponseDTO(
 
         Boolean pago,
 
-        Cupom cupom) {
+        CupomResponseDTO cupom) {
 
     public CompraResponseDTO (Compra compra){
         this(compra.getUsuario().getId(), compra.getListaItemCompra().stream()
@@ -42,7 +42,7 @@ public record CompraResponseDTO(
                      compra.getValorTotal(),
             compra.getFormaPagamento(), compra.getStatusPedido(), compra.getToken(), compra.getCodigoRastreio(),
                 compra.getDataPrevista(), compra.getDataEntrega(), new EnderecoResponseDTO(compra.getEnderecoEntrega()), compra.getPago(),
-                compra.getCupom());
+                new CupomResponseDTO(compra.getCupom()));
     }
 
 }

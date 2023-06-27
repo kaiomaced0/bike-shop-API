@@ -14,6 +14,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import br.glacks.dto.CompraDTO;
 import br.glacks.dto.CompraResponseDTO;
 import br.glacks.model.Compra;
 import br.glacks.service.CompraService;
@@ -60,18 +61,18 @@ public class CompraResource {
 
     @POST
     @Transactional
-    @RolesAllowed({"User"})
-    public Response insert(Compra compra){
+    @RolesAllowed({"User", "UserCnpj"})
+    public Response insert(CompraDTO compra){
         return compraService.insert(compra);
     }
 
-    @PUT
-    @Path("/{id}")
-    @Transactional
-    @RolesAllowed({"Admin"})
-    public Compra update(@PathParam("id") long id, Compra compra){
-        return compraService.update(id, compra);
-    }
+    // @PUT
+    // @Path("/{id}")
+    // @Transactional
+    // @RolesAllowed({"Admin"})
+    // public Compra update(@PathParam("id") long id, Compra compra){
+    //     return compraService.update(id, compra);
+    // }
 
     
     @PUT

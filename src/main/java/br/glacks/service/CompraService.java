@@ -3,6 +3,7 @@ import java.util.List;
 
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
+import br.glacks.dto.CompraDTO;
 import br.glacks.dto.CompraResponseDTO;
 import br.glacks.model.Compra;
 
@@ -16,9 +17,9 @@ public interface CompraService {
     
     public Response mudarStatusPedido(long id, int idStatusPedido);
 
-    public Response insert(Compra compraDTO);
+    public Response insert(CompraDTO compraDTO);
 
-    public Compra update(@PathParam("id") long id, Compra compra);
+    // public Compra update(@PathParam("id") long id, Compra compra);
     
     public Response delete(@PathParam("id") Long id);
 

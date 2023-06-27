@@ -9,16 +9,16 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import br.glacks.dto.CompraDTO;
 import br.glacks.dto.CompraResponseDTO;
 import br.glacks.model.Compra;
-import br.glacks.model.ItemCompra;
 import br.glacks.model.StatusPedido;
 import br.glacks.model.Usuario;
 import br.glacks.repository.CompraRepository;
-import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.CompraService;
 import br.glacks.service.ProdutoService;
 import br.glacks.service.UsuarioLogadoService;
+import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -33,7 +33,7 @@ public class CompraServiceImpl implements CompraService {
     UsuarioLogadoService usuarioLogado;
 
     @Inject
-    UsuarioRepository usuarioRepository;
+    UsuarioService usuarioService;
 
     @Inject
     ProdutoService produtoService;
@@ -55,7 +55,8 @@ public class CompraServiceImpl implements CompraService {
     public List<CompraResponseDTO> getAllOn() {
         try {
             LOG.info("Requisição Compra.getAll()");
-            Usuario user = usuarioRepository.findById(usuarioLogado.getPerfilUsuarioLogado().id());
+            Usuario user = usuarioService.getId(usuarioLogado.getPerfilUsuarioLogado().id());
+
             return user.getCompras().stream().map(compra -> new CompraResponseDTO(compra))
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -94,42 +95,20 @@ public class CompraServiceImpl implements CompraService {
 
     @Override
     @Transactional
-    public Response insert(Compra compra) {
-        if (compra != null) {
+    public Response insert(CompraDTO compra) {
 
-            Usuario entity = usuarioRepository.findByLogin(
-                    usuarioLogado.getPerfilUsuarioLogado().login());
-            compra.setUsuario(entity);
-            compra.setStatusPedido(StatusPedido.PREPARANDO);
-
-            for (ItemCompra item : compra.getListaItemCompra()) {
-                try {
-                    produtoService.retiraEstoque(item.getProduto().getId(), item.getQuantidade());
-                } catch (Exception e) {
-                    LOG.error("Erro ao rodar Requisição Compra.insert()");
-                    return Response.status(Status.NO_CONTENT).build();
-                }
-            }
-            repository.persist(compra);
-            LOG.info("Requisição Compra.insert()");
-            return Response.ok(compra).build();
-        }
-        return Response.status(Status.NO_CONTENT).build();
-
-    }
-
-    @Override
-    @Transactional
-    public Compra update(long id, Compra compra) {
         try {
-            LOG.info("Requisição Compra.update()");
-            Compra entity = repository.findById(id);
-            entity.setNome(compra.getNome());
-            return entity;
+            Compra c = CompraDTO.criaCompra(compra);
+            repository.persist(c);
+
+            LOG.info("Requisição Compra.insert()");
+
+            return Response.ok(new CompraResponseDTO(c)).build();
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Compra.update()");
-            return null;
+            LOG.error("Erro ao rodar Requisição Compra.insert()");
+            return Response.status(Status.NO_CONTENT).build();
         }
+
     }
 
     @Override
