@@ -9,12 +9,12 @@ public record CartaoResponseDTO(
     Long id,
     String nome,
     @Enumerated BandeiraCartao bandeiraCartao,
-    UsuarioResponseDTO usuarioResponseDTO
+    Long idUsuario
     
 ) {
     public CartaoResponseDTO(Cartao cartao){
         this(cartao.getId(), cartao.getNome(),
-         cartao.getBandeiraCartao(), new UsuarioResponseDTO(cartao.getUsuario()));
+         cartao.getBandeiraCartao(), cartao.getUsuario().getId());
     }
     
 }
