@@ -135,4 +135,10 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
     }
 
+    @Override
+    public PessoaJuridicaResponseDTO update(long id, PessoaJuridicaDTO pessoajuridica) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
 }

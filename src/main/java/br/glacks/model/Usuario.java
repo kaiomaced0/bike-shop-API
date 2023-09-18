@@ -49,7 +49,7 @@ public class Usuario extends EntityClass {
     @OneToMany
     @JoinColumn(name = "lista_compra_usuario")
     private List<Compra> compras;
-    
+
     public String getLogin() {
         return login;
     }

@@ -9,17 +9,17 @@ import br.glacks.model.Cupom;
 
 public interface CupomService {
     
-    public List<Cupom> getAll();
+    public List<CupomResponseDTO> getAll();
 
-    public Cupom getId(@PathParam("id") long id);
+    public CupomResponseDTO getId(@PathParam("id") long id);
 
-    public List<Cupom> getNome(@PathParam("nome") String nome);
+    public List<CupomResponseDTO> getNome(@PathParam("nome") String nome);
 
     public Response insert(CupomDTO cupomDTO);
 
     public CupomResponseDTO getCodigo(@PathParam("codigo") String codigo);
 
-    public Cupom update(@PathParam("id") long id, CupomDTO cupom);
+    public Response update(@PathParam("id") long id, CupomDTO cupom);
     
     public Response delete(@PathParam("id") Long id);
 }

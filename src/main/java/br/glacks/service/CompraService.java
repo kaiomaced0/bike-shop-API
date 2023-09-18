@@ -13,7 +13,7 @@ public interface CompraService {
 
     public List<CompraResponseDTO> getAllOn();
 
-    public Compra getId(@PathParam("id") long id);
+    public CompraResponseDTO getId(@PathParam("id") long id);
     
     public Response mudarStatusPedido(long id, int idStatusPedido);
 

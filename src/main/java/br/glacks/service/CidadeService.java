@@ -1,6 +1,7 @@
 package br.glacks.service;
 import java.util.List;
 
+import br.glacks.dto.CidadeResponseDTO;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import br.glacks.dto.CidadeDTO;
@@ -8,9 +9,9 @@ import br.glacks.model.locais.Cidade;
 
 public interface CidadeService {
     
-    public List<Cidade> getAll();
+    public List<CidadeResponseDTO> getAll();
 
-    public Cidade getId(@PathParam("id") long id);
+    public CidadeResponseDTO getId(@PathParam("id") long id);
 
     public List<Cidade> getNome(@PathParam("nome") String nome);
 

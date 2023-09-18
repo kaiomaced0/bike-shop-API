@@ -1,10 +1,10 @@
 package br.glacks.model;
 
+import br.glacks.model.locais.Cidade;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import br.glacks.model.locais.Cidade;
 @Entity
 public class Endereco extends EntityClass{
 
