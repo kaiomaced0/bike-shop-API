@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 
@@ -24,10 +25,10 @@ public class CupomServiceImpl implements CupomService {
     CupomRepository repository;
 
     @Override
-    public List<Cupom> getAll() {
+    public List<CupomResponseDTO> getAll() {
         try {
             LOG.info("Requisição Cupom.getAll()");
-            return repository.findAll().list();
+            return repository.findAll().stream().map(CupomResponseDTO::new).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getAll()");
             return null;
@@ -36,10 +37,10 @@ public class CupomServiceImpl implements CupomService {
     }
 
     @Override
-    public Cupom getId(long id) {
+    public CupomResponseDTO getId(long id) {
         try {
             LOG.info("Requisição Cupom.getId()");
-            return repository.findById(id);
+            return new CupomResponseDTO(repository.findById(id));
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getId()");
             return null;
@@ -48,10 +49,10 @@ public class CupomServiceImpl implements CupomService {
     }
 
     @Override
-    public List<Cupom> getNome(String nome) {
+    public List<CupomResponseDTO> getNome(String nome) {
         try {
             LOG.info("Requisição Cupom.getNome()");
-            return repository.findByNome(nome);
+            return repository.findByNome(nome).stream().map(CupomResponseDTO::new).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getNome()");
             return null;
@@ -87,7 +88,7 @@ public class CupomServiceImpl implements CupomService {
 
     @Override
     @Transactional
-    public Cupom update(long id, CupomDTO cupom) {
+    public Response update(long id, CupomDTO cupom) {
         try {
             LOG.info("Requisição Cupom.update()");
             Cupom entity = repository.findById(id);
@@ -95,10 +96,10 @@ public class CupomServiceImpl implements CupomService {
             entity.setCodigo(cupom.codigo());
             entity.setQuantidade(cupom.quantidade());
             entity.setValorDesconto(cupom.valorDesconto());
-            return entity;
+            return Response.accepted(new CupomResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.update()");
-            return null;
+            return Response.status(Status.NO_CONTENT).build();
         }
 
     }
@@ -114,7 +115,7 @@ public class CupomServiceImpl implements CupomService {
             return Response.status(Status.OK).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.delete()");
-            return null;
+            return Response.status(Status.NO_CONTENT).build();
         }
 
     }

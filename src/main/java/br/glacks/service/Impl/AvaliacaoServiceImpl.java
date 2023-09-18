@@ -42,7 +42,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
             LOG.info("Requisição Avaliacao.getAll() - " + repository.count() + " itens.");
             return repository.findAll()
                     .stream()
-                    .map(avaliacao -> new AvaliacaoResponseDTO(avaliacao))
+                    .map(AvaliacaoResponseDTO::new)
                     .collect(Collectors.toList());
 
         } catch (Exception e) {

@@ -44,7 +44,7 @@ public class CartaoServiceImpl implements CartaoService {
             LOG.info("Requisição Cartao.getAll()");
             return repository.findAll()
             .stream()
-            .map(cartao -> new CartaoResponseDTO(cartao))
+            .map(CartaoResponseDTO::new)
             .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cartao.getAll()");

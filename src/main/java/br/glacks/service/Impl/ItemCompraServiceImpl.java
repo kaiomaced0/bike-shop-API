@@ -1,14 +1,15 @@
 package br.glacks.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.glacks.dto.ItemCompraResponseDTO;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
 import br.glacks.model.ItemCompra;
 import br.glacks.repository.ItemCompraRepository;
 import br.glacks.service.ItemCompraService;
@@ -23,11 +24,11 @@ public class ItemCompraServiceImpl implements ItemCompraService {
     ItemCompraRepository repository;
     
     @Override
-    public List<ItemCompra> getAll(){
+    public List<ItemCompraResponseDTO> getAll(){
         
         try {
             LOG.info("Requisição ItemCompra.getAll()");
-            return repository.findAll().list();
+            return repository.findAll().stream().map(ItemCompraResponseDTO::new).collect(Collectors.toList());
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição ItemCompra.getAll()");
@@ -37,11 +38,11 @@ public class ItemCompraServiceImpl implements ItemCompraService {
     }
 
     @Override
-    public ItemCompra getId(long id){
+    public ItemCompraResponseDTO getId(long id){
         
         try {
             LOG.info("Requisição ItemCompra.getId()");
-            return repository.findById(id);
+            return new ItemCompraResponseDTO(repository.findById(id));
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição ItemCompra.getId()");
@@ -63,7 +64,7 @@ public class ItemCompraServiceImpl implements ItemCompraService {
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição ItemCompra.insert()");
-            return null;
+            return Response.status(Status.NO_CONTENT).build();
         }
     }
 
@@ -95,7 +96,7 @@ public class ItemCompraServiceImpl implements ItemCompraService {
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição ItemCompra.delete()");
-            return null;
+            return Response.status(Status.NO_CONTENT).build();
         }
         
     }

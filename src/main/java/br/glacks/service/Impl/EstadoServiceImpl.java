@@ -1,7 +1,9 @@
 package br.glacks.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.glacks.dto.EstadoResponseDTO;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -22,11 +24,11 @@ public class EstadoServiceImpl implements EstadoService {
     EstadoRepository repository;
     
     @Override
-    public List<Estado> getAll(){
+    public List<EstadoResponseDTO> getAll(){
         
         try {
             LOG.info("Requisição Estado.getAll()");
-            return repository.findAll().list();
+            return repository.findAll().list().stream().map(EstadoResponseDTO::new).collect(Collectors.toList());
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Estado.getAll()");
@@ -37,10 +39,10 @@ public class EstadoServiceImpl implements EstadoService {
     }
 
     @Override
-    public Estado getId(long id){
+    public EstadoResponseDTO getId(long id){
         try {
             LOG.info("Requisição Estado.getId()");
-            return repository.findById(id);
+            return new EstadoResponseDTO(repository.findById(id));
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Estado.getId()");
@@ -65,16 +67,16 @@ public class EstadoServiceImpl implements EstadoService {
 
     @Override
     @Transactional
-    public Estado update(long id, Estado estado){
+    public Response update(long id, Estado estado){
         try {
             LOG.info("Requisição Estado.update()");
             Estado entity = repository.findById(id);
             entity.setNome(estado.getNome());
-            return entity;
+            return Response.accepted(entity).build();
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Estado.update()");
-            return null;
+            return Response.status(Status.NO_CONTENT).build();
         }
     }
     
@@ -90,7 +92,7 @@ public class EstadoServiceImpl implements EstadoService {
         
     } catch (Exception e) {
         LOG.error("Erro ao rodar Requisição Estado.delete()");
-        return null;
+        return Response.status(Status.NO_CONTENT).build();
     }
     }
 

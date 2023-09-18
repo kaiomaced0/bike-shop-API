@@ -32,7 +32,7 @@ public class BikeServiceImpl implements BikeService {
             return repository.findAll()
                     .stream()
                     .sorted(Comparator.comparing(bike -> bike.getId()))
-                    .map(bike -> new BikeResponseDTO(bike))
+                    .map(BikeResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Bike.getAll()");

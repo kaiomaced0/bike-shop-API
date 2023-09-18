@@ -1,7 +1,9 @@
 package br.glacks.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import br.glacks.dto.CidadeResponseDTO;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -26,10 +28,10 @@ public class CidadeServiceImpl implements CidadeService {
     private static final Logger LOG = Logger.getLogger(CidadeServiceImpl.class);
 
     @Override
-    public List<Cidade> getAll() {
+    public List<CidadeResponseDTO> getAll() {
         try {
             LOG.info("Requisição Cidade.getAll()");
-            return repository.findAll().list();
+            return repository.findAll().stream().map(CidadeResponseDTO::new).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.getAll()");
             return null;
@@ -38,11 +40,11 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
-    public Cidade getId(long id) {
+    public CidadeResponseDTO getId(long id) {
         try {
             LOG.info("Requisição Cidade.getId()");
 
-            return repository.findById(id);
+            return new CidadeResponseDTO(repository.findById(id));
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.getId()");
             return null;

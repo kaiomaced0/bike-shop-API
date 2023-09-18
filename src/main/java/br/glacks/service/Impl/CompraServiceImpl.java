@@ -16,7 +16,6 @@ import br.glacks.model.StatusPedido;
 import br.glacks.model.Usuario;
 import br.glacks.repository.CompraRepository;
 import br.glacks.service.CompraService;
-import br.glacks.service.ProdutoService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -35,14 +34,11 @@ public class CompraServiceImpl implements CompraService {
     @Inject
     UsuarioService usuarioService;
 
-    @Inject
-    ProdutoService produtoService;
-
     @Override
     public List<CompraResponseDTO> getAll() {
         try {
             LOG.info("Requisição Compra.getAll()");
-            return repository.findAll().stream().map(compra -> new CompraResponseDTO(compra))
+            return repository.findAll().stream().map(CompraResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Compra.getAll()");
@@ -57,7 +53,7 @@ public class CompraServiceImpl implements CompraService {
             LOG.info("Requisição Compra.getAll()");
             Usuario user = usuarioService.getId(usuarioLogado.getPerfilUsuarioLogado().id());
 
-            return user.getCompras().stream().map(compra -> new CompraResponseDTO(compra))
+            return user.getCompras().stream().map(CompraResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Compra.getAll()");
@@ -67,10 +63,10 @@ public class CompraServiceImpl implements CompraService {
     }
 
     @Override
-    public Compra getId(long id) {
+    public CompraResponseDTO getId(long id) {
         try {
             LOG.info("Requisição Compra.getId()");
-            return repository.findById(id);
+            return new CompraResponseDTO(repository.findById(id));
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Compra.getId()");
             return null;
@@ -130,7 +126,7 @@ public class CompraServiceImpl implements CompraService {
     @Transactional
     public Response realizarPagamentoCompra(long id, String tokenPagamento) {
 
-        Compra entity = getId(id);
+        Compra entity = repository.findById(id);
         if (entity != null) {
             entity.setStatusPedido(StatusPedido.PREPARANDO);
             entity.setPago(true);

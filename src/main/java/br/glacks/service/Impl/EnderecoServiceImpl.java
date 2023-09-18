@@ -30,7 +30,7 @@ public class EnderecoServiceImpl implements EnderecoService {
             LOG.info("Requisição endereco.getAll()");
             return repository.findAll()
                     .stream()
-                    .map(endereco -> new EnderecoResponseDTO(endereco))
+                    .map(EnderecoResponseDTO::new)
                     .collect(Collectors.toList());
 
         } catch (Exception e) {
