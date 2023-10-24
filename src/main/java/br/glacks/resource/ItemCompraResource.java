@@ -3,6 +3,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.ItemCompraResponseDTO;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -31,7 +32,7 @@ public class ItemCompraResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<ItemCompra> gettAll(){
+    public List<ItemCompraResponseDTO> gettAll(){
         return itemCompraService.getAll();
         
     }
@@ -39,7 +40,7 @@ public class ItemCompraResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public ItemCompra getId(@PathParam("id") long id){
+    public ItemCompraResponseDTO getId(@PathParam("id") long id){
         return itemCompraService.getId(id);
         
     }

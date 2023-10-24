@@ -3,6 +3,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.EstadoResponseDTO;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -34,7 +35,7 @@ public class EstadoResource {
 
     @GET
     @PermitAll
-    public List<Estado> gettAll(){
+    public List<EstadoResponseDTO> gettAll(){
         return estadoService.getAll();
         
     }
@@ -42,7 +43,7 @@ public class EstadoResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public Estado getId(@PathParam("id") long id){
+    public EstadoResponseDTO getId(@PathParam("id") long id){
         return estadoService.getId(id);
         
     }
@@ -58,7 +59,7 @@ public class EstadoResource {
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
-    public Estado update(@PathParam("id") long id, Estado estado){
+    public Response update(@PathParam("id") long id, Estado estado){
         return estadoService.update(id, estado);
     }
 

@@ -3,6 +3,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.CidadeResponseDTO;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -32,7 +33,7 @@ public class CidadeResource {
 
     @GET
     @PermitAll
-    public List<Cidade> gettAll(){
+    public List<CidadeResponseDTO> gettAll(){
         return cidadeService.getAll();
         
     }
@@ -47,7 +48,7 @@ public class CidadeResource {
     @GET
     @Path("/{id}")
     @RolesAllowed({"Admin"})
-    public Cidade getId(@PathParam("id") long id){
+    public CidadeResponseDTO getId(@PathParam("id") long id){
         return cidadeService.getId(id);
         
     }

@@ -58,7 +58,7 @@ public class UsuarioResourceTeste {
   @Test
   public void insertTest() {
 
-    UsuarioDTO usuarioDTO = new UsuarioDTO("usuariouser", "usuariouser",
+    UsuarioDTO usuarioDTO = new UsuarioDTO("usuariouser",
         "cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==", "user@gmail.com");
 
     given()

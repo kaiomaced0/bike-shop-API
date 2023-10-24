@@ -46,7 +46,7 @@ public class CompraResource {
     @GET
     @Path("/{id}")
     @RolesAllowed({"Admin"})
-    public Compra getId(@PathParam("id") long id){
+    public CompraResponseDTO getId(@PathParam("id") long id){
         return compraService.getId(id);
         
     }

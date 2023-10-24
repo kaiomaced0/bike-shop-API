@@ -1,15 +1,11 @@
 package br.glacks;
 
+import br.glacks.dto.*;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.response.Response;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import br.glacks.dto.AuthUsuarioDTO;
-import br.glacks.dto.PessoaFisicaDTO;
-import br.glacks.dto.PessoaJuridicaDTO;
-import br.glacks.dto.TelefoneDTO;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -58,7 +54,8 @@ public class PessoaFisicaResourceTeste {
 
   @Test
   public void insertTest() {
-    PessoaFisicaDTO p = new PessoaFisicaDTO(null, "000023823");
+    PessoaFisicaDTO p = new PessoaFisicaDTO("pessoa teste", "teste 0000", new UsuarioDTO("usuariouser",
+            "cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==", "user@gmail.com"));
     
     given()
         .header("Authorization", "Bearer " + token)
@@ -73,7 +70,8 @@ public class PessoaFisicaResourceTeste {
   @Test
   public void updateTest() {
 
-    PessoaFisicaDTO p = new PessoaFisicaDTO(null, "3242");
+    PessoaFisicaDTO p = new PessoaFisicaDTO("teste", "3242", new UsuarioDTO("usuariouser",
+            "cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==", "user@gmail.com"));
     
     given()
         .pathParam("id", 100)

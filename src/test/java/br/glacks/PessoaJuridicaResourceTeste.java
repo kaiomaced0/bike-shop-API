@@ -1,16 +1,11 @@
 package br.glacks;
 
+import br.glacks.dto.*;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.response.Response;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import br.glacks.dto.AuthUsuarioDTO;
-import br.glacks.dto.PessoaFisicaDTO;
-import br.glacks.dto.PessoaJuridicaDTO;
-import br.glacks.dto.ProdutoDTO;
-import br.glacks.dto.TelefoneDTO;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -59,7 +54,8 @@ public class PessoaJuridicaResourceTeste {
   
   @Test
   public void insertTest() {
-    PessoaJuridicaDTO p = new PessoaJuridicaDTO(null, "10101010");
+    PessoaJuridicaDTO p = new PessoaJuridicaDTO("teste", "10101010", "razer social teste" ,new UsuarioDTO("usuariouser",
+            "cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==", "user@gmail.com"));
     given()
         .header("Authorization", "Bearer " + token)
         .contentType("application/json")
@@ -73,8 +69,9 @@ public class PessoaJuridicaResourceTeste {
   @Test
   public void updateTest() {
 
-    PessoaJuridicaDTO p = new PessoaJuridicaDTO(null, "00000087");
-    
+    PessoaJuridicaDTO p = new PessoaJuridicaDTO("teste", "10101010", "razer social teste" ,new UsuarioDTO("usuariouser",
+            "cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==", "user@gmail.com"));
+
     given()
         .pathParam("id", 101)
         .header("Authorization", "Bearer " + token)

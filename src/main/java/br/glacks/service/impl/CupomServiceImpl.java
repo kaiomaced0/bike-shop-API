@@ -19,7 +19,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CupomServiceImpl implements CupomService {
 
-    public static final Logger LOG = Logger.getLogger(AvaliacaoServiceImpl.class);
+    public static final Logger LOG = Logger.getLogger(CupomServiceImpl.class);
 
     @Inject
     CupomRepository repository;

@@ -23,7 +23,6 @@ public record CompraDTO(
         Compra compra = new Compra();
         compra.setListaItemCompra(c.listaItemCompraDTO.stream().map(
                 itemCompra -> ItemCompraDTO.criaItemCompra(itemCompra)).collect(Collectors.toList()));
-        compra.setCupom(cupom.getId(c.idCupom));
         compra.setEnderecoEntrega(end.findById(c.idEndereco));
         compra.setFormaPagamento(FormaPagamento.valueOf(c.formaPagamento));
         compra.setStatusPedido(StatusPedido.PREPARANDO);
