@@ -39,13 +39,13 @@ public class CartaoServiceImpl implements CartaoService {
     UsuarioRepository usuarioRepository;
     
     @Override
-    public List<CartaoResponseDTO> getAll(){
+    public Response getAll(){
         try {
             LOG.info("Requisição Cartao.getAll()");
-            return repository.findAll()
+            return Response.ok(repository.findAll()
             .stream()
             .map(CartaoResponseDTO::new)
-            .collect(Collectors.toList());
+            .collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cartao.getAll()");
             return null;
@@ -54,10 +54,10 @@ public class CartaoServiceImpl implements CartaoService {
     }
 
     @Override
-    public CartaoResponseDTO getId(long id){
+    public Response getId(long id){
         try {
             LOG.info("Requisição Cartao.getId()");
-            return new CartaoResponseDTO(repository.findById(id));
+            return Response.ok(new CartaoResponseDTO(repository.findById(id))).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cartao.getId()");
             return null;

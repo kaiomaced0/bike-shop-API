@@ -9,9 +9,9 @@ import br.glacks.dto.CartaoResponseDTO;
 
 public interface CartaoService {
     
-    public List<CartaoResponseDTO> getAll();
+    public Response getAll();
 
-    public CartaoResponseDTO getId(@PathParam("id") long id);
+    public Response getId(@PathParam("id") long id);
 
     public Response insert(CartaoDTO cartaoDTO);
 
