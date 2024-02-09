@@ -37,13 +37,13 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     UsuarioLogadoService usuarioLogado;
 
     @Override
-    public List<AvaliacaoResponseDTO> getAll() {
+    public Response getAll() {
         try {
             LOG.info("Requisição Avaliacao.getAll() - " + repository.count() + " itens.");
-            return repository.findAll()
-                    .stream()
-                    .map(AvaliacaoResponseDTO::new)
-                    .collect(Collectors.toList());
+            return Response.ok(repository.findAll()
+            .stream()
+            .map(AvaliacaoResponseDTO::new)
+            .collect(Collectors.toList())).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Avaliacao.getAll()");
@@ -53,11 +53,11 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     }
 
     @Override
-    public AvaliacaoResponseDTO getId(long id) {
+    public Response getId(long id) {
         try {
 
             LOG.info("Requisição Avaliacao.getId()");
-            return new AvaliacaoResponseDTO(repository.findById(id));
+            return Response.ok(new AvaliacaoResponseDTO(repository.findById(id))).build();
 
         } catch (Exception e) {
 
@@ -91,14 +91,14 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     @Override
     @Transactional
-    public AvaliacaoResponseDTO update(long id, AvaliacaoDTO avaliacao) {
+    public Response update(long id, AvaliacaoDTO avaliacao) {
         try {
             
             Avaliacao entity = repository.findById(id);
             entity.setEstrela(avaliacao.estrela());
             entity.setComentario(avaliacao.comentario());
             LOG.info("Requisição Avaliacao.update()");
-            return new AvaliacaoResponseDTO(entity);
+            return Response.ok(new AvaliacaoResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Avaliacao.update()");
             return null;
