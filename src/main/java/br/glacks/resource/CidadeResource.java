@@ -33,14 +33,14 @@ public class CidadeResource {
 
     @GET
     @PermitAll
-    public List<CidadeResponseDTO> gettAll(){
+    public Response gettAll(){
         return cidadeService.getAll();
         
     }
 
     @GET
     @Path("/nome/{nome}")
-    public List<Cidade> getNome(@PathParam("nome") String nome){
+    public Response getNome(@PathParam("nome") String nome){
         return cidadeService.getNome(nome);
     
     }
@@ -48,7 +48,7 @@ public class CidadeResource {
     @GET
     @Path("/{id}")
     @RolesAllowed({"Admin"})
-    public CidadeResponseDTO getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return cidadeService.getId(id);
         
     }

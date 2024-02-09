@@ -28,10 +28,10 @@ public class CidadeServiceImpl implements CidadeService {
     private static final Logger LOG = Logger.getLogger(CidadeServiceImpl.class);
 
     @Override
-    public List<CidadeResponseDTO> getAll() {
+    public Response getAll() {
         try {
             LOG.info("Requisição Cidade.getAll()");
-            return repository.findAll().stream().map(CidadeResponseDTO::new).collect(Collectors.toList());
+            return Response.ok(repository.findAll().stream().map(CidadeResponseDTO::new).collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.getAll()");
             return null;
@@ -40,11 +40,11 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
-    public CidadeResponseDTO getId(long id) {
+    public Response getId(long id) {
         try {
             LOG.info("Requisição Cidade.getId()");
 
-            return new CidadeResponseDTO(repository.findById(id));
+            return Response.ok(new CidadeResponseDTO(repository.findById(id))).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.getId()");
             return null;
@@ -53,10 +53,10 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
-    public List<Cidade> getNome(String nome) {
+    public Response getNome(String nome) {
         try {
             LOG.info("Requisição Cidade.getNome()");
-            return repository.findByNome(nome);
+            return Response.ok(repository.findByNome(nome)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.getNome()");
             return null;

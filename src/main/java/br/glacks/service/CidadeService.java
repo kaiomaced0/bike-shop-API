@@ -9,11 +9,11 @@ import br.glacks.model.locais.Cidade;
 
 public interface CidadeService {
     
-    public List<CidadeResponseDTO> getAll();
+    public Response getAll();
 
-    public CidadeResponseDTO getId(@PathParam("id") long id);
+    public Response getId(@PathParam("id") long id);
 
-    public List<Cidade> getNome(@PathParam("nome") String nome);
+    public Response getNome(@PathParam("nome") String nome);
 
     public Response insert(CidadeDTO cidadeDTO);
 
