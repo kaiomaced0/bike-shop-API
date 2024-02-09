@@ -1,9 +1,12 @@
 package br.glacks.model;
 
+import java.time.LocalDateTime;
+
 import br.glacks.model.locais.Cidade;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Endereco extends EntityClass{
@@ -26,7 +29,12 @@ public class Endereco extends EntityClass{
 
     private String descricao;
 
-    private Boolean principal = false;
+    private Boolean principal;
+
+    @PrePersist
+    private void gerarDataInclusao() {
+        principal = false;
+    }
     
 
     public Cidade getCidade() {
