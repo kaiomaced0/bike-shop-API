@@ -1,5 +1,6 @@
 package br.glacks.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import jakarta.ws.rs.core.Response.Status;
 import br.glacks.dto.TelefoneDTO;
 import br.glacks.dto.TelefoneResponseDTO;
 import br.glacks.model.Telefone;
+import br.glacks.model.Usuario;
 import br.glacks.repository.TelefoneRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.TelefoneService;
@@ -74,6 +76,14 @@ public class TelefoneServiceImpl implements TelefoneService {
             tell.setCodigoArea(telefone.codigoArea());
             tell.setNumero(telefone.numero());
             tell.setProprietario(usuarioRepository.findById(telefone.proprietarioId().longValue()));
+            Usuario u = usuarioRepository.findById(telefone.proprietarioId().longValue());
+            if(u.getTelefones() == null){
+                List<Telefone> telefones = new ArrayList<Telefone>();
+                telefones.add(tell);
+                u.setTelefones(telefones);
+            }else{
+                u.getTelefones().add(tell);
+            }
             repository.persist(tell);
             return Response.ok(telefone).build();
         } catch (Exception e) {

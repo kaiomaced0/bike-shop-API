@@ -1,6 +1,8 @@
 package br.glacks.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -223,12 +225,20 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Override
     public Response telefoneInsert(TelefoneUsuarioLogadoDTO telefoneUsuarioLogadoDTO) {
         try {
-            Usuario usuarioLUsuario = repository.findByLogin(jsonWebToken.getSubject());
+            Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
             Telefone tell = new Telefone();
             tell.setAtivo(true);
             tell.setCodigoArea(telefoneUsuarioLogadoDTO.codigoArea());
             tell.setNumero(telefoneUsuarioLogadoDTO.numero());
-            tell.setProprietario(usuarioLUsuario);
+            tell.setProprietario(usuariolUsuario);
+            
+            if(usuariolUsuario.getTelefones() == null){
+                List<Telefone> telefones = new ArrayList<Telefone>();
+                telefones.add(tell);
+                usuariolUsuario.setTelefones(telefones);
+            }else{
+                usuariolUsuario.getTelefones().add(tell);
+            }
             return Response.ok(new TelefoneResponseDTO(tell)).build();
         } catch (Exception e) {
             return Response.status(Status.BAD_REQUEST).entity(e).build();
