@@ -1,5 +1,7 @@
 package br.glacks.model;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -10,19 +12,17 @@ import jakarta.validation.constraints.Size;
 @PrimaryKeyJoinColumn(name = "id")
 public class PessoaFisica extends Usuario{
     
-    @NotBlank
+    @NotBlank(message = "O campo 'nome' nao pode ser vazio (2 - 50 caracteres)")
     @Size(min = 2, max = 50)
     private String nome;
 
-    @Size(min = 11, max = 11)
+    @CPF
     private String cpf; 
     
     @Column(name ="data_nascimento")
     private String dataNascimento;
     
     private String sobrenome;
-
-
 
     public String getNome() {
         return nome;
