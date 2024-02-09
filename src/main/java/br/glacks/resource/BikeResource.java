@@ -15,6 +15,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import br.glacks.dto.BikeDTO;
 import br.glacks.dto.BikeResponseDTO;
 import br.glacks.model.bike.Bike;
 import br.glacks.service.BikeService;
@@ -29,7 +30,7 @@ public class BikeResource {
     
     @GET
     @PermitAll
-    public List<BikeResponseDTO> gettAll(){
+    public Response gettAll(){
         return bikeService.getAll();
         
     }
@@ -37,7 +38,7 @@ public class BikeResource {
     @GET
     @PermitAll
     @Path("/nome/{nome}")
-    public List<Bike> getNome(@PathParam("nome") String nome){
+    public Response getNome(@PathParam("nome") String nome){
         return bikeService.getNome(nome);
     
     }
@@ -45,7 +46,7 @@ public class BikeResource {
     @GET
     @PermitAll
     @Path("/{id}")
-    public Bike getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return bikeService.getId(id);
         
     }
@@ -53,15 +54,15 @@ public class BikeResource {
     @POST
     @Transactional
     @RolesAllowed({"Admin"})
-    public Response insert(Bike bike){
+    public Response insert(BikeDTO bike){
         return bikeService.insert(bike);
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/update/{id}")
     @Transactional
     @RolesAllowed({"Admin"})
-    public Bike update(@PathParam("id") long id, Bike bike){
+    public Response update(@PathParam("id") long id, BikeDTO bike){
         return bikeService.update(id, bike);
     }
 
