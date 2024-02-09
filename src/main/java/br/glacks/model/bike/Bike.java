@@ -11,7 +11,7 @@ import br.glacks.model.Produto;
 @Entity
 public class Bike extends Produto{
 
-    private Integer marcha;
+    private String marcha;
 
     private String freio;
 
@@ -28,11 +28,11 @@ public class Bike extends Produto{
     private TipoBike tipoBike;
 
 
-    public Integer getMarcha() {
+    public String getMarcha() {
         return marcha;
     }
 
-    public void setMarcha(Integer marcha) {
+    public void setMarcha(String marcha) {
         this.marcha = marcha;
     }
 
