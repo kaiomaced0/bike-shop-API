@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import br.glacks.dto.TelefoneUsuarioLogadoDTO;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.dto.UsuarioUpdateEmailDTO;
 import br.glacks.dto.UsuarioUpdateLoginDTO;
@@ -15,6 +16,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -67,6 +69,12 @@ public class UsuarioLogadoResource {
     public UsuarioResponseDTO getPerfilUsuario(){
         return usuarioLogado.getPerfilUsuarioLogado();
         
+    }
+
+    @POST
+    @RolesAllowed({"User"})
+    public Response insertTelefone(TelefoneUsuarioLogadoDTO dto){
+        return usuarioLogado.telefoneInsert(dto);
     }
 
     @PUT

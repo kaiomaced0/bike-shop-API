@@ -2,6 +2,7 @@ package br.glacks.service;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import br.glacks.dto.TelefoneUsuarioLogadoDTO;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.dto.UsuarioUpdateEmailDTO;
 import br.glacks.dto.UsuarioUpdateLoginDTO;
@@ -20,6 +21,8 @@ public interface UsuarioLogadoService {
     public UsuarioResponseDTO updateNome(UsuarioUpdateNomeDTO nome);
 
     public UsuarioResponseDTO updateEmail(UsuarioUpdateEmailDTO email);
+
+    public Response telefoneInsert(TelefoneUsuarioLogadoDTO telefoneUsuarioLogadoDTO);
     
     public UsuarioResponseDTO getPerfilUsuarioLogado();
 

@@ -30,7 +30,7 @@ public class AvaliacaoResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<AvaliacaoResponseDTO> gettAll(){
+    public Response gettAll(){
         return avaliacaoService.getAll();
         
     }
@@ -38,7 +38,7 @@ public class AvaliacaoResource {
     @GET
     @Path("/{id}")
     @RolesAllowed({"Admin"})
-    public AvaliacaoResponseDTO getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return avaliacaoService.getId(id);
         
     }
@@ -54,7 +54,7 @@ public class AvaliacaoResource {
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
-    public AvaliacaoResponseDTO update(@PathParam("id") long id, AvaliacaoDTO avaliacao){
+    public Response update(@PathParam("id") long id, AvaliacaoDTO avaliacao){
         return avaliacaoService.update(id, avaliacao);
     }
 

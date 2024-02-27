@@ -30,7 +30,7 @@ public class CartaoResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<CartaoResponseDTO> gettAll(){
+    public Response gettAll(){
         return cartaoService.getAll();
         
     }
@@ -38,7 +38,7 @@ public class CartaoResource {
     @GET
     @Path("/{id}")
     @RolesAllowed({"Admin"})
-    public CartaoResponseDTO getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return cartaoService.getId(id);
         
     }

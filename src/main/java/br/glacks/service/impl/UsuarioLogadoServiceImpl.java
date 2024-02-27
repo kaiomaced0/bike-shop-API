@@ -1,11 +1,15 @@
 package br.glacks.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.application.Result;
+import br.glacks.dto.TelefoneResponseDTO;
+import br.glacks.dto.TelefoneUsuarioLogadoDTO;
 import br.glacks.dto.UsuarioResponseDTO;
 import br.glacks.dto.UsuarioUpdateEmailDTO;
 import br.glacks.dto.UsuarioUpdateLoginDTO;
@@ -13,8 +17,10 @@ import br.glacks.dto.UsuarioUpdateNomeDTO;
 import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.form.ImageForm;
 import br.glacks.model.PessoaFisica;
+import br.glacks.model.Telefone;
 import br.glacks.model.Usuario;
 import br.glacks.repository.PessoaFisicaRepository;
+import br.glacks.repository.TelefoneRepository;
 import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.FileService;
 import br.glacks.service.HashService;
@@ -57,6 +63,9 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     
     @Inject
     HashService hash;
+
+    @Inject
+    TelefoneRepository telefoneRepository;
 
     @Override
     @Transactional
@@ -211,6 +220,29 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             return null;
         }
 
+    }
+
+    @Override
+    public Response telefoneInsert(TelefoneUsuarioLogadoDTO telefoneUsuarioLogadoDTO) {
+        try {
+            Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
+            Telefone tell = new Telefone();
+            tell.setAtivo(true);
+            tell.setCodigoArea(telefoneUsuarioLogadoDTO.codigoArea());
+            tell.setNumero(telefoneUsuarioLogadoDTO.numero());
+            tell.setProprietario(usuariolUsuario);
+            
+            if(usuariolUsuario.getTelefones() == null){
+                List<Telefone> telefones = new ArrayList<Telefone>();
+                telefones.add(tell);
+                usuariolUsuario.setTelefones(telefones);
+            }else{
+                usuariolUsuario.getTelefones().add(tell);
+            }
+            return Response.ok(new TelefoneResponseDTO(tell)).build();
+        } catch (Exception e) {
+            return Response.status(Status.BAD_REQUEST).entity(e).build();
+        }
     }
 
 }

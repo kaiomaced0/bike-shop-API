@@ -9,13 +9,13 @@ import br.glacks.dto.AvaliacaoResponseDTO;
 
 public interface AvaliacaoService {
     
-    public List<AvaliacaoResponseDTO> getAll();
+    public Response getAll();
 
-    public AvaliacaoResponseDTO getId(@PathParam("id") long id);
+    public Response getId(@PathParam("id") long id);
 
     public Response insert(AvaliacaoDTO avaliacaoDTO);
 
-    public AvaliacaoResponseDTO update(@PathParam("id") long id, AvaliacaoDTO avaliacao);
+    public Response update(@PathParam("id") long id, AvaliacaoDTO avaliacao);
     
     public Response delete(@PathParam("id") Long id);
 }

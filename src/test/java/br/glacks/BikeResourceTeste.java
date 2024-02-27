@@ -62,7 +62,7 @@ public class BikeResourceTeste {
   @Test
   public void insertTest() {
 
-    BikeDTO b = new BikeDTO(new ProdutoDTO("bike 10", null, 200.00, Cor.BRANCO, 10), token, token, token, null, null);
+    BikeDTO b = new BikeDTO("bike 10", null, 200.00, Cor.BRANCO, 10, token, token, token, null, null);
     given()
         .header("Authorization", "Bearer " + token)
         .contentType("application/json")
