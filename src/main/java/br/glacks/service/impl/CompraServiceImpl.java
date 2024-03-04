@@ -3,6 +3,13 @@ package br.glacks.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.dto.ItemCompraDTO;
+import br.glacks.model.*;
+import br.glacks.model.pagamento.FormaPagamento;
+import br.glacks.repository.CupomRepository;
+import br.glacks.repository.EnderecoRepository;
+import br.glacks.repository.ItemCompraRepository;
+import br.glacks.service.CupomService;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -11,9 +18,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import br.glacks.dto.CompraDTO;
 import br.glacks.dto.CompraResponseDTO;
-import br.glacks.model.Compra;
-import br.glacks.model.StatusPedido;
-import br.glacks.model.Usuario;
 import br.glacks.repository.CompraRepository;
 import br.glacks.service.CompraService;
 import br.glacks.service.UsuarioLogadoService;
@@ -33,6 +37,18 @@ public class CompraServiceImpl implements CompraService {
 
     @Inject
     UsuarioService usuarioService;
+
+    @Inject
+    ItemCompraRepository itemCompraRepository;
+
+    @Inject
+    EnderecoRepository enderecoRepository;
+
+    @Inject
+    CupomRepository cupomRepository;
+
+    @Inject
+    CupomService cupomService;
 
     @Override
     public List<CompraResponseDTO> getAll() {
@@ -95,6 +111,27 @@ public class CompraServiceImpl implements CompraService {
 
         try {
             Compra c = CompraDTO.criaCompra(compra);
+            c.setValorTotal(0.0);
+            c.setListaItemCompra(compra.listaItemCompraDTO().stream().map(
+                    itemCompra -> {
+                        ItemCompra i = ItemCompraDTO.criaItemCompra(itemCompra);
+                        itemCompraRepository.persist(i);
+                        c.setValorTotal(c.getValorTotal() + i.getPreco());
+                        return i;
+                    }).collect(Collectors.toList()));
+            Endereco e = enderecoRepository.findById(compra.idEndereco());
+            Cupom cupom = cupomService.isActive(compra.idCupom());
+            if(compra.idCupom() != null){
+                if(cupom != null){
+                    c.setValorTotal(c.getValorTotal() * ( 1 - (cupom.getValorDesconto() / 100)));
+                }
+            }
+            if(e == null){
+                throw new Exception("Endereco nulo!");
+            }
+            c.setEnderecoEntrega(e);
+
+
             repository.persist(c);
 
             LOG.info("Requisição Compra.insert()");
