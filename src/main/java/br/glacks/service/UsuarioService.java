@@ -2,17 +2,11 @@ package br.glacks.service;
 
     import java.util.List;
 
+    import br.glacks.dto.*;
     import jakarta.ws.rs.PathParam;
     import jakarta.ws.rs.core.Response;
 
-    import br.glacks.dto.UsuarioDTO;
-import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateDTO;
-import br.glacks.dto.UsuarioUpdateEmailDTO;
-import br.glacks.dto.UsuarioUpdateLoginDTO;
-import br.glacks.dto.UsuarioUpdateNomeDTO;
-import br.glacks.dto.UsuarioUpdateSenhaDTO;
-import br.glacks.model.Usuario;
+    import br.glacks.model.Usuario;
 
     public interface UsuarioService {
         
@@ -34,7 +28,7 @@ import br.glacks.model.Usuario;
 
         public UsuarioResponseDTO updateSenha(Long id, UsuarioUpdateSenhaDTO senha);
 
-        public Response insert(UsuarioDTO usuarioDTO);
+        public Response insert(PessoaFisicaDTO p);
 
         public UsuarioResponseDTO updateImagem(long id, String imageForm);
         

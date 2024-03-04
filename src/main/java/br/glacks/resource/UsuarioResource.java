@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.*;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -17,12 +18,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import br.glacks.dto.UsuarioDTO;
-import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateEmailDTO;
-import br.glacks.dto.UsuarioUpdateLoginDTO;
-import br.glacks.dto.UsuarioUpdateNomeDTO;
-import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.model.Usuario;
 import br.glacks.service.*;
 
@@ -62,8 +57,8 @@ public class UsuarioResource {
     @POST
     @PermitAll
     @Transactional
-    public Response insert(UsuarioDTO usuarioDTO){
-        return usuarioService.insert(usuarioDTO);
+    public Response insert(PessoaFisicaDTO p){
+        return usuarioService.insert(p);
         
     }
 

@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.dto.*;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -11,12 +12,6 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import br.glacks.dto.UsuarioDTO;
-import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateEmailDTO;
-import br.glacks.dto.UsuarioUpdateLoginDTO;
-import br.glacks.dto.UsuarioUpdateNomeDTO;
-import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.model.Perfil;
 import br.glacks.model.PessoaFisica;
 import br.glacks.model.Usuario;
@@ -176,17 +171,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public Response insert(UsuarioDTO usuarioDTO) {
+    public Response insert(PessoaFisicaDTO pessoaFisicaDTO) {
         try {
             LOG.info("Requisição Usuario.insert()");
-            Usuario usuario = UsuarioDTO.criaUsuario(usuarioDTO);
-            if (usuarioDTO.getClass() == null) {
-                throw new Exception("Usuario nulo");
+            PessoaFisica p = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
+            if (p.getClass() == null) {
+                throw new Exception("pessoa nulo");
             }
-            usuario.getPerfis().add(Perfil.USER);
-            usuario.setSenha(hash.getHashSenha(usuario.getSenha()));
-            repository.persist(usuario);
-            return Response.ok(usuario).build();
+            p.getPerfis().add(Perfil.USER);
+            p.setSenha(hash.getHashSenha(p.getSenha()));
+            pessoaFisicaRepository.persist(p);
+            return Response.ok(p).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.insert()" + e.getMessage());
