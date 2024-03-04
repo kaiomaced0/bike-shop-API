@@ -22,4 +22,6 @@ public interface CupomService {
     public Response update(@PathParam("id") long id, CupomDTO cupom);
     
     public Response delete(@PathParam("id") Long id);
+
+    public Cupom isActive(Long id);
 }

@@ -77,11 +77,18 @@ public class CupomServiceImpl implements CupomService {
     public Response insert(CupomDTO cupom) {
         try {
             LOG.info("Requisição Cupom.insert()");
-            repository.persist(CupomDTO.criaCupom(cupom));
+            Cupom c = CupomDTO.criaCupom(cupom);
+            if(c.getValorDesconto() < 50.0 && c.getValorDesconto() > 0){
+                repository.persist(c);
+            }
+            else{
+                throw new Exception("Valor de desconto muito alto!");
+            }
+
             return Response.ok(cupom).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.insert()");
-            return Response.status(Status.NOT_IMPLEMENTED).build();
+            return Response.status(Status.NOT_IMPLEMENTED).entity(e).build();
         }
 
     }
@@ -119,5 +126,16 @@ public class CupomServiceImpl implements CupomService {
         }
 
     }
+
+    @Override
+    public Cupom isActive(Long id) {
+        Cupom cupom = repository.findById(id);
+        if(cupom.getQuantidade() > 0){
+            return cupom;
+        }else {
+            return null;
+        }
+    }
+
 
 }
