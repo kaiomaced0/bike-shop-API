@@ -72,6 +72,7 @@ public class UsuarioLogadoResource {
     }
 
     @POST
+    @Path("/telefone")
     @RolesAllowed({"User"})
     public Response insertTelefone(TelefoneUsuarioLogadoDTO dto){
         return usuarioLogado.telefoneInsert(dto);
