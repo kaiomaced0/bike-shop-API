@@ -60,44 +60,44 @@ public class AuthResource {
 
     }
 
-    @POST
-    @PermitAll
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response loginCNPJ(AuthPessoaJuridicaDTO authDTO) {
-        String hash = hashService.getHashSenha(authDTO.senha());
-
-        Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
-        if (usuario == null) {
-            return Response.status(Status.NO_CONTENT)
-                    .entity("Usuario não encontrado").build();
-        }
-
-        PessoaJuridica pj = pessoaJuridicaRepository.findByCnpj(authDTO.cnpj()).get(0);
-
-        if (usuario instanceof PessoaFisica)
-            for (Usuario i : pj.getUsuariosResponsaveis()) {
-                if (i.getId() == usuario.getId()) {
-                    return Response.ok()
-                            .header("Authorization - Empresa: " + pj.getRazaoSocial() + " ",
-                                    tokenService.generateJwtJuridico(usuario))
-                            .build();
-                }
-            }
-
-        if (usuario instanceof PessoaJuridica)
-            if (usuario.getId() == pj.getId()) {
-                if (pj.getSenha() == hash) {
-                    return Response.ok()
-                            .header("Authorization - Empresa: " + pj.getRazaoSocial() + " ",
-                                    tokenService.generateJwt(pj))
-                            .build();
-                }
-            }
-
-        return Response.status(Status.NO_CONTENT)
-                .entity("Usuario não tem acesso").build();
-
-    }
+//    @POST
+//    @PermitAll
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public Response loginCNPJ(AuthPessoaJuridicaDTO authDTO) {
+//        String hash = hashService.getHashSenha(authDTO.senha());
+//
+//        Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
+//        if (usuario == null) {
+//            return Response.status(Status.NO_CONTENT)
+//                    .entity("Usuario não encontrado").build();
+//        }
+//
+//        PessoaJuridica pj = pessoaJuridicaRepository.findByCnpj(authDTO.cnpj()).get(0);
+//
+//        if (usuario instanceof PessoaFisica)
+//            for (Usuario i : pj.getUsuariosResponsaveis()) {
+//                if (i.getId() == usuario.getId()) {
+//                    return Response.ok()
+//                            .header("Authorization - Empresa: " + pj.getRazaoSocial() + " ",
+//                                    tokenService.generateJwtJuridico(usuario))
+//                            .build();
+//                }
+//            }
+//
+//        if (usuario instanceof PessoaJuridica)
+//            if (usuario.getId() == pj.getId()) {
+//                if (pj.getSenha() == hash) {
+//                    return Response.ok()
+//                            .header("Authorization - Empresa: " + pj.getRazaoSocial() + " ",
+//                                    tokenService.generateJwt(pj))
+//                            .build();
+//                }
+//            }
+//
+//        return Response.status(Status.NO_CONTENT)
+//                .entity("Usuario não tem acesso").build();
+//
+//    }
 
 }
