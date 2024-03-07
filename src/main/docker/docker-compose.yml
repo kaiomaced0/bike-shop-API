@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  app:
+    image: openjdk:17
+    volumes:
+      - ./././target/quarkus-app:/app
+    working_dir: /app
+    command: java -jar quarkus-run.jar
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=comandasdb
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=comandasdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
