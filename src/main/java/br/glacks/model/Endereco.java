@@ -14,11 +14,11 @@ public class Endereco extends EntityClass{
     private String nome;
     
     @ManyToOne
-    @JoinColumn(name = "usuario_dono_endereco")
+    @JoinColumn(name = "usuario")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "cidade_endereco")
+    @JoinColumn(name = "cidade")
     private Cidade cidade;
 
     private String cep;
@@ -31,11 +31,6 @@ public class Endereco extends EntityClass{
 
     private Boolean principal;
 
-    @PrePersist
-    private void gerarDataInclusao() {
-        principal = false;
-    }
-    
 
     public Cidade getCidade() {
         return cidade;

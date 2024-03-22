@@ -2,18 +2,7 @@ package br.glacks.model;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-
-
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,9 +13,6 @@ public class Produto extends EntityClass {
     private String nomeLongo;
 
     private Double valorCompra;
-    
-    @Column(name = "lista_imagem_produto")
-    private List<String> image;
 
     @Enumerated(EnumType.ORDINAL) 
     private Cor cor;
@@ -48,6 +34,42 @@ public class Produto extends EntityClass {
 
     private Double estrelas;
 
+    @ManyToMany
+    @JoinColumn(name = "lista_categoria")
+    private List<Categoria> categorias;
+
+
+    @ManyToOne
+    @JoinColumn(name = "fornecedor")
+    private Fornecedor fornecedor;
+
+    @ManyToOne
+    @JoinColumn(name = "marca")
+    private Marca marca;
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     public Boolean getVisivel() {
         return visivel;
@@ -111,14 +133,6 @@ public class Produto extends EntityClass {
 
     public void setPreco(Double preco) {
         this.preco = preco;
-    }
-
-    public List<String> getImage() {
-        return image;
-    }
-
-    public void setImage(List<String> image) {
-        this.image = image;
     }
 
     public String getNome() {

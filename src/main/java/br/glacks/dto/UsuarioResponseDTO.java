@@ -8,6 +8,7 @@ import br.glacks.model.Usuario;
 public record UsuarioResponseDTO(
         Long id,
         String login,
+        String nome,
         String email,
         List<CartaoResponseDTO> cartoes,
         List<EnderecoResponseDTO> enderecos,
@@ -17,6 +18,7 @@ public record UsuarioResponseDTO(
     public UsuarioResponseDTO(Usuario user) {
         this(user.getId(),
                 user.getLogin(),
+                user.getNome(),
                 user.getEmail(),
                 user.getCartoes()
                         .stream()

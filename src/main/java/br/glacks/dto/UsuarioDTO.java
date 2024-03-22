@@ -6,6 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UsuarioDTO(
+
+        @NotBlank
+        @Size(min = 2, max = 50)
+        String nome,
     @NotBlank
     @Size(min = 3, max = 25)
     String login,
@@ -18,6 +22,7 @@ public record UsuarioDTO(
 ) {
     public static Usuario criaUsuario(UsuarioDTO usuarioDTO){
         Usuario user = new Usuario();
+        user.setNome(usuarioDTO.nome);
         user.setLogin(usuarioDTO.login);
         user.setEmail(usuarioDTO.email);
         user.setSenha(usuarioDTO.senha);

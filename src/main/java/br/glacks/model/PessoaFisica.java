@@ -11,10 +11,6 @@ import jakarta.validation.constraints.Size;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class PessoaFisica extends Usuario{
-    
-    @NotBlank(message = "O campo 'nome' nao pode ser vazio (2 - 50 caracteres)")
-    @Size(min = 2, max = 50)
-    private String nome;
 
     @CPF
     private String cpf; 
@@ -23,14 +19,6 @@ public class PessoaFisica extends Usuario{
     private String dataNascimento;
     
     private String sobrenome;
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getSobrenome() {
         return sobrenome;

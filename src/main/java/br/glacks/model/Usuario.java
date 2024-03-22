@@ -12,10 +12,16 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import br.glacks.model.pagamento.Cartao;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends EntityClass {
+
+    @NotBlank(message = "O campo 'nome' nao pode ser vazio (2 - 50 caracteres)")
+    @Size(min = 2, max = 50)
+    private String nome;
 
     private String login;
 
@@ -49,6 +55,14 @@ public class Usuario extends EntityClass {
     @OneToMany
     @JoinColumn(name = "lista_compra_usuario")
     private List<Compra> compras;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getLogin() {
         return login;

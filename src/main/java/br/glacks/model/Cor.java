@@ -10,7 +10,10 @@ public enum Cor {
     ROSA(7, "Rosa"),
     PRETO(8, "Preto"),
     BRANCO(9, "Branco"),
-    CINZA(10, "Cinza");
+    CINZA(10, "Cinza"),
+    DOURADO(11, "Dourado"),
+    OFF_WHITE(12, "Off White"),
+    CORAL(13, "Coral");
 
     private int id;
     private String label;
