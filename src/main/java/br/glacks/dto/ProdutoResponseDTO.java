@@ -1,12 +1,11 @@
 package br.glacks.dto;
 
-import jakarta.persistence.Enumerated;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.glacks.model.Cor;
 import br.glacks.model.Produto;
+import jakarta.persistence.Enumerated;
 
 public record ProdutoResponseDTO(
         String nome,
@@ -27,7 +26,7 @@ public record ProdutoResponseDTO(
             .stream()
             .map(avaliacao -> new AvaliacaoResponseDTO(avaliacao))
             .collect(Collectors.toList()),
-            produto.getImage());
+            produto.getImg());
     }
 
 }

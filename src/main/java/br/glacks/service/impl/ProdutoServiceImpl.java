@@ -9,10 +9,6 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
 import br.glacks.application.Result;
 import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
@@ -22,6 +18,10 @@ import br.glacks.repository.ProdutoRepository;
 import br.glacks.service.FileService;
 import br.glacks.service.ProdutoService;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 @ApplicationScoped
 public class ProdutoServiceImpl implements ProdutoService {
@@ -212,7 +212,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             nomeImagem = fileService.salvarImagemProduto(form.getImagem(), form.getNome());
             // obtendo o login a partir do token
             Produto p = repository.findById(produtoId);
-            p.getImage().add(nomeImagem);
+            p.getImg().add(nomeImagem);
 
             LOG.info("Requisição Produto.salvarImagem()");
 
