@@ -33,12 +33,6 @@
  insert into produto (id,nome, estoque, preco) values(103, 'bike 4', 20, 2300.0);
  insert into produto (id,nome, estoque, preco) values(104, 'bike 5', 20, 2300.0);
 
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 1);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 3'), 2);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 4'), 3);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 5'), 4);
-
  insert into cupom (id, quantidade, codigo, valordesconto) values(100, 50, '#desconto20', 20.0);
  insert into cupom (quantidade, codigo, valordesconto) values(100, '#desconto10', 10.0);
  insert into cupom (quantidade, codigo, valordesconto) values(80, '#desconto40', 40.0);
