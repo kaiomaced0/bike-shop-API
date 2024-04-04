@@ -71,7 +71,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
             return repository.findByNome(nome)
                     .stream()
-                    .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
+                    .map(PessoaJuridicaResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.getNome()");

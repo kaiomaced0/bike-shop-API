@@ -33,6 +33,12 @@
  insert into produto (id,nome, estoque, preco) values(103, 'bike 4', 20, 2300.0);
  insert into produto (id,nome, estoque, preco) values(104, 'bike 5', 20, 2300.0);
 
+ insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 1);
+ insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2);
+ insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 3'), 2);
+ insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 4'), 3);
+ insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 5'), 4);
+
  insert into cupom (id, quantidade, codigo, valordesconto) values(100, 50, '#desconto20', 20.0);
  insert into cupom (quantidade, codigo, valordesconto) values(100, '#desconto10', 10.0);
  insert into cupom (quantidade, codigo, valordesconto) values(80, '#desconto40', 40.0);
@@ -46,11 +52,11 @@
  insert into cidade (id, nome, estado_id) values(101, 'Goiania', (SELECT estado.id FROM estado WHERE estado.nome = 'Goias'));
  insert into cidade (id, nome, estado_id) values(102, 'belem', (SELECT estado.id FROM estado WHERE estado.nome = 'Para'));
 
- insert into endereco (id, usuario_dono_endereco, descricao) values(100, 1, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(102, 2, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(103, 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(4, 4, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario_dono_endereco, descricao) values(5, 5, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(100, 1, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(102, 2, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(103, 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(4, 4, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(5, 5, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
 
  insert into telefone (id, codigoarea, numero, proprietario_id) values(100, '63', '999727734', 101);
  insert into telefone (id, codigoarea, numero, proprietario_id) values(101, '62', '978934834', 2);
