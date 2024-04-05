@@ -11,15 +11,17 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 public record CompraResponseDTO(
+        Long id,
         Long usuarioId,
+        String loginUsuario,
 
         List<ItemCompraResponseDTO> listaItemCompraResponseDTO,
 
         Double valorTotal,
 
-        @Enumerated(EnumType.ORDINAL) FormaPagamento formaPagamento,
+        String formaPagamento,
 
-        @Enumerated(EnumType.ORDINAL) StatusPedido statusPedido,
+        String statusPedido,
 
         String token,
 
@@ -36,11 +38,11 @@ public record CompraResponseDTO(
         Long idCupom) {
 
     public CompraResponseDTO (Compra compra){
-                this(compra.getUsuario().getId(), compra.getListaItemCompra() != null ? compra.getListaItemCompra().stream()
+                this(compra.getId(), compra.getUsuario().getId(),compra.getUsuario().getLogin(), compra.getListaItemCompra() != null ? compra.getListaItemCompra().stream()
                             .map(itemCompra -> new ItemCompraResponseDTO(itemCompra.getProduto().getId(), itemCompra.getQuantidade(), itemCompra.getPreco()))
                             .collect(Collectors.toList()): null,
                      compra.getValorTotal(),
-            compra.getFormaPagamento(), compra.getStatusPedido(), compra.getToken(), compra.getCodigoRastreio(),
+            compra.getFormaPagamento().getLabel(), compra.getStatusPedido().getLabel(), compra.getToken(), compra.getCodigoRastreio(),
                 compra.getDataPrevista(), compra.getDataEntrega(), compra.getEnderecoEntrega().getId(), compra.getPago(),
                 compra.getCupom().getId());
     }
