@@ -10,7 +10,7 @@ public record CupomDTO(
     Integer quantidade,
     String codigo,
     Double valorDesconto,
-    List<Long> idProdutos
+    List<Long> produtos
 ) {
     public static Cupom criaCupom(CupomDTO cupomDTO){
         Cupom cupom = new Cupom();

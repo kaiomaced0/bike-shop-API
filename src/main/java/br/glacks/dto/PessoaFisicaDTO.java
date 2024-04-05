@@ -1,5 +1,6 @@
 package br.glacks.dto;
 
+import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.glacks.model.PessoaFisica;
@@ -10,17 +11,29 @@ public record PessoaFisicaDTO(
     @CPF
     @NotBlank
     String cpf,
-    UsuarioDTO usuarioDTO
+
+    @NotBlank
+    @Size(min = 2, max = 50)
+    String nome,
+    @NotBlank
+    @Size(min = 3, max = 25)
+    String login,
+    @NotBlank
+    @Size(min = 3, max = 1000)
+    String senha,
+    @NotBlank
+    @Email
+    String email
 
 ) {
 
     public static PessoaFisica criaPessoaFisica(PessoaFisicaDTO pessoaFisicaDTO){
         PessoaFisica pessoaFisica = new PessoaFisica();
-        pessoaFisica.setLogin(pessoaFisicaDTO.usuarioDTO.login());
-        pessoaFisica.setEmail(pessoaFisicaDTO.usuarioDTO.email());
-        pessoaFisica.setSenha(pessoaFisicaDTO.usuarioDTO.senha());
+        pessoaFisica.setLogin(pessoaFisicaDTO.login());
+        pessoaFisica.setEmail(pessoaFisicaDTO.email());
+        pessoaFisica.setSenha(pessoaFisicaDTO.senha());
         pessoaFisica.setCpf(pessoaFisicaDTO.cpf);
-        pessoaFisica.setNome(pessoaFisicaDTO.usuarioDTO.nome());
+        pessoaFisica.setNome(pessoaFisicaDTO.nome());
 
         return pessoaFisica;
     }

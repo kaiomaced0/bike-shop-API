@@ -84,8 +84,8 @@ public class CupomServiceImpl implements CupomService {
             LOG.info("Requisição Cupom.insert()");
             Cupom c = CupomDTO.criaCupom(cupom);
             c.setProdutos(new ArrayList<>());
-            if(!cupom.idProdutos().isEmpty()){
-                cupom.idProdutos().stream().forEach(produtoId -> {
+            if(!cupom.produtos().isEmpty()){
+                cupom.produtos().stream().forEach(produtoId -> {
                     c.getProdutos().add(produtoRepository.findById(produtoId));
                 });
             }

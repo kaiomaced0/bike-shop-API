@@ -123,7 +123,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             return Response.ok(produto).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.insert()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

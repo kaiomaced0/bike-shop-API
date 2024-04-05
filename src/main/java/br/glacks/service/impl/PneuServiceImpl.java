@@ -4,8 +4,10 @@ import br.glacks.dto.PneuDTO;
 import br.glacks.dto.ProdutoAdminResponseDTO;
 import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
+import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
 import br.glacks.model.bike.Pneu;
+import br.glacks.repository.MarcaRepository;
 import br.glacks.repository.PneuRepository;
 import br.glacks.service.PneuService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -19,6 +21,9 @@ import java.util.stream.Collectors;
 public class PneuServiceImpl implements PneuService {
     @Inject
     PneuRepository repository;
+
+    @Inject
+    MarcaRepository marcaRepository;
     @Override
     public Response getAll() {
         try {
@@ -50,9 +55,11 @@ public class PneuServiceImpl implements PneuService {
     @Transactional
     public Response insert(ProdutoDTO c) {
         try{
-            Pneu Pneu = PneuDTO.criaPneu(c);
-            repository.persist(Pneu);
-            return Response.ok(new ProdutoResponseDTO(Pneu)).build();
+            Pneu pneu = PneuDTO.criaPneu(c);
+            pneu.setMarca(marcaRepository.findById(c.idMarca()));
+            pneu.setCor(Cor.valueOf(c.idCor().intValue()));
+            repository.persist(pneu);
+            return Response.ok(new ProdutoResponseDTO(pneu)).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }
