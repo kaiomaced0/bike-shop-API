@@ -1,9 +1,7 @@
 package br.glacks.model.bike;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import br.glacks.model.Marca;
+import jakarta.persistence.*;
 
 import br.glacks.model.Produto;
 
@@ -13,20 +11,17 @@ public class Bike extends Produto{
 
     private String marcha;
 
-    private String freio;
+    @ManyToOne
+    @JoinColumn(name = "freio")
+    private Freio freio;
 
     private String cambio;
-
-    private String observacao;
-
-    private String marca;
 
     @Enumerated(EnumType.ORDINAL)
     private Tamanho tamanho;
 
     @Enumerated(EnumType.ORDINAL)
     private TipoBike tipoBike;
-
 
     public String getMarcha() {
         return marcha;
@@ -36,11 +31,11 @@ public class Bike extends Produto{
         this.marcha = marcha;
     }
 
-    public String getFreio() {
+    public Freio getFreio() {
         return freio;
     }
 
-    public void setFreio(String freio) {
+    public void setFreio(Freio freio) {
         this.freio = freio;
     }
 
@@ -52,20 +47,12 @@ public class Bike extends Produto{
         this.cambio = cambio;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public Tamanho getTamanho() {
+        return tamanho;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setTamanho(Tamanho tamanho) {
+        this.tamanho = tamanho;
     }
 
     public TipoBike getTipoBike() {
@@ -75,15 +62,4 @@ public class Bike extends Produto{
     public void setTipoBike(TipoBike tipoBike) {
         this.tipoBike = tipoBike;
     }
-
-    public Tamanho getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(Tamanho tamanho) {
-        this.tamanho = tamanho;
-    }
-
-
-
 }

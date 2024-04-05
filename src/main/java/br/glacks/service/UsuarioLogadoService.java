@@ -1,13 +1,8 @@
 package br.glacks.service;
 
+import br.glacks.dto.*;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import br.glacks.dto.TelefoneUsuarioLogadoDTO;
-import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateEmailDTO;
-import br.glacks.dto.UsuarioUpdateLoginDTO;
-import br.glacks.dto.UsuarioUpdateNomeDTO;
-import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.form.ImageForm;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
@@ -31,4 +26,6 @@ public interface UsuarioLogadoService {
     public Response salvarImagem(@MultipartForm ImageForm form);
 
     public Response baixarImagem(@PathParam("nomeImagem") String nomeImagem);
+
+    public Response insertEndereco(EnderecoDTO endereco);
 }

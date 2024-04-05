@@ -22,7 +22,7 @@ public interface ProdutoService {
 
     public Response insert(ProdutoDTO produtoDTO);
 
-    public Produto update(@PathParam("id") long id, ProdutoDTO produto);
+    public Response update(@PathParam("id") long id, ProdutoDTO produto);
     
     public Response delete(@PathParam("id") Long id);
 

@@ -1,8 +1,10 @@
 package br.glacks.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.repository.ProdutoRepository;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -23,6 +25,9 @@ public class CupomServiceImpl implements CupomService {
 
     @Inject
     CupomRepository repository;
+
+    @Inject
+    ProdutoRepository produtoRepository;
 
     @Override
     public List<CupomResponseDTO> getAll() {
@@ -78,6 +83,12 @@ public class CupomServiceImpl implements CupomService {
         try {
             LOG.info("Requisição Cupom.insert()");
             Cupom c = CupomDTO.criaCupom(cupom);
+            c.setProdutos(new ArrayList<>());
+            if(!cupom.idProdutos().isEmpty()){
+                cupom.idProdutos().stream().forEach(produtoId -> {
+                    c.getProdutos().add(produtoRepository.findById(produtoId));
+                });
+            }
             if(c.getValorDesconto() < 50.0 && c.getValorDesconto() > 0){
                 repository.persist(c);
             }
@@ -85,7 +96,7 @@ public class CupomServiceImpl implements CupomService {
                 throw new Exception("Valor de desconto muito alto!");
             }
 
-            return Response.ok(cupom).build();
+            return Response.ok(new CupomResponseDTO(c)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.insert()");
             return Response.status(Status.NOT_IMPLEMENTED).entity(e).build();

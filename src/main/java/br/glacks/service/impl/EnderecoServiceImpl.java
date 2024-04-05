@@ -3,6 +3,8 @@ package br.glacks.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.dto.EnderecoDTO;
+import br.glacks.repository.CidadeRepository;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -23,6 +25,9 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Inject
     EnderecoRepository repository;
+
+    @Inject
+    CidadeRepository cidadeRepository;
 
     @Override
     public List<EnderecoResponseDTO> getAll() {
@@ -55,33 +60,44 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Override
     @Transactional
-    public Response insert(Endereco endereco) {
+    public Response insert(EnderecoDTO endereco) {
         try {
             LOG.info("Requisição endereco.insert()");
-
-            repository.persist(endereco);
-            return Response.ok(endereco).build();
+            Endereco e = EnderecoDTO.criaEndereco(endereco);
+            e.setCidade(cidadeRepository.findById(endereco.idCidade()));
+            repository.persist(e);
+            return Response.ok(new EnderecoResponseDTO(e)).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição endereco.insert()");
-            return null;
+            return Response.status(400).build();
         }
 
     }
 
     @Override
     @Transactional
-    public Endereco update(long id, Endereco endereco) {
+    public Response update(Long id, EnderecoDTO endereco) {
         try {
             LOG.info("Requisição endereco.update()");
 
             Endereco entity = repository.findById(id);
-            entity.setNome(endereco.getNome());
-            return entity;
+            if(endereco.nome() != null)
+                entity.setNome(endereco.nome());
+            if(endereco.cep() != null)
+                entity.setCep(endereco.cep());
+            if(endereco.idCidade() != null)
+                entity.setCidade(cidadeRepository.findById(endereco.idCidade()));
+            if(endereco.rua() != null)
+                entity.setRua(endereco.rua());
+            if(endereco.numero() != null)
+                entity.setNumero(endereco.numero());
+
+            return Response.ok(new EnderecoResponseDTO(entity)).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição endereco.update()");
-            return null;
+            return Response.status(Status.NOT_MODIFIED).build();
         }
 
     }

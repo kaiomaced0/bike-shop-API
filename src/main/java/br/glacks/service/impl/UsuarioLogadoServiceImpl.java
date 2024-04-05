@@ -4,24 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.glacks.dto.*;
+import br.glacks.model.Endereco;
+import br.glacks.repository.*;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.application.Result;
-import br.glacks.dto.TelefoneResponseDTO;
-import br.glacks.dto.TelefoneUsuarioLogadoDTO;
-import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateEmailDTO;
-import br.glacks.dto.UsuarioUpdateLoginDTO;
-import br.glacks.dto.UsuarioUpdateNomeDTO;
-import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.form.ImageForm;
 import br.glacks.model.PessoaFisica;
 import br.glacks.model.Telefone;
 import br.glacks.model.Usuario;
-import br.glacks.repository.PessoaFisicaRepository;
-import br.glacks.repository.TelefoneRepository;
-import br.glacks.repository.UsuarioRepository;
 import br.glacks.service.FileService;
 import br.glacks.service.HashService;
 import br.glacks.service.PessoaFisicaService;
@@ -66,6 +59,12 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Inject
     TelefoneRepository telefoneRepository;
+
+    @Inject
+    CidadeRepository cidadeRepository;
+
+    @Inject
+    EnderecoRepository enderecoRepository;
 
     @Override
     @Transactional
@@ -245,4 +244,22 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
         }
     }
 
+    @Transactional
+    @Override
+    public Response insertEndereco(EnderecoDTO endereco) {
+        try {
+            Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
+            LOG.info("Requisição endereco.insert()");
+            Endereco e = EnderecoDTO.criaEndereco(endereco);
+            e.setCidade(cidadeRepository.findById(endereco.idCidade()));
+            e.setUsuario(usuariolUsuario);
+            enderecoRepository.persist(e);
+            return Response.ok(new EnderecoResponseDTO(e)).build();
+
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição endereco.insert()");
+            return Response.status(400).build();
+        }
+
+    }
 }

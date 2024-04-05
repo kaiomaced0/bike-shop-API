@@ -12,7 +12,7 @@ public interface PessoaJuridicaService {
     
     public List<PessoaJuridicaResponseDTO> getAll();
 
-    public PessoaJuridica getId(@PathParam("id") long id);
+    public Response getId(@PathParam("id") long id);
 
     public List<PessoaJuridicaResponseDTO> getNome(@PathParam("nome") String nome);
     

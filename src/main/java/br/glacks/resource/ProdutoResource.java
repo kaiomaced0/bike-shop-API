@@ -77,7 +77,7 @@ public class ProdutoResource {
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
-    public Produto update(@PathParam("id") long id, ProdutoDTO produto){
+    public Response update(@PathParam("id") long id, ProdutoDTO produto){
         return produtoService.update(id, produto);
     }
 

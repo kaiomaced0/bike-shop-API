@@ -1,34 +1,34 @@
 package br.glacks.dto;
+import br.glacks.model.Produto;
 import br.glacks.model.bike.Bike;
 import jakarta.persistence.Enumerated;
 import br.glacks.model.Cor;
 import br.glacks.model.bike.Tamanho;
 import br.glacks.model.bike.TipoBike;
 
+import java.util.ArrayList;
+
 public record BikeDTO(
-        String nome,
-        String nomeLongo,
-        Double preco,
-        @Enumerated Cor cor,
-        Integer estoque,
-        String marca,
-        String observacao,
+        ProdutoDTO produto,
         String marcha,
-        @Enumerated Tamanho tamanho,
-        @Enumerated TipoBike tipoBike
+        Long idTamanho,
+        Long idTipoBike
 
 ) {
     public static Bike criaBike(BikeDTO bikeDTO){
+
         Bike bike = new Bike();
-        bike.setNome(bikeDTO.nome());
-        bike.setNomeLongo(bikeDTO.nomeLongo());
-        bike.setPreco(bikeDTO.preco());
-        bike.setCor(bikeDTO.cor());
-        bike.setEstoque(bikeDTO.estoque());
-        bike.setMarca(bikeDTO.marca);
-        bike.setObservacao(bikeDTO.observacao);
-        bike.setTamanho(bikeDTO.tamanho);
-        bike.setTipoBike(bikeDTO.tipoBike);
+        bike.setNome(bikeDTO.produto().nome());
+        bike.setNomeLongo(bikeDTO.produto().nomeLongo());
+        bike.setPreco(bikeDTO.produto().precoVenda());
+        bike.setValorCompra(bikeDTO.produto().precoCusto());
+        bike.setEstoque(bikeDTO.produto().estoque());
+        bike.setImg(new ArrayList<>());
+        if(!bikeDTO.produto().img().isEmpty())
+            bikeDTO.produto().img().stream().forEach(img -> {
+                bike.getImg().add(img);
+            });
+
         return bike;
     }
 

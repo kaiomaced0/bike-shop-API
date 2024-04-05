@@ -1,6 +1,7 @@
 package br.glacks.service;
 import java.util.List;
 
+import br.glacks.dto.EnderecoDTO;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 
@@ -13,9 +14,9 @@ public interface EnderecoService {
 
     public EnderecoResponseDTO getId(@PathParam("id") long id);
 
-    public Response insert(Endereco enderecoDTO);
+    public Response insert(EnderecoDTO enderecoDTO);
 
-    public Endereco update(@PathParam("id") long id, Endereco endereco);
+    public Response update(@PathParam("id") Long id, EnderecoDTO endereco);
     
     public Response delete(@PathParam("id") Long id);
 }

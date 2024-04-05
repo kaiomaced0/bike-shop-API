@@ -5,7 +5,6 @@ import jakarta.persistence.Converter;
 
 import br.glacks.model.pagamento.BandeiraCartao;
 
-@Converter(autoApply = true)
 public class BandeiraCartaoConverter implements AttributeConverter<BandeiraCartao, Integer>{
     @Override
     public Integer convertToDatabaseColumn(BandeiraCartao bandeiraCartao) {

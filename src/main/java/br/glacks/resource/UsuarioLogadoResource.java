@@ -1,13 +1,8 @@
 package br.glacks.resource;
 
+import br.glacks.dto.*;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import br.glacks.dto.TelefoneUsuarioLogadoDTO;
-import br.glacks.dto.UsuarioResponseDTO;
-import br.glacks.dto.UsuarioUpdateEmailDTO;
-import br.glacks.dto.UsuarioUpdateLoginDTO;
-import br.glacks.dto.UsuarioUpdateNomeDTO;
-import br.glacks.dto.UsuarioUpdateSenhaDTO;
 import br.glacks.form.ImageForm;
 import br.glacks.service.UsuarioLogadoService;
 import jakarta.annotation.security.RolesAllowed;
@@ -103,5 +98,13 @@ public class UsuarioLogadoResource {
         return usuarioLogado.baixarImagem(nomeImagem);
 
     }
+
+    @POST
+    @Path("/endereco")
+    @RolesAllowed({"Admin", "User"})
+    public Response insertEndereco(EnderecoDTO endereco) {
+        return usuarioLogado.insertEndereco(endereco);
+    }
+
     
 }

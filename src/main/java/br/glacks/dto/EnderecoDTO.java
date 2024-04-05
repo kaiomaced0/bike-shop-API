@@ -1,15 +1,22 @@
 package br.glacks.dto;
 
-import br.glacks.model.locais.Cidade;
+import br.glacks.model.Endereco;
 
 public record EnderecoDTO(
-    Long id,
     String nome,
-    Cidade cidade,
+    Long idCidade,
     String cep,
     String rua , 
     String numero
 
 ) {
+    public static Endereco criaEndereco(EnderecoDTO e){
+        Endereco endereco = new Endereco();
+        endereco.setNome(e.nome);
+        endereco.setCep(e.cep);
+        endereco.setRua(e.rua);
+        endereco.setNumero(e.numero);
+        return endereco;
+    }
     
 }

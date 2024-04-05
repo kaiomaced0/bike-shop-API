@@ -13,6 +13,7 @@ import jakarta.ws.rs.core.MediaType;
 import br.glacks.dto.PessoaFisicaResponseDTO;
 import br.glacks.model.PessoaFisica;
 import br.glacks.service.PessoaFisicaService;
+import jakarta.ws.rs.core.Response;
 
 @Path("/pessoafisica")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +41,7 @@ public class PessoaFisicaResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public PessoaFisica getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return pessoaFisicaService.getId(id);
         
     }

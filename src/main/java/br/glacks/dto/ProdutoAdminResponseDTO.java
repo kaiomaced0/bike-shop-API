@@ -1,35 +1,34 @@
 package br.glacks.dto;
 
+import br.glacks.model.Produto;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.glacks.model.Cor;
-import br.glacks.model.Produto;
-import jakarta.persistence.Enumerated;
-
-public record ProdutoResponseDTO(
-        Long id,
+public record ProdutoAdminResponseDTO(
         String nome,
         String nomeLongo,
         String descricao,
         Double preco,
+        Double valorCusto,
         String cor,
         Integer estoque,
         List<AvaliacaoResponseDTO> avaliacoes,
         List<String> images,
         MarcaResponseDTO marca) {
 
-    public ProdutoResponseDTO(Produto produto){
-        this(produto.getId(), produto.getNome(),
+    public ProdutoAdminResponseDTO(Produto produto){
+        this(produto.getNome(),
          produto.getNomeLongo(),
          produto.getDescricao(),
          produto.getPreco(),
+                produto.getValorCompra(),
           produto.getCor().getLabel(),
           produto.getEstoque(),
-          produto.getAvaliacoes() != null ? produto.getAvaliacoes()
+          produto.getAvaliacoes()
             .stream()
             .map(AvaliacaoResponseDTO::new)
-            .collect(Collectors.toList()): null,
+            .collect(Collectors.toList()),
             produto.getImg(), new MarcaResponseDTO(produto.getMarca()));
     }
 

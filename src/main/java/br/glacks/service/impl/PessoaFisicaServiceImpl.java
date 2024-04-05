@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -43,15 +44,15 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
     }
 
     @Override
-    public PessoaFisica getId(long id){
+    public Response getId(long id){
         try {
             LOG.info("Requisição PessoaFisica.getId()"); 
         
-            return repository.findById(id);
+            return Response.ok(new PessoaFisicaResponseDTO(repository.findById(id))).build();
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.getId()");
-            return null;
+            return Response.status(400).build();
         }
         
     }

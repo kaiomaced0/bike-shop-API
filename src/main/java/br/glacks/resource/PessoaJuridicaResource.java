@@ -55,7 +55,7 @@ public class PessoaJuridicaResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public PessoaJuridica getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return pessoaJuridicaService.getId(id);
         
     }

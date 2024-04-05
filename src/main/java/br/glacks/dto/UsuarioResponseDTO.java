@@ -20,18 +20,18 @@ public record UsuarioResponseDTO(
                 user.getLogin(),
                 user.getNome(),
                 user.getEmail(),
-                user.getCartoes()
-                        .stream()
-                        .map(cartao -> new CartaoResponseDTO(cartao))
-                        .collect(Collectors.toList()),
-                user.getEnderecos()
-                        .stream()
-                        .map(endereco -> new EnderecoResponseDTO(endereco))
-                        .collect(Collectors.toList()),
-                user.getGostei()
-                        .stream()
-                        .map(produto -> new ProdutoResponseDTO(produto))
-                        .collect(Collectors.toList()));
+                user.getCartoes() != null ? user.getCartoes()
+                .stream()
+                        .map(CartaoResponseDTO::new)
+                        .collect(Collectors.toList()) : null,
+                user.getEnderecos() != null ? user.getEnderecos()
+                .stream()
+                        .map(EnderecoResponseDTO::new)
+                        .collect(Collectors.toList()): null,
+                user.getGostei() != null ? user.getGostei()
+                .stream()
+                        .map(ProdutoResponseDTO::new)
+                        .collect(Collectors.toList()): null);
 
     }
 }

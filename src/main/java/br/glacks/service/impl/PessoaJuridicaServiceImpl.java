@@ -52,14 +52,14 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     }
 
     @Override
-    public PessoaJuridica getId(long id) {
+    public Response getId(long id) {
         try {
             LOG.info("Requisição PessoaFisica.getId()");
 
-            return repository.findById(id);
+            return Response.ok(new PessoaJuridicaResponseDTO(repository.findById(id))).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.getId()");
-            return null;
+            return Response.status(400).build();
         }
 
     }

@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.Cor;
+import br.glacks.repository.MarcaRepository;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -36,6 +38,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Inject
     JsonWebToken jsonWebToken;
+
+    @Inject
+    MarcaRepository marcaRepository;
 
     @Override
     public List<ProdutoResponseDTO> getAll() {
@@ -105,8 +110,10 @@ public class ProdutoServiceImpl implements ProdutoService {
     public Response insert(ProdutoDTO produto) {
         try {
             LOG.info("Requisição Produto.insert()");
-
-            repository.persist(ProdutoDTO.criaProduto(produto));
+            Produto p = ProdutoDTO.criaProduto(produto);
+            p.setMarca(marcaRepository.findById(produto.idMarca()));
+            p.setCor(Cor.valueOf(produto.idCor().intValue()));
+            repository.persist(p);
             return Response.ok(produto).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.insert()");
@@ -117,21 +124,25 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     @Transactional
-    public Produto update(long id, ProdutoDTO produto) {
+    public Response update(long id, ProdutoDTO produto) {
         try {
             LOG.info("Requisição Produto.update()");
 
             Produto entity = repository.findById(id);
             if(produto.nome() != null)
                 entity.setNome(produto.nome());
+            if(produto.idMarca() != null)
+                entity.setMarca(marcaRepository.findById(produto.idMarca()));
             if(produto.nomeLongo() != null)
                 entity.setNomeLongo(produto.nomeLongo());
-            if(produto.preco() != null)
-                entity.setPreco(produto.preco());
-            return entity;
+            if(produto.precoCusto() != null)
+                entity.setValorCompra(produto.precoCusto());
+            if(produto.precoVenda() != null)
+                entity.setPreco(produto.precoVenda());
+            return Response.ok(new ProdutoResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.update()");
-            return null;
+            return Response.status(400).build();
         }
 
     }

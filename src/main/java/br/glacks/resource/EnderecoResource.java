@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.EnderecoDTO;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -46,7 +47,7 @@ public class EnderecoResource {
     @POST    
     @RolesAllowed({"Admin", "User"})
     @Transactional
-    public Response insert(Endereco endereco){
+    public Response insert(EnderecoDTO endereco){
         return enderecoService.insert(endereco);
     }
 
@@ -54,7 +55,7 @@ public class EnderecoResource {
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
-    public Endereco update(@PathParam("id") long id, Endereco endereco){
+    public Response update(@PathParam("id") Long id, EnderecoDTO endereco){
         return enderecoService.update(id, endereco);
     }
 

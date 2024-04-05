@@ -27,17 +27,22 @@
  insert into pessoajuridica (id, cnpj, nomefantasia) values(7, '0990023123/00', 'EMPRESA 3');
  insert into pessoajuridica (id, cnpj, nomefantasia) values(8, '123927321732','EMPRESA 4');
 
- insert into produto (id,nome, estoque, preco) values(100, 'bike 1', 50, 1020.0);
- insert into produto (id,nome, estoque, preco) values(101, 'bike 2', 30, 3040.0);
- insert into produto (id,nome, estoque, preco) values(102, 'bike 3', 20, 2300.0);
- insert into produto (id,nome, estoque, preco) values(103, 'bike 4', 20, 2300.0);
- insert into produto (id,nome, estoque, preco) values(104, 'bike 5', 20, 2300.0);
+ insert into fornecedor (id, nome) VALUES (1, 'Fornecedor 1');
 
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 1);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 3'), 2);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 4'), 3);
- insert into bike (id, tamanho) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 5'), 4);
+ insert into marca (id, nome) VALUES (1, 'marca 1');
+
+ insert into produto (id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(100, 'bike 1', 50, 1020.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(101, 'bike 2', 30, 3040.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(102, 'bike 3', 20, 2300.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(103, 'bike 4', 20, 2300.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(104, 'bike 5', 20, 2300.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
+
+ insert into freio (id, nome) VALUES (1, 'Freio Tradicional');
+
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 1, '12 marchas', 1, 'cambio adasds', 1);
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2, '12 marchas', 1, 'cambio adasds', 1);
+
+ insert into ferramenta(id) VALUES (102);
 
  insert into cupom (id, quantidade, codigo, valordesconto) values(100, 50, '#desconto20', 20.0);
  insert into cupom (quantidade, codigo, valordesconto) values(100, '#desconto10', 10.0);

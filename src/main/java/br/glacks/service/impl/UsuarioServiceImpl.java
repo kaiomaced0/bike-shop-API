@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -178,10 +179,13 @@ public class UsuarioServiceImpl implements UsuarioService {
             if (p.getClass() == null) {
                 throw new Exception("pessoa nulo");
             }
+            if(p.getPerfis() == null){
+                p.setPerfis(new HashSet<>());
+            }
             p.getPerfis().add(Perfil.USER);
             p.setSenha(hash.getHashSenha(p.getSenha()));
             pessoaFisicaRepository.persist(p);
-            return Response.ok(p).build();
+            return Response.ok(new PessoaFisicaResponseDTO(p)).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.insert()" + e.getMessage());

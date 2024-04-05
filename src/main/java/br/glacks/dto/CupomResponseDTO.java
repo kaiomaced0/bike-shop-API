@@ -7,6 +7,7 @@ import br.glacks.model.Cupom;
 
 
 public record CupomResponseDTO(
+        Long id,
     
     String nome,
     Integer quantidade,
@@ -16,12 +17,12 @@ public record CupomResponseDTO(
     
 ) {
     public CupomResponseDTO(Cupom cupom){
-        this(cupom.getNome(),
+        this(cupom.getId(), cupom.getNome(),
             cupom.getQuantidade(),
             cupom.getCodigo(),
             cupom.getValorDesconto(),
             cupom.getProdutos().stream()
-                    .map(produto -> new ProdutoResponseDTO(produto))
+                    .map(ProdutoResponseDTO::new)
                     .collect(Collectors.toList()));
     }
     

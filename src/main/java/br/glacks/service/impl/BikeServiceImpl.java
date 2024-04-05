@@ -4,6 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.Cor;
+import br.glacks.model.Marca;
+import br.glacks.model.bike.Tamanho;
+import br.glacks.model.bike.TipoBike;
+import br.glacks.repository.MarcaRepository;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -27,13 +32,16 @@ public class BikeServiceImpl implements BikeService {
     @Inject
     BikeRepository repository;
 
+    @Inject
+    MarcaRepository marcaRepository;
+
+
     @Override
     public Response getAll(){
         try {
             LOG.info("Requisição Bike.getAll()");
             return Response.ok(repository.findAll()
                     .stream()
-                    .sorted(Comparator.comparing(bike -> bike.getId()))
                     .map(BikeResponseDTO::new)
                     .collect(Collectors.toList())).build();
         } catch (Exception e) {
@@ -78,8 +86,13 @@ public class BikeServiceImpl implements BikeService {
     public Response insert(BikeDTO bike){
         try {
             LOG.info("Requisição Bike.insert()");
-            repository.persist(BikeDTO.criaBike(bike));
-            return Response.ok(bike).build();
+            Bike b = BikeDTO.criaBike(bike);
+            b.setMarca(marcaRepository.findById(bike.produto().idMarca()));
+            b.setTipoBike(TipoBike.valueOf(bike.idTipoBike().intValue()));
+            b.setTamanho(Tamanho.valueOf(bike.idTamanho().intValue()));
+            b.setCor(Cor.valueOf(bike.produto().idCor().intValue()));
+            repository.persist(b);
+            return Response.ok(new BikeResponseDTO(b)).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Bike.insert()");
@@ -94,35 +107,37 @@ public class BikeServiceImpl implements BikeService {
             LOG.info("Requisição Bike.update()");
             Bike entity = repository.findById(id);
 
-            if (bike.nome() != null) {
-                entity.setNome(bike.nome());
+            if (bike.produto().nome() != null) {
+                entity.setNome(bike.produto().nome());
             }
-            if (bike.nomeLongo() != null) {
-                entity.setNomeLongo(bike.nomeLongo());
+            if (bike.produto().nomeLongo() != null) {
+                entity.setNomeLongo(bike.produto().nomeLongo());
             }
-            if (bike.preco() != null) {
-                entity.setPreco(bike.preco());
+            if (bike.produto().precoVenda() != null) {
+                entity.setPreco(bike.produto().precoVenda());
             }
-            if (bike.cor() != null) {
-                entity.setCor(bike.cor());
+            if (bike.produto().precoCusto() != null) {
+                entity.setValorCompra(bike.produto().precoCusto());
             }
-            if (bike.estoque() != null) {
-                entity.setEstoque(bike.estoque());
+            if (bike.produto().idCor() != null) {
+                entity.setCor(Cor.valueOf(bike.produto().idCor().intValue()));
             }
-            if (bike.marca() != null) {
-                entity.setMarca(bike.marca());
+            if (bike.produto().estoque() != null) {
+                entity.setEstoque(bike.produto().estoque());
             }
-            if (bike.observacao() != null) {
-                entity.setObservacao(bike.observacao());
+            if (bike.produto().idMarca() != null) {
+                Marca m = marcaRepository.findById(bike.produto().idMarca());
+                entity.setMarca(m);
             }
+
             if (bike.marcha() != null) {
                 entity.setMarcha(bike.marcha());
             }
-            if (bike.tamanho() != null) {
-                entity.setTamanho(bike.tamanho());
+            if (bike.idTamanho() != null) {
+                entity.setTamanho(Tamanho.valueOf(bike.idTamanho().intValue()));
             }
-            if (bike.tipoBike() != null) {
-                entity.setTipoBike(bike.tipoBike());
+            if (bike.idTipoBike() != null) {
+                entity.setTipoBike(TipoBike.valueOf(bike.idTipoBike().intValue()));
             }
 
             return Response.ok(entity).build();

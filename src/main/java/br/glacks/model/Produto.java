@@ -12,6 +12,8 @@ public class Produto extends EntityClass {
 
     private String nomeLongo;
 
+    private String descricao;
+
     private Double valorCompra;
 
     @Enumerated(EnumType.ORDINAL) 
@@ -28,7 +30,7 @@ public class Produto extends EntityClass {
     private Boolean visivel;
 
     @CollectionTable
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "url_imagens_produto")
     private List<String> img;
 
@@ -47,28 +49,69 @@ public class Produto extends EntityClass {
     @JoinColumn(name = "marca")
     private Marca marca;
 
-    public Marca getMarca() {
-        return marca;
+
+    public String getNome() {
+        return nome;
     }
 
-    public void setMarca(Marca marca) {
-        this.marca = marca;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
+    public String getNomeLongo() {
+        return nomeLongo;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setNomeLongo(String nomeLongo) {
+        this.nomeLongo = nomeLongo;
     }
 
-    public List<Categoria> getCategorias() {
-        return categorias;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Double getValorCompra() {
+        return valorCompra;
+    }
+
+    public void setValorCompra(Double valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public Cor getCor() {
+        return cor;
+    }
+
+    public void setCor(Cor cor) {
+        this.cor = cor;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public Integer getEstoque() {
+        return Estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+        Estoque = estoque;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public Boolean getVisivel() {
@@ -95,61 +138,27 @@ public class Produto extends EntityClass {
         this.estrelas = estrelas;
     }
 
-    public String getNomeLongo() {
-        return nomeLongo;
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 
-    public void setNomeLongo(String nomeLongo) {
-        this.nomeLongo = nomeLongo;
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
-    public Double getValorCompra() {
-        return valorCompra;
+    public Fornecedor getFornecedor() {
+        return fornecedor;
     }
 
-    public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
-    public Cor getCor() {
-        return cor;
+    public Marca getMarca() {
+        return marca;
     }
 
-    public void setCor(Cor cor) {
-        this.cor = cor;
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
-
-    public Integer getEstoque() {
-        return Estoque;
-    }
-
-    public void setEstoque(Integer estoque) {
-        Estoque = estoque;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<Avaliacao> getAvaliacoes() {
-        return avaliacoes;
-    }
-
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
-    }
-
-    
 }
