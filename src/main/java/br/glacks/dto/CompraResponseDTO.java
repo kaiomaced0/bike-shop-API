@@ -29,20 +29,20 @@ public record CompraResponseDTO(
 
         String dataEntrega,
 
-        EnderecoResponseDTO enderecoEntrega,
+        Long idEnderecoEntrega,
 
         Boolean pago,
 
-        CupomResponseDTO cupom) {
+        Long idCupom) {
 
     public CompraResponseDTO (Compra compra){
-                this(compra.getUsuario().getId(), compra.getListaItemCompra().stream()
+                this(compra.getUsuario().getId(), compra.getListaItemCompra() != null ? compra.getListaItemCompra().stream()
                             .map(itemCompra -> new ItemCompraResponseDTO(itemCompra.getProduto().getId(), itemCompra.getQuantidade(), itemCompra.getPreco()))
-                            .collect(Collectors.toList()),
+                            .collect(Collectors.toList()): null,
                      compra.getValorTotal(),
             compra.getFormaPagamento(), compra.getStatusPedido(), compra.getToken(), compra.getCodigoRastreio(),
-                compra.getDataPrevista(), compra.getDataEntrega(), new EnderecoResponseDTO(compra.getEnderecoEntrega()), compra.getPago(),
-                new CupomResponseDTO(compra.getCupom()));
+                compra.getDataPrevista(), compra.getDataEntrega(), compra.getEnderecoEntrega().getId(), compra.getPago(),
+                compra.getCupom().getId());
     }
 
 }

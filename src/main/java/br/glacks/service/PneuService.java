@@ -10,6 +10,8 @@ public interface PneuService {
 
     public Response getAll();
 
+    public Response getAllAdmin();
+
     public Response getId(@PathParam("id") Long id);
 
     public Response insert(ProdutoDTO p);

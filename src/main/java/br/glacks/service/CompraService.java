@@ -9,7 +9,7 @@ import br.glacks.model.Compra;
 
 public interface CompraService {
     
-    public List<CompraResponseDTO> getAll();
+    public Response getAll();
 
     public List<CompraResponseDTO> getAllOn();
 

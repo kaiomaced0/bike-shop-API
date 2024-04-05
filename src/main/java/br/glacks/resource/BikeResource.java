@@ -37,6 +37,14 @@ public class BikeResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
+    @Path("/admin")
+    public Response gettAllAdmin(){
+        return bikeService.getAllAdmin();
+
+    }
+
+    @GET
     @PermitAll
     @Path("/nome/{nome}")
     public Response getNome(@PathParam("nome") String nome){

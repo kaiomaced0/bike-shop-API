@@ -51,14 +51,14 @@ public class CompraServiceImpl implements CompraService {
     CupomService cupomService;
 
     @Override
-    public List<CompraResponseDTO> getAll() {
+    public Response getAll() {
         try {
             LOG.info("Requisição Compra.getAll()");
-            return repository.findAll().stream().map(CompraResponseDTO::new)
-                    .collect(Collectors.toList());
+            return Response.ok(repository.findAll().stream().map(CompraResponseDTO::new)
+                    .collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Compra.getAll()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

@@ -1,6 +1,7 @@
 package br.glacks.service;
 import java.util.List;
 
+import br.glacks.dto.ProdutoAdminResponseDTO;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import jakarta.ws.rs.PathParam;
@@ -13,8 +14,7 @@ import br.glacks.model.Produto;
 public interface ProdutoService {
     
     public List<ProdutoResponseDTO> getAll();
-
-    public List<Produto> getAllAdm();
+    public List<ProdutoAdminResponseDTO> getAllAdmin();
 
     public Produto getId(@PathParam("id") long id);
 

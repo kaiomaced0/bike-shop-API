@@ -1,7 +1,7 @@
 package br.glacks.service.impl;
 
 import br.glacks.dto.PneuDTO;
-import br.glacks.dto.PneuResponseDTO;
+import br.glacks.dto.ProdutoAdminResponseDTO;
 import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.model.EntityClass;
@@ -23,6 +23,15 @@ public class PneuServiceImpl implements PneuService {
     public Response getAll() {
         try {
             return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    public Response getAllAdmin() {
+        try {
+            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(ProdutoAdminResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }

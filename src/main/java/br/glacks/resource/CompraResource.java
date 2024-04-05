@@ -30,7 +30,7 @@ public class CompraResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<CompraResponseDTO> gettAll(){
+    public Response gettAll(){
         return compraService.getAll();
         
     }

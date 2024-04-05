@@ -12,6 +12,8 @@ public interface BikeService {
 
     public Response getAll();
 
+    public Response getAllAdmin();
+
     public Response getId(@PathParam("id") long id);
 
     public Response getNome(@PathParam("nome") String nome);

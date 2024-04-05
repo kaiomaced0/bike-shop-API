@@ -7,6 +7,8 @@ public interface FerramentaService {
 
     public Response getAll();
 
+    public Response getAllAdmin();
+
     public Response getId(Long id);
     public Response insert(ProdutoDTO ferramentaDTO);
     public Response update(Long id, ProdutoDTO p);

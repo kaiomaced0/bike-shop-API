@@ -4,7 +4,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.dto.BikeAdminResponseDTO;
 import br.glacks.model.Cor;
+import br.glacks.model.EntityClass;
 import br.glacks.model.Marca;
 import br.glacks.model.bike.Tamanho;
 import br.glacks.model.bike.TipoBike;
@@ -43,6 +45,21 @@ public class BikeServiceImpl implements BikeService {
             return Response.ok(repository.findAll()
                     .stream()
                     .map(BikeResponseDTO::new)
+                    .collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Bike.getAll()");
+            return Response.status(Status.BAD_REQUEST).entity(e).build();
+        }
+
+    }
+    @Override
+    public Response getAllAdmin(){
+        try {
+            LOG.info("Requisição Bike.getAll()");
+            return Response.ok(repository.findAll()
+                    .stream()
+                    .sorted(Comparator.comparing(EntityClass::getId))
+                    .map(BikeAdminResponseDTO::new)
                     .collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Bike.getAll()");

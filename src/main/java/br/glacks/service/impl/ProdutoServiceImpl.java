@@ -5,7 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.dto.ProdutoAdminResponseDTO;
 import br.glacks.model.Cor;
+import br.glacks.model.EntityClass;
 import br.glacks.repository.MarcaRepository;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
@@ -62,15 +64,19 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<Produto> getAllAdm() {
+    public List<ProdutoAdminResponseDTO> getAllAdmin() {
+
         try {
-            LOG.info("Requisição Produto.getAllAdm()");
+            LOG.info("Requisição Produto.getAll()");
+
             return repository.findAll()
                     .stream()
-                    .sorted(Comparator.comparing(produto -> produto.getId()))
+                    .sorted(Comparator.comparing(EntityClass::getId))
+                    .map(ProdutoAdminResponseDTO::new)
                     .collect(Collectors.toList());
+
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Produto.getAllAdm()");
+            LOG.error("Erro ao rodar Requisição Produto.getAll()");
             return null;
         }
 

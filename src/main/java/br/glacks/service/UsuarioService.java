@@ -34,5 +34,7 @@ package br.glacks.service;
         
         public Response delete(@PathParam("id") Long id);
 
+        public Response resetarSenha(Long id);
+
     
 }

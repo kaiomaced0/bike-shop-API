@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.ProdutoAdminResponseDTO;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import jakarta.annotation.security.PermitAll;
@@ -41,13 +42,12 @@ public class ProdutoResource {
         return produtoService.getAll();
         
     }
-
     @GET
-    @Path("/all")
     @RolesAllowed({"Admin"})
-    public List<Produto> gettAllAdm(){
-        return produtoService.getAllAdm();
-        
+    @Path("/admin")
+    public List<ProdutoAdminResponseDTO> getAllAdmin(){
+        return produtoService.getAllAdmin();
+
     }
 
     @GET

@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import br.glacks.dto.FerramentaDTO;
+import br.glacks.dto.ProdutoAdminResponseDTO;
 import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.model.Cor;
@@ -32,6 +33,15 @@ public class FerramentaServiceImpl implements FerramentaService {
     public Response getAll() {
         try {
             return Response.ok(repository.findAll().stream().map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+        }catch (Exception e){
+            return Response.status(400).build();
+        }
+    }
+
+    @Override
+    public Response getAllAdmin() {
+        try {
+            return Response.ok(repository.findAll().stream().map(ProdutoAdminResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).build();
         }

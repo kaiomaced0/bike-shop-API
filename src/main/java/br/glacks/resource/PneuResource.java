@@ -24,6 +24,13 @@ public class PneuResource {
     }
 
     @GET
+    @RolesAllowed({"Admin"})
+    @Path("/admin")
+    public Response getAllAdmin(){
+        return service.getAllAdmin();
+    }
+
+    @GET
     @PermitAll
     @Path("/{id}")
     public Response getId(@PathParam("id") Long id){

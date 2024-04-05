@@ -256,4 +256,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    @Override
+    public Response resetarSenha(Long id) {
+        try {
+            LOG.info("entrou resetarSenha");
+            Usuario u = repository.findById(id);
+            u.setSenha(hash.getHashSenha("123"));
+            return Response.ok().build();
+        }catch (Exception e){
+            LOG.error("erro resetarSenha");
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
 }

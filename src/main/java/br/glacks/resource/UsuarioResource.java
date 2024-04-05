@@ -109,5 +109,11 @@ public class UsuarioResource {
         return usuarioService.delete(id);
     }
 
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/resetarsenha/{id}")
+    public Response resetarSenha(@PathParam("id") Long id) {
+        return usuarioService.resetarSenha(id);
+    }
     
 }

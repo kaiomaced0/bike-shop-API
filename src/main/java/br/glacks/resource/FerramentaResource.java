@@ -22,6 +22,15 @@ public class FerramentaResource {
     public Response getAll(){
         return service.getAll();
     }
+
+    @GET
+    @RolesAllowed({"Admin"})
+    @Path("/admin")
+    public Response getAllAdmin(){
+        return service.getAllAdmin();
+    }
+
+
     @GET
     @Path("/{id}")
     @PermitAll

@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record ProdutoAdminResponseDTO(
+        Long id,
         String nome,
         String nomeLongo,
         String descricao,
+        Double valorCompra,
         Double preco,
-        Double valorCusto,
         String cor,
         Integer estoque,
         List<AvaliacaoResponseDTO> avaliacoes,
@@ -18,17 +19,17 @@ public record ProdutoAdminResponseDTO(
         MarcaResponseDTO marca) {
 
     public ProdutoAdminResponseDTO(Produto produto){
-        this(produto.getNome(),
+        this(produto.getId(), produto.getNome(),
          produto.getNomeLongo(),
          produto.getDescricao(),
-         produto.getPreco(),
                 produto.getValorCompra(),
+         produto.getPreco(),
           produto.getCor().getLabel(),
           produto.getEstoque(),
-          produto.getAvaliacoes()
+          produto.getAvaliacoes() != null ? produto.getAvaliacoes()
             .stream()
             .map(AvaliacaoResponseDTO::new)
-            .collect(Collectors.toList()),
+            .collect(Collectors.toList()): null,
             produto.getImg(), new MarcaResponseDTO(produto.getMarca()));
     }
 
