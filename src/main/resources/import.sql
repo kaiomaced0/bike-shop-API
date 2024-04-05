@@ -1,12 +1,12 @@
 -- his file allow to e SQL commands that will be emitted in test and dev.
 -- The commands are coted as their support dependf the database
  insert into usuario (id,  login, senha) values(101,'kaio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario ( login, senha) values('joao','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario ( login, senha) values('antonio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario ( login, senha) values('lucas', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario ( login, senha) values('kuba event', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario ( login, senha) values('imports imports', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario ( login, senha) values('al', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (id, login, senha) values(107, 'joao','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (id, login, senha) values(102, 'antonio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (id, login, senha) values(103, 'lucas', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (id, login, senha) values(104,'kuba event', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (id, login, senha) values(105, 'imports imports', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (id, login, senha) values(106, 'al', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario ( login, senha) values('AEDAO', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario ( login, senha) values('joana', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario ( login, senha) values( 'kamila', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
@@ -17,15 +17,15 @@
  insert into usuario ( login, senha) values( 'rubens', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario ( login, senha) values( 'ordete','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (id,  login, senha) values(100, 'teste', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(100, '000000', 'hilowisck', '00/00/2121');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(2, '020323082', 'hilowisck', '04/12/2002');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(3, '988734434', 'hilowisck', '27/11/2002');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(4, '971922434', 'hilowisck', '08/12/1978');
+ insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(100, '12345678909', 'hilowisck', '00/00/2121');
+ insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(107, '98765432101', 'hilowisck', '04/12/2002');
+ insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(102, '23456789023', 'hilowisck', '27/11/2002');
+ insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(103, '34567890134', 'hilowisck', '08/12/1978');
 
- insert into pessoajuridica (id, cnpj, nomefantasia) values(101, '00.000.000.0001/00', 'EMPRESA 1');
- insert into pessoajuridica (id, cnpj, nomefantasia) values(6, '0032301870001/02', 'EMPRESA 2');
- insert into pessoajuridica (id, cnpj, nomefantasia) values(7, '0990023123/00', 'EMPRESA 3');
- insert into pessoajuridica (id, cnpj, nomefantasia) values(8, '123927321732','EMPRESA 4');
+ insert into pessoajuridica (id, cnpj, nomefantasia) values(101, '12.345.678/0001-90', 'EMPRESA 1');
+ insert into pessoajuridica (id, cnpj, nomefantasia) values(106, '01.234.567/0001-89', 'EMPRESA 2');
+ insert into pessoajuridica (id, cnpj, nomefantasia) values(104, '23.456.789/0001-23', 'EMPRESA 3');
+ insert into pessoajuridica (id, cnpj, nomefantasia) values(105, '34.567.890/0001-34','EMPRESA 4');
 
  insert into fornecedor (id, nome) VALUES (1, 'Fornecedor 1');
 
@@ -57,22 +57,26 @@
  insert into cidade (id, nome, estado_id) values(101, 'Goiania', (SELECT estado.id FROM estado WHERE estado.nome = 'Goias'));
  insert into cidade (id, nome, estado_id) values(102, 'belem', (SELECT estado.id FROM estado WHERE estado.nome = 'Para'));
 
- insert into endereco (id, usuario, descricao) values(100, 1, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario, descricao) values(102, 2, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario, descricao) values(103, 3, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario, descricao) values(4, 4, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
- insert into endereco (id, usuario, descricao) values(5, 5, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(100, 101, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(102, 102, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(103, 103, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(4, 104, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
+ insert into endereco (id, usuario, descricao) values(5, 105, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
 
  insert into telefone (id, codigoarea, numero, proprietario_id) values(100, '63', '999727734', 101);
- insert into telefone (id, codigoarea, numero, proprietario_id) values(101, '62', '978934834', 2);
- insert into telefone (id, codigoarea, numero, proprietario_id) values(102, '63', '987504954', 3);
+ insert into telefone (id, codigoarea, numero, proprietario_id) values(101, '62', '978934834', 102);
+ insert into telefone (id, codigoarea, numero, proprietario_id) values(102, '63', '987504954', 103);
 
  insert into compra (id, usuario_id) values(100, 101);
  insert into compra (id, usuario_id) values(102, 101);
- insert into compra (id, usuario_id) values(103, 2);
- insert into compra (id, usuario_id) values(104, 3);
- insert into compra (id, usuario_id) values(105, 4);
- 
+ insert into compra (id, usuario_id) values(103, 102);
+ insert into compra (id, usuario_id) values(104, 103);
+ insert into compra (id, usuario_id) values(105, 104);
+
+ insert into categoria (id, nome) VALUES (1, 'categoria 1');
+ insert into categoria (id, nome) VALUES (2, 'categoria 2');
+ insert into categoria (id, nome) VALUES (3, 'categoria 3');
+
  insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(100, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 5, 100);
  insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(101, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2, 100);
  insert into itemcompra (id, produto_item_compra, quantidade, lista_itemcompra) values(102, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 3'), 1, 102);
@@ -80,10 +84,10 @@
  insert into itemcompra (id, produto_item_compra, quantidade) values(104, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 4'), 5);
  insert into itemcompra (id, produto_item_compra, quantidade) values(105, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 3'), 5);
 
- insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(100, 1, 101, 5, 'Bom');
- insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(102, 1, 102, 5, 'Legal');
- insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(103, 1, 102, 5, 'asdasdsdads');
- insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(104, 1, 101, 5, 'aslsldlsdl 213213j jj');
+ insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(100, 101, 101, 5, 'Bom');
+ insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(102, 101, 102, 5, 'Legal');
+ insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(103, 101, 102, 5, 'asdasdsdads');
+ insert into avaliacao (id, usuario_id, produto_id, estrelas, comentario) values(104, 101, 101, 5, 'aslsldlsdl 213213j jj');
 
  insert into usuario_perfil (perfil, id_usuario) values (1, 100);
  insert into usuario_perfil (perfil, id_usuario) values (1, 101);
