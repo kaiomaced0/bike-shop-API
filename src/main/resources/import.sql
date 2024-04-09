@@ -27,7 +27,7 @@
  insert into pessoajuridica (id, cnpj, nomefantasia) values(104, '23.456.789/0001-23', 'EMPRESA 3');
  insert into pessoajuridica (id, cnpj, nomefantasia) values(105, '34.567.890/0001-34','EMPRESA 4');
 
- insert into fornecedor (ativo, id, nome) VALUES (true, 1, 'Fornecedor 1');
+ insert into fornecedor (ativo, id, nome, cnpj) VALUES (true, 1, 'Fornecedor 1', '0001100/000');
 
  insert into marca (ativo, id, nome) VALUES (true, 1, 'marca 1');
 
