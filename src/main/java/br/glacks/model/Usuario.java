@@ -19,8 +19,6 @@ import jakarta.validation.constraints.Size;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends EntityClass {
 
-    @NotBlank(message = "O campo 'nome' nao pode ser vazio (2 - 50 caracteres)")
-    @Size(min = 2, max = 50)
     private String nome;
 
     private String login;
