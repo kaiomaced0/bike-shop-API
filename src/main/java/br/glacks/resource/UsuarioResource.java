@@ -62,14 +62,6 @@ public class UsuarioResource {
         
     }
 
-    // @PUT
-    // @RolesAllowed({"Admin"})
-    // @Path("/update/{id}")
-    // @Transactional
-    // public UsuarioResponseDTO update(@PathParam("id") long id, UsuarioDTO usuario){
-    //     return usuarioService.update(id, usuario);
-    // }
-
     @PATCH
     @RolesAllowed({"Admin"})
     @Path("/senha/{id}")
@@ -103,6 +95,14 @@ public class UsuarioResource {
     }
 
     @PUT
+    @RolesAllowed({"Admin"})
+    @Path("/{id}")
+    @Transactional
+    public Response update(@PathParam("id") Long id, UsuarioDTO dto){
+        return usuarioService.update(id, dto);
+    }
+
+    @PATCH
     @RolesAllowed({"Admin"})
     @Path("/delete/{id}")
     public Response delete(@PathParam("id") Long id) {

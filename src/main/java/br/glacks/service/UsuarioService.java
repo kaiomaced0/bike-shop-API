@@ -18,6 +18,8 @@ package br.glacks.service;
 
         public UsuarioResponseDTO findByLogin(String login);
 
+        Response update(Long id, UsuarioDTO u);
+
         public List<UsuarioResponseDTO> getNome(@PathParam("nome") String nome);
 
         public UsuarioResponseDTO updateEmail(Long id, UsuarioUpdateEmailDTO email);

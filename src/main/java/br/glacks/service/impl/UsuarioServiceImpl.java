@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.glacks.dto.*;
+import br.glacks.model.EntityClass;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -50,9 +51,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             LOG.info("Requisição Usuario.getAll()");
 
-            return repository.findAll().stream()
-                    .sorted(Comparator.comparing(usuario -> usuario.getId()))
-            .map(usuario -> new UsuarioResponseDTO(usuario))
+            return repository.findAll().stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId))
+            .map(UsuarioResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.getAll()");
@@ -72,6 +73,33 @@ public class UsuarioServiceImpl implements UsuarioService {
             return null;
         }
 
+    }
+
+    @Override
+    @Transactional
+    public Response update(Long id, UsuarioDTO u) {
+        try {
+            LOG.info("Requisição Usuario.update()");
+            Usuario user = new Usuario();
+            user = repository.findById(id);
+            if(!u.nome().isEmpty()){
+                user.setNome(u.nome());
+            }
+            if(!u.email().isEmpty()){
+                user.setEmail(u.email());
+            }
+            if(!u.login().isEmpty()){
+                user.setLogin(u.login());
+            }
+            if(!u.senha().isEmpty()){
+                user.setSenha(hash.getHashSenha(u.senha()));
+            }
+
+            return Response.ok(new UsuarioResponseDTO(user)).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Usuario.update()");
+            return Response.status(400).entity(e.getMessage()).build();
+        }
     }
 
     @Override
@@ -251,12 +279,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
             return Response.status(Status.OK).build();
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Usuario.delete()");
-            return null;
+            LOG.error("Erro ao rodar Requisição Usuario.delete()" + e.getMessage());
+            return Response.status(400).entity(e.getMessage()).build();
         }
     }
 
     @Override
+    @Transactional
     public Response resetarSenha(Long id) {
         try {
             LOG.info("entrou resetarSenha");
@@ -264,7 +293,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             u.setSenha(hash.getHashSenha("123"));
             return Response.ok().build();
         }catch (Exception e){
-            LOG.error("erro resetarSenha");
+            LOG.error("erro resetarSenha - " + e.getMessage());
             return Response.status(400).entity(e.getMessage()).build();
         }
     }
