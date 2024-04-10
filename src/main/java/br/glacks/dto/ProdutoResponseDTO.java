@@ -16,7 +16,7 @@ public record ProdutoResponseDTO(
         String cor,
         Integer estoque,
         List<AvaliacaoResponseDTO> avaliacoes,
-        List<String> images,
+        List<String> img,
         MarcaResponseDTO marca) {
 
     public ProdutoResponseDTO(Produto produto){

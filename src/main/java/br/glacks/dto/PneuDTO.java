@@ -9,8 +9,8 @@ public record PneuDTO(
         Pneu f = new Pneu();
         f.setNome(produtoDTO.nome());
         f.setNomeLongo(produtoDTO.nomeLongo());
-        f.setPreco(produtoDTO.precoVenda());
-        f.setValorCompra(produtoDTO.precoCusto());
+        f.setPreco(produtoDTO.valorCompra());
+        f.setValorCompra(produtoDTO.preco());
         f.setEstoque(produtoDTO.estoque());
         return f;
     }

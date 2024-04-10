@@ -13,8 +13,8 @@ public record ProdutoDTO(
     String nome,
     String nomeLongo,
     String descricao,
-    Double precoCusto,
-    Double precoVenda,
+    Double valorCompra,
+    Double preco,
     Long idMarca,
     Long idCor,
     Integer estoque,
@@ -24,8 +24,8 @@ public record ProdutoDTO(
         Produto p = new Produto();
         p.setNome(produtoDTO.nome);
         p.setNomeLongo(produtoDTO.nomeLongo);
-        p.setPreco(produtoDTO.precoVenda);
-        p.setValorCompra(produtoDTO.precoCusto);
+        p.setPreco(produtoDTO.preco);
+        p.setValorCompra(produtoDTO.valorCompra);
         p.setEstoque(produtoDTO.estoque);
         p.setImg(new ArrayList<>());
         if(!produtoDTO.img().isEmpty())

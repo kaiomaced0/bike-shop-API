@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.glacks.dto.CidadeResponseDTO;
+import br.glacks.model.EntityClass;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -31,7 +32,7 @@ public class CidadeServiceImpl implements CidadeService {
     public Response getAll() {
         try {
             LOG.info("Requisição Cidade.getAll()");
-            return Response.ok(repository.findAll().stream().map(CidadeResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(CidadeResponseDTO::new).collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cidade.getAll()");
             return null;

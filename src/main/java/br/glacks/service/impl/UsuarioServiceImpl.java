@@ -109,7 +109,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
             return repository.findByNome(nome)
                     .stream()
-                    .map(usuario -> new UsuarioResponseDTO(usuario))
+                    .map(UsuarioResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.getNome()");
@@ -126,7 +126,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
             Usuario entity = repository.findById(id);
 
-            if(hash.getHashSenha(senha.senhaAnterior()) != entity.getSenha())
+            if(!hash.getHashSenha(senha.senhaAnterior()).equals(entity.getSenha()))
                 throw new NotFoundException("Senha anterior Incorreta");
 
             entity.setSenha(hash.getHashSenha(senha.novaSenha()));
@@ -145,7 +145,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             LOG.info(usuarioLogado.getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateLogin()");
 
             Usuario entity = repository.findById(id);
-            if(hash.getHashSenha(login.senha()) != entity.getSenha())
+            if(!hash.getHashSenha(login.senha()).equals(entity.getSenha()))
                 throw new NotFoundException("Senha Incorreta");
             
             entity.setLogin(login.login());
@@ -165,7 +165,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
             Usuario entity = repository.findById(id);
             if(entity instanceof PessoaFisica){
-                if(hash.getHashSenha(nome.senha()) != entity.getSenha())
+                if(!hash.getHashSenha(nome.senha()).equals(entity.getSenha()))
                     throw new NotFoundException("Senha Incorreta");
             PessoaFisica p = pessoaFisicaRepository.findById(entity.getId());
             p.setNome(nome.nome());
@@ -186,7 +186,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             LOG.info(usuarioLogado.getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateEmail()");
 
             Usuario entity = repository.findById(id);
-            if(hash.getHashSenha(email.senha()) != entity.getSenha())
+            if(!hash.getHashSenha(email.senha()).equals(entity.getSenha()))
                 throw new NotFoundException("Senha Incorreta");
             
             entity.setEmail(email.email());
@@ -204,9 +204,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             LOG.info("Requisição Usuario.insert()");
             PessoaFisica p = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
-            if (p.getClass() == null) {
-                throw new Exception("pessoa nulo");
-            }
             if(p.getPerfis() == null){
                 p.setPerfis(new HashSet<>());
             }

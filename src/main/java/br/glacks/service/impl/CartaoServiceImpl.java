@@ -3,6 +3,7 @@ package br.glacks.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.EntityClass;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -43,7 +44,7 @@ public class CartaoServiceImpl implements CartaoService {
         try {
             LOG.info("Requisição Cartao.getAll()");
             return Response.ok(repository.findAll()
-            .stream()
+            .stream().filter(EntityClass::getAtivo)
             .map(CartaoResponseDTO::new)
             .collect(Collectors.toList())).build();
         } catch (Exception e) {

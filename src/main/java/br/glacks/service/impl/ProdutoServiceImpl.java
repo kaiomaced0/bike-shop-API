@@ -51,9 +51,9 @@ public class ProdutoServiceImpl implements ProdutoService {
             LOG.info("Requisição Produto.getAll()");
 
             return repository.findAll()
-                    .stream()
-                    .sorted(Comparator.comparing(produto -> produto.getId()))
-                    .map(produto -> new ProdutoResponseDTO(produto))
+                    .stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId))
+                    .map(ProdutoResponseDTO::new)
                     .collect(Collectors.toList());
 
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             LOG.info("Requisição Produto.getAll()");
 
             return repository.findAll()
-                    .stream()
+                    .stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId))
                     .map(ProdutoAdminResponseDTO::new)
                     .collect(Collectors.toList());
@@ -102,7 +102,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
             return repository.findByNome(nome)
                     .stream()
-                    .map(produto -> new ProdutoResponseDTO(produto))
+                    .map(ProdutoResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getNome()");
@@ -141,10 +141,12 @@ public class ProdutoServiceImpl implements ProdutoService {
                 entity.setMarca(marcaRepository.findById(produto.idMarca()));
             if(produto.nomeLongo() != null)
                 entity.setNomeLongo(produto.nomeLongo());
-            if(produto.precoCusto() != null)
-                entity.setValorCompra(produto.precoCusto());
-            if(produto.precoVenda() != null)
-                entity.setPreco(produto.precoVenda());
+            if(produto.valorCompra() != null)
+                entity.setValorCompra(produto.valorCompra());
+            if(produto.preco() != null)
+                entity.setPreco(produto.preco());
+            if(produto.estoque() != null)
+                entity.setEstoque(produto.estoque());
             return Response.ok(new ProdutoResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.update()");
@@ -215,7 +217,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.adicionaEstoque()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }
@@ -239,7 +241,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
             LOG.error("Erro ao rodar Requisição Produto.salvarImagem()");
 
-            return Response.status(Status.CONFLICT).entity(result).build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

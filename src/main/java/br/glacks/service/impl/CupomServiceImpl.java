@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.EntityClass;
 import br.glacks.repository.ProdutoRepository;
 import org.jboss.logging.Logger;
 
@@ -33,7 +34,7 @@ public class CupomServiceImpl implements CupomService {
     public List<CupomResponseDTO> getAll() {
         try {
             LOG.info("Requisição Cupom.getAll()");
-            return repository.findAll().stream().map(CupomResponseDTO::new).collect(Collectors.toList());
+            return repository.findAll().stream().filter(EntityClass::getAtivo).map(CupomResponseDTO::new).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getAll()");
             return null;

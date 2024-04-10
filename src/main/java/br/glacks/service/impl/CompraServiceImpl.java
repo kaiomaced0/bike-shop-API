@@ -54,7 +54,7 @@ public class CompraServiceImpl implements CompraService {
     public Response getAll() {
         try {
             LOG.info("Requisição Compra.getAll()");
-            return Response.ok(repository.findAll().stream().map(CompraResponseDTO::new)
+            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(CompraResponseDTO::new)
                     .collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Compra.getAll()");

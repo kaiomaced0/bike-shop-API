@@ -43,7 +43,7 @@ public class BikeServiceImpl implements BikeService {
         try {
             LOG.info("Requisição Bike.getAll()");
             return Response.ok(repository.findAll()
-                    .stream()
+                    .stream().filter(EntityClass::getAtivo)
                     .map(BikeResponseDTO::new)
                     .collect(Collectors.toList())).build();
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class BikeServiceImpl implements BikeService {
         try {
             LOG.info("Requisição Bike.getAll()");
             return Response.ok(repository.findAll()
-                    .stream()
+                    .stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId))
                     .map(BikeAdminResponseDTO::new)
                     .collect(Collectors.toList())).build();

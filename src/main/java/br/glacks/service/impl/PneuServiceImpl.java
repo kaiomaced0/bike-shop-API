@@ -6,6 +6,7 @@ import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
+import br.glacks.model.Produto;
 import br.glacks.model.bike.Pneu;
 import br.glacks.repository.MarcaRepository;
 import br.glacks.repository.PneuRepository;
@@ -67,11 +68,23 @@ public class PneuServiceImpl implements PneuService {
 
     @Override
     @Transactional
-    public Response update(Long id, ProdutoDTO c) {
+    public Response update(Long id, ProdutoDTO produto) {
         try {
-            Pneu Pneu = repository.findById(id);
-            Pneu.setNome(c.nome());
-            return Response.ok(new ProdutoResponseDTO(Pneu)).build();
+
+            Pneu entity = repository.findById(id);
+            if(produto.nome() != null)
+                entity.setNome(produto.nome());
+            if(produto.idMarca() != null)
+                entity.setMarca(marcaRepository.findById(produto.idMarca()));
+            if(produto.nomeLongo() != null)
+                entity.setNomeLongo(produto.nomeLongo());
+            if(produto.valorCompra() != null)
+                entity.setValorCompra(produto.valorCompra());
+            if(produto.preco() != null)
+                entity.setPreco(produto.preco());
+            if(produto.estoque() != null)
+                entity.setEstoque(produto.estoque());
+            return Response.ok(new ProdutoResponseDTO(entity)).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.EntityClass;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -44,8 +45,8 @@ public class TelefoneServiceImpl implements TelefoneService {
         try {
             LOG.info("Requisição Telefone.getAll()");
 
-            return repository.findAll().stream()
-                    .map(telefone -> new TelefoneResponseDTO(telefone))
+            return repository.findAll().stream().filter(EntityClass::getAtivo)
+                    .map(TelefoneResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Telefone.getAll()");

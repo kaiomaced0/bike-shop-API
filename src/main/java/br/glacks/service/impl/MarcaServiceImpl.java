@@ -2,6 +2,7 @@ package br.glacks.service.impl;
 
 import br.glacks.dto.MarcaDTO;
 import br.glacks.dto.MarcaResponseDTO;
+import br.glacks.model.EntityClass;
 import br.glacks.model.Marca;
 import br.glacks.repository.MarcaRepository;
 import br.glacks.service.MarcaService;
@@ -21,7 +22,7 @@ public class MarcaServiceImpl implements MarcaService {
     @Override
     public Response getAll() {
         try {
-            return Response.ok(repository.findAll().stream().map(MarcaResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(MarcaResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).build();
         }

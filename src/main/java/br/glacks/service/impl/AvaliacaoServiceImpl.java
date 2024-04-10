@@ -3,6 +3,7 @@ package br.glacks.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.EntityClass;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -41,7 +42,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
         try {
             LOG.info("Requisição Avaliacao.getAll() - " + repository.count() + " itens.");
             return Response.ok(repository.findAll()
-            .stream()
+            .stream().filter(EntityClass::getAtivo)
             .map(AvaliacaoResponseDTO::new)
             .collect(Collectors.toList())).build();
 

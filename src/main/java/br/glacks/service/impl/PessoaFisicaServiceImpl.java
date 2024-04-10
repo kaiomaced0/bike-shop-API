@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.EntityClass;
 import jakarta.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 
@@ -29,9 +30,9 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         try {
             LOG.info("Requisição PessoaFisica.getAll()"); 
             return repository.findAll()
-            .stream()
-            .sorted(Comparator.comparing(pessoaFisica -> pessoaFisica.getId()))
-            .map(pessoaFisica -> new PessoaFisicaResponseDTO(pessoaFisica))
+            .stream().filter(EntityClass::getAtivo)
+            .sorted(Comparator.comparing(EntityClass::getId))
+            .map(PessoaFisicaResponseDTO::new)
             .collect(Collectors.toList());
             
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.model.EntityClass;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -39,9 +40,9 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
         try {
             LOG.info("Requisição PessoaFisica.getAll()");
             return repository.findAll()
-                    .stream()
-                    .sorted(Comparator.comparing(pessoaJuridica -> pessoaJuridica.getId()))
-                    .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
+                    .stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId))
+                    .map(PessoaJuridicaResponseDTO::new)
                     .collect(Collectors.toList());
 
         } catch (Exception e) {
