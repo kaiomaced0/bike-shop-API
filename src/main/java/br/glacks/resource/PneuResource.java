@@ -43,7 +43,7 @@ public class PneuResource {
         return service.insert(c);
     }
 
-    @PATCH
+    @PUT
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     public Response update(@PathParam("id") Long id,ProdutoDTO c){

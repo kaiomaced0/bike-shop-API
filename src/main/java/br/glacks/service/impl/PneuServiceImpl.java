@@ -51,7 +51,7 @@ public class PneuServiceImpl implements PneuService {
     @Override
     public Response getId(Long id) {
         try{
-            return Response.ok(new ProdutoResponseDTO(repository.findById(id))).build();
+            return Response.ok(new ProdutoAdminResponseDTO(repository.findById(id))).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }
