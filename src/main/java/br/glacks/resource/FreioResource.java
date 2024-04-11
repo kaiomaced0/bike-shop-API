@@ -42,5 +42,12 @@ public class FreioResource {
     public Response update(@PathParam("id") Long id,FreioDTO f){
         return service.update(id, f);
     }
+
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return service.delete(id);
+    }
 }
 
