@@ -31,7 +31,7 @@ public class PneuResource {
     }
 
     @GET
-    @PermitAll
+    @RolesAllowed({"Admin"})
     @Path("/{id}")
     public Response getId(@PathParam("id") Long id){
         return service.getId(id);
@@ -48,6 +48,13 @@ public class PneuResource {
     @Path("/{id}")
     public Response update(@PathParam("id") Long id,ProdutoDTO c){
         return service.update(id, c);
+    }
+
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return  service.delete(id);
     }
 }
 
