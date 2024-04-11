@@ -5,7 +5,9 @@ import br.glacks.dto.ProdutoAdminResponseDTO;
 import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.model.Cor;
+import br.glacks.model.EntityClass;
 import br.glacks.model.Ferramenta;
+import br.glacks.model.bike.Freio;
 import br.glacks.repository.FerramentaRepository;
 import br.glacks.repository.MarcaRepository;
 import br.glacks.service.FerramentaService;
@@ -41,7 +43,7 @@ public class FerramentaServiceImpl implements FerramentaService {
     @Override
     public Response getAllAdmin() {
         try {
-            return Response.ok(repository.findAll().stream().map(ProdutoAdminResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(ProdutoAdminResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).build();
         }
@@ -50,7 +52,7 @@ public class FerramentaServiceImpl implements FerramentaService {
     @Override
     public Response getId(Long id) {
         try {
-            return Response.ok(new ProdutoResponseDTO(repository.findById(id))).build();
+            return Response.ok(new ProdutoAdminResponseDTO(repository.findById(id))).build();
         }catch (Exception e){
             return Response.status(400).build();
         }
@@ -74,5 +76,15 @@ public class FerramentaServiceImpl implements FerramentaService {
     @Override
     public Response update(Long id, ProdutoDTO m) {
             return produtoService.update(id, m);
+    }
+
+    @Override
+    @Transactional
+    public Response delete(Long id) {
+        try {
+            return produtoService.delete(id);
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+        }
     }
 }

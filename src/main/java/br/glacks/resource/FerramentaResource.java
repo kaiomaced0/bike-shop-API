@@ -33,7 +33,7 @@ public class FerramentaResource {
 
     @GET
     @Path("/{id}")
-    @PermitAll
+    @RolesAllowed({"Admin"})
     public Response getId(@PathParam("id") Long id){
         return service.getId(id);
     }
@@ -49,6 +49,13 @@ public class FerramentaResource {
     @Path("/update/{id}")
     public Response update (@PathParam("id") Long id, ProdutoDTO p){
         return service.update(id, p);
+    }
+
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return service.delete(id);
     }
 
 }
