@@ -145,12 +145,14 @@ public class ProdutoServiceImpl implements ProdutoService {
                 entity.setValorCompra(produto.valorCompra());
             if(produto.preco() != null)
                 entity.setPreco(produto.preco());
+            if(produto.descricao() != null)
+                entity.setDescricao(produto.descricao());
             if(produto.estoque() != null)
                 entity.setEstoque(produto.estoque());
             return Response.ok(new ProdutoResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.update()");
-            return Response.status(400).build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

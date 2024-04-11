@@ -24,6 +24,7 @@ public record ProdutoDTO(
         Produto p = new Produto();
         p.setNome(produtoDTO.nome);
         p.setNomeLongo(produtoDTO.nomeLongo);
+        p.setDescricao(produtoDTO.descricao);
         p.setPreco(produtoDTO.preco);
         p.setValorCompra(produtoDTO.valorCompra);
         p.setEstoque(produtoDTO.estoque);
