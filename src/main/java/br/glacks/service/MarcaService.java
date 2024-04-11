@@ -12,4 +12,5 @@ public interface MarcaService {
     public Response insert(MarcaDTO m);
     public Response update(Long id, MarcaDTO m);
 
+    public Response delete(Long id);
 }

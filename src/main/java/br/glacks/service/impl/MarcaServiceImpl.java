@@ -4,6 +4,7 @@ import br.glacks.dto.MarcaDTO;
 import br.glacks.dto.MarcaResponseDTO;
 import br.glacks.model.EntityClass;
 import br.glacks.model.Marca;
+import br.glacks.model.bike.Freio;
 import br.glacks.repository.MarcaRepository;
 import br.glacks.service.MarcaService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -58,6 +59,18 @@ public class MarcaServiceImpl implements MarcaService {
             return Response.ok(new MarcaResponseDTO(marca)).build();
         }catch (Exception e){
             return Response.status(Response.Status.NOT_MODIFIED).build();
+        }
+    }
+
+    @Override
+    @Transactional
+    public Response delete(Long id) {
+        try {
+            Marca marca = repository.findById(id);
+            marca.setAtivo(false);
+            return Response.ok(new MarcaResponseDTO(marca)).build();
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
         }
     }
 }

@@ -42,4 +42,11 @@ public class MarcaResource {
         return service.update(id, m);
     }
 
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return service.delete(id);
+    }
+
 }
