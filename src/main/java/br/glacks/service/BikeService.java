@@ -16,6 +16,8 @@ public interface BikeService {
 
     public Response getId(@PathParam("id") long id);
 
+    public Response getAdminId(@PathParam("id") long id);
+
     public Response getNome(@PathParam("nome") String nome);
 
     public Response insert(BikeDTO bike);

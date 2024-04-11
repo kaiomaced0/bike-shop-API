@@ -19,9 +19,10 @@ public record BikeDTO(
 
         Bike bike = new Bike();
         bike.setNome(bikeDTO.produto().nome());
+        bike.setDescricao(bikeDTO.produto().descricao());
         bike.setNomeLongo(bikeDTO.produto().nomeLongo());
-        bike.setPreco(bikeDTO.produto().precoVenda());
-        bike.setValorCompra(bikeDTO.produto().precoCusto());
+        bike.setPreco(bikeDTO.produto().preco());
+        bike.setValorCompra(bikeDTO.produto().valorCompra());
         bike.setEstoque(bikeDTO.produto().estoque());
         bike.setImg(new ArrayList<>());
         if(!bikeDTO.produto().img().isEmpty())

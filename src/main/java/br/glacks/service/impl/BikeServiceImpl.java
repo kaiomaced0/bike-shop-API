@@ -73,7 +73,22 @@ public class BikeServiceImpl implements BikeService {
         try {
             LOG.info("Requisição Bike.getId()");
             Bike b = repository.findById(id);
-            return Response.ok(new BikeResponseDTO(b)).build();
+            return Response.ok(new BikeAdminResponseDTO(b)).build();
+
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Bike.getId()");
+            return Response.status(Status.BAD_REQUEST).entity(e).build();
+
+        }
+
+    }
+
+    @Override
+    public Response getAdminId(long id){
+        try {
+            LOG.info("Requisição Bike.getId()");
+            Bike b = repository.findById(id);
+            return Response.ok(new BikeAdminResponseDTO(b)).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Bike.getId()");
@@ -127,14 +142,17 @@ public class BikeServiceImpl implements BikeService {
             if (bike.produto().nome() != null) {
                 entity.setNome(bike.produto().nome());
             }
+            if (bike.produto().descricao() != null) {
+                entity.setDescricao(bike.produto().descricao());
+            }
             if (bike.produto().nomeLongo() != null) {
                 entity.setNomeLongo(bike.produto().nomeLongo());
             }
-            if (bike.produto().precoVenda() != null) {
-                entity.setPreco(bike.produto().precoVenda());
+            if (bike.produto().preco() != null) {
+                entity.setPreco(bike.produto().preco());
             }
-            if (bike.produto().precoCusto() != null) {
-                entity.setValorCompra(bike.produto().precoCusto());
+            if (bike.produto().valorCompra() != null) {
+                entity.setValorCompra(bike.produto().valorCompra());
             }
             if (bike.produto().idCor() != null) {
                 entity.setCor(Cor.valueOf(bike.produto().idCor().intValue()));
@@ -157,7 +175,7 @@ public class BikeServiceImpl implements BikeService {
                 entity.setTipoBike(TipoBike.valueOf(bike.idTipoBike().intValue()));
             }
 
-            return Response.ok(entity).build();
+            return Response.ok(new BikeResponseDTO(entity)).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Bike.update()", e);
