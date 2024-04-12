@@ -12,7 +12,6 @@ import jakarta.validation.constraints.Size;
 @PrimaryKeyJoinColumn(name = "id")
 public class PessoaFisica extends Usuario{
 
-    @CPF
     private String cpf; 
     
     @Column(name ="data_nascimento")

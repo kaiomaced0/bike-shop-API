@@ -41,5 +41,14 @@ public class CategoriaResource {
     public Response update(@PathParam("id") Long id,CategoriaDTO c){
         return service.update(id, c);
     }
+
+    @PATCH
+    @RolesAllowed({"Admin"})
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return service.delete(id);
+    }
+
+
 }
 

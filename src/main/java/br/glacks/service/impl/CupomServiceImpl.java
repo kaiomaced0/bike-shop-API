@@ -114,11 +114,13 @@ public class CupomServiceImpl implements CupomService {
             entity.setNome(cupom.nome());
             entity.setCodigo(cupom.codigo());
             entity.setQuantidade(cupom.quantidade());
-            entity.setValorDesconto(cupom.valorDesconto());
-            return Response.accepted(new CupomResponseDTO(entity)).build();
+            if(cupom.valorDesconto() < 50.0 && cupom.valorDesconto() > 0){
+                entity.setValorDesconto(cupom.valorDesconto());
+            }
+            return Response.ok(new CupomResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.update()");
-            return Response.status(Status.NO_CONTENT).build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }
@@ -134,7 +136,7 @@ public class CupomServiceImpl implements CupomService {
             return Response.status(Status.OK).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.delete()");
-            return Response.status(Status.NO_CONTENT).build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

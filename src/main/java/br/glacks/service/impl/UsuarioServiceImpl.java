@@ -63,25 +63,25 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario getId(long id) {
+    public Response getId(long id) {
         try {
             LOG.info("Requisição Usuario.getId()");
-
-            return repository.findById(id);
+            Usuario u = repository.findById(id);
+            return Response.ok(new UsuarioResponseDTO(u)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.getId()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }
 
     @Override
     @Transactional
-    public Response update(Long id, UsuarioDTO u) {
+    public Response update(Long id, PessoaFisicaDTO u) {
         try {
             LOG.info("Requisição Usuario.update()");
-            Usuario user = new Usuario();
-            user = repository.findById(id);
+            PessoaFisica user = new PessoaFisica();
+            user = pessoaFisicaRepository.findById(id);
             if(!u.nome().isEmpty()){
                 user.setNome(u.nome());
             }
@@ -94,8 +94,10 @@ public class UsuarioServiceImpl implements UsuarioService {
             if(!u.senha().isEmpty()){
                 user.setSenha(hash.getHashSenha(u.senha()));
             }
+            if(!u.cpf().isEmpty())
+                user.setCpf(u.cpf());
 
-            return Response.ok(new UsuarioResponseDTO(user)).build();
+            return Response.ok(new PessoaFisicaResponseDTO(user)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.update()");
             return Response.status(400).entity(e.getMessage()).build();
@@ -204,7 +206,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             LOG.info("Requisição Usuario.insert()");
             PessoaFisica p = PessoaFisicaDTO.criaPessoaFisica(pessoaFisicaDTO);
-            if(p.getPerfis() == null){
+                if(p.getPerfis() == null){
                 p.setPerfis(new HashSet<>());
             }
             p.getPerfis().add(Perfil.USER);

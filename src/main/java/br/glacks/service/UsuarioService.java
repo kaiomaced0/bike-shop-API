@@ -12,13 +12,13 @@ package br.glacks.service;
         
         public List<UsuarioResponseDTO> getAll();
 
-        public Usuario getId(@PathParam("id") long id);
+        public Response getId(@PathParam("id") long id);
 
         public Usuario findByLoginAndSenha(String login, String senha);
 
         public UsuarioResponseDTO findByLogin(String login);
 
-        Response update(Long id, UsuarioDTO u);
+        Response update(Long id, PessoaFisicaDTO u);
 
         public List<UsuarioResponseDTO> getNome(@PathParam("nome") String nome);
 

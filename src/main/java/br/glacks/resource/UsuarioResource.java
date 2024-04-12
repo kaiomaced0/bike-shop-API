@@ -49,7 +49,7 @@ public class UsuarioResource {
     @GET
     @RolesAllowed({"Admin"})
     @Path("/{id}")
-    public Usuario getId(@PathParam("id") long id){
+    public Response getId(@PathParam("id") long id){
         return usuarioService.getId(id);
         
     }
@@ -98,7 +98,7 @@ public class UsuarioResource {
     @RolesAllowed({"Admin"})
     @Path("/{id}")
     @Transactional
-    public Response update(@PathParam("id") Long id, UsuarioDTO dto){
+    public Response update(@PathParam("id") Long id, PessoaFisicaDTO dto){
         return usuarioService.update(id, dto);
     }
 

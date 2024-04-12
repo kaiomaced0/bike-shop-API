@@ -53,7 +53,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.getId()");
-            return Response.status(400).build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
         
     }

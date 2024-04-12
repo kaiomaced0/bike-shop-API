@@ -35,7 +35,7 @@ public class MarcaResource {
         return service.insert(m);
     }
 
-    @PUT
+    @PATCH
     @RolesAllowed({"Admin"})
     @Path("/update/{id}")
     public Response update (@PathParam("id") Long id, MarcaDTO m){

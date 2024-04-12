@@ -1,9 +1,9 @@
 -- his file allow to e SQL commands that will be emitted in test and dev.
 -- The commands are coted as their support dependf the database
  insert into usuario (nome, ativo, id,  login, senha)values('kaio',true, 101,'kaio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo, id, login, senha) values('joao',true, 107, 'joao','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo, id, login, senha) values('antonio',true, 102, 'antonio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo, id, login, senha) values('lucas',true, 103, 'lucas', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (email, nome, ativo, id, login, senha) values('joao@gmail.com','joao',true, 107, 'joao','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (email, nome, ativo, id, login, senha) values('antonio@gmail.com','antonio',true, 102, 'antonio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (email, nome, ativo, id, login, senha) values('lucas@gmail.com','lucas',true, 103, 'lucas', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo, id, login, senha) values('kuba event',true, 104,'kuba event', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo, id, login, senha) values('imports',true, 105, 'imports imports', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo, id, login, senha) values('al',true, 106, 'al', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
@@ -16,7 +16,7 @@
  insert into usuario (nome, ativo,  login, senha) values('otavio',true,  'otavio', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo,  login, senha) values('rubens',true,  'rubens', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo,  login, senha) values('ordete',true,  'ordete','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo, id,  login, senha) values('teste',true, 100, 'teste', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (email, nome, ativo, id,  login, senha) values('teste@gmail.com','teste',true, 100, 'teste', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(100, '12345678909', 'hilowisck', '00/00/2121');
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(107, '98765432101', 'hilowisck', '04/12/2002');
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(102, '23456789023', 'hilowisck', '27/11/2002');
@@ -30,21 +30,36 @@
  insert into fornecedor (ativo, id, nome, cnpj) VALUES (true, 1, 'Fornecedor 1', '0001100/000');
 
  insert into marca (ativo, id, nome) VALUES (true, 1, 'marca 1');
+ insert into marca (ativo, id, nome) VALUES (true, 2, 'marca 2');
+ insert into marca (ativo, id, nome) VALUES (true, 3, 'marca 3');
+ insert into marca (ativo, id, nome) VALUES (true, 4, 'marca 4');
+ insert into marca (ativo, id, nome) VALUES (true, 5, 'marca 5');
 
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 100, 'bike 1', 50, 1020.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 101, 'bike 2', 30, 3040.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
- insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 102, 'Ferramenta 1', 20, 2300.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
- insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 103, 'Pneu 1', 20, 2300.0, 1, 5, 200.0, true, 1, 1, 'pneeeeeuss', 'nome longooooo');
- insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 104, 'bike 5', 20, 2300.0, 1, 5, 200.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 102, 'Ferramenta 1', 20, 300.0, 1, 5, 90.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 103, 'Pneu 1', 20, 2000.0, 1, 5, 90.0, true, 1, 1, 'pneeeeeuss', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 104, 'bike 5', 20, 2200.0, 1, 5, 500.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 105, 'Ferramenta 2A', 20, 2700.0, 1, 5, 1200.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 106, 'Pneu de Bicicleta Aro18', 20, 299.0, 1, 5, 99.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 107, 'Pneu de Bicicleta 29x2.2 - 2 unidades', 20, 440.0, 1, 5, 190.0, true, 1, 1, 'descricao', 'nome longooooo');
 
  insert into freio (id, nome, ativo) VALUES (1, 'Freio Tradicional', true);
+ insert into freio (id, nome, ativo) VALUES (2, 'Freio aaaa', true);
+ insert into freio (id, nome, ativo) VALUES (3, 'Freio bbbb', true);
+ insert into freio (id, nome, ativo) VALUES (4, 'Freio cccc', true);
+ insert into freio (id, nome, ativo) VALUES (5, 'Freio ddddd', true);
 
  insert into bike (id, tamanho, marcha, freio, cambio, tipobike) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 1, '12 marchas', 1, 'cambio adasds', 1);
  insert into bike (id, tamanho, marcha, freio, cambio, tipobike) values((SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2, '12 marchas', 1, 'cambio adasds', 1);
+ insert into bike(id) VALUES (104);
 
  insert into pneu (id) VALUES (103);
+ insert into pneu (id) VALUES (106);
+ insert into pneu (id) VALUES (107);
 
  insert into ferramenta(id) VALUES (102);
+ insert into ferramenta(id) VALUES (105);
 
  insert into cupom (ativo, nome, id, quantidade, codigo, valordesconto) values(true, 'descontao20', 100, 50, '#desconto20', 20.0);
  insert into cupom (ativo, nome, quantidade, codigo, valordesconto) values(true, 'descontao10', 100, '#desconto10', 10.0);
