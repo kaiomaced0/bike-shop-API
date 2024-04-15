@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 import br.glacks.dto.ItemCompraDTO;
 import br.glacks.model.*;
 import br.glacks.model.pagamento.FormaPagamento;
-import br.glacks.repository.CupomRepository;
-import br.glacks.repository.EnderecoRepository;
-import br.glacks.repository.ItemCompraRepository;
+import br.glacks.repository.*;
 import br.glacks.service.CupomService;
 import org.jboss.logging.Logger;
 
@@ -18,7 +16,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import br.glacks.dto.CompraDTO;
 import br.glacks.dto.CompraResponseDTO;
-import br.glacks.repository.CompraRepository;
 import br.glacks.service.CompraService;
 import br.glacks.service.UsuarioLogadoService;
 import br.glacks.service.UsuarioService;
@@ -36,7 +33,7 @@ public class CompraServiceImpl implements CompraService {
     UsuarioLogadoService usuarioLogado;
 
     @Inject
-    UsuarioService usuarioService;
+    UsuarioRepository usuarioRepository;
 
     @Inject
     ItemCompraRepository itemCompraRepository;
@@ -67,7 +64,7 @@ public class CompraServiceImpl implements CompraService {
     public List<CompraResponseDTO> getAllOn() {
         try {
             LOG.info("Requisição Compra.getAll()");
-            Usuario user = usuarioService.getId(usuarioLogado.getPerfilUsuarioLogado().id());
+            Usuario user = usuarioRepository.findById(usuarioLogado.getPerfilUsuarioLogado().id());
 
             return user.getCompras().stream().map(CompraResponseDTO::new)
                     .collect(Collectors.toList());
