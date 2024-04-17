@@ -209,6 +209,10 @@ public class UsuarioServiceImpl implements UsuarioService {
                 if(p.getPerfis() == null){
                 p.setPerfis(new HashSet<>());
             }
+            Usuario u = repository.findByLogin(pessoaFisicaDTO.login());
+            if(u != null){
+                throw new Exception("Login ja existe!");
+            }
             p.getPerfis().add(Perfil.USER);
             p.setSenha(hash.getHashSenha(p.getSenha()));
             pessoaFisicaRepository.persist(p);
@@ -216,7 +220,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Usuario.insert()" + e.getMessage());
-            return Response.notModified().build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

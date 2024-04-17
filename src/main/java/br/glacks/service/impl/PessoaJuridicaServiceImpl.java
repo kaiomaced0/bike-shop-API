@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.glacks.model.EntityClass;
+import br.glacks.repository.UsuarioRepository;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -33,6 +34,9 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
     @Inject
     HashService hash;
+
+    @Inject
+    UsuarioRepository usuarioRepository;
 
     @Override
     public List<PessoaJuridicaResponseDTO> getAll() {
@@ -102,9 +106,10 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
     public Response insert(PessoaJuridicaDTO pessoaJuridicaDTO) {
         try {
             LOG.info("Requisição PessoaJuridica.insert()");
-            PessoaJuridica pj = pessoaJuridicaDTO.criaPessoaJuridica(pessoaJuridicaDTO);
-            if (pessoaJuridicaDTO.getClass() == null) {
-                throw new Exception("PessoaJuridica nula");
+            PessoaJuridica pj = PessoaJuridicaDTO.criaPessoaJuridica(pessoaJuridicaDTO);
+            Usuario u = usuarioRepository.findByLogin(pessoaJuridicaDTO.usuarioDTO().login());
+            if(u != null){
+                throw new Exception("Login ja existe!");
             }
             pj.getPerfis().add(Perfil.USER);
             pj.setSenha(hash.getHashSenha(pj.getSenha()));
