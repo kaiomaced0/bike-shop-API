@@ -1,13 +1,14 @@
 package br.glacks.service.impl;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import br.glacks.dto.ProdutoAdminResponseDTO;
+import br.glacks.model.Categoria;
 import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
+import br.glacks.repository.CategoriaRepository;
 import br.glacks.repository.MarcaRepository;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
@@ -43,6 +44,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Inject
     MarcaRepository marcaRepository;
+
+    @Inject
+    CategoriaRepository categoriaRepository;
 
     @Override
     public List<ProdutoResponseDTO> getAll() {
@@ -96,17 +100,21 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<ProdutoResponseDTO> getNome(String nome) {
+    public Response getNome(String nome) {
         try {
             LOG.info("Requisição Produto.getNome()");
-
-            return repository.findByNome(nome)
-                    .stream()
+            Set<ProdutoResponseDTO> lista = new HashSet<>();
+            lista = repository.findByNome(nome)
+                    .stream().filter(EntityClass::getAtivo)
                     .map(ProdutoResponseDTO::new)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
+
+            Set<ProdutoResponseDTO> finalLista = lista;
+            finalLista.addAll(repository.findAll().stream().filter(EntityClass::getAtivo).filter(produto -> !(produto.getCategorias().stream().filter(categoria -> categoria.getNome().contains(nome)).count() == 0)).map(ProdutoResponseDTO::new).toList());
+            return Response.ok(finalLista).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getNome()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

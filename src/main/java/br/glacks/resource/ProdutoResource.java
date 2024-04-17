@@ -53,7 +53,7 @@ public class ProdutoResource {
     @GET
     @PermitAll
     @Path("/nome/{nome}")
-    public List<ProdutoResponseDTO> getNome(@PathParam("nome") String nome){
+    public Response getNome(@PathParam("nome") String nome){
         return produtoService.getNome(nome);
         
     }
