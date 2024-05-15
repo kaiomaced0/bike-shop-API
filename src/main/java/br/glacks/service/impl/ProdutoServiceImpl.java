@@ -87,11 +87,11 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Produto getId(long id) {
+    public ProdutoResponseDTO getId(long id) {
         try {
             LOG.info("Requisição Produto.getId()");
 
-            return repository.findById(id);
+            return new ProdutoResponseDTO(repository.findById(id));
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getId()");
             return null;
@@ -127,8 +127,17 @@ public class ProdutoServiceImpl implements ProdutoService {
             Produto p = ProdutoDTO.criaProduto(produto);
             p.setMarca(marcaRepository.findById(produto.idMarca()));
             p.setCor(Cor.valueOf(produto.idCor().intValue()));
+            p.setCategorias(new ArrayList<>());
+            if(!produto.categoriasId().isEmpty()){
+                produto.categoriasId().forEach(c -> {
+                    Categoria cat = categoriaRepository.findById(c);
+                    if(!cat.getNome().isEmpty()){
+                        p.getCategorias().add(cat);
+                    }
+                });
+            }
             repository.persist(p);
-            return Response.ok(produto).build();
+            return Response.ok(new ProdutoResponseDTO(p)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.insert()");
             return Response.status(400).entity(e.getMessage()).build();
@@ -177,7 +186,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             return Response.status(Status.OK).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.delete()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }
@@ -202,7 +211,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             return Response.status(Status.OK).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.retiraEstoque()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }

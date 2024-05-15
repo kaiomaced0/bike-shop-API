@@ -14,12 +14,6 @@ public record ItemCompraDTO(
             ItemCompra i = new ItemCompra();
             ProdutoServiceImpl p = new ProdutoServiceImpl();
 
-            i.setProduto(p.getId(itemCompraDTO.produtoId));
-            if (i.getProduto() == null) {
-                throw new Exception();
-            }
-            i.setQuantidade(itemCompraDTO.quantidade);
-            i.setPreco(i.getProduto().getPreco() * itemCompraDTO.quantidade);
 
             return i;
         } catch (Exception e) {

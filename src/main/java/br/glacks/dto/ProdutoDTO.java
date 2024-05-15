@@ -4,19 +4,31 @@ import jakarta.persistence.Enumerated;
 
 import br.glacks.model.Cor;
 import br.glacks.model.Produto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public record ProdutoDTO(
 
+        @Size(min = 5, max = 60)
     String nome,
+        @Size(max = 160)
     String nomeLongo,
     String descricao,
+
+        @Size(min = 1)
     Double valorCompra,
+
+        @Size(min = 1)
     Double preco,
     Long idMarca,
+    List<Long> categoriasId,
     Long idCor,
+        @Size(min = 1)
     Integer estoque,
     List<String> img
 ) {

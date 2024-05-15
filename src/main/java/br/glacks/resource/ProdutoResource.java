@@ -57,11 +57,11 @@ public class ProdutoResource {
         return produtoService.getNome(nome);
         
     }
-    
+
     @GET
     @Path("/{id}")
-    @RolesAllowed({"Admin"})
-    public Produto getId(@PathParam("id") long id){
+    @PermitAll
+    public ProdutoResponseDTO getId(@PathParam("id") Long id){
         return produtoService.getId(id);
         
     }

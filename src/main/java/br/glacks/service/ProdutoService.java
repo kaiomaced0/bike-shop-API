@@ -16,7 +16,7 @@ public interface ProdutoService {
     public List<ProdutoResponseDTO> getAll();
     public List<ProdutoAdminResponseDTO> getAllAdmin();
 
-    public Produto getId(@PathParam("id") long id);
+    public ProdutoResponseDTO getId(@PathParam("id") long id);
 
     public Response getNome(@PathParam("nome") String nome);
 

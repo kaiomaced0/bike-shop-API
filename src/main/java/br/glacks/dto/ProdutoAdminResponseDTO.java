@@ -15,6 +15,7 @@ public record ProdutoAdminResponseDTO(
         String cor,
         Integer estoque,
         List<AvaliacaoResponseDTO> avaliacoes,
+        List<CategoriaResponseDTO> categorias,
         List<String> img,
         MarcaResponseDTO marca) {
 
@@ -30,6 +31,10 @@ public record ProdutoAdminResponseDTO(
             .stream()
             .map(AvaliacaoResponseDTO::new)
             .collect(Collectors.toList()): null,
+                produto.getCategorias() != null ? produto.getCategorias()
+                        .stream()
+                        .map(CategoriaResponseDTO::new)
+                        .collect(Collectors.toList()): null,
             produto.getImg(), new MarcaResponseDTO(produto.getMarca()));
     }
 
