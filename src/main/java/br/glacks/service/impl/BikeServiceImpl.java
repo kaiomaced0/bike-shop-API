@@ -44,6 +44,7 @@ public class BikeServiceImpl implements BikeService {
             LOG.info("Requisição Bike.getAll()");
             return Response.ok(repository.findAll()
                     .stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
                     .map(BikeResponseDTO::new)
                     .collect(Collectors.toList())).build();
         } catch (Exception e) {

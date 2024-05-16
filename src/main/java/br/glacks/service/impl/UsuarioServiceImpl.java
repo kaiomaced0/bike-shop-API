@@ -52,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             LOG.info("Requisição Usuario.getAll()");
 
             return repository.findAll().stream().filter(EntityClass::getAtivo)
-                    .sorted(Comparator.comparing(EntityClass::getId))
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
             .map(UsuarioResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {

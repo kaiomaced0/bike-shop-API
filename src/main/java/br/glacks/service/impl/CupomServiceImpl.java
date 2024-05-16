@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,8 @@ public class CupomServiceImpl implements CupomService {
     public List<CupomResponseDTO> getAll() {
         try {
             LOG.info("Requisição Cupom.getAll()");
-            return repository.findAll().stream().filter(EntityClass::getAtivo).map(CupomResponseDTO::new).collect(Collectors.toList());
+            return repository.findAll().stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(CupomResponseDTO::new).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getAll()");
             return null;
@@ -100,7 +102,7 @@ public class CupomServiceImpl implements CupomService {
             return Response.ok(new CupomResponseDTO(c)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.insert()");
-            return Response.status(Status.NOT_IMPLEMENTED).entity(e).build();
+            return Response.status(400).entity(e).build();
         }
 
     }

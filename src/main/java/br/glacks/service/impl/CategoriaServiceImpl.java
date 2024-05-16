@@ -11,6 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -20,7 +21,8 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public Response getAll() {
         try {
-            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(CategoriaResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(CategoriaResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }

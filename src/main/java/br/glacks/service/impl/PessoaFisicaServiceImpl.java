@@ -31,7 +31,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
             LOG.info("Requisição PessoaFisica.getAll()"); 
             return repository.findAll()
             .stream().filter(EntityClass::getAtivo)
-            .sorted(Comparator.comparing(EntityClass::getId))
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
             .map(PessoaFisicaResponseDTO::new)
             .collect(Collectors.toList());
             

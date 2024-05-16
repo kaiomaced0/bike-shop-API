@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,7 @@ public class TelefoneServiceImpl implements TelefoneService {
             LOG.info("Requisição Telefone.getAll()");
 
             return repository.findAll().stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
                     .map(TelefoneResponseDTO::new)
                     .collect(Collectors.toList());
         } catch (Exception e) {

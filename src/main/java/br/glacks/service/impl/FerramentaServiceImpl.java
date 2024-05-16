@@ -17,6 +17,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -34,7 +35,8 @@ public class FerramentaServiceImpl implements FerramentaService {
     @Override
     public Response getAll() {
         try {
-            return Response.ok(repository.findAll().stream().map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(repository.findAll().stream()
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).build();
         }

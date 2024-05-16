@@ -92,6 +92,7 @@ public class PessoaJuridicaServiceImpl implements PessoaJuridicaService {
 
             return repository.findByCnpj(cnpj)
                     .stream()
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
                     .map(pessoaJuridica -> new PessoaJuridicaResponseDTO(pessoaJuridica))
                     .collect(Collectors.toList());
         } catch (Exception e) {
