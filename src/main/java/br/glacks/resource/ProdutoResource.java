@@ -66,6 +66,14 @@ public class ProdutoResource {
         
     }
 
+    @GET
+    @Path("/admin/{id}")
+    @RolesAllowed({"Admin"})
+    public ProdutoAdminResponseDTO getIdAdmin(@PathParam("id") Long id){
+        return produtoService.getIdAdmin(id);
+
+    }
+
     @POST
     @RolesAllowed({"Admin"})
     @Transactional

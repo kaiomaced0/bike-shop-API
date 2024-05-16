@@ -18,6 +18,8 @@ public interface ProdutoService {
 
     public ProdutoResponseDTO getId(@PathParam("id") long id);
 
+    public ProdutoAdminResponseDTO getIdAdmin(Long id);
+
     public Response getNome(@PathParam("nome") String nome);
 
     public Response insert(ProdutoDTO produtoDTO);

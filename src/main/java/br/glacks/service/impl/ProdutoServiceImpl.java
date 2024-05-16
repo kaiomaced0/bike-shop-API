@@ -75,7 +75,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
             return repository.findAll()
                     .stream().filter(EntityClass::getAtivo)
-                    .sorted(Comparator.comparing(EntityClass::getId))
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
                     .map(ProdutoAdminResponseDTO::new)
                     .collect(Collectors.toList());
 
@@ -94,6 +94,19 @@ public class ProdutoServiceImpl implements ProdutoService {
             return new ProdutoResponseDTO(repository.findById(id));
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getId()");
+            return null;
+        }
+
+    }
+
+    @Override
+    public ProdutoAdminResponseDTO getIdAdmin(Long id) {
+        try {
+            LOG.info("Requisição Produto.getIdAdmin()");
+
+            return new ProdutoAdminResponseDTO(repository.findById(id));
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Produto.getIdAdmin()");
             return null;
         }
 
