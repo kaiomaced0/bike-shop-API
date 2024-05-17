@@ -119,3 +119,9 @@
  insert into usuario_perfil (perfil, id_usuario) values (2, 100);
 
  insert into cartao (id, usuario_id) values (100, 100);
+
+ insert into homeconfig (id) values (1);
+
+ insert into carrossel (id, link, image) values (1, '', 'https://placehold.co/1200x600/orange/white?text=Promoção+1');
+ insert into carrossel (id, link, image) values (2, '', 'https://placehold.co/1200x600/blue/gray?text=Promoção+2');
+ insert into carrossel (id, link, image) values (3, '', 'https://placehold.co/1200x600/green/white?text=Promoção+3');
