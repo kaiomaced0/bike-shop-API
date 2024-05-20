@@ -22,7 +22,7 @@ public class HomeConfigService {
     public Response getDestaques(){
         try{
             HomeConfig h = repository.findById(1L);
-            if(!h.getProdutosDestaque().isEmpty())
+            if(h.getProdutosDestaque().isEmpty())
                 throw new Exception("");
             return Response.ok(h.getProdutosDestaque().stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId))
@@ -38,7 +38,7 @@ public class HomeConfigService {
     public Response getCarrossel(){
         try{
             HomeConfig h = repository.findById(1L);
-            if(!h.getListaCarrosel().isEmpty())
+            if(h.getListaCarrosel().isEmpty())
                 throw new Exception("");
             return Response.ok(h.getListaCarrosel().stream().map(CarrosselResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
