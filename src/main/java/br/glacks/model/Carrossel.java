@@ -8,6 +8,16 @@ public class Carrossel extends EntityClass{
     private String link;
     private String image;
 
+    private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getLink() {
         return link;
     }
