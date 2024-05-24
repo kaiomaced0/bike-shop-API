@@ -44,6 +44,15 @@
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 106, 'Pneu de Bicicleta Aro18', 20, 299.0, 1, 5, 99.0, true, 1, 1, 'descricao', 'nome longooooo');
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 107, 'Pneu de Bicicleta 29x2.2 - 2 unidades', 20, 440.0, 1, 5, 190.0, true, 1, 1, 'descricao', 'nome longooooo');
 
+ insert into produto_img(produto_id, url_imagens_produto) values (100, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike1.jpg?alt=media&token=a67128d8-6d57-4217-8ff2-ec6d5d8fa8f5');
+ insert into produto_img(produto_id, url_imagens_produto) values (101, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike2.jpg?alt=media&token=50ce98d5-7079-40d1-8ec9-aeca4fe2f519');
+ insert into produto_img(produto_id, url_imagens_produto) values (102, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/ferramenta1.jpg?alt=media&token=5af758b3-0ba6-429f-b9c6-a3d301e6a245');
+ insert into produto_img(produto_id, url_imagens_produto) values (103, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/pneu1.jpg?alt=media&token=fc38ce65-a894-47d5-ad09-f57cd1772d9f');
+ insert into produto_img(produto_id, url_imagens_produto) values (104, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/iabike2.jpg?alt=media&token=45f32a77-8a6a-46a3-9a1b-f7e41e217c04');
+ insert into produto_img(produto_id, url_imagens_produto) values (105, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/jogodechave.jpg?alt=media&token=75ef3403-96a4-45ee-85a7-60aeb2f3343a');
+ insert into produto_img(produto_id, url_imagens_produto) values (106, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/pneu2.jpg?alt=media&token=829ef4e1-650e-48ce-ae13-8893b82ecfd3');
+ insert into produto_img(produto_id, url_imagens_produto) values (107, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/pneu3.jpg?alt=media&token=10d320c4-7c50-4795-90a5-a8de9326bdc0');
+
  insert into freio (id, nome, ativo) VALUES (1, 'Freio Tradicional', true);
  insert into freio (id, nome, ativo) VALUES (2, 'Freio aaaa', true);
  insert into freio (id, nome, ativo) VALUES (3, 'Freio bbbb', true);
@@ -127,6 +136,6 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
 
  insert into homeconfig (id, ativo) values (1, true);
 
- insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 1', true, 1, 1, '', 'https://placehold.co/1200x600/orange/white?text=Promoção+1');
+ insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 1', true, 1, 1, '', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/2024_24_a_31_maio_Orgulho_Nerd_1920x450.jpg?alt=media&token=c96b7dab-cdf4-4fa6-a0e5-d1e9c7c8f25b');
  insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 2', true, 1, 2, '', 'https://placehold.co/1200x600/blue/gray?text=Promoção+2');
  insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 3', true, 1, 3, '', 'https://placehold.co/1200x600/green/white?text=Promoção+3');
