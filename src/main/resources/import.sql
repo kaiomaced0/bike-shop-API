@@ -93,13 +93,18 @@
  insert into categoria (ativo, id, nome) VALUES (true, 1, 'categoria 1');
  insert into categoria (ativo, id, nome) VALUES (true, 2, 'categoria 2');
  insert into categoria (ativo, id, nome) VALUES (true, 3, 'categoria 3');
+insert into categoria (ativo, id, nome) VALUES (true, 4, 'Bike');
+insert into categoria (ativo, id, nome) VALUES (true, 5, 'Ferramenta');
+insert into categoria (ativo, id, nome) VALUES (true, 6, 'Pneu');
 
- insert into produto_categoria (produto_id, categorias_id) VALUES (100, 1);
- insert into produto_categoria (produto_id, categorias_id) VALUES (101, 1);
- insert into produto_categoria (produto_id, categorias_id) VALUES (102, 1);
- insert into produto_categoria (produto_id, categorias_id) VALUES (103, 1);
- insert into produto_categoria (produto_id, categorias_id) VALUES (105, 2);
- insert into produto_categoria (produto_id, categorias_id) VALUES (107, 2);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (100, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (101, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (102, 5);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (103, 6);
+insert into produto_categoria (produto_id, categorias_id) VALUES (104, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (105, 5);
+insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (107, 6);
 
  insert into itemcompra (ativo, id, produto_item_compra, quantidade, lista_itemcompra) values(true, 100, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 1'), 5, 100);
  insert into itemcompra (ativo, id, produto_item_compra, quantidade, lista_itemcompra) values(true, 101, (SELECT produto.id FROM produto WHERE produto.nome = 'bike 2'), 2, 100);
