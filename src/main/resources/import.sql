@@ -137,5 +137,5 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  insert into homeconfig (id, ativo) values (1, true);
 
  insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 1', true, 1, 1, '', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/2024_24_a_31_maio_Orgulho_Nerd_1920x450.jpg?alt=media&token=c96b7dab-cdf4-4fa6-a0e5-d1e9c7c8f25b');
- insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 2', true, 1, 2, '', 'https://placehold.co/1200x600/blue/gray?text=Promoção+2');
- insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 3', true, 1, 3, '', 'https://placehold.co/1200x600/green/white?text=Promoção+3');
+ insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 2', true, 1, 2, '', 'https://placehold.co/1150x300/black/gray?text=Promoção+2');
+ insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 3', true, 1, 3, '', 'https://placehold.co/1150x300/gray/white?text=Promoção+3');
