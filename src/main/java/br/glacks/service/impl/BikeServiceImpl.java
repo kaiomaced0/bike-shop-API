@@ -1,15 +1,18 @@
 package br.glacks.service.impl;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.glacks.dto.BikeAdminResponseDTO;
+import br.glacks.model.Categoria;
 import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
 import br.glacks.model.Marca;
 import br.glacks.model.bike.Tamanho;
 import br.glacks.model.bike.TipoBike;
+import br.glacks.repository.CategoriaRepository;
 import br.glacks.repository.MarcaRepository;
 import org.jboss.logging.Logger;
 
@@ -36,6 +39,9 @@ public class BikeServiceImpl implements BikeService {
 
     @Inject
     MarcaRepository marcaRepository;
+
+    @Inject
+    CategoriaRepository categoriaRepository;
 
 
     @Override
@@ -124,6 +130,9 @@ public class BikeServiceImpl implements BikeService {
             b.setTipoBike(TipoBike.valueOf(bike.idTipoBike().intValue()));
             b.setTamanho(Tamanho.valueOf(bike.idTamanho().intValue()));
             b.setCor(Cor.valueOf(bike.produto().idCor().intValue()));
+            Categoria c = categoriaRepository.findByNome("Bike");
+            b.setCategorias(new ArrayList<>());
+            b.getCategorias().add(c);
             repository.persist(b);
             return Response.ok(new BikeResponseDTO(b)).build();
 

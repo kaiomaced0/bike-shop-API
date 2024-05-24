@@ -1,13 +1,12 @@
 package br.glacks.service.impl;
 
-import br.glacks.dto.PneuDTO;
-import br.glacks.dto.ProdutoAdminResponseDTO;
-import br.glacks.dto.ProdutoDTO;
-import br.glacks.dto.ProdutoResponseDTO;
+import br.glacks.dto.*;
+import br.glacks.model.Categoria;
 import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
 import br.glacks.model.Produto;
 import br.glacks.model.bike.Pneu;
+import br.glacks.repository.CategoriaRepository;
 import br.glacks.repository.MarcaRepository;
 import br.glacks.repository.PneuRepository;
 import br.glacks.service.PneuService;
@@ -17,6 +16,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -30,6 +30,9 @@ public class PneuServiceImpl implements PneuService {
 
     @Inject
     ProdutoService produtoService;
+
+    @Inject
+    CategoriaRepository categoriaRepository;
 
     @Override
     public Response getAll() {
@@ -61,8 +64,20 @@ public class PneuServiceImpl implements PneuService {
 
     @Override
     @Transactional
-    public Response insert(ProdutoDTO c) {
-        return produtoService.insert(c);
+    public Response insert(ProdutoDTO produto) {
+        try {
+            Pneu p = PneuDTO.criaPneu(produto);
+            p.setMarca(marcaRepository.findById(produto.idMarca()));
+            p.setCor(Cor.valueOf(produto.idCor().intValue()));
+            p.setCategorias(new ArrayList<>());
+            Categoria c = categoriaRepository.findByNome("Pneu");
+            p.getCategorias().add(c);
+            repository.persist(p);
+            return Response.ok(new ProdutoResponseDTO(p)).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+
     }
 
     @Override
