@@ -17,6 +17,12 @@ public interface UsuarioLogadoService {
 
     public UsuarioResponseDTO updateEmail(UsuarioUpdateEmailDTO email);
 
+    public Response getGostei();
+
+    public Response gosteiInsert(@PathParam("id") long id);
+
+    public Response gosteiDelete(@PathParam("id") Long id);
+
     public Response telefoneInsert(TelefoneUsuarioLogadoDTO telefoneUsuarioLogadoDTO);
     
     public UsuarioResponseDTO getPerfilUsuarioLogado();

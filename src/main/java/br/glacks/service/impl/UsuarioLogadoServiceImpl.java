@@ -3,18 +3,16 @@ package br.glacks.service.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.glacks.dto.*;
-import br.glacks.model.Endereco;
+import br.glacks.model.*;
 import br.glacks.repository.*;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.application.Result;
 import br.glacks.form.ImageForm;
-import br.glacks.model.PessoaFisica;
-import br.glacks.model.Telefone;
-import br.glacks.model.Usuario;
 import br.glacks.service.FileService;
 import br.glacks.service.HashService;
 import br.glacks.service.PessoaFisicaService;
@@ -59,6 +57,9 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Inject
     TelefoneRepository telefoneRepository;
+
+    @Inject
+    ProdutoRepository produtoRepository;
 
     @Inject
     CidadeRepository cidadeRepository;
@@ -130,7 +131,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Transactional
     public UsuarioResponseDTO updateEmail(UsuarioUpdateEmailDTO email) {
         try {
-            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição Usuario.updateEmail()");
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.updateEmail()");
 
             Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
             if(hash.getHashSenha(email.senha()) != entity.getSenha())
@@ -139,10 +140,62 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             entity.setEmail(email.email());
             return new UsuarioResponseDTO(entity);
         } catch (Exception e) {
-            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição Usuario.updateEmail()");
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição UsuarioLogado.updateEmail()");
             return null;
         }
 
+    }
+
+    @Override
+    public Response getGostei() {
+        try {
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getGostei()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+
+            return Response.ok(entity.getGostei().stream().map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição UsuarioLogado.getGostei()");
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    @Transactional
+    public Response gosteiInsert(long id) {
+        try {
+                LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.gosteiInsert()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+
+            Produto p = produtoRepository.findById(id);
+            if(entity.getGostei().isEmpty())
+                entity.setGostei(new ArrayList<>());
+
+            entity.getGostei().add(p);
+
+            return Response.ok(entity.getGostei().stream().filter(EntityClass::getAtivo).map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição UsuarioLogado.gosteiInsert()");
+            return Response.status(400).entity(e.getMessage()).build();
+                }
+    }
+
+    @Override
+    @Transactional
+    public Response gosteiDelete(Long id) {
+        try {
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.gosteiDelete()");
+
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+            Produto p = produtoRepository.findById(id);
+            entity.getGostei().remove(p);
+
+            return Response.ok(entity.getGostei().stream().filter(EntityClass::getAtivo).map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição UsuarioLogado.gosteiDelete()");
+            return Response.status(400).entity(e.getMessage()).build();
+        }
     }
 
 
@@ -150,14 +203,14 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     public UsuarioResponseDTO getPerfilUsuarioLogado() {
 
         try {
-            LOG.info("Requisição Telefone.getPerfilUsuarioLogado()");
+            LOG.info("Requisição UsuarioLogado.getPerfilUsuarioLogado()");
 
             String login = jsonWebToken.getSubject();
             UsuarioResponseDTO user = usuarioService.findByLogin(login);
 
             return user;
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Telefone.getPerfilUsuarioLogado()");
+            LOG.error("Erro ao rodar Requisição UsuarioLogado.getPerfilUsuarioLogado()");
             return null;
         }
 
@@ -167,14 +220,14 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Transactional
     public Response deleteOn() {
         try {
-            LOG.info("Requisição Usuario.delete()");
+            LOG.info("Requisição UsuarioLogado.delete()");
 
             Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
             entity.setAtivo(false);
 
             return Response.status(Status.OK).build();
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Usuario.delete()");
+            LOG.error("Erro ao rodar Requisição UsuarioLogado.delete()");
             return null;
         }
     }
@@ -200,7 +253,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
             LOG.error("Erro ao rodar Requisição UsuarioLogado.salvarImagem()");
 
-            return Response.status(Status.CONFLICT).entity(result).build();
+            return Response.status(400).entity(result).build();
         }
 
     }
@@ -240,7 +293,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             }
             return Response.ok(new TelefoneResponseDTO(tell)).build();
         } catch (Exception e) {
-            return Response.status(Status.BAD_REQUEST).entity(e).build();
+            return Response.status(400).entity(e).build();
         }
     }
 
@@ -249,7 +302,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     public Response insertEndereco(EnderecoDTO endereco) {
         try {
             Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
-            LOG.info("Requisição endereco.insert()");
+            LOG.info("Requisição UsuarioLogado.insertEndereco()");
             Endereco e = EnderecoDTO.criaEndereco(endereco);
             e.setCidade(cidadeRepository.findById(endereco.idCidade()));
             e.setUsuario(usuariolUsuario);
@@ -257,7 +310,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             return Response.ok(new EnderecoResponseDTO(e)).build();
 
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição endereco.insert()");
+            LOG.error("Erro ao rodar Requisição UsuarioLogado.insertEndereco()");
             return Response.status(400).build();
         }
 

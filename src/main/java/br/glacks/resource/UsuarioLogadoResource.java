@@ -66,6 +66,28 @@ public class UsuarioLogadoResource {
         
     }
 
+    @GET
+    @Path("/gostei")
+    @RolesAllowed({"Admin", "User"})
+    public Response getGostei(){
+        return usuarioLogado.getGostei();
+
+    }
+    @PATCH
+    @Path("/gostei/insert/{id}")
+    @RolesAllowed({"Admin", "User"})
+    public Response insertGostei(@PathParam("id") long id){
+        return usuarioLogado.gosteiInsert(id);
+
+    }
+    @PATCH
+    @Path("/gostei/delete/{id}")
+    @RolesAllowed({"Admin", "User"})
+    public Response deleteGostei(@PathParam("id") long id){
+        return usuarioLogado.gosteiDelete(id);
+
+    }
+
     @POST
     @Path("/telefone")
     @RolesAllowed({"User", "Admin"})
