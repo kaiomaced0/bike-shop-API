@@ -12,7 +12,8 @@ public record UsuarioResponseDTO(
         String email,
         List<CartaoResponseDTO> cartoes,
         List<EnderecoResponseDTO> enderecos,
-        List<ProdutoResponseDTO> listaGostei
+        List<ProdutoResponseDTO> listaGostei,
+        List<String> telefones
 
 ) {
     public UsuarioResponseDTO(Usuario user) {
@@ -31,6 +32,10 @@ public record UsuarioResponseDTO(
                 user.getGostei() != null ? user.getGostei()
                 .stream()
                         .map(ProdutoResponseDTO::new)
+                        .collect(Collectors.toList()): null,
+                user.getTelefones() != null ? user.getTelefones()
+                        .stream()
+                        .map(tell -> tell.getCodigoArea() + tell.getNumero())
                         .collect(Collectors.toList()): null);
 
     }
