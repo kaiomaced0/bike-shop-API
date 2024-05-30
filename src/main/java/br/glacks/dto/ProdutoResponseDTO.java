@@ -15,6 +15,7 @@ public record ProdutoResponseDTO(
         Double preco,
         String cor,
         Integer estoque,
+        Double estrelas,
         List<AvaliacaoResponseDTO> avaliacoes,
         List<CategoriaResponseDTO> categorias,
         List<String> img,
@@ -27,6 +28,7 @@ public record ProdutoResponseDTO(
          produto.getPreco(),
           produto.getCor().getLabel(),
           produto.getEstoque(),
+          produto.getEstrelas(),
           produto.getAvaliacoes() != null ? produto.getAvaliacoes()
             .stream()
             .map(AvaliacaoResponseDTO::new)
