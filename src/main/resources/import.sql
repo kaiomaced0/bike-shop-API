@@ -1,6 +1,6 @@
 -- his file allow to e SQL commands that will be emitted in test and dev.
 -- The commands are coted as their support dependf the database
- insert into usuario (nome, ativo, id,  login, senha)values('kaio',true, 101,'kaio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (email, nome, ativo, id, login, senha) values('kaiomacedo@unitins.br','kaio', true, 101, 'kaio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (email, nome, ativo, id, login, senha) values('joao@gmail.com','joao',true, 107, 'joao','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (email, nome, ativo, id, login, senha) values('antonio@gmail.com','antonio',true, 102, 'antonio','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (email, nome, ativo, id, login, senha) values('lucas@gmail.com','lucas',true, 103, 'lucas', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
@@ -41,8 +41,8 @@
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 103, 'Pneu 1', 20, 2000.0, 1, 5, 90.0, true, 1, 1, 'pneeeeeuss', 'nome longooooo');
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 104, 'bike 5', 20, 2200.0, 1, 5, 500.0, true, 1, 1, 'descricao', 'nome longooooo');
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 105, 'Ferramenta 2A', 20, 2700.0, 1, 5, 1200.0, true, 1, 1, 'descricao', 'nome longooooo');
- insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 106, 'Pneu de Bicicleta Aro18', 20, 299.0, 1, 5, 99.0, true, 1, 1, 'descricao', 'nome longooooo');
- insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 107, 'Pneu de Bicicleta 29x2.2 - 2 unidades', 20, 440.0, 1, 5, 190.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 106, 'Pneu Aro18', 20, 299.0, 1, 5, 99.0, true, 1, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 107, 'Pneu 29x2.2', 20, 440.0, 1, 5, 190.0, true, 1, 1, 'descricao', 'nome longooooo');
 
  insert into produto_img(produto_id, url_imagens_produto) values (100, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike1.jpg?alt=media&token=a67128d8-6d57-4217-8ff2-ec6d5d8fa8f5');
  insert into produto_img(produto_id, url_imagens_produto) values (101, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike2.jpg?alt=media&token=50ce98d5-7079-40d1-8ec9-aeca4fe2f519');
