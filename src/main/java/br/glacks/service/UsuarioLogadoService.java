@@ -25,7 +25,7 @@ public interface UsuarioLogadoService {
 
     public Response telefoneInsert(TelefoneUsuarioLogadoDTO telefoneUsuarioLogadoDTO);
     
-    public UsuarioResponseDTO getPerfilUsuarioLogado();
+    public PessoaFisicaResponseDTO getPerfilUsuarioLogado();
 
     public Response deleteOn();
 
