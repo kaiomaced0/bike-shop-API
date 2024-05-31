@@ -200,16 +200,15 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
 
     @Override
-    public PessoaFisicaResponseDTO getPerfilUsuarioLogado() {
+    public UsuarioResponseDTO getPerfilUsuarioLogado() {
 
         try {
             LOG.info("Requisição UsuarioLogado.getPerfilUsuarioLogado()");
 
             String login = jsonWebToken.getSubject();
             UsuarioResponseDTO user = usuarioService.findByLogin(login);
-            PessoaFisica p = pessoaFisicaRepository.findById(user.id());
 
-            return new PessoaFisicaResponseDTO(p);
+            return user;
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição UsuarioLogado.getPerfilUsuarioLogado()");
             return null;
