@@ -101,8 +101,8 @@ public class ProdutoResource {
     @Path("/novaimagem")
     @RolesAllowed({"Admin"})
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm ImageForm form, Integer idProduto){
-        return produtoService.salvarImagem(form, idProduto.longValue());
+    public Response salvarImagem(@MultipartForm ImageForm form){
+        return produtoService.salvarImagem(form);
 
     }
     

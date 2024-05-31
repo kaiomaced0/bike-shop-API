@@ -256,13 +256,15 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     @Transactional
-    public Response salvarImagem(@MultipartForm ImageForm form, Long produtoId) {
+    public Response salvarImagem(@MultipartForm ImageForm form) {
         String nomeImagem = "";
 
         try {
             nomeImagem = fileService.salvarImagemProduto(form.getImagem(), form.getNome());
             // obtendo o login a partir do token
-            Produto p = repository.findById(produtoId);
+            Produto p = repository.findById(form.getId());
+            if(p.getImg().isEmpty())
+                p.setImg(new ArrayList<>());
             p.getImg().add(nomeImagem);
 
             LOG.info("Requisição Produto.salvarImagem()");

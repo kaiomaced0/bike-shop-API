@@ -32,5 +32,5 @@ public interface ProdutoService {
     
     public Response adicionaEstoque(@PathParam("id") Long id, int quantidade);
 
-    public Response salvarImagem(@MultipartForm ImageForm form, Long produtoId);
+    public Response salvarImagem(@MultipartForm ImageForm form);
 }

@@ -152,7 +152,7 @@ public class FileServiceImpl implements FileService {
         try {
             LOG.info("Requisição File.download()");
 
-            File file = new File(PATH_USER+nomeArquivo);
+            File file = new File(PATH_PRODUTO+nomeArquivo);
             return file;
             
         } catch (Exception e) {
