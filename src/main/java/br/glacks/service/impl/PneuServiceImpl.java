@@ -1,10 +1,16 @@
 package br.glacks.service.impl;
 
-import br.glacks.dto.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+import br.glacks.dto.PneuDTO;
+import br.glacks.dto.ProdutoAdminResponseDTO;
+import br.glacks.dto.ProdutoDTO;
+import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.model.Categoria;
 import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
-import br.glacks.model.Produto;
 import br.glacks.model.bike.Pneu;
 import br.glacks.repository.CategoriaRepository;
 import br.glacks.repository.MarcaRepository;
@@ -15,10 +21,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PneuServiceImpl implements PneuService {
@@ -38,7 +40,9 @@ public class PneuServiceImpl implements PneuService {
     public Response getAll() {
         try {
             return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo)
-                    .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed())
+                    .map(ProdutoResponseDTO::new)
+                    .collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }
@@ -47,7 +51,11 @@ public class PneuServiceImpl implements PneuService {
     @Override
     public Response getAllAdmin() {
         try {
-            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo).map(ProdutoAdminResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(repository.findAll().stream()
+            .filter(EntityClass::getAtivo)
+            .sorted(Comparator.comparing(EntityClass::getId).reversed())
+            .map(ProdutoAdminResponseDTO::new)
+            .collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }
