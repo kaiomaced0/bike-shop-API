@@ -139,3 +139,173 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 1', true, 1, 1, '', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/2024_24_a_31_maio_Orgulho_Nerd_1920x450.jpg?alt=media&token=c96b7dab-cdf4-4fa6-a0e5-d1e9c7c8f25b');
  insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 2', true, 1, 2, '', 'https://placehold.co/1150x300/black/gray?text=Promoção+2');
  insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 3', true, 1, 3, '', 'https://placehold.co/1150x300/gray/white?text=Promoção+3');
+
+ ------------------------------
+
+ insert into fornecedor (ativo, id, nome, cnpj) VALUES (true, 2, 'Fornecedor 2', '0002200/000');
+ insert into fornecedor (ativo, id, nome, cnpj) VALUES (true, 3, 'Fornecedor 3', '0003300/000');
+ 
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 108, 'bike 3', 45, 1500.0, 2, 4, 300.0, true, 2, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 109, 'bike 4', 40, 1800.0, 2, 5, 400.0, true, 2, 3, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 110, 'Camiseta 1', 100, 50.0, 3, 5, 10.0, true, 2, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 111, 'Camiseta 2', 80, 70.0, 3, 4, 20.0, true, 2, 3, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 112, 'Luvas 1', 60, 25.0, 4, 5, 5.0, true, 3, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 113, 'Capacete 1', 50, 150.0, 4, 5, 40.0, true, 3, 4, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 114, 'Capacete 2', 55, 180.0, 4, 4, 50.0, true, 3, 5, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 115, 'Ferramenta 3', 25, 320.0, 1, 5, 100.0, true, 3, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 116, 'Ferramenta 4', 15, 350.0, 1, 4, 110.0, true, 3, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 117, 'Ferramenta 5', 20, 300.0, 1, 5, 90.0, true, 3, 3, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 118, 'Pneu 2', 25, 2100.0, 1, 5, 100.0, true, 1, 4, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 119, 'Pneu 3', 30, 2200.0, 1, 4, 110.0, true, 1, 5, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 120, 'Pneu 4', 35, 2300.0, 1, 5, 120.0, true, 2, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 121, 'Bike 6', 20, 2400.0, 1, 5, 130.0, true, 2, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 122, 'Bike 7', 15, 2500.0, 1, 5, 140.0, true, 3, 3, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 123, 'Camisa 1', 50, 50.0, 3, 5, 20.0, true, 3, 4, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 124, 'Camisa 2', 40, 70.0, 3, 4, 30.0, true, 3, 5, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 125, 'Calção 1', 60, 100.0, 4, 5, 40.0, true, 3, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 126, 'Calção 2', 55, 120.0, 4, 4, 50.0, true, 3, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 127, 'Ferramenta 6', 25, 400.0, 1, 5, 150.0, true, 2, 3, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 128, 'Ferramenta 7', 20, 450.0, 1, 4, 160.0, true, 2, 4, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 129, 'Pneu 5', 30, 2400.0, 1, 5, 130.0, true, 2, 5, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 130, 'Pneu 6', 35, 2500.0, 1, 5, 140.0, true, 2, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 131, 'Bike 8', 20, 2600.0, 1, 5, 150.0, true, 2, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 132, 'Bike 9', 15, 2700.0, 1, 5, 160.0, true, 3, 3, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 133, 'Camiseta 3', 50, 55.0, 3, 5, 25.0, true, 3, 4, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 134, 'Camiseta 4', 40, 75.0, 3, 4, 35.0, true, 3, 5, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 135, 'Luvas 2', 60, 30.0, 4, 5, 15.0, true, 3, 1, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 136, 'Capacete 3', 50, 160.0, 4, 5, 60.0, true, 3, 2, 'descricao', 'nome longooooo');
+ insert into produto (ativo, id, nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) 
+ values(true, 137, 'Capacete 4', 55, 190.0, 4, 4, 70.0, true, 3, 3, 'descricao', 'nome longooooo');
+ 
+ 
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Mountain Bike 3'), 1, '12 marchas', 1, 'câmbio Shimano', 1);
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Mountain Bike 4'), 2, '12 marchas', 2, 'câmbio SRAM', 2);
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Bike 6'), 3, '18 marchas', 3, 'câmbio Shimano', 1);
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Bike 7'), 4, '21 marchas', 4, 'câmbio Shimano', 2);
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Bike 8'), 5, '24 marchas', 5, 'câmbio Shimano', 3);
+ insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Bike 9'), 6, '27 marchas', 1, 'câmbio Shimano', 4);
+ insert into pneu (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Pneu 2'));
+ insert into pneu (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Pneu 3'));
+ insert into pneu (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Pneu 4'));
+ insert into pneu (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Pneu 5'));
+ insert into pneu (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Pneu 6'));
+ insert into ferramenta (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Ferramentas 3'));
+ insert into ferramenta (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Reparo 4'));
+ insert into ferramenta (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Manutenção 5'));
+ insert into ferramenta (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Ferramentas Avançado 6'));
+ insert into ferramenta (id) 
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Reparo Rápido 7'));
+
+ 
+ insert into produto_img(produto_id, url_imagens_produto) values (108,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (109,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (110,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (111,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (112,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (113,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (114,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (115,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (116,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (117,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (118,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (119,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (120,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (121,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (122,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (123,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (124,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (125,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (126,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (127,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (128,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (129,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (130,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (131,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (132,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (133,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (134,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (135,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (136,'https://placehold.co/220x200/gray/white?text=Produto');
+ insert into produto_img(produto_id, url_imagens_produto) values (137,'https://placehold.co/220x200/gray/white?text=Produto');
+ 
+ insert into categoria (ativo, id, nome) VALUES (true, 7, 'Camiseta');
+ insert into categoria (ativo, id, nome) VALUES (true, 8, 'Luvas');
+ insert into categoria (ativo, id, nome) VALUES (true, 9, 'Capacete');
+ insert into categoria (ativo, id, nome) VALUES (true, 10, 'Camisa');
+ insert into categoria (ativo, id, nome) VALUES (true, 11, 'Calção');
+ 
+ insert into produto_categoria (produto_id, categorias_id) VALUES (108, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (109, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (110, 7);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (111, 7);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (112, 8);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (113, 9);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (114, 9);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (115, 5);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (116, 5);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (117, 5);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (118, 6);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (119, 6);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (120, 6);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (121, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (122, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (123, 10);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (124, 10);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (125, 11);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (126, 11);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (127, 5);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (128, 5);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (129, 6);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (130, 6);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (131, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (132, 4);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (133, 7);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (134, 7);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (135, 8);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (136, 9);
+ insert into produto_categoria (produto_id, categorias_id) VALUES (137, 9);
+ 
