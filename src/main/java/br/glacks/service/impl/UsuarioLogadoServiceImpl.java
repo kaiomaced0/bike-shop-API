@@ -217,6 +217,23 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     }
 
     @Override
+    public PessoaFisicaResponseDTO getPerfilPessoaFisicaLogado() {
+
+        try {
+            LOG.info("Requisição UsuarioLogado.getPerfilUsuarioLogado()");
+
+            String login = jsonWebToken.getSubject();
+            UsuarioResponseDTO user = usuarioService.findByLogin(login);
+            PessoaFisica pessoaFisica = pessoaFisicaRepository.findById(user.id());
+            return new PessoaFisicaResponseDTO(pessoaFisica);
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição UsuarioLogado.getPerfilUsuarioLogado()");
+            return null;
+        }
+
+    }
+
+    @Override
     @Transactional
     public Response deleteOn() {
         try {

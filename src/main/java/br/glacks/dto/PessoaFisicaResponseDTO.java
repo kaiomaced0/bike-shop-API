@@ -13,25 +13,31 @@ public record PessoaFisicaResponseDTO(
     String email,
     List<CartaoResponseDTO> cartoes,
     List<EnderecoResponseDTO> enderecos,
-    List<ProdutoResponseDTO> listaGostei
+    List<ProdutoResponseDTO> listaGostei,
+    List<String> telefones
 ) {
     
-    public PessoaFisicaResponseDTO(PessoaFisica pessoaFisica){
-      this(pessoaFisica.getCpf(), pessoaFisica.getId(),
-              pessoaFisica.getLogin(),
-              pessoaFisica.getNome(),
-              pessoaFisica.getEmail(),
-              pessoaFisica.getCartoes() != null ? pessoaFisica.getCartoes()
+    public PessoaFisicaResponseDTO(PessoaFisica user){
+      this(user.getCpf(),
+              user.getId(),
+              user.getLogin(),
+              user.getNome(),
+              user.getEmail(),
+              user.getCartoes() != null ? user.getCartoes()
                       .stream()
                       .map(CartaoResponseDTO::new)
                       .collect(Collectors.toList()) : null,
-              pessoaFisica.getEnderecos() != null ? pessoaFisica.getEnderecos()
+              user.getEnderecos() != null ? user.getEnderecos()
                       .stream()
                       .map(EnderecoResponseDTO::new)
                       .collect(Collectors.toList()): null,
-              pessoaFisica.getGostei() != null ? pessoaFisica.getGostei()
+              user.getGostei() != null ? user.getGostei()
                       .stream()
                       .map(ProdutoResponseDTO::new)
+                      .collect(Collectors.toList()): null,
+              user.getTelefones() != null ? user.getTelefones()
+                      .stream()
+                      .map(tell -> tell.getCodigoArea() + tell.getNumero())
                       .collect(Collectors.toList()): null);
     }
 }

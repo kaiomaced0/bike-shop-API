@@ -61,8 +61,8 @@ public class UsuarioLogadoResource {
 
     @GET
     @RolesAllowed({"Admin", "User"})
-    public UsuarioResponseDTO getPerfilUsuario(){
-        return usuarioLogado.getPerfilUsuarioLogado();
+    public PessoaFisicaResponseDTO getPerfilUsuario(){
+        return usuarioLogado.getPerfilPessoaFisicaLogado();
         
     }
 

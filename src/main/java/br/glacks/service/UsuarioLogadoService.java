@@ -27,6 +27,8 @@ public interface UsuarioLogadoService {
     
     public UsuarioResponseDTO getPerfilUsuarioLogado();
 
+    public PessoaFisicaResponseDTO getPerfilPessoaFisicaLogado();
+
     public Response deleteOn();
 
     public Response salvarImagem(@MultipartForm ImageForm form);

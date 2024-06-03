@@ -7,25 +7,20 @@
  insert into usuario (nome, ativo, id, login, senha) values('kuba event',true, 104,'kuba event', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo, id, login, senha) values('imports',true, 105, 'imports imports', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo, id, login, senha) values('al',true, 106, 'al', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('AEDAO',true, 'AEDAO', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('joana',true, 'joana', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('kamila',true,  'kamila', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('amanda',true,  'amanda', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('isabela',true,  'isabela', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('gabriel',true,  'gabriel', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('otavio',true,  'otavio', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('rubens',true,  'rubens', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into usuario (nome, ativo,  login, senha) values('ordete',true,  'ordete','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('AEDAO',true, 108, 'AEDAO', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('joana',true, 109, 'joana', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('kamila',true, 110, 'kamila', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('amanda',true, 111, 'amanda', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('isabela',true, 112, 'isabela', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('gabriel',true, 113, 'gabriel', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('otavio',true, 114, 'otavio', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('rubens',true, 115, 'rubens', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
+ insert into usuario (nome, ativo, id, login, senha) values('ordete',true, 116, 'ordete','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (email, nome, ativo, id,  login, senha) values('teste@gmail.com','teste',true, 100, 'teste', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(100, '12345678909', 'hilowisck', '00/00/2121');
+ insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(101, '05562849259', 'hilowisck', '27/11/2002');
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(107, '98765432101', 'hilowisck', '04/12/2002');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(102, '23456789023', 'hilowisck', '27/11/2002');
+ insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(102, '23456789023', 'hilowisck', '27/07/2002');
  insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(103, '34567890134', 'hilowisck', '08/12/1978');
-
- insert into pessoajuridica (id, cnpj, nomefantasia) values(101, '12.345.678/0001-90', 'EMPRESA 1');
- insert into pessoajuridica (id, cnpj, nomefantasia) values(106, '01.234.567/0001-89', 'EMPRESA 2');
- insert into pessoajuridica (id, cnpj, nomefantasia) values(104, '23.456.789/0001-23', 'EMPRESA 3');
- insert into pessoajuridica (id, cnpj, nomefantasia) values(105, '34.567.890/0001-34','EMPRESA 4');
 
  insert into fornecedor (ativo, id, nome, cnpj) VALUES (true, 1, 'Fornecedor 1', '0001100/000');
 
