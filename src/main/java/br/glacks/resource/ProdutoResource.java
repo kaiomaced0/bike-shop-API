@@ -2,7 +2,6 @@ package br.glacks.resource;
 
 import java.util.List;
 
-import br.glacks.dto.ListIdsProdutoDTO;
 import br.glacks.dto.ProdutoAdminResponseDTO;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
