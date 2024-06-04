@@ -113,6 +113,17 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
+    public Response listIds(List<Long> listaProdutos) {
+        try{
+            List<Produto> produtos = repository.find("id in ?1", listaProdutos).list();
+            return Response.ok(produtos.stream().filter(EntityClass::getAtivo).map(ProdutoResponseDTO::new).collect(Collectors.toList())).build();
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+
+    }
+
+    @Override
     public Response getNome(String nome) {
         try {
             LOG.info("Requisição Produto.getNome()");

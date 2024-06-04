@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import br.glacks.dto.ListIdsProdutoDTO;
 import br.glacks.dto.ProdutoAdminResponseDTO;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
@@ -22,7 +23,6 @@ import jakarta.ws.rs.core.Response;
 import br.glacks.dto.ProdutoDTO;
 import br.glacks.dto.ProdutoResponseDTO;
 import br.glacks.form.ImageForm;
-import br.glacks.model.Produto;
 import br.glacks.service.ProdutoService;
 
 
@@ -72,6 +72,12 @@ public class ProdutoResource {
     public ProdutoAdminResponseDTO getIdAdmin(@PathParam("id") Long id){
         return produtoService.getIdAdmin(id);
 
+    }
+    @POST
+    @Path("/carrinho/ids")
+    @PermitAll
+    public Response listIds(List<Long> ids) {
+        return produtoService.listIds(ids);
     }
 
     @POST
