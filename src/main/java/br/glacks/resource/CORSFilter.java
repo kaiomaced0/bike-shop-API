@@ -13,6 +13,8 @@ public class CORSFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+        responseContext.getHeaders().add("Access-Control-Allow-cors", "true");
+        responseContext.getHeaders().add("Access-Control-Allow-cors-access-control-max-age", "24H");
         responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
         responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH, OPTIONS");
         responseContext.getHeaders().add("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, Origin");
