@@ -10,6 +10,8 @@ import jakarta.ws.rs.core.Response;
 public interface UsuarioLogadoService {
 
     public UsuarioResponseDTO updateSenha(UsuarioUpdateSenhaDTO senha);
+
+    public Response enderecos();
     
     public UsuarioResponseDTO updateLogin(UsuarioUpdateLoginDTO login);
     

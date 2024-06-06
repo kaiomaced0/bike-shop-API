@@ -88,6 +88,17 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     }
 
     @Override
+    public Response enderecos() {
+        try {
+            Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+            return Response.ok(entity.getEnderecos().stream().filter(EntityClass::getAtivo).map(EnderecoResponseDTO::new).collect(Collectors.toList())).build();
+
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
     @Transactional
     public UsuarioResponseDTO updateLogin(UsuarioUpdateLoginDTO login) {
         try {
