@@ -13,8 +13,14 @@ public record EnderecoResponseDTO(
     String descricao
 ) {
     public EnderecoResponseDTO(Endereco endereco){
-        this(endereco.getId(),endereco.getUsuario().getId(), endereco.getNome(),
-        new CidadeResponseDTO(endereco.getCidade().getId(), endereco.getCidade().getNome(), new EstadoResponseDTO(endereco.getCidade().getEstado().getId(), endereco.getCidade().getEstado().getNome())), endereco.getCep(), endereco.getRua(), endereco.getNumero(),
+        this(endereco.getId(),endereco.getUsuario().getId(),
+                endereco.getNome(),
+        new CidadeResponseDTO(endereco.getCidade().getId(),
+                endereco.getCidade().getNome(),
+                endereco.getCidade().getEstado().getNome()),
+                endereco.getCep(),
+                endereco.getRua(),
+                endereco.getNumero(),
         endereco.getDescricao());
     }
     

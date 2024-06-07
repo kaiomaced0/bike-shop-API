@@ -2,11 +2,12 @@ package br.glacks.service.impl;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import br.glacks.dto.ItemCompraDTO;
+import br.glacks.dto.ValidaCompraResponseDTO;
 import br.glacks.model.*;
-import br.glacks.model.pagamento.FormaPagamento;
 import br.glacks.repository.*;
 import br.glacks.service.CupomService;
 import org.jboss.logging.Logger;
@@ -19,7 +20,6 @@ import br.glacks.dto.CompraDTO;
 import br.glacks.dto.CompraResponseDTO;
 import br.glacks.service.CompraService;
 import br.glacks.service.UsuarioLogadoService;
-import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -48,6 +48,9 @@ public class CompraServiceImpl implements CompraService {
     @Inject
     CupomService cupomService;
 
+    @Inject
+    ProdutoRepository produtoRepository;
+
     @Override
     public Response getAll() {
         try {
@@ -60,6 +63,25 @@ public class CompraServiceImpl implements CompraService {
             return Response.status(400).entity(e.getMessage()).build();
         }
 
+    }
+
+    @Override
+    public Response getValorTeste(List<ItemCompraDTO> listaItemCompra) {
+        try{
+            if(listaItemCompra.isEmpty()){
+                throw new Exception();
+            }
+            AtomicReference<Double> total = new AtomicReference<>(0.0);
+            listaItemCompra.forEach(i -> {
+                Produto p = produtoRepository.findById(i.produtoId());
+                total.set(total.get() + (p.getPreco() * i.quantidade()));
+            });
+            return Response.ok(total.get()).build();
+
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+
+        }
     }
 
     @Override
@@ -139,6 +161,58 @@ public class CompraServiceImpl implements CompraService {
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Compra.insert()");
             return Response.status(Status.NO_CONTENT).build();
+        }
+
+    }
+
+    @Override
+    public ValidaCompraResponseDTO verificarCompra(CompraDTO compra) {
+        try {
+            Compra c = CompraDTO.criaCompra(compra);
+            c.setValorTotal(0.0);
+            if(compra.idCupom() != null){
+                Cupom cupom = cupomService.isActive(compra.idCupom());
+                if(cupom.getQuantidade() > 0) {
+                    compra.listaItemCompra().stream().forEach(
+                            itemCompra -> {
+                                Produto p = produtoRepository.findById(itemCompra.produtoId());
+
+                                if (cupom.getProdutos().contains(p)) {
+                                    c.setValorTotal(c.getValorTotal() + ((p.getPreco() * itemCompra.quantidade()) * (1 - (cupom.getValorDesconto() / 100))));
+                                } else {
+                                    c.setValorTotal(c.getValorTotal() + (p.getPreco() * itemCompra.quantidade()));
+                                }
+                            });
+                }
+                else{
+                    compra.listaItemCompra().stream().forEach(
+                        itemCompra -> {
+                            Produto p = produtoRepository.findById(itemCompra.produtoId());
+                            c.setValorTotal(c.getValorTotal() + (p.getPreco() * itemCompra.quantidade()));
+
+                        });
+
+                }
+            }else{
+                compra.listaItemCompra().stream().forEach(
+                        itemCompra -> {
+                            Produto p = produtoRepository.findById(itemCompra.produtoId());
+                                c.setValorTotal(c.getValorTotal() + (p.getPreco() * itemCompra.quantidade()));
+
+                        });
+            }
+
+            Endereco e = enderecoRepository.findById(compra.idEndereco());
+            if(e == null){
+                throw new Exception("Endereco nulo!");
+            }
+
+            LOG.info("Requisição Compra.verificarCompra() " + c.getValorTotal());
+
+            return new ValidaCompraResponseDTO(c.getValorTotal());
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Compra.verificarCompra()");
+            return null;
         }
 
     }

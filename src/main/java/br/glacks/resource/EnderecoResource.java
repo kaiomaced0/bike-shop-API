@@ -52,7 +52,7 @@ public class EnderecoResource {
     }
 
     @PUT
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     @Path("/{id}")
     @Transactional
     public Response update(@PathParam("id") Long id, EnderecoDTO endereco){

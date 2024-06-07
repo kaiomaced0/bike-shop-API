@@ -71,8 +71,9 @@ public class CupomServiceImpl implements CupomService {
     @Override
     public CupomResponseDTO getCodigo(String codigo) {
         try {
+            Cupom c = repository.findByCodigo(codigo);
             LOG.info("Requisição Cupom.getCodigo()");
-            return new CupomResponseDTO(repository.findByCodigo(codigo));
+            return new CupomResponseDTO(c);
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getCodigo()");
             return null;
@@ -144,9 +145,9 @@ public class CupomServiceImpl implements CupomService {
     }
 
     @Override
-    public Cupom isActive(Long id) {
-        Cupom cupom = repository.findById(id);
-        if(cupom.getQuantidade() > 0){
+    public Cupom isActive(String id) {
+        Cupom cupom = repository.findByCodigo(id);
+        if(cupom.getAtivo()){
             return cupom;
         }else {
             return null;

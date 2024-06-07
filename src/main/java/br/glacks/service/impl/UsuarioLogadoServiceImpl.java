@@ -1,6 +1,7 @@
 package br.glacks.service.impl;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,12 +52,9 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Inject
     FileService fileService;
-    
-    @Inject
-    HashService hash;
 
     @Inject
-    TelefoneRepository telefoneRepository;
+    HashService hash;
 
     @Inject
     ProdutoRepository produtoRepository;
@@ -155,6 +153,42 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             return null;
         }
 
+    }
+
+    @Override
+    @Transactional
+    public Response updateDados(UsuarioLogadoDadosDTO u) {
+        try {
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.updateDados()");
+
+            String login = jsonWebToken.getSubject();
+            Usuario user = repository.findByLogin(login);
+            PessoaFisica entity = pessoaFisicaRepository.findById(user.getId());
+
+            String senha = hash.getHashSenha(u.senhaAtual());
+            if(!user.getSenha().contentEquals(senha)){
+                throw new Exception("Senha atual incorreta");
+            }
+            if(u.pessoa().nome() != null)
+                entity.setNome(u.pessoa().nome());
+            if(u.pessoa().cpf() != null)
+                entity.setCpf(u.pessoa().cpf());
+            if(u.pessoa().email() != null)
+                entity.setEmail(u.pessoa().email());
+            if(u.pessoa().dataNascimento() != null)
+                if(u.pessoa().dataNascimento().isBefore(LocalDate.now()))
+                    entity.setDataNascimento(u.pessoa().dataNascimento());
+            if(u.pessoa().login() != null)
+                entity.setLogin(u.pessoa().login());
+            if(u.pessoa().senha() != null)
+                entity.setSenha(hash.getHashSenha(u.pessoa().senha()));
+
+
+            return Response.ok().build();
+        } catch (Exception e) {
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição UsuarioLogado.updateDados()");
+            return Response.status(400).entity(e.getMessage()).build();
+        }
     }
 
     @Override

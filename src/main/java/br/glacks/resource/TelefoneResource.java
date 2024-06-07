@@ -42,15 +42,15 @@ public class TelefoneResource {
         
     }
 
-//    @POST
-//    @RolesAllowed({"Admin", "User"})
-//    @Transactional
-//    public Response insert(TelefoneDTO telefone){
-//        return telefoneService.insert(telefone);
-//    }
+    @POST
+    @RolesAllowed({"Admin", "User"})
+    @Transactional
+    public Response insert(TelefoneDTO telefone){
+        return telefoneService.insert(telefone);
+    }
 
     @PUT
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     @Path("/update/{id}")
     @Transactional
     public TelefoneResponseDTO update(@PathParam("id") Long id, TelefoneDTO telefone){

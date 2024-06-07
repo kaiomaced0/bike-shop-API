@@ -2,6 +2,7 @@ package br.glacks.dto;
 
 import br.glacks.model.PessoaFisica;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public record PessoaFisicaResponseDTO(
     String login,
     String nome,
     String email,
+    LocalDate dataNascimento,
     List<CartaoResponseDTO> cartoes,
     List<EnderecoResponseDTO> enderecos,
     List<ProdutoResponseDTO> listaGostei,
@@ -23,6 +25,7 @@ public record PessoaFisicaResponseDTO(
               user.getLogin(),
               user.getNome(),
               user.getEmail(),
+              user.getDataNascimento() != null ? user.getDataNascimento() : null,
               user.getCartoes() != null ? user.getCartoes()
                       .stream()
                       .map(CartaoResponseDTO::new)

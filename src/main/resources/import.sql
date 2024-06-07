@@ -17,10 +17,10 @@
  insert into usuario (nome, ativo, id, login, senha) values('rubens',true, 115, 'rubens', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (nome, ativo, id, login, senha) values('ordete',true, 116, 'ordete','cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
  insert into usuario (email, nome, ativo, id,  login, senha) values('teste@gmail.com','teste',true, 100, 'teste', 'cBz32i3RfBAIaqKNkTfdDZLrqih7z94jKllRAMiOW+U+b3GTkGAVUJhWsP6LK8KfVkkei6cekKUJpS2bU7VqvQ==');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(101, '05562849259', 'hilowisck', '27/11/2002');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(107, '98765432101', 'hilowisck', '04/12/2002');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(102, '23456789023', 'hilowisck', '27/07/2002');
- insert into pessoafisica (id, cpf, sobrenome, data_nascimento) values(103, '34567890134', 'hilowisck', '08/12/1978');
+ insert into pessoafisica (id, cpf, sobrenome) values(101, '05562849259', 'hilowisck');
+ insert into pessoafisica (id, cpf, sobrenome) values(107, '98765432101', 'hilowisck');
+ insert into pessoafisica (id, cpf, sobrenome) values(102, '23456789023', 'hilowisck');
+ insert into pessoafisica (id, cpf, sobrenome) values(103, '34567890134', 'hilowisck');
 
  insert into fornecedor (ativo, id, nome, cnpj) VALUES (true, 1, 'Fornecedor 1', '0001100/000');
 
@@ -74,10 +74,6 @@
  insert into estado (ativo, id, sigla_estado, nome) values(true, 104, 'PA', 'Para');
  insert into estado (ativo, id, sigla_estado, nome) values(true, 103, 'MG', 'Minas Gerais');
 
- insert into cidade (ativo, id, nome, estado_id) values(true, 100, 'Palmas', (SELECT estado.id FROM estado WHERE estado.nome = 'Tocantins'));
- insert into cidade (ativo, id, nome, estado_id) values(true, 101, 'Goiania', (SELECT estado.id FROM estado WHERE estado.nome = 'Goias'));
- insert into cidade (ativo, id, nome, estado_id) values(true, 102, 'belem', (SELECT estado.id FROM estado WHERE estado.nome = 'Para'));
-
  insert into endereco (ativo, id, usuario, descricao) values(true, 100, 101, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
  insert into endereco (ativo, id, usuario, descricao) values(true, 102, 102, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
  insert into endereco (ativo, id, usuario, descricao) values(true, 103, 103, 'aaaaaaaaaakdkskdk endereco legal, perto daquele lugar la');
@@ -126,6 +122,11 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  insert into usuario_perfil (perfil, id_usuario) values (1, 101);
  insert into usuario_perfil (perfil, id_usuario) values (2, 101);
  insert into usuario_perfil (perfil, id_usuario) values (2, 100);
+
+ insert into cidade (ativo, estado, id, nome) values (true, 100, 1, 'Palmas');
+ insert into cidade (ativo, estado, id, nome) values (true, 100, 2, 'Paraiso');
+ insert into cidade (ativo, estado, id, nome) values (true, 100, 3, 'Porto Nacional');
+
 
  insert into cartao (id, usuario_id) values (100, 100);
 
@@ -202,10 +203,7 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  values(true, 137, 'Capacete 4', 55, 190.0, 4, 4, 70.0, true, 3, 3, 'descricao', 'nome longooooo');
  
  
- insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Mountain Bike 3'), 1, '12 marchas', 1, 'câmbio Shimano', 1);
- insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Mountain Bike 4'), 2, '12 marchas', 2, 'câmbio SRAM', 2);
+
  insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
  values((SELECT produto.id FROM produto WHERE produto.nome = 'Bike 6'), 3, '18 marchas', 3, 'câmbio Shimano', 1);
  insert into bike (id, tamanho, marcha, freio, cambio, tipobike) 
@@ -225,15 +223,9 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  insert into pneu (id) 
  values((SELECT produto.id FROM produto WHERE produto.nome = 'Pneu 6'));
  insert into ferramenta (id) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Ferramentas 3'));
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Ferramenta 3'));
  insert into ferramenta (id) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Reparo 4'));
- insert into ferramenta (id) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Manutenção 5'));
- insert into ferramenta (id) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Ferramentas Avançado 6'));
- insert into ferramenta (id) 
- values((SELECT produto.id FROM produto WHERE produto.nome = 'Kit de Reparo Rápido 7'));
+ values((SELECT produto.id FROM produto WHERE produto.nome = 'Ferramenta 4'));
 
  
  insert into produto_img(produto_id, url_imagens_produto) values (108,'https://placehold.co/220x200/gray/white?text=Produto');
@@ -303,4 +295,8 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  insert into produto_categoria (produto_id, categorias_id) VALUES (135, 8);
  insert into produto_categoria (produto_id, categorias_id) VALUES (136, 9);
  insert into produto_categoria (produto_id, categorias_id) VALUES (137, 9);
- 
+
+insert into telefone (ativo, id, lista_telefones_usuario, proprietario_id, codigoArea, numero) values (true, 103, 101, 101, '63', '984142999');
+insert into telefone (ativo, id, lista_telefones_usuario, proprietario_id, codigoArea, numero) values (true, 104, 101, 101, '63', '9841429349');
+insert into telefone (ativo, id, lista_telefones_usuario, proprietario_id, codigoArea, numero) values (true, 105, 101, 101, '63', '982222900');
+insert into telefone (ativo, id, lista_telefones_usuario, proprietario_id, codigoArea, numero) values (true, 106, 101, 101, '63', '991223233');

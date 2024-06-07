@@ -45,6 +45,14 @@ public class CupomResource {
         
     }
 
+    @GET
+    @Path("/verificar/{codigo}")
+    @RolesAllowed({"Admin", "User"})
+    public CupomResponseDTO verificar(@PathParam("codigo") String codigo){
+        return cupomService.getCodigo(codigo);
+
+    }
+
     @POST
     @Transactional
     @RolesAllowed({"Admin"})

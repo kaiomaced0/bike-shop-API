@@ -23,5 +23,5 @@ public interface CupomService {
     
     public Response delete(@PathParam("id") Long id);
 
-    public Cupom isActive(Long id);
+    public Cupom isActive(String codigo);
 }

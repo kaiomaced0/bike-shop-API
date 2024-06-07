@@ -1,6 +1,7 @@
 package br.glacks.model.locais;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import br.glacks.model.EntityClass;
@@ -11,6 +12,7 @@ public class Cidade extends EntityClass{
     private String nome;
     
     @ManyToOne
+    @JoinColumn(name = "estado")
     private Estado estado;
 
     public Estado getEstado() {

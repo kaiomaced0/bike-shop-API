@@ -7,9 +7,12 @@ import br.glacks.model.PessoaFisica;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+
 public record PessoaFisicaDTO(
     @CPF
     @NotBlank
+            @Size(max = 11, min = 11)
     String cpf,
 
     @NotBlank
@@ -23,7 +26,8 @@ public record PessoaFisicaDTO(
     String senha,
     @NotBlank
     @Email
-    String email
+    String email,
+    LocalDate dataNascimento
 
 ) {
 
@@ -34,6 +38,9 @@ public record PessoaFisicaDTO(
         pessoaFisica.setSenha(pessoaFisicaDTO.senha());
         pessoaFisica.setCpf(pessoaFisicaDTO.cpf);
         pessoaFisica.setNome(pessoaFisicaDTO.nome());
+        if(pessoaFisicaDTO.dataNascimento != null){
+            pessoaFisica.setDataNascimento(pessoaFisicaDTO.dataNascimento());
+        }
 
         return pessoaFisica;
     }

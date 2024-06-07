@@ -6,8 +6,7 @@ public record TelefoneDTO(
     @NotBlank
     String codigoArea,
     @NotBlank
-    String numero,
-    Integer proprietarioId
+    String numero
 ) {
     
 }

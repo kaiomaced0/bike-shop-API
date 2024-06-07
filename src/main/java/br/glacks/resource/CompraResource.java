@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.glacks.dto.ItemCompraDTO;
+import br.glacks.dto.ValidaCompraResponseDTO;
 import br.glacks.model.ItemCompra;
 import br.glacks.repository.CompraRepository;
 import br.glacks.repository.ItemCompraRepository;
@@ -36,6 +38,21 @@ public class CompraResource {
     public Response gettAll(){
         return compraService.getAll();
         
+    }
+
+    @GET
+    @RolesAllowed({"Admin", "User"})
+    @Path("/getValor")
+    public Response getValorTeste(List<ItemCompraDTO> listaItemCompra) {
+        return compraService.getValorTeste(listaItemCompra);
+
+    }
+
+    @POST
+    @RolesAllowed({"Admin", "User"})
+    @Path("/verifica")
+    public ValidaCompraResponseDTO verificarCompra(CompraDTO compra) {
+        return compraService.verificarCompra(compra);
     }
 
     @PATCH

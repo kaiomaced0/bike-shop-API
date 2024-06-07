@@ -66,6 +66,13 @@ public class UsuarioLogadoResource {
         
     }
 
+    @PUT
+    @Path("/updatedados")
+    @RolesAllowed({"Admin", "User"})
+    public Response updateDados(UsuarioLogadoDadosDTO u) {
+        return usuarioLogado.updateDados(u);
+    }
+
     @GET
     @Path("/gostei")
     @RolesAllowed({"Admin", "User"})

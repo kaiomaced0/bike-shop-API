@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CompraDTO(
         @NotBlank List<ItemCompraDTO> listaItemCompra,
-        Long idCupom,
+        String idCupom,
         Long idEndereco,
         Integer formaPagamento
 

@@ -55,7 +55,7 @@ public class TelefoneResourceTeste {
     @Test
     public void insertTest() {
 
-        TelefoneDTO telefone = new TelefoneDTO("63", "984232991", 1);
+        TelefoneDTO telefone = new TelefoneDTO("63", "984232991");
 
         given()
                 .header("Authorization", "Bearer " + token)
@@ -71,7 +71,7 @@ public class TelefoneResourceTeste {
     @Test
     public void updateTest() {
 
-        var telefoneDTO = new TelefoneDTO("63", "99999999", null);
+        var telefoneDTO = new TelefoneDTO("63", "99999999");
 
         given()
                 .pathParam("id", "100")

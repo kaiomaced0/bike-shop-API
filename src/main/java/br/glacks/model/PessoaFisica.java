@@ -8,6 +8,8 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class PessoaFisica extends Usuario{
@@ -15,7 +17,7 @@ public class PessoaFisica extends Usuario{
     private String cpf; 
     
     @Column(name ="data_nascimento")
-    private String dataNascimento;
+    private LocalDate dataNascimento;
     
     private String sobrenome;
 
@@ -35,11 +37,11 @@ public class PessoaFisica extends Usuario{
         this.cpf = cpf;
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

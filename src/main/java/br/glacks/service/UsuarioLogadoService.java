@@ -19,6 +19,8 @@ public interface UsuarioLogadoService {
 
     public UsuarioResponseDTO updateEmail(UsuarioUpdateEmailDTO email);
 
+    public Response updateDados(UsuarioLogadoDadosDTO u);
+
     public Response getGostei();
 
     public Response gosteiInsert(@PathParam("id") long id);

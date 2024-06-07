@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.glacks.model.EntityClass;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 
 import jakarta.inject.Inject;
@@ -39,6 +40,10 @@ public class TelefoneServiceImpl implements TelefoneService {
 
     @Inject
     UsuarioRepository usuarioRepository;
+
+    @Inject
+    JsonWebToken jsonWebToken;
+
 
     @Override
     public List<TelefoneResponseDTO> getAll() {
@@ -74,24 +79,22 @@ public class TelefoneServiceImpl implements TelefoneService {
     @Transactional
     public Response insert(TelefoneDTO telefone) {
         try {
+            String login = jsonWebToken.getSubject();
+            Usuario user = usuarioRepository.findByLogin(login);
             LOG.info("Requisição Telefone.insert()");
             Telefone tell = new Telefone();
             tell.setCodigoArea(telefone.codigoArea());
             tell.setNumero(telefone.numero());
-            tell.setProprietario(usuarioRepository.findById(telefone.proprietarioId().longValue()));
-            Usuario u = usuarioRepository.findById(telefone.proprietarioId().longValue());
-            if(u.getTelefones() == null){
-                List<Telefone> telefones = new ArrayList<Telefone>();
-                telefones.add(tell);
-                u.setTelefones(telefones);
-            }else{
-                u.getTelefones().add(tell);
+            tell.setProprietario(user);
+            if(user.getTelefones().isEmpty()){
+                user.setGostei(new ArrayList<>());
             }
             repository.persist(tell);
+            user.getTelefones().add(tell);
             return Response.ok(telefone).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Telefone.insert()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }
@@ -100,16 +103,19 @@ public class TelefoneServiceImpl implements TelefoneService {
     @Transactional
     public TelefoneResponseDTO update(long id, TelefoneDTO telefone) {
         try {
+            String login = jsonWebToken.getSubject();
+            Usuario user = usuarioRepository.findByLogin(login);
             LOG.info("Requisição Telefone.update()");
 
             Telefone entity = repository.findById(id);
+
+            if(entity.getProprietario() != user)
+                throw new Exception();
             if(telefone.numero() != null)
                 entity.setNumero(telefone.numero());
             if(telefone.codigoArea() != null)
                 entity.setCodigoArea(telefone.codigoArea());
-            if(telefone.proprietarioId() != null)
-                entity.setProprietario(usuarioRepository.findById(telefone.proprietarioId().longValue()));
-            
+
             return new TelefoneResponseDTO(entity);
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Telefone.update()");
@@ -122,19 +128,20 @@ public class TelefoneServiceImpl implements TelefoneService {
     @Transactional
     public Response delete(Long id) {
         try {
+            String login = jsonWebToken.getSubject();
+            Usuario user = usuarioRepository.findByLogin(login);
             LOG.info("Requisição Telefone.delete()");
             
             Telefone entity = repository.findById(id);
-            if(entity.getProprietario().getLogin() != usuarioLogadoService.getPerfilUsuarioLogado().login()){
-
-            throw new Exception("Telefone não pertence a voce");
+            if(entity.getProprietario() != user){
+                throw new Exception("Telefone não pertence a voce");
             }
             entity.setAtivo(false);
             return Response.status(Status.OK).build();
 
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Telefone.delete()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
 
     }
