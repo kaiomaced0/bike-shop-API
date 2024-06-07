@@ -73,6 +73,14 @@ public class UsuarioLogadoResource {
         return usuarioLogado.getGostei();
 
     }
+
+    @GET
+    @Path("/enderecos")
+    @RolesAllowed({"Admin", "User"})
+    public Response getEnderecos(){
+        return usuarioLogado.enderecos();
+    }
+
     @PATCH
     @Path("/gostei/insert/{id}")
     @RolesAllowed({"Admin", "User"})

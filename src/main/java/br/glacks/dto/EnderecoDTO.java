@@ -7,7 +7,8 @@ public record EnderecoDTO(
     Long idCidade,
     String cep,
     String rua , 
-    String numero
+    String numero,
+    String descricao
 
 ) {
     public static Endereco criaEndereco(EnderecoDTO e){
@@ -16,6 +17,7 @@ public record EnderecoDTO(
         endereco.setCep(e.cep);
         endereco.setRua(e.rua);
         endereco.setNumero(e.numero);
+        endereco.setDescricao(e.descricao);
         return endereco;
     }
     

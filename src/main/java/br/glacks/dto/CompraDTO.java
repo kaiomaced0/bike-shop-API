@@ -8,7 +8,7 @@ import br.glacks.model.pagamento.FormaPagamento;
 import jakarta.validation.constraints.NotBlank;
 
 public record CompraDTO(
-        @NotBlank List<ItemCompraDTO> listaItemCompraDTO,
+        @NotBlank List<ItemCompraDTO> listaItemCompra,
         Long idCupom,
         Long idEndereco,
         Integer formaPagamento
