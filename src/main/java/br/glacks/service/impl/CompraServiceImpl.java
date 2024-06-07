@@ -111,7 +111,7 @@ public class CompraServiceImpl implements CompraService {
         try {
             Compra c = CompraDTO.criaCompra(compra);
             c.setValorTotal(0.0);
-            c.setListaItemCompra(compra.listaItemCompraDTO().stream().map(
+            c.setListaItemCompra(compra.listaItemCompra().stream().map(
                     itemCompra -> {
                         ItemCompra i = ItemCompraDTO.criaItemCompra(itemCompra);
                         itemCompraRepository.persist(i);
