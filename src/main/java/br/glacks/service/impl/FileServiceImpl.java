@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.transaction.Transactional;
 import org.jboss.logging.Logger;
 
 import br.glacks.form.ImageForm;
@@ -88,6 +89,7 @@ public class FileServiceImpl implements FileService {
         }
 
         @Override
+        @Transactional
         public String salvarImagemProduto(byte[] imagem, String nomeImagem) throws IOException{
 
             
@@ -140,9 +142,6 @@ public class FileServiceImpl implements FileService {
             LOG.error("Erro ao rodar Requisição Estado.getAll()");
             return null;
         }
-        
-            
-
         }
 
 

@@ -25,6 +25,8 @@ public interface UsuarioLogadoService {
 
     public Response gosteiInsert(@PathParam("id") long id);
 
+    public Response getTelefones();
+
     public Response gosteiDelete(@PathParam("id") Long id);
 
     public Response telefoneInsert(TelefoneUsuarioLogadoDTO telefoneUsuarioLogadoDTO);

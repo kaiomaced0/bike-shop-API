@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import br.glacks.dto.ProdutoAdminResponseDTO;
+import br.glacks.form.ProdutoImageForm;
 import br.glacks.model.Categoria;
 import br.glacks.model.Cor;
 import br.glacks.model.EntityClass;
@@ -267,7 +268,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     @Transactional
-    public Response salvarImagem(@MultipartForm ImageForm form) {
+    public Response salvarImagem(@MultipartForm ProdutoImageForm form) {
         String nomeImagem = "";
 
         try {

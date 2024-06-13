@@ -9,16 +9,15 @@ import java.util.stream.Collectors;
 import br.glacks.dto.*;
 import br.glacks.model.*;
 import br.glacks.repository.*;
+import br.glacks.service.*;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.application.Result;
 import br.glacks.form.ImageForm;
-import br.glacks.service.FileService;
-import br.glacks.service.HashService;
-import br.glacks.service.PessoaFisicaService;
-import br.glacks.service.UsuarioLogadoService;
-import br.glacks.service.UsuarioService;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.jboss.logging.Logger;
 
@@ -64,6 +63,12 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
 
     @Inject
     EnderecoRepository enderecoRepository;
+
+    @Inject
+    TelefoneRepository telefoneRepository;
+
+    @Inject
+    TelefoneService telefoneService;
 
     @Override
     @Transactional
@@ -182,7 +187,7 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
                 entity.setLogin(u.pessoa().login());
             if(u.pessoa().senha() != null)
                 entity.setSenha(hash.getHashSenha(u.pessoa().senha()));
-
+            
 
             return Response.ok().build();
         } catch (Exception e) {
@@ -348,15 +353,23 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             
             if(usuariolUsuario.getTelefones() == null){
                 List<Telefone> telefones = new ArrayList<Telefone>();
-                telefones.add(tell);
-                usuariolUsuario.setTelefones(telefones);
-            }else{
-                usuariolUsuario.getTelefones().add(tell);
             }
+            telefoneRepository.persist(tell);
+            usuariolUsuario.getTelefones().add(tell);
             return Response.ok(new TelefoneResponseDTO(tell)).build();
         } catch (Exception e) {
             return Response.status(400).entity(e).build();
         }
+    }
+    @Override
+    public Response getTelefones(){
+        try {
+            Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
+            return Response.ok(usuariolUsuario.getTelefones().stream().filter(EntityClass::getAtivo).map(TelefoneResponseDTO::new).collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e).build();
+        }
+
     }
 
     @Transactional
@@ -376,5 +389,11 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             return Response.status(400).build();
         }
 
+    }
+    @PUT
+    @RolesAllowed({"Admin", "User"})
+    @Path("/telefone/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return telefoneService.delete(id);
     }
 }

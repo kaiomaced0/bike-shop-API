@@ -2,6 +2,7 @@ package br.glacks.service;
 import java.util.List;
 
 import br.glacks.dto.ProdutoAdminResponseDTO;
+import br.glacks.form.ProdutoImageForm;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import jakarta.ws.rs.PathParam;
@@ -34,5 +35,5 @@ public interface ProdutoService {
     
     public Response adicionaEstoque(@PathParam("id") Long id, int quantidade);
 
-    public Response salvarImagem(@MultipartForm ImageForm form);
+    public Response salvarImagem(@MultipartForm ProdutoImageForm form);
 }

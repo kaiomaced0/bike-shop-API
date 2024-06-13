@@ -1,12 +1,14 @@
 package br.glacks.form;
 
-import org.jboss.resteasy.annotations.providers.multipart.PartType;
-
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.core.MediaType;
+import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
-public class ImageForm{
+public class ProdutoImageForm {
 
+    @FormParam("id")
+    @PartType(MediaType.TEXT_PLAIN)
+    private Long id;
     @FormParam("nomeImagem")
     private String nome;
     
@@ -14,6 +16,14 @@ public class ImageForm{
     @PartType("application/octet-stream")
     private byte[] imagem;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public byte[] getImagem() {
         return imagem;

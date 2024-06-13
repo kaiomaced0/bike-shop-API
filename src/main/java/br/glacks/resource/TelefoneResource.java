@@ -58,7 +58,7 @@ public class TelefoneResource {
     }
 
     @PUT
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     @Path("/delete/{id}")
     public Response delete(@PathParam("id") Long id) {
         return telefoneService.delete(id);

@@ -3,6 +3,7 @@ package br.glacks.resource;
 import java.util.List;
 
 import br.glacks.dto.ProdutoAdminResponseDTO;
+import br.glacks.form.ProdutoImageForm;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import jakarta.annotation.security.PermitAll;
@@ -106,7 +107,7 @@ public class ProdutoResource {
     @Path("/novaimagem")
     @RolesAllowed({"Admin"})
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm ImageForm form){
+    public Response salvarImagem(@MultipartForm ProdutoImageForm form){
         return produtoService.salvarImagem(form);
 
     }

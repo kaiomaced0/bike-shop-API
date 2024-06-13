@@ -40,6 +40,7 @@
  insert into produto (ativo, id,nome, estoque, preco, cor, estrelas, valorcompra, visivel, fornecedor, marca, descricao, nomelongo) values(true, 107, 'Pneu 29x2.2', 20, 440.0, 1, 5, 190.0, true, 1, 1, 'descricao', 'nome longooooo');
 
  insert into produto_img(produto_id, url_imagens_produto) values (100, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike1.jpg?alt=media&token=a67128d8-6d57-4217-8ff2-ec6d5d8fa8f5');
+ insert into produto_img(produto_id, url_imagens_produto) values (100, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike1.jpg?alt=media&token=a67128d8-6d57-4217-8ff2-ec6d5d8fa8f5');
  insert into produto_img(produto_id, url_imagens_produto) values (101, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/bike2.jpg?alt=media&token=50ce98d5-7079-40d1-8ec9-aeca4fe2f519');
  insert into produto_img(produto_id, url_imagens_produto) values (102, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/ferramenta1.jpg?alt=media&token=5af758b3-0ba6-429f-b9c6-a3d301e6a245');
  insert into produto_img(produto_id, url_imagens_produto) values (103, 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/pneu1.jpg?alt=media&token=fc38ce65-a894-47d5-ad09-f57cd1772d9f');
@@ -132,9 +133,9 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
 
  insert into homeconfig (id, ativo) values (1, true);
 
- insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 1', true, 1, 1, '', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/2024_24_a_31_maio_Orgulho_Nerd_1920x450.jpg?alt=media&token=c96b7dab-cdf4-4fa6-a0e5-d1e9c7c8f25b');
- insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 2', true, 1, 2, '', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/carrossel%20promocao.png?alt=media&token=64a3a45b-9eba-4d15-adc9-ffcdaf3d29c8');
- insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 3', true, 1, 3, '', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/Captura%20de%20tela%202024-06-03%20235813.png?alt=media&token=3e3f099d-0c92-4e1e-a5fb-14a6bc5d9034');
+ insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 1', true, 1, 1, '/detail/102', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/2024_24_a_31_maio_Orgulho_Nerd_1920x450.jpg?alt=media&token=c96b7dab-cdf4-4fa6-a0e5-d1e9c7c8f25b');
+ insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 2', true, 1, 2, '/detail/100', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/carrossel%20promocao.png?alt=media&token=64a3a45b-9eba-4d15-adc9-ffcdaf3d29c8');
+ insert into carrossel (nome, ativo, lista_carrossel, id, link, image) values ('Promoção 3', true, 1, 3, '/detail/101', 'https://firebasestorage.googleapis.com/v0/b/bike-shop-830cf.appspot.com/o/Captura%20de%20tela%202024-06-03%20235813.png?alt=media&token=3e3f099d-0c92-4e1e-a5fb-14a6bc5d9034');
 
  ------------------------------
 
@@ -227,38 +228,6 @@ insert into produto_categoria (produto_id, categorias_id) VALUES (106, 6);
  insert into ferramenta (id) 
  values((SELECT produto.id FROM produto WHERE produto.nome = 'Ferramenta 4'));
 
- 
- insert into produto_img(produto_id, url_imagens_produto) values (108,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (109,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (110,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (111,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (112,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (113,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (114,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (115,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (116,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (117,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (118,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (119,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (120,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (121,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (122,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (123,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (124,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (125,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (126,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (127,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (128,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (129,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (130,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (131,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (132,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (133,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (134,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (135,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (136,'https://placehold.co/220x200/gray/white?text=Produto');
- insert into produto_img(produto_id, url_imagens_produto) values (137,'https://placehold.co/220x200/gray/white?text=Produto');
- 
  insert into categoria (ativo, id, nome) VALUES (true, 7, 'Camiseta');
  insert into categoria (ativo, id, nome) VALUES (true, 8, 'Luvas');
  insert into categoria (ativo, id, nome) VALUES (true, 9, 'Capacete');

@@ -91,7 +91,7 @@ public class TelefoneServiceImpl implements TelefoneService {
             }
             repository.persist(tell);
             user.getTelefones().add(tell);
-            return Response.ok(telefone).build();
+            return Response.ok(new TelefoneResponseDTO(tell)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Telefone.insert()");
             return Response.status(400).entity(e.getMessage()).build();

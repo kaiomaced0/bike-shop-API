@@ -1,6 +1,7 @@
 package br.glacks.resource;
 
 import br.glacks.dto.*;
+import br.glacks.service.TelefoneService;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.form.ImageForm;
@@ -26,6 +27,9 @@ public class UsuarioLogadoResource {
 
     @Inject
     UsuarioLogadoService usuarioLogado;
+
+    @Inject
+    TelefoneService telefoneService;
 
     @PATCH
     @RolesAllowed({"User", "Admin"})
@@ -87,6 +91,12 @@ public class UsuarioLogadoResource {
     public Response getEnderecos(){
         return usuarioLogado.enderecos();
     }
+    @GET
+    @Path("/telefones")
+    @RolesAllowed({"Admin", "User"})
+    public Response getTelefones(){
+        return usuarioLogado.getTelefones();
+    }
 
     @PATCH
     @Path("/gostei/insert/{id}")
@@ -101,6 +111,21 @@ public class UsuarioLogadoResource {
     public Response deleteGostei(@PathParam("id") long id){
         return usuarioLogado.gosteiDelete(id);
 
+    }
+
+    @POST
+    @RolesAllowed({"Admin", "User"})
+    @Path("/addtelefone")
+    @Transactional
+    public Response insert(TelefoneDTO telefone){
+        return telefoneService.insert(telefone);
+    }
+
+    @PUT
+    @RolesAllowed({"Admin", "User"})
+    @Path("/telefone/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        return telefoneService.delete(id);
     }
 
     @POST
