@@ -62,11 +62,16 @@ public class AuthResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    @Path("/verifica-admin")
+    @Path("/verificaadmin")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response verificaAdmin() {
-        return Response.ok().build();
+        try {
+
+            return Response.ok(true).build();
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+        }
     }
 
 //    @POST

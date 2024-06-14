@@ -3,6 +3,7 @@ package br.glacks.model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -12,6 +13,7 @@ public class Produto extends EntityClass {
 
     private String nomeLongo;
 
+    @Size(max=3000)
     private String descricao;
 
     private Double valorCompra;

@@ -21,6 +21,8 @@ public interface UsuarioLogadoService {
 
     public Response updateDados(UsuarioLogadoDadosDTO u);
 
+    public Response getCompras();
+    public Response getCompra(@PathParam("id") long id);
     public Response getGostei();
 
     public Response gosteiInsert(@PathParam("id") long id);

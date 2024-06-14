@@ -70,6 +70,9 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     @Inject
     TelefoneService telefoneService;
 
+    @Inject
+    CompraRepository compraRepository;
+
     @Override
     @Transactional
     public UsuarioResponseDTO updateSenha(UsuarioUpdateSenhaDTO senha) {
@@ -192,6 +195,39 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
             return Response.ok().build();
         } catch (Exception e) {
             LOG.error(getPerfilUsuarioLogado().id().toString() + " - Erro ao rodar Requisição UsuarioLogado.updateDados()");
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    public Response getCompras() {
+        try{
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getCompras()");
+
+            String login = jsonWebToken.getSubject();
+            Usuario user = repository.findByLogin(login);
+            return Response.ok(user.getCompras().stream().filter(EntityClass::getAtivo).map(CompraResponseDTO::new).collect(Collectors.toList())).build();
+        }catch (Exception e){
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    public Response getCompra(long id) {
+        try{
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getCompras()");
+
+            String login = jsonWebToken.getSubject();
+            Usuario user = repository.findByLogin(login);
+            Compra compra = compraRepository.findById(id);
+            if(compra.getUsuario().getId() == user.getId()){
+                return Response.ok(new CompraResponseDTO(compra)).build();
+
+            }
+            else {
+                throw new Exception();
+            }
+            }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
         }
     }

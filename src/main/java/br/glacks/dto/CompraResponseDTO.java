@@ -43,7 +43,7 @@ public record CompraResponseDTO(
                         compra.getUsuario().getLogin(),
                         compra.getListaItemCompra() != null ? compra.getListaItemCompra().stream()
                             .map(itemCompra -> new ItemCompraResponseDTO(itemCompra.getProduto().getId(),
-                                    itemCompra.getQuantidade(), itemCompra.getPreco()))
+                                    itemCompra.getQuantidade(), itemCompra.getPreco(), itemCompra.getProduto().getNome(), itemCompra.getProduto().getImg().get(0), itemCompra.getProduto().getPreco()))
                             .collect(Collectors.toList()): null,
                      compra.getValorTotal(),
             compra.getFormaPagamento().getLabel(),

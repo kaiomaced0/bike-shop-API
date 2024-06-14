@@ -1,5 +1,6 @@
 package br.glacks.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -193,12 +194,14 @@ public class CompraServiceImpl implements CompraService {
             Endereco e = enderecoRepository.findById(compra.idEndereco());
             c.setEnderecoEntrega(e);
             c.setUsuario(user);
-            if(user.getCompras().isEmpty())
+            c.setDataPrevista(LocalDate.now().plusDays(25).toString());
+            if(user.getCompras().isEmpty()){
                 user.setCompras(new ArrayList<>());
+            }
             c.setPago(false);
+
             repository.persist(c);
             user.getCompras().add(c);
-
             LOG.info("Requisição Compra.insert()");
 
             return Response.ok(new CompraResponseDTO(c)).build();

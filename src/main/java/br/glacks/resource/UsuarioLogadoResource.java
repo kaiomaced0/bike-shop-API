@@ -69,6 +69,21 @@ public class UsuarioLogadoResource {
         return usuarioLogado.getPerfilPessoaFisicaLogado();
         
     }
+    @GET
+    @Path("/compras")
+    @RolesAllowed({"Admin", "User"})
+    public Response getCompras(){
+        return usuarioLogado.getCompras();
+
+    }
+
+    @GET
+    @Path("/compra/{id}")
+    @RolesAllowed({"Admin", "User"})
+    public Response getCompras(@PathParam("id") Long id){
+        return usuarioLogado.getCompra(id);
+
+    }
 
     @PUT
     @Path("/updatedados")
