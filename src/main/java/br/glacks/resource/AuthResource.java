@@ -1,5 +1,9 @@
 package br.glacks.resource;
 
+import br.glacks.dto.UsuarioResponseDTO;
+import br.glacks.service.UsuarioLogadoService;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.*;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import br.glacks.dto.AuthPessoaJuridicaDTO;
@@ -13,10 +17,6 @@ import br.glacks.service.TokenJwtService;
 import br.glacks.service.UsuarioService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -49,7 +49,7 @@ public class AuthResource {
         String hash = hashService.getHashSenha(authDTO.senha());
 
         Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
-        
+
         if (usuario == null) {
             return Response.status(Status.NO_CONTENT)
                     .entity("Usuario não encontrado").build();
@@ -58,6 +58,15 @@ public class AuthResource {
                 .header("Authorization", tokenService.generateJwt(usuario))
                 .build();
 
+    }
+
+    @GET
+    @RolesAllowed({"Admin"})
+    @Path("/verifica-admin")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response verificaAdmin() {
+        return Response.ok().build();
     }
 
 //    @POST
