@@ -9,7 +9,9 @@ import br.glacks.model.Cupom;
 
 public interface CupomService {
     
-    public List<CupomResponseDTO> getAll();
+    public List<CupomResponseDTO> getAll(int page, int pageSize);
+
+    public long count();
 
     public CupomResponseDTO getId(@PathParam("id") long id);
 

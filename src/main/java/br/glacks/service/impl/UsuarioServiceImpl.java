@@ -46,12 +46,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     PessoaFisicaRepository pessoaFisicaRepository;
 
     @Override
-    public List<UsuarioResponseDTO> getAll() {
+    public List<UsuarioResponseDTO> getAll(int page, int pageSize) {
 
         try {
             LOG.info("Requisição Usuario.getAll()");
 
-            return repository.findAll().stream().filter(EntityClass::getAtivo)
+            return repository.findAll().page(page, pageSize).stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId).reversed())
             .map(UsuarioResponseDTO::new)
                     .collect(Collectors.toList());
@@ -60,6 +60,21 @@ public class UsuarioServiceImpl implements UsuarioService {
             return null;
         }
 
+    }
+
+    @Override
+    public long count() {
+        try {
+            LOG.info("Requisição Usuario.count()");
+
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Usuario.count()");
+            return 0;
+        }
     }
 
     @Override

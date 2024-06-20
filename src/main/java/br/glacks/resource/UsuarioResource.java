@@ -33,9 +33,17 @@ public class UsuarioResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<UsuarioResponseDTO> getAll(){
-        return usuarioService.getAll();
+    @Path("/{page}/{pageSize}")
+    public List<UsuarioResponseDTO> getAll(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return usuarioService.getAll(page, pageSize);
         
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return usuarioService.count();
     }
 
     @GET

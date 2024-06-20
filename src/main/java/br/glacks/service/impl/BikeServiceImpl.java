@@ -59,11 +59,23 @@ public class BikeServiceImpl implements BikeService {
         }
 
     }
+
     @Override
-    public Response getAllAdmin(){
+    public long count() {
+        try {
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    @Override
+    public Response getAllAdmin(int page, int pageSize){
         try {
             LOG.info("Requisição Bike.getAllAdmin()");
-            return Response.ok(repository.findAll()
+            return Response.ok(repository.findAll().page(page, pageSize)
                     .stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId))
                     .map(BikeAdminResponseDTO::new)

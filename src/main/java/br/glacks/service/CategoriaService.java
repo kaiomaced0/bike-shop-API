@@ -9,6 +9,9 @@ public interface CategoriaService {
 
     public Response getAll();
 
+    public long count();
+    public Response getAllAdmin(int page, int pageSize);
+
     public Response getId(@PathParam("id") Long id);
 
     public Response insert(CategoriaDTO c);

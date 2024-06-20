@@ -7,7 +7,9 @@ import jakarta.ws.rs.core.Response;
 
 public interface FreioService {
 
-    public Response getAll();
+    public Response getAll(int page, int pageSize);
+
+    public long count();
 
     public Response getId(@PathParam("id") Long id);
 

@@ -12,7 +12,9 @@ public interface BikeService {
 
     public Response getAll();
 
-    public Response getAllAdmin();
+    public Response getAllAdmin(int page, int pageSize);
+
+    public long count();
 
     public Response getId(@PathParam("id") long id);
 

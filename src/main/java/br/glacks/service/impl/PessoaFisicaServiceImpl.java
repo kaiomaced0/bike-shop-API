@@ -24,24 +24,37 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
     PessoaFisicaRepository repository;
     
     @Override
-    public List<PessoaFisicaResponseDTO> getAll(){
-        
-        
+    public Response getAll(int page, int pageSize){
         try {
             LOG.info("Requisição PessoaFisica.getAll()"); 
-            return repository.findAll()
-            .stream().filter(EntityClass::getAtivo)
+            return Response.ok(repository.findAll().page(page, pageSize)
+                    .stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId).reversed())
-            .map(PessoaFisicaResponseDTO::new)
-            .collect(Collectors.toList());
+                    .map(PessoaFisicaResponseDTO::new)
+                    .collect(Collectors.toList())).build();
             
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição PessoaFisica.getAll()");
-            return null;
+            return Response.status(400).entity(e.getMessage()).build();
         }
         
        
         
+    }
+
+    @Override
+    public long count() {
+        try {
+            LOG.info("Requisição PessoaFisica.count()");
+
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição PessoaFisica.count()");
+            return 0;
+        }
     }
 
     @Override

@@ -10,7 +10,9 @@ import br.glacks.model.PessoaFisica;
 
 public interface PessoaFisicaService {
     
-    public List<PessoaFisicaResponseDTO> getAll();
+    public Response getAll(int page, int pageSize);
+
+    public long count();
 
     public Response getId(@PathParam("id") long id);
 

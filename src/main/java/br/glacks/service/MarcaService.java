@@ -7,6 +7,9 @@ import jakarta.ws.rs.core.Response;
 public interface MarcaService {
 
     public Response getAll();
+    public Response getAllAdmin(int page, int pageSize);
+
+    public long count();
 
     public Response getId(Long id);
     public Response insert(MarcaDTO m);

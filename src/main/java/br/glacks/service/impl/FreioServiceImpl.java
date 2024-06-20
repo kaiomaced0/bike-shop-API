@@ -21,12 +21,24 @@ public class FreioServiceImpl implements FreioService {
     @Inject
     FreioRepository repository;
     @Override
-    public Response getAll() {
+    public Response getAll(int page, int pageSize) {
         try {
-            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo)
+            return Response.ok(repository.findAll().page(page, pageSize).stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(FreioResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    public long count() {
+        try {
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            return 0;
         }
     }
 

@@ -32,6 +32,29 @@ public class MarcaServiceImpl implements MarcaService {
     }
 
     @Override
+    public long count() {
+        try {
+
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public Response getAllAdmin(int page, int pageSize) {
+        try {
+            return Response.ok(repository.findAll().page(page, pageSize).stream().filter(EntityClass::getAtivo)
+                    .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(MarcaResponseDTO::new).collect(Collectors.toList())).build();
+        }catch (Exception e){
+            return Response.status(400).build();
+        }
+    }
+
+    @Override
     public Response getId(Long id) {
         try {
             return Response.ok(new MarcaResponseDTO(repository.findById(id))).build();
@@ -48,7 +71,7 @@ public class MarcaServiceImpl implements MarcaService {
             repository.persist(marca);
             return Response.ok(new MarcaResponseDTO(marca)).build();
         }catch (Exception e){
-            return Response.status(400).build();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
 

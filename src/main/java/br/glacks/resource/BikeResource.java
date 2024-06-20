@@ -31,10 +31,17 @@ public class BikeResource {
     }
 
     @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return bikeService.count();
+    }
+
+    @GET
     @RolesAllowed({"Admin"})
-    @Path("/admin")
-    public Response gettAllAdmin(){
-        return bikeService.getAllAdmin();
+    @Path("/admin/{page}/{pageSize}")
+    public Response gettAllAdmin(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return bikeService.getAllAdmin(page, pageSize);
 
     }
 

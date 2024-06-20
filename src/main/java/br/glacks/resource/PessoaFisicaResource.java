@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -25,9 +26,17 @@ public class PessoaFisicaResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<PessoaFisicaResponseDTO> getAll(){
-        return pessoaFisicaService.getAll();
+    @Path("/{page}/{pageSize}")
+    public Response getAll(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return pessoaFisicaService.getAll(page, pageSize);
         
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return pessoaFisicaService.count();
     }
 
     @GET

@@ -19,8 +19,16 @@ public class FreioResource {
 
     @GET
     @PermitAll
-    public Response getAll(){
-        return service.getAll();
+    @Path("/{page}/{pageSize}")
+    public Response getAll(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return service.getAll(page, pageSize);
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return service.count();
     }
 
     @GET

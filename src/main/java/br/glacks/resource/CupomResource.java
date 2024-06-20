@@ -3,6 +3,7 @@ package br.glacks.resource;
 import java.util.List;
 
 import br.glacks.dto.CupomResponseDTO;
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -24,9 +25,17 @@ public class CupomResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public List<CupomResponseDTO> gettAll(){
-        return cupomService.getAll();
+    @Path("/{page}/{pageSize}")
+    public List<CupomResponseDTO> gettAll(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return cupomService.getAll(page, pageSize);
         
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return cupomService.count();
     }
 
     @GET

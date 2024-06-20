@@ -12,11 +12,7 @@ public record PessoaFisicaResponseDTO(
     String login,
     String nome,
     String email,
-    LocalDate dataNascimento,
-    List<CartaoResponseDTO> cartoes,
-    List<EnderecoResponseDTO> enderecos,
-    List<ProdutoResponseDTO> listaGostei,
-    List<String> telefones
+    LocalDate dataNascimento
 ) {
     
     public PessoaFisicaResponseDTO(PessoaFisica user){
@@ -25,22 +21,6 @@ public record PessoaFisicaResponseDTO(
               user.getLogin(),
               user.getNome(),
               user.getEmail(),
-              user.getDataNascimento() != null ? user.getDataNascimento() : null,
-              user.getCartoes() != null ? user.getCartoes()
-                      .stream()
-                      .map(CartaoResponseDTO::new)
-                      .collect(Collectors.toList()) : null,
-              user.getEnderecos() != null ? user.getEnderecos()
-                      .stream()
-                      .map(EnderecoResponseDTO::new)
-                      .collect(Collectors.toList()): null,
-              user.getGostei() != null ? user.getGostei()
-                      .stream()
-                      .map(ProdutoResponseDTO::new)
-                      .collect(Collectors.toList()): null,
-              user.getTelefones() != null ? user.getTelefones()
-                      .stream()
-                      .map(tell -> tell.getCodigoArea() + tell.getNumero())
-                      .collect(Collectors.toList()): null);
+              user.getDataNascimento() != null ? user.getDataNascimento() : null);
     }
 }

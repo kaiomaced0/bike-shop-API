@@ -24,6 +24,20 @@ public class CategoriaResource {
 
     @GET
     @PermitAll
+    @Path("/admin/{page}/{pageSize}")
+    public Response getAllAdmin(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return service.getAllAdmin(page, pageSize);
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return service.count();
+    }
+
+    @GET
+    @PermitAll
     @Path("/{id}")
     public Response getId(@PathParam("id") Long id){
         return service.getId(id);

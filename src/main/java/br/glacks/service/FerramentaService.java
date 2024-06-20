@@ -5,9 +5,11 @@ import jakarta.ws.rs.core.Response;
 
 public interface FerramentaService {
 
-    public Response getAll();
+    public Response getAll(int page, int pageSize);
 
-    public Response getAllAdmin();
+    public long count();
+
+    public Response getAllAdmin(int page, int pageSize);
 
     public Response delete(Long id);
     public Response getId(Long id);

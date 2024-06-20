@@ -11,7 +11,9 @@ import br.glacks.model.Compra;
 
 public interface CompraService {
     
-    public Response getAll();
+    public Response getAll(int page, int pageSize);
+
+    public long count();
 
     public Response getValorTeste(List<ItemCompraDTO> listaItemCompra);
 

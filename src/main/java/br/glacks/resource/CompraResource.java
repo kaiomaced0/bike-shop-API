@@ -9,6 +9,7 @@ import br.glacks.dto.ValidaCompraResponseDTO;
 import br.glacks.model.ItemCompra;
 import br.glacks.repository.CompraRepository;
 import br.glacks.repository.ItemCompraRepository;
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -35,9 +36,17 @@ public class CompraResource {
 
     @GET
     @RolesAllowed({"Admin"})
-    public Response gettAll(){
-        return compraService.getAll();
+    @Path("/{page}/{pageSize}")
+    public Response gettAll(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return compraService.getAll(page, pageSize);
         
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return compraService.count();
     }
 
     @GET

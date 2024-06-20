@@ -32,16 +32,28 @@ public class CupomServiceImpl implements CupomService {
     ProdutoRepository produtoRepository;
 
     @Override
-    public List<CupomResponseDTO> getAll() {
+    public List<CupomResponseDTO> getAll(int page, int pageSize) {
         try {
             LOG.info("Requisição Cupom.getAll()");
-            return repository.findAll().stream().filter(EntityClass::getAtivo)
+            return repository.findAll().page(page, pageSize).stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId).reversed()).map(CupomResponseDTO::new).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Cupom.getAll()");
             return null;
         }
 
+    }
+
+    @Override
+    public long count() {
+        try {
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override

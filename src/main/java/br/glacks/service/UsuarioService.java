@@ -10,7 +10,9 @@ package br.glacks.service;
 
     public interface UsuarioService {
         
-        public List<UsuarioResponseDTO> getAll();
+        public List<UsuarioResponseDTO> getAll(int page, int pageSize);
+
+        public long count();
 
         public Response getId(@PathParam("id") long id);
 
