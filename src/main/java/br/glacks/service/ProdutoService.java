@@ -14,14 +14,16 @@ import br.glacks.model.Produto;
 
 public interface ProdutoService {
     
-    public List<ProdutoResponseDTO> getAll();
-    public List<ProdutoAdminResponseDTO> getAllAdmin();
+    public List<ProdutoResponseDTO> getAll(int page, int pageSize);
+    public List<ProdutoAdminResponseDTO> getAllAdmin(int page, int pageSize);
 
     public ProdutoResponseDTO getId(@PathParam("id") long id);
 
     public ProdutoAdminResponseDTO getIdAdmin(Long id);
 
     public Response listIds(List<Long> listaProdutos);
+
+    public long count();
 
     public Response getNome(@PathParam("nome") String nome);
 

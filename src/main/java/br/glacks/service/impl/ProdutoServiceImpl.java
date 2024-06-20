@@ -50,12 +50,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     CategoriaRepository categoriaRepository;
 
     @Override
-    public List<ProdutoResponseDTO> getAll() {
+    public List<ProdutoResponseDTO> getAll(int page, int pageSize) {
 
         try {
             LOG.info("Requisição Produto.getAll()");
 
-            return repository.findAll()
+            return repository.findAll().page(page, pageSize)
                     .stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId))
                     .map(ProdutoResponseDTO::new)
@@ -68,13 +68,30 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     }
 
+
     @Override
-    public List<ProdutoAdminResponseDTO> getAllAdmin() {
+    public long count() {
+        try {
+            LOG.info("Requisição Produto.count()");
+
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Produto.count()");
+            return 0;
+        }
+    }
+
+
+    @Override
+    public List<ProdutoAdminResponseDTO> getAllAdmin(int page, int pageSize) {
 
         try {
             LOG.info("Requisição Produto.getAll()");
 
-            return repository.findAll()
+            return repository.findAll().page(page, pageSize)
                     .stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId).reversed())
                     .map(ProdutoAdminResponseDTO::new)
@@ -123,6 +140,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
 
     }
+
 
     @Override
     public Response getNome(String nome) {

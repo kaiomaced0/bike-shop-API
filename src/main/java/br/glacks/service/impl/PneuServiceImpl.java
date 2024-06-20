@@ -37,9 +37,9 @@ public class PneuServiceImpl implements PneuService {
     CategoriaRepository categoriaRepository;
 
     @Override
-    public Response getAll() {
+    public Response getAll(int page, int pageSize) {
         try {
-            return Response.ok(repository.findAll().stream().filter(EntityClass::getAtivo)
+            return Response.ok(repository.findAll().page(page, pageSize).stream().filter(EntityClass::getAtivo)
                     .sorted(Comparator.comparing(EntityClass::getId).reversed())
                     .map(ProdutoResponseDTO::new)
                     .collect(Collectors.toList())).build();
@@ -49,9 +49,23 @@ public class PneuServiceImpl implements PneuService {
     }
 
     @Override
-    public Response getAllAdmin() {
+    public long count() {
         try {
-            return Response.ok(repository.findAll().stream()
+            return repository.findAll()
+                    .stream().filter(EntityClass::getAtivo)
+                    .toList().size();
+
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+
+
+    @Override
+    public Response getAllAdmin(int page, int pageSize) {
+        try {
+            return Response.ok(repository.findAll().page(page, pageSize).stream()
             .filter(EntityClass::getAtivo)
             .sorted(Comparator.comparing(EntityClass::getId).reversed())
             .map(ProdutoAdminResponseDTO::new)

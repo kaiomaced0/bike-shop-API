@@ -38,16 +38,24 @@ public class ProdutoResource {
 
     @GET
     @PermitAll
-    public List<ProdutoResponseDTO> gettAll(){
-        return produtoService.getAll();
+    @Path("/{page}/{pageSize}")
+    public List<ProdutoResponseDTO> gettAll(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return produtoService.getAll(page, pageSize);
         
     }
     @GET
     @RolesAllowed({"Admin"})
-    @Path("/admin")
-    public List<ProdutoAdminResponseDTO> getAllAdmin(){
-        return produtoService.getAllAdmin();
+    @Path("/admin/{page}/{pageSize}")
+    public List<ProdutoAdminResponseDTO> getAllAdmin(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return produtoService.getAllAdmin(page, pageSize);
 
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count")
+    public long count(){
+        return produtoService.count();
     }
 
     @GET

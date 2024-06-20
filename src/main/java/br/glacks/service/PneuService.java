@@ -8,9 +8,11 @@ import jakarta.ws.rs.core.Response;
 
 public interface PneuService {
 
-    public Response getAll();
+    public Response getAll(int page, int pageSize);
 
-    public Response getAllAdmin();
+    public Response getAllAdmin(int page, int pageSize);
+
+    public long count();
 
     public Response getId(@PathParam("id") Long id);
 
