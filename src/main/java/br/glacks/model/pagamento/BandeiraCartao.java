@@ -4,7 +4,7 @@ public enum BandeiraCartao {
     
     MASTERCARD(1, "MasterCard"),
     VISA(2, "Visa"),
-    ELO(31, "Elo"),
+    ELO(3, "Elo"),
     AMERICANEXPRESS(4, "AmericanExpress"),
     MAESTRO(5, "Maestro");
 

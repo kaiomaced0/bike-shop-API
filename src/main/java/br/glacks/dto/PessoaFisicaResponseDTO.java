@@ -12,7 +12,8 @@ public record PessoaFisicaResponseDTO(
     String login,
     String nome,
     String email,
-    LocalDate dataNascimento
+    LocalDate dataNascimento,
+    List<String> telefones
 ) {
     
     public PessoaFisicaResponseDTO(PessoaFisica user){
@@ -21,6 +22,10 @@ public record PessoaFisicaResponseDTO(
               user.getLogin(),
               user.getNome(),
               user.getEmail(),
-              user.getDataNascimento() != null ? user.getDataNascimento() : null);
+              user.getDataNascimento() != null ? user.getDataNascimento() : null,
+                user.getTelefones() != null ? user.getTelefones()
+                .stream()
+                .map(tell -> tell.getCodigoArea() + tell.getNumero())
+                .collect(Collectors.toList()): null);
     }
 }

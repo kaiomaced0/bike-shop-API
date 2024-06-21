@@ -11,7 +11,13 @@ public interface UsuarioLogadoService {
 
     public UsuarioResponseDTO updateSenha(UsuarioUpdateSenhaDTO senha);
 
-    public Response enderecos();
+    public Response enderecosLista();
+
+    public Response enderecos(int page, int pageSize);
+
+    public Response getCartoes(int page, int pageSize);
+
+    public Response getCartoesLista();
     
     public UsuarioResponseDTO updateLogin(UsuarioUpdateLoginDTO login);
     
@@ -21,13 +27,21 @@ public interface UsuarioLogadoService {
 
     public Response updateDados(UsuarioLogadoDadosDTO u);
 
-    public Response getCompras();
+    public Response getCompras(int page, int pageSize);
+
     public Response getCompra(@PathParam("id") long id);
+
+    public long countCompras();
+
+    public long countEnderecos();
+
+    public long countTelefones();
+
     public Response getGostei();
 
     public Response gosteiInsert(@PathParam("id") long id);
 
-    public Response getTelefones();
+    public Response getTelefones(int page, int pageSize);
 
     public Response gosteiDelete(@PathParam("id") Long id);
 

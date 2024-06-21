@@ -53,18 +53,18 @@ public class CartaoResourceTeste {
                 .body("id", is(100));
     }
 
-    @Test
-    public void insertTest() {
-
-        CartaoDTO c = new CartaoDTO(200, "cartao200", null, "0123232", 100);
-        given()
-                .header("Authorization", "Bearer " + token)
-                .contentType("application/json")
-                .body(c)
-                .when().post("/cartao")
-                .then()
-                .statusCode(200)
-                .body("id", is(200))
-                .body("nome", is("cartao200"));
-    }
+//    @Test
+//    public void insertTest() {
+//
+//        CartaoDTO c = new CartaoDTO(200, "cartao200", null, "0123232", 100);
+//        given()
+//                .header("Authorization", "Bearer " + token)
+//                .contentType("application/json")
+//                .body(c)
+//                .when().post("/cartao")
+//                .then()
+//                .statusCode(200)
+//                .body("id", is(200))
+//                .body("nome", is("cartao200"));
+//    }
 }

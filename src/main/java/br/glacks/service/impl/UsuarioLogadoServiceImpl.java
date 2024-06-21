@@ -94,13 +94,34 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     }
 
     @Override
-    public Response enderecos() {
+    public Response enderecosLista() {
         try {
             Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
             return Response.ok(entity.getEnderecos().stream().filter(EntityClass::getAtivo).map(EnderecoResponseDTO::new).collect(Collectors.toList())).build();
 
         }catch (Exception e){
             return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    public Response enderecos(int page, int pageSize) {
+            if (page < 0 || pageSize < 0) {
+                return Response.status(400).entity("Page and pageSize must be greater than 0").build();
+            }
+
+            try {
+                Usuario entity = repository.findById(getPerfilUsuarioLogado().id());
+
+                List<EnderecoResponseDTO> paginatedEnderecos = entity.getEnderecos().stream()
+                        .filter(EntityClass::getAtivo)
+                        .map(EnderecoResponseDTO::new)
+                        .skip(page * pageSize)
+                        .limit(pageSize)
+                        .collect(Collectors.toList());
+            return Response.ok(paginatedEnderecos).build();
+        } catch (Exception e) {
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
 
@@ -200,22 +221,23 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
     }
 
     @Override
-    public Response getCompras() {
+    public Response getCompras(int page, int pageSize) {
         try{
-            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getCompras()");
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisicao UsuarioLogado.getCompras()");
 
             String login = jsonWebToken.getSubject();
             Usuario user = repository.findByLogin(login);
-            return Response.ok(user.getCompras().stream().filter(EntityClass::getAtivo).map(CompraResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(user.getCompras().stream().filter(EntityClass::getAtivo).skip((page) * pageSize).limit(pageSize).map(CompraResponseDTO::new).collect(Collectors.toList())).build();
         }catch (Exception e){
-            return Response.status(400).entity(e.getMessage()).build();
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Requisicao UsuarioLogado.getCompras()");
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
 
     @Override
     public Response getCompra(long id) {
         try{
-            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getCompras()");
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getCompra()");
 
             String login = jsonWebToken.getSubject();
             Usuario user = repository.findByLogin(login);
@@ -228,7 +250,50 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
                 throw new Exception();
             }
             }catch (Exception e){
-            return Response.status(400).entity(e.getMessage()).build();
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.getCompra()");
+            return Response.status(500).entity(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    public long countCompras() {
+        try{
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.countCompras()");
+
+            String login = jsonWebToken.getSubject();
+            Usuario user = repository.findByLogin(login);
+            return user.getCompras().stream().filter(EntityClass::getAtivo).toList().size();
+        }catch (Exception e){
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.countCompras()");
+            return 0;
+        }
+    }
+
+    @Override
+    public long countEnderecos() {
+        try{
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.countEnderecos()");
+
+            String login = jsonWebToken.getSubject();
+            Usuario user = repository.findByLogin(login);
+            return user.getEnderecos().stream().filter(EntityClass::getAtivo).toList().size();
+        }catch (Exception e){
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.countEnderecos()");
+            return 0;
+        }
+    }
+
+    @Override
+    public long countTelefones() {
+        try{
+            LOG.info(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.countTelefones()");
+
+            String login = jsonWebToken.getSubject();
+            Usuario user = repository.findByLogin(login);
+            return user.getTelefones().stream().filter(EntityClass::getAtivo).toList().size();
+        }catch (Exception e){
+            LOG.error(getPerfilUsuarioLogado().id().toString() + " - Requisição UsuarioLogado.countTelefones()");
+            return 0;
         }
     }
 
@@ -398,10 +463,31 @@ public class UsuarioLogadoServiceImpl implements UsuarioLogadoService {
         }
     }
     @Override
-    public Response getTelefones(){
+    public Response getTelefones(int page, int pageSize){
         try {
             Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
-            return Response.ok(usuariolUsuario.getTelefones().stream().filter(EntityClass::getAtivo).map(TelefoneResponseDTO::new).collect(Collectors.toList())).build();
+            return Response.ok(usuariolUsuario.getTelefones().stream().filter(EntityClass::getAtivo).skip((page) * pageSize).limit(pageSize).map(TelefoneResponseDTO::new).collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e).build();
+        }
+
+    }
+
+    @Override
+    public Response getCartoesLista(){
+        try {
+            Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
+            return Response.ok(usuariolUsuario.getCartoes().stream().filter(EntityClass::getAtivo).map(CartaoResponseDTO::new).collect(Collectors.toList())).build();
+        } catch (Exception e) {
+            return Response.status(400).entity(e).build();
+        }
+
+    }
+    @Override
+    public Response getCartoes(int page, int pageSize){
+        try {
+            Usuario usuariolUsuario = repository.findByLogin(jsonWebToken.getSubject());
+            return Response.ok(usuariolUsuario.getCartoes().stream().filter(EntityClass::getAtivo).skip((page) * pageSize).limit(pageSize).map(CartaoResponseDTO::new).collect(Collectors.toList())).build();
         } catch (Exception e) {
             return Response.status(400).entity(e).build();
         }

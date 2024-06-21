@@ -25,7 +25,10 @@ public interface ProdutoService {
 
     public long count();
 
-    public Response getNome(@PathParam("nome") String nome);
+
+    public long getNomeCount(String nome);
+
+    public Response getNome(@PathParam("nome") String nome, int page, int pageSize);
 
     public Response insert(ProdutoDTO produtoDTO);
 

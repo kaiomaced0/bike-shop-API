@@ -2,6 +2,7 @@ package br.glacks.resource;
 
 import br.glacks.dto.*;
 import br.glacks.service.TelefoneService;
+import jakarta.annotation.security.PermitAll;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import br.glacks.form.ImageForm;
@@ -70,17 +71,33 @@ public class UsuarioLogadoResource {
         
     }
     @GET
-    @Path("/compras")
+    @Path("/compras/{page}/{pageSize}")
     @RolesAllowed({"Admin", "User"})
-    public Response getCompras(){
-        return usuarioLogado.getCompras();
+    public Response getCompras(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return usuarioLogado.getCompras(page, pageSize);
+
+    }
+
+    @GET
+    @Path("/cartoes/{page}/{pageSize}")
+    @RolesAllowed({"Admin", "User"})
+    public Response getCartoes(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return usuarioLogado.getCartoes(page, pageSize);
+
+    }
+
+    @GET
+    @Path("/cartoes")
+    @RolesAllowed({"Admin", "User"})
+    public Response getCartoesLista(){
+        return usuarioLogado.getCartoesLista();
 
     }
 
     @GET
     @Path("/compra/{id}")
     @RolesAllowed({"Admin", "User"})
-    public Response getCompras(@PathParam("id") Long id){
+    public Response getCompra(@PathParam("id") Long id){
         return usuarioLogado.getCompra(id);
 
     }
@@ -101,16 +118,42 @@ public class UsuarioLogadoResource {
     }
 
     @GET
-    @Path("/enderecos")
-    @RolesAllowed({"Admin", "User"})
-    public Response getEnderecos(){
-        return usuarioLogado.enderecos();
+    @PermitAll
+    @Path("/count/enderecos")
+    public long countEnderecos(){
+        return usuarioLogado.countEnderecos();
     }
     @GET
-    @Path("/telefones")
+    @PermitAll
+    @Path("/count/compras")
+    public long countCompras(){
+        return usuarioLogado.countCompras();
+    }
+    @GET
+    @PermitAll
+    @Path("/count/telefones")
+    public long countTelefones(){
+        return usuarioLogado.countTelefones();
+    };
+
+
+    @GET
+    @Path("/enderecos")
     @RolesAllowed({"Admin", "User"})
-    public Response getTelefones(){
-        return usuarioLogado.getTelefones();
+    public Response enderecosLista(){
+        return usuarioLogado.enderecosLista();
+    }
+    @GET
+    @Path("/enderecos/{page}/{pageSize}")
+    @RolesAllowed({"Admin", "User"})
+    public Response getEnderecos(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return usuarioLogado.enderecos(page, pageSize);
+    }
+    @GET
+    @Path("/telefones/{page}/{pageSize}")
+    @RolesAllowed({"Admin", "User"})
+    public Response getTelefones(@PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return usuarioLogado.getTelefones(page, pageSize);
     }
 
     @PATCH

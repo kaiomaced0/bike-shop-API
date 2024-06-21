@@ -60,10 +60,17 @@ public class ProdutoResource {
 
     @GET
     @PermitAll
-    @Path("/nome/{nome}")
-    public Response getNome(@PathParam("nome") String nome){
-        return produtoService.getNome(nome);
+    @Path("/nome/{nome}/{page}/{pageSize}")
+    public Response getNome(@PathParam("nome") String nome, @PathParam("page") int page, @PathParam("pageSize") int pageSize){
+        return produtoService.getNome(nome, page, pageSize);
         
+    }
+
+    @GET
+    @PermitAll
+    @Path("/count/nome/{nome}")
+    public long getNomeCount(@PathParam("nome") String nome){
+        return produtoService.getNomeCount(nome);
     }
 
     @GET

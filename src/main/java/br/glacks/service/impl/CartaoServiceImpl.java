@@ -1,5 +1,6 @@
 package br.glacks.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,12 +75,16 @@ public class CartaoServiceImpl implements CartaoService {
             Cartao c = CartaoDTO.criaCartao(cartao);
             c.setUsuario(entityUser);
             repository.persist(c);
+            if(entityUser.getCartoes().isEmpty())
+                entityUser.setCartoes(new ArrayList<>());
+
+            entityUser.getCartoes().add(c);
+            LOG.info("Requisição Cartao.insert()");
+            return Response.ok(cartao).build();
         } catch (Exception e) {
-            LOG.error("Erro ao rodar Requisição Cartao.insert()");
-            return Response.status(Status.NOT_ACCEPTABLE).build();
+            LOG.error("Requisição Cartao.insert()");
+            return Response.status(500).build();
         }
-        LOG.info("Requisição Cartao.insert()");
-        return Response.ok(cartao).build();
     }
 
     @Override

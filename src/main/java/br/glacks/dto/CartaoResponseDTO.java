@@ -8,13 +8,14 @@ import br.glacks.model.pagamento.Cartao;
 public record CartaoResponseDTO(
     Long id,
     String nome,
-    @Enumerated BandeiraCartao bandeiraCartao,
-    Long idUsuario
+    String bandeiraCartao,
+    Long idUsuario,
+    String dataValidade
     
 ) {
     public CartaoResponseDTO(Cartao cartao){
         this(cartao.getId(), cartao.getNome(),
-         cartao.getBandeiraCartao(), cartao.getUsuario().getId());
+         cartao.getBandeiraCartao().getLabel(), cartao.getUsuario().getId(), cartao.getDataValidade());
     }
     
 }

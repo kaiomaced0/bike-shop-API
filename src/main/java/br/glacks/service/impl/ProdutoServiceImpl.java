@@ -143,7 +143,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 
     @Override
-    public Response getNome(String nome) {
+    public Response getNome(String nome, int page, int pageSize) {
         try {
             LOG.info("Requisição Produto.getNome()");
             Set<ProdutoResponseDTO> lista = new HashSet<>();
@@ -154,10 +154,29 @@ public class ProdutoServiceImpl implements ProdutoService {
 
             Set<ProdutoResponseDTO> finalLista = lista;
             finalLista.addAll(repository.findAll().stream().filter(EntityClass::getAtivo).filter(produto -> !(produto.getCategorias().stream().filter(categoria -> categoria.getNome().contains(nome)).count() == 0)).map(ProdutoResponseDTO::new).toList());
-            return Response.ok(finalLista).build();
+            return Response.ok(finalLista.stream().skip((page) * pageSize).limit(pageSize).collect(Collectors.toList())).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.getNome()");
             return Response.status(400).entity(e.getMessage()).build();
+        }
+
+    }
+    @Override
+    public long getNomeCount(String nome) {
+        try {
+            LOG.info("Requisição Produto.getNomeCount()");
+            Set<ProdutoResponseDTO> lista = new HashSet<>();
+            lista = repository.findByNome(nome)
+                    .stream().filter(EntityClass::getAtivo)
+                    .map(ProdutoResponseDTO::new)
+                    .collect(Collectors.toSet());
+
+            Set<ProdutoResponseDTO> finalLista = lista;
+            finalLista.addAll(repository.findAll().stream().filter(EntityClass::getAtivo).filter(produto -> !(produto.getCategorias().stream().filter(categoria -> categoria.getNome().contains(nome)).count() == 0)).map(ProdutoResponseDTO::new).toList());
+            return finalLista.size();
+        } catch (Exception e) {
+            LOG.error("Erro ao rodar Requisição Produto.getNomeCount()");
+            return 0;
         }
 
     }
