@@ -209,6 +209,8 @@ public class ProdutoServiceImpl implements ProdutoService {
                 entity.setDescricao(produto.descricao());
             if(produto.estoque() != null)
                 entity.setEstoque(produto.estoque());
+            if(produto.img() != null)
+                entity.setImg(produto.img());
             return Response.ok(new ProdutoResponseDTO(entity)).build();
         } catch (Exception e) {
             LOG.error("Erro ao rodar Requisição Produto.update()");
